@@ -7,9 +7,21 @@ from scripts.spike.smoke import decode_marker_rgb, sample_pose
 from scripts.spike.smoke import external_dependencies
 from scripts.spike.smoke import runtime_pose
 from scripts.spike.smoke import prepare_output, quaternion_angle_error
+from scripts.spike.smoke import loop_statistics
 
 
 class SmokeHelpersTests(unittest.TestCase):
+    def test_rtsp_statistics_do_not_claim_encoded_or_verified_frames(self):
+        stats = loop_statistics('rtsp', 30, 2.0, [.01, .03], [0, 0])
+        self.assertEqual(stats['render_iterations'], 30)
+        self.assertEqual(stats['server_loop_fps'], 15)
+        self.assertAlmostEqual(stats['mean_render_iteration_ms'], 20)
+        for key in ['frames', 'published_fps', 'mean_capture_ms', 'mean_jpeg_bytes']:
+            self.assertNotIn(key, stats)
+        paired = loop_statistics('paired', 10, 2.0, [.02], [100])
+        self.assertEqual(paired['frames'], 10)
+        self.assertEqual(paired['published_fps'], 5)
+
     def test_nonempty_run_directory_is_preserved_and_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
             p = Path(temp) / 'run'
@@ -40,6 +52,10 @@ class SmokeHelpersTests(unittest.TestCase):
         self.assertEqual(external_dependencies('/project/assets', paths,
                          '/isaac/kit/mdl/OmniPBR.mdl'),
                          ['/other/OmniPBR.mdl', '/source/texture.png'])
+
+    def test_self_contained_62_package_cannot_whitelist_external_mdl(self):
+        self.assertEqual(external_dependencies('/project/assets', ['/isaac/OmniPBR.mdl'], None),
+                         ['/isaac/OmniPBR.mdl'])
 
     def test_pose_maps_by_name_and_grippers_have_opposite_signs(self):
         names = ['right_gripper_finger_joint2', 'left_arm_joint2',
