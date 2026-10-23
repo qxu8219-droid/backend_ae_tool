@@ -203,6 +203,17 @@ raise SystemExit(supervisor.report['exit_code'])
         self.assertEqual(report['processes']['worker']['returncode'], -signal.SIGTERM)
         self.assertTrue(report['cleanup']['complete'])
 
+    def test_cleanup_reaps_root_even_when_nonblocking_poll_has_no_exit_code(self):
+        from unittest.mock import patch
+        with self.module.Supervisor(self.root/'run',shutdown_timeout=1) as supervisor:
+            process=supervisor.start('worker',[sys.executable,'-c','import time; time.sleep(60)'],cwd=self.root)
+            # /proc can observe the final transition before a nonblocking poll
+            # provides a code. The cleanup completion must include wait/reap.
+            with patch.object(process,'poll',return_value=None):
+                supervisor.cleanup()
+                self.assertIsNotNone(supervisor.report['processes']['worker']['returncode'])
+                self.assertEqual(supervisor.report['processes']['worker']['returncode'],-signal.SIGTERM)
+
     def test_worker_early_exit_is_a_failed_stage_and_cleanup_is_recorded(self):
         with self.assertRaises(self.module.SupervisorError):
             with self.module.Supervisor(self.root/'run', shutdown_timeout=1) as supervisor:

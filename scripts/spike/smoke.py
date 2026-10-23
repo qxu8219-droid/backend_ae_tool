@@ -120,6 +120,8 @@ def main() -> int:
     parser.add_argument('--renderer', choices=['RaytracedLighting', 'PathTracing'], default='RaytracedLighting')
     parser.add_argument('--diagnose-capture', action='store_true')
     parser.add_argument('--snapshot-debug', action='store_true')
+    parser.add_argument('--start-paused', action='store_true',
+                        help='Render the initial ready pose at log time zero until play is requested')
     parser.add_argument('--rt-subframes', type=int, default=8)
     parser.add_argument('--samples', type=int, default=8)
     args = parser.parse_args()
@@ -374,7 +376,7 @@ def main() -> int:
                           image_size=list(frame.shape), image_std=float(frame[:,:,:3].std()))
             return 0
         report['startup_seconds'] = time.monotonic() - started
-        state, speed, log_time, epoch, seq, request_id = 'playing', 1.0, 0.0, 0, 0, 0
+        state, speed, log_time, epoch, seq, request_id = ('ready' if args.start_paused else 'playing'), 1.0, 0.0, 0, 0, 0
         loop_start = last_tick = time.monotonic()
         capture_times, jpeg_sizes = [], []
         print('P0_READY', str(args.output_dir), flush=True)

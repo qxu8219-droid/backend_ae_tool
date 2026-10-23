@@ -275,10 +275,14 @@ class Supervisor:
         for name, process in self.processes.items():
             result = dict(groups.get(process.pid, {'sent_sigterm': False, 'sent_sigkill': False}))
             result['remaining_live_pids'] = [pid for pid in live if self.owned[pid]['owner'] == name]
-            self.report['processes'][name].update(returncode=process.poll(), cleanup=result)
+            try:
+                process.wait(timeout=1)
+            except subprocess.TimeoutExpired:
+                result['error'] = 'Owned root process did not finish reaping'
+            self.report['processes'][name].update(returncode=process.returncode, cleanup=result)
         for log in self.logs.values():
             log.close()
-        complete = not live
+        complete = not live and all(process.returncode is not None for process in self.processes.values())
         self.report['cleanup'] = {'complete': complete, 'finished_at': utc_now(),
             'groups': groups, 'owned_descendant_pids': sorted(self.owned.keys() - roots),
             'remaining_live_pids': sorted(live)}

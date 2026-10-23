@@ -9,7 +9,8 @@
     "probe": "node --test browser-capabilities.test.mjs",
     "test:whep": "node --test whep-playback.test.mjs",
     "test:whep:lifecycle": "node --test whep-lifecycle.test.mjs",
-    "test:sync": "node --test sync-presentation.test.mjs"
+    "test:sync": "node --test sync-presentation.test.mjs",
+    "test:sync:faults": "node --test sync-faults.test.mjs"
   },
   "engines": {
     "node": ">=20"

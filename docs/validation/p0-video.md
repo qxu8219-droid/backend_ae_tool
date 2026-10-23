@@ -42,4 +42,4 @@ python3 scripts/run_p0_browser_test.py --run-dir outputs/p0/new-sync \
 
 每次使用新目录；`worker/`、`browser/`、`logs/` 和 `supervisor.json` 分开保存。依赖安装见 [README](../../README.md)，网关来源与校验见 [SOURCE.txt](../../tools/mediamtx/SOURCE.txt)。
 
-性能应读取浏览器呈现记录；源循环率、接收吞吐与包含控制等待的平均呈现率是不同指标。长时间稳定性、真实网络丢包、网关/worker 异常重建和远程网络条件仍需后续测试。
+性能应读取浏览器呈现记录；源循环率、接收吞吐与包含控制等待的平均呈现率是不同指标。网关/worker 异常重建已通过[故障实验](p0-faults.md)；长时间稳定性、真实网络丢包和远程网络条件仍需后续测试。

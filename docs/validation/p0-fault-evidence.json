@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-23",
+  "status": "passed",
+  "browser_version": "152.0.7977.82",
+  "scenarios": [
+    {
+      "name": "connect-with-no-source",
+      "status": "passed"
+    },
+    {
+      "name": "source-start-recovery",
+      "status": "passed"
+    },
+    {
+      "name": "drop-metadata",
+      "status": "passed"
+    },
+    {
+      "name": "drop-video",
+      "status": "passed"
+    },
+    {
+      "name": "reorder",
+      "status": "passed"
+    },
+    {
+      "name": "duplicate",
+      "status": "passed"
+    },
+    {
+      "name": "gateway-stop-start",
+      "status": "passed"
+    },
+    {
+      "name": "browser-reload",
+      "status": "passed"
+    },
+    {
+      "name": "source-sigkill-reload",
+      "status": "passed"
+    }
+  ],
+  "independent_canvas_samples": 77,
+  "motion": "0.1x actual source; time and pose must advance before faults and after same-session recovery",
+  "injection_scope": "Drop, delay and duplicate actual native Worker messages before application onmessage delivery.",
+  "network_packet_loss_simulated": false,
+  "source_restart_policy": "new worker process, new directory/session_id/capture sequence, ready at log_time_s 0; old connection remains frozen until explicit reconnect",
+  "processes": {
+    "gateway_1": {
+      "pid": 144143,
+      "returncode": 0
+    },
+    "preview_1": {
+      "pid": 144163,
+      "returncode": -15
+    },
+    "browser": {
+      "pid": 144165,
+      "returncode": 0
+    },
+    "worker_1": {
+      "pid": 144350,
+      "returncode": -9
+    },
+    "preview_2": {
+      "pid": 145044,
+      "returncode": -15
+    },
+    "gateway_2": {
+      "pid": 145280,
+      "returncode": 0
+    },
+    "worker_2": {
+      "pid": 145328,
+      "returncode": 0
+    },
+    "preview_3": {
+      "pid": 145668,
+      "returncode": -15
+    }
+  },
+  "cleanup_complete": true,
+  "remaining_live_pids": [],
+  "browser_report": "outputs/p0/faults-final/browser/sync-faults.json",
+  "supervisor_report": "outputs/p0/faults-final/supervisor.json"
+}
