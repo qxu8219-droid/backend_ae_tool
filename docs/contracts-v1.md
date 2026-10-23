@@ -77,4 +77,6 @@ env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/export_contracts.py --c
 
 查看契约页面可运行 `.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000`，访问 `/docs`。这只启动契约 ASGI 应用，不启动 IsaacSim。
 
+T05 接入后补充两项生成规则：JSON Schema 2020-12 的 prefixItems 仅在传给 TS 编译器时转换成数值元组，保存的原始 Schema 不变；REST 类型保留 Schema 默认字段的可选性，与 WS 类型一致。导出同时复制运行时 Schema 和 canonical 关节 fixture，供前端 AJV 校验。
+
 TypeScript 固定 5.9.3，满足 openapi-typescript 7.13.0 的 peer 范围；未强制绕过不兼容依赖。递归 JSON 类型也从 Schema 生成独立别名，避免 TS2502，没有手抄另一套字段。Pydantic 与 OpenAPI 依据分别见[严格模式说明](https://docs.pydantic.dev/latest/concepts/strict_mode/)和[OpenAPI 导出说明](https://fastapi.tiangolo.com/how-to/extending-openapi/)。

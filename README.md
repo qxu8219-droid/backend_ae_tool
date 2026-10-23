@@ -1,6 +1,6 @@
 # 机器人日志回放平台 P0
 
-首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。已完成 P0 核心媒体/同步与主要故障验证，并建立 P1 T04 接口契约；正式回放业务和 Vue 工作台尚未实现。
+首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。已完成 P0 核心验证、T04 契约与 T05 前端 Mock 工作台；正式回放业务和实际媒体接入仍待实现。
 
 当前结果见 [6.2 验证记录](docs/validation/p0-isaac62-status.md)。[5.1 验证记录](docs/validation/p0-isaac51-status.md)与旧资产保留供追溯，不作为当前版本的验收证据。
 
@@ -12,7 +12,7 @@
 
 `app/` 提供 18 个 REST 路由声明与 WS 模型，`proto/` 是 worker 可独立导入的共享协议，`contracts/` 保存生成 Schema、49 份有效样例和 TypeScript 类型。完整说明、安装与验证命令见 [contracts-v1.md](docs/contracts-v1.md)。
 
-合法业务调用目前返回 `503 BACKEND_NOT_CONFIGURED`，WS 关闭 1013；OpenAPI 声明不代表实际会话、日志上传或回放已经实现。后端业务在 P2 接入，前端 Mock 工作台从 T05 开始。
+合法业务调用目前返回 `503 BACKEND_NOT_CONFIGURED`，WS 关闭 1013；OpenAPI 声明不代表实际会话、日志上传或回放已经实现。后端业务在 P2 接入；当前可独立运行的前端 Mock 工作台见 [frontend README](../frontend/README.md)。
 
 ## 当前浏览器实验入口
 

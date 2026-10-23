@@ -328,7 +328,7 @@ export interface components {
              * @default linear
              * @enum {string}
              */
-            angle_semantics: "bounded" | "angular_wrapped" | "angular_unwrapped" | "linear";
+            angle_semantics?: "bounded" | "angular_wrapped" | "angular_unwrapped" | "linear";
             /** Joint Index */
             joint_index?: number | null;
             /**
@@ -367,12 +367,12 @@ export interface components {
              * Processing
              * @default []
              */
-            processing: ("original" | "unit_converted" | "interpolated" | "forward_filled" | "defaulted" | "derived")[];
+            processing?: ("original" | "unit_converted" | "interpolated" | "forward_filled" | "defaulted" | "derived")[];
             /**
              * Source Indices
              * @default []
              */
-            source_indices: number[];
+            source_indices?: number[];
             /** Valid */
             valid: boolean;
         };
@@ -400,19 +400,19 @@ export interface components {
              * @default 6.2.0
              * @constant
              */
-            isaacsim_version: "6.2.0";
+            isaacsim_version?: "6.2.0";
             /**
              * Mode
              * @default kinematic
              * @constant
              */
-            mode: "kinematic";
+            mode?: "kinematic";
             /**
              * Physics Engine
              * @default physx
              * @constant
              */
-            physics_engine: "physx";
+            physics_engine?: "physx";
             /** Robot Id */
             robot_id: string;
             /** Scene Id */
@@ -433,7 +433,7 @@ export interface components {
              * @default min_max
              * @constant
              */
-            downsampling: "min_max";
+            downsampling?: "min_max";
             /** From S */
             from_s: number;
             /** Log Id */
@@ -488,7 +488,7 @@ export interface components {
              * @default 1
              * @constant
              */
-            schema_version: 1;
+            schema_version?: 1;
             /** Session Id */
             session_id: string;
             /** Target Seq */
@@ -672,7 +672,7 @@ export interface components {
              * Duration S
              * @default 0
              */
-            duration_s: number;
+            duration_s?: number;
             /** Log Id */
             log_id?: string | null;
             /** Playback Epoch */
@@ -683,14 +683,14 @@ export interface components {
              * @default 1
              * @constant
              */
-            schema_version: 1;
+            schema_version?: 1;
             /** Session Id */
             session_id: string;
             /**
              * Speed
              * @default 1
              */
-            speed: number;
+            speed?: number;
             /**
              * State
              * @enum {string}
@@ -717,7 +717,7 @@ export interface components {
              * @default accepted
              * @constant
              */
-            ack_stage: "accepted";
+            ack_stage?: "accepted";
             /** Control Seq */
             control_seq: number;
             playback: components["schemas"]["PlaybackSnapshot"];
@@ -733,7 +733,7 @@ export interface components {
              * @default 28
              * @constant
              */
-            dof: 28;
+            dof?: 28;
             /** Id */
             id: string;
             /** Name */
@@ -794,7 +794,7 @@ export interface components {
              * @default starting
              * @constant
              */
-            status: "starting";
+            status?: "starting";
             /** Ws Url */
             ws_url: string;
         };
@@ -810,13 +810,13 @@ export interface components {
              * @default kinematic
              * @constant
              */
-            mode: "kinematic";
+            mode?: "kinematic";
             /**
              * Physics Engine
              * @default physx
              * @constant
              */
-            physics_engine: "physx";
+            physics_engine?: "physx";
             /** Render Fps */
             render_fps: number | null;
             /** Robot Id */
@@ -870,7 +870,7 @@ export interface components {
              * @default physx
              * @constant
              */
-            physics_engine: "physx";
+            physics_engine?: "physx";
             /** Usd Path */
             usd_path: string;
         };
@@ -917,13 +917,13 @@ export interface components {
              * @default 1
              * @constant
              */
-            catalog_schema_version: 1;
+            catalog_schema_version?: 1;
             /**
              * Decoder
              * @default webcodecs_h264
              * @constant
              */
-            decoder: "webcodecs_h264";
+            decoder?: "webcodecs_h264";
             /** Ice Servers */
             ice_servers?: components["schemas"]["IceServer"][];
             /**
@@ -931,13 +931,13 @@ export interface components {
              * @default capture32_crc32
              * @constant
              */
-            identity_scheme: "capture32_crc32";
+            identity_scheme?: "capture32_crc32";
             /**
              * Presentation
              * @default verified_pair_single_canvas
              * @constant
              */
-            presentation: "verified_pair_single_canvas";
+            presentation?: "verified_pair_single_canvas";
             /** Publishing */
             publishing: boolean;
             /**
@@ -945,7 +945,7 @@ export interface components {
              * @default rtcrtp_script_transform_or_encoded_streams
              * @constant
              */
-            receiver_transform: "rtcrtp_script_transform_or_encoded_streams";
+            receiver_transform?: "rtcrtp_script_transform_or_encoded_streams";
             /** Render Fps */
             render_fps?: number | null;
             /** Sei Uuid Hex */
@@ -955,7 +955,7 @@ export interface components {
              * @default h264_sei_snapshot_catalog
              * @constant
              */
-            snapshot_transport: "h264_sei_snapshot_catalog";
+            snapshot_transport?: "h264_sei_snapshot_catalog";
             /** Stream Path */
             stream_path: string | null;
             /**
@@ -963,7 +963,7 @@ export interface components {
              * @default whep
              * @constant
              */
-            transport: "whep";
+            transport?: "whep";
             /** Whep Url */
             whep_url: string | null;
         };
@@ -984,7 +984,7 @@ export interface components {
              * @default recreate_session_reload_from_start
              * @constant
              */
-            restart_policy: "recreate_session_reload_from_start";
+            restart_policy?: "recreate_session_reload_from_start";
         };
     };
     responses: never;
