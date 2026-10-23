@@ -1,0 +1,254 @@
+{
+  "$defs": {
+    "ChannelQuality": {
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Method"
+        },
+        "origin": {
+          "enum": [
+            "measured",
+            "commanded",
+            "derived",
+            "missing"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "processing": {
+          "default": [],
+          "items": {
+            "enum": [
+              "original",
+              "unit_converted",
+              "interpolated",
+              "forward_filled",
+              "defaulted",
+              "derived"
+            ],
+            "type": "string"
+          },
+          "title": "Processing",
+          "type": "array"
+        },
+        "source_indices": {
+          "default": [],
+          "items": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "Source Indices",
+          "type": "array"
+        },
+        "valid": {
+          "title": "Valid",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "origin",
+        "valid"
+      ],
+      "title": "ChannelQuality",
+      "type": "object"
+    },
+    "ChassisPose": {
+      "additionalProperties": false,
+      "properties": {
+        "frame": {
+          "const": "world",
+          "default": "world",
+          "title": "Frame",
+          "type": "string"
+        },
+        "x": {
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "title": "Y",
+          "type": "number"
+        },
+        "yaw": {
+          "title": "Yaw",
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "yaw"
+      ],
+      "title": "ChassisPose",
+      "type": "object"
+    },
+    "TargetFrame": {
+      "additionalProperties": false,
+      "properties": {
+        "chassis": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ChassisPose"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "control_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Control Seq",
+          "type": "integer"
+        },
+        "duration_s": {
+          "minimum": 0,
+          "title": "Duration S",
+          "type": "number"
+        },
+        "joint_efforts": {
+          "default": null,
+          "title": "Joint Efforts",
+          "type": "null"
+        },
+        "joint_velocities": {
+          "default": null,
+          "title": "Joint Velocities",
+          "type": "null"
+        },
+        "joints": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 28,
+          "minItems": 28,
+          "title": "Joints",
+          "type": "array"
+        },
+        "log_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Log Id",
+          "type": "string"
+        },
+        "log_time_s": {
+          "minimum": 0,
+          "title": "Log Time S",
+          "type": "number"
+        },
+        "mode": {
+          "const": "kinematic",
+          "default": "kinematic",
+          "title": "Mode",
+          "type": "string"
+        },
+        "playback_epoch": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Playback Epoch",
+          "type": "integer"
+        },
+        "progress": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Progress",
+          "type": "number"
+        },
+        "quality": {
+          "items": {
+            "$ref": "#/$defs/ChannelQuality"
+          },
+          "maxItems": 28,
+          "minItems": 28,
+          "title": "Quality",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "source_sample_index": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Sample Index"
+        },
+        "target_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Target Seq",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "log_time_s",
+        "duration_s",
+        "progress",
+        "session_id",
+        "log_id",
+        "playback_epoch",
+        "control_seq",
+        "target_seq",
+        "joints",
+        "quality",
+        "chassis"
+      ],
+      "title": "TargetFrame",
+      "type": "object"
+    }
+  },
+  "$id": "https://model-evaluation.local/contracts/1/target.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "frame": {
+      "$ref": "#/$defs/TargetFrame"
+    },
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "type": {
+      "const": "target",
+      "default": "target",
+      "title": "Type",
+      "type": "string"
+    }
+  },
+  "required": [
+    "frame"
+  ],
+  "title": "TargetMessage",
+  "type": "object"
+}

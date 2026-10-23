@@ -1,10 +1,18 @@
 # 机器人日志回放平台 P0
 
-首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。当前仍是 P0 探针，尚未进入正式 FastAPI/Vue 开发。
+首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。已完成 P0 核心媒体/同步与主要故障验证，并建立 P1 T04 接口契约；正式回放业务和 Vue 工作台尚未实现。
 
 当前结果见 [6.2 验证记录](docs/validation/p0-isaac62-status.md)。[5.1 验证记录](docs/validation/p0-isaac51-status.md)与旧资产保留供追溯，不作为当前版本的验收证据。
 
 已接通真实 Chrome 的严格同步原型：1280×720、60 秒稳定播放约 19.6fps；图像 ID＋CRC 精确匹配快照后，在同一 canvas 展示机器人、28 关节、底盘和进度。暂停、seek、单步、0.1x/10x、双向额外延迟 700ms 及两轮重连通过。详细方法、统计口径和未完成项见 [媒体路线](docs/validation/p0-video.md)与[同步报告](docs/validation/p0-sync.md)。
+
+用户已确认沿用 ≥15fps、共同延迟 <2s 的健康播放目标；故障等待时同步区域共同保持并提示状态。新增运动中的消息丢弃/乱序/重复、真实网关停启、浏览器刷新和 worker SIGKILL/重载验证见[故障报告](docs/validation/p0-faults.md)。
+
+## P1 接口契约
+
+`app/` 提供 18 个 REST 路由声明与 WS 模型，`proto/` 是 worker 可独立导入的共享协议，`contracts/` 保存生成 Schema、49 份有效样例和 TypeScript 类型。完整说明、安装与验证命令见 [contracts-v1.md](docs/contracts-v1.md)。
+
+合法业务调用目前返回 `503 BACKEND_NOT_CONFIGURED`，WS 关闭 1013；OpenAPI 声明不代表实际会话、日志上传或回放已经实现。后端业务在 P2 接入，前端 Mock 工作台从 T05 开始。
 
 ## 当前浏览器实验入口
 

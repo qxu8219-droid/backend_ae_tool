@@ -5,3 +5,6 @@ outputs/
 assets/robots/
 .superpowers/
 *.local.json
+*.egg-info/
+build/
+dist/

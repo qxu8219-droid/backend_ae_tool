@@ -1,0 +1,500 @@
+{
+  "$defs": {
+    "ApplyKeyframe": {
+      "additionalProperties": false,
+      "properties": {
+        "cmd": {
+          "const": "apply_keyframe",
+          "title": "Cmd",
+          "type": "string"
+        },
+        "frame": {
+          "$ref": "#/$defs/TargetFrame"
+        }
+      },
+      "required": [
+        "cmd",
+        "frame"
+      ],
+      "title": "ApplyKeyframe",
+      "type": "object"
+    },
+    "ChannelQuality": {
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Method"
+        },
+        "origin": {
+          "enum": [
+            "measured",
+            "commanded",
+            "derived",
+            "missing"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "processing": {
+          "default": [],
+          "items": {
+            "enum": [
+              "original",
+              "unit_converted",
+              "interpolated",
+              "forward_filled",
+              "defaulted",
+              "derived"
+            ],
+            "type": "string"
+          },
+          "title": "Processing",
+          "type": "array"
+        },
+        "source_indices": {
+          "default": [],
+          "items": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "Source Indices",
+          "type": "array"
+        },
+        "valid": {
+          "title": "Valid",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "origin",
+        "valid"
+      ],
+      "title": "ChannelQuality",
+      "type": "object"
+    },
+    "ChassisPose": {
+      "additionalProperties": false,
+      "properties": {
+        "frame": {
+          "const": "world",
+          "default": "world",
+          "title": "Frame",
+          "type": "string"
+        },
+        "x": {
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "title": "Y",
+          "type": "number"
+        },
+        "yaw": {
+          "title": "Yaw",
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "yaw"
+      ],
+      "title": "ChassisPose",
+      "type": "object"
+    },
+    "Heartbeat": {
+      "additionalProperties": false,
+      "properties": {
+        "cmd": {
+          "const": "heartbeat",
+          "title": "Cmd",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cmd"
+      ],
+      "title": "Heartbeat",
+      "type": "object"
+    },
+    "LoadLog": {
+      "additionalProperties": false,
+      "properties": {
+        "cmd": {
+          "const": "load_log",
+          "title": "Cmd",
+          "type": "string"
+        },
+        "log_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Log Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cmd",
+        "log_id"
+      ],
+      "title": "LoadLog",
+      "type": "object"
+    },
+    "LoadRobot": {
+      "additionalProperties": false,
+      "properties": {
+        "cmd": {
+          "const": "load_robot",
+          "title": "Cmd",
+          "type": "string"
+        },
+        "robot_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Robot Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cmd",
+        "robot_id"
+      ],
+      "title": "LoadRobot",
+      "type": "object"
+    },
+    "LoadScene": {
+      "additionalProperties": false,
+      "properties": {
+        "cmd": {
+          "const": "load_scene",
+          "title": "Cmd",
+          "type": "string"
+        },
+        "scene_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Scene Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cmd",
+        "scene_id"
+      ],
+      "title": "LoadScene",
+      "type": "object"
+    },
+    "PauseBarrier": {
+      "additionalProperties": false,
+      "properties": {
+        "cmd": {
+          "const": "pause_barrier",
+          "title": "Cmd",
+          "type": "string"
+        },
+        "target_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Target Seq",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "cmd",
+        "target_seq"
+      ],
+      "title": "PauseBarrier",
+      "type": "object"
+    },
+    "Reset": {
+      "additionalProperties": false,
+      "properties": {
+        "cmd": {
+          "const": "reset",
+          "title": "Cmd",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cmd"
+      ],
+      "title": "Reset",
+      "type": "object"
+    },
+    "Shutdown": {
+      "additionalProperties": false,
+      "properties": {
+        "cmd": {
+          "const": "shutdown",
+          "title": "Cmd",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cmd"
+      ],
+      "title": "Shutdown",
+      "type": "object"
+    },
+    "SubscribeReady": {
+      "additionalProperties": false,
+      "properties": {
+        "channels": {
+          "items": {
+            "enum": [
+              "target",
+              "telemetry"
+            ],
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "Channels",
+          "type": "array"
+        },
+        "cmd": {
+          "const": "subscribe_ready",
+          "title": "Cmd",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cmd",
+        "channels"
+      ],
+      "title": "SubscribeReady",
+      "type": "object"
+    },
+    "TargetFrame": {
+      "additionalProperties": false,
+      "properties": {
+        "chassis": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ChassisPose"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "control_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Control Seq",
+          "type": "integer"
+        },
+        "duration_s": {
+          "minimum": 0,
+          "title": "Duration S",
+          "type": "number"
+        },
+        "joint_efforts": {
+          "default": null,
+          "title": "Joint Efforts",
+          "type": "null"
+        },
+        "joint_velocities": {
+          "default": null,
+          "title": "Joint Velocities",
+          "type": "null"
+        },
+        "joints": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 28,
+          "minItems": 28,
+          "title": "Joints",
+          "type": "array"
+        },
+        "log_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Log Id",
+          "type": "string"
+        },
+        "log_time_s": {
+          "minimum": 0,
+          "title": "Log Time S",
+          "type": "number"
+        },
+        "mode": {
+          "const": "kinematic",
+          "default": "kinematic",
+          "title": "Mode",
+          "type": "string"
+        },
+        "playback_epoch": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Playback Epoch",
+          "type": "integer"
+        },
+        "progress": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Progress",
+          "type": "number"
+        },
+        "quality": {
+          "items": {
+            "$ref": "#/$defs/ChannelQuality"
+          },
+          "maxItems": 28,
+          "minItems": 28,
+          "title": "Quality",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "source_sample_index": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Sample Index"
+        },
+        "target_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Target Seq",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "log_time_s",
+        "duration_s",
+        "progress",
+        "session_id",
+        "log_id",
+        "playback_epoch",
+        "control_seq",
+        "target_seq",
+        "joints",
+        "quality",
+        "chassis"
+      ],
+      "title": "TargetFrame",
+      "type": "object"
+    }
+  },
+  "$id": "https://model-evaluation.local/contracts/1/ipc-request.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "command": {
+      "discriminator": {
+        "mapping": {
+          "apply_keyframe": "#/$defs/ApplyKeyframe",
+          "heartbeat": "#/$defs/Heartbeat",
+          "load_log": "#/$defs/LoadLog",
+          "load_robot": "#/$defs/LoadRobot",
+          "load_scene": "#/$defs/LoadScene",
+          "pause_barrier": "#/$defs/PauseBarrier",
+          "reset": "#/$defs/Reset",
+          "shutdown": "#/$defs/Shutdown",
+          "subscribe_ready": "#/$defs/SubscribeReady"
+        },
+        "propertyName": "cmd"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/LoadScene"
+        },
+        {
+          "$ref": "#/$defs/LoadRobot"
+        },
+        {
+          "$ref": "#/$defs/LoadLog"
+        },
+        {
+          "$ref": "#/$defs/ApplyKeyframe"
+        },
+        {
+          "$ref": "#/$defs/PauseBarrier"
+        },
+        {
+          "$ref": "#/$defs/Reset"
+        },
+        {
+          "$ref": "#/$defs/Shutdown"
+        },
+        {
+          "$ref": "#/$defs/Heartbeat"
+        },
+        {
+          "$ref": "#/$defs/SubscribeReady"
+        }
+      ],
+      "title": "Command"
+    },
+    "control_seq": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Control Seq",
+      "type": "integer"
+    },
+    "playback_epoch": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Playback Epoch",
+      "type": "integer"
+    },
+    "request_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Request Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "session_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Session Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "session_id",
+    "request_id",
+    "control_seq",
+    "playback_epoch",
+    "command"
+  ],
+  "title": "RPCRequest",
+  "type": "object"
+}

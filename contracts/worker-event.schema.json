@@ -1,0 +1,649 @@
+{
+  "$defs": {
+    "AppliedFrame": {
+      "additionalProperties": false,
+      "properties": {
+        "applied_wall_s": {
+          "minimum": 0,
+          "title": "Applied Wall S",
+          "type": "number"
+        },
+        "chassis": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ChassisPose"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "control_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Control Seq",
+          "type": "integer"
+        },
+        "duration_s": {
+          "minimum": 0,
+          "title": "Duration S",
+          "type": "number"
+        },
+        "joint_efforts": {
+          "default": null,
+          "title": "Joint Efforts",
+          "type": "null"
+        },
+        "joint_velocities": {
+          "default": null,
+          "title": "Joint Velocities",
+          "type": "null"
+        },
+        "joints": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 28,
+          "minItems": 28,
+          "title": "Joints",
+          "type": "array"
+        },
+        "log_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Log Id",
+          "type": "string"
+        },
+        "log_time_s": {
+          "minimum": 0,
+          "title": "Log Time S",
+          "type": "number"
+        },
+        "mode": {
+          "const": "kinematic",
+          "default": "kinematic",
+          "title": "Mode",
+          "type": "string"
+        },
+        "playback_epoch": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Playback Epoch",
+          "type": "integer"
+        },
+        "progress": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Progress",
+          "type": "number"
+        },
+        "quality": {
+          "items": {
+            "$ref": "#/$defs/ChannelQuality"
+          },
+          "maxItems": 28,
+          "minItems": 28,
+          "title": "Quality",
+          "type": "array"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "source_joints": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 28,
+          "minItems": 28,
+          "title": "Source Joints",
+          "type": "array"
+        },
+        "source_sample_index": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Sample Index"
+        },
+        "target_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Target Seq",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "log_time_s",
+        "duration_s",
+        "progress",
+        "session_id",
+        "log_id",
+        "playback_epoch",
+        "control_seq",
+        "target_seq",
+        "joints",
+        "quality",
+        "chassis",
+        "source_joints",
+        "applied_wall_s"
+      ],
+      "title": "AppliedFrame",
+      "type": "object"
+    },
+    "ChannelQuality": {
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Method"
+        },
+        "origin": {
+          "enum": [
+            "measured",
+            "commanded",
+            "derived",
+            "missing"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "processing": {
+          "default": [],
+          "items": {
+            "enum": [
+              "original",
+              "unit_converted",
+              "interpolated",
+              "forward_filled",
+              "defaulted",
+              "derived"
+            ],
+            "type": "string"
+          },
+          "title": "Processing",
+          "type": "array"
+        },
+        "source_indices": {
+          "default": [],
+          "items": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "Source Indices",
+          "type": "array"
+        },
+        "valid": {
+          "title": "Valid",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "origin",
+        "valid"
+      ],
+      "title": "ChannelQuality",
+      "type": "object"
+    },
+    "ChassisPose": {
+      "additionalProperties": false,
+      "properties": {
+        "frame": {
+          "const": "world",
+          "default": "world",
+          "title": "Frame",
+          "type": "string"
+        },
+        "x": {
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "title": "Y",
+          "type": "number"
+        },
+        "yaw": {
+          "title": "Yaw",
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "yaw"
+      ],
+      "title": "ChassisPose",
+      "type": "object"
+    },
+    "JsonValue": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "array"
+        },
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "ProtocolError": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Code",
+          "type": "string"
+        },
+        "details": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Details",
+          "type": "object"
+        },
+        "message": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "ProtocolError",
+      "type": "object"
+    },
+    "RenderedFrame": {
+      "additionalProperties": false,
+      "properties": {
+        "applied_wall_s": {
+          "minimum": 0,
+          "title": "Applied Wall S",
+          "type": "number"
+        },
+        "capture_id": {
+          "maximum": 4294967295,
+          "minimum": 1,
+          "title": "Capture Id",
+          "type": "integer"
+        },
+        "captured_wall_s": {
+          "minimum": 0,
+          "title": "Captured Wall S",
+          "type": "number"
+        },
+        "chassis": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ChassisPose"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "control_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Control Seq",
+          "type": "integer"
+        },
+        "duration_s": {
+          "minimum": 0,
+          "title": "Duration S",
+          "type": "number"
+        },
+        "joint_efforts": {
+          "default": null,
+          "title": "Joint Efforts",
+          "type": "null"
+        },
+        "joint_velocities": {
+          "default": null,
+          "title": "Joint Velocities",
+          "type": "null"
+        },
+        "joints": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 28,
+          "minItems": 28,
+          "title": "Joints",
+          "type": "array"
+        },
+        "log_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Log Id",
+          "type": "string"
+        },
+        "log_time_s": {
+          "minimum": 0,
+          "title": "Log Time S",
+          "type": "number"
+        },
+        "mode": {
+          "const": "kinematic",
+          "default": "kinematic",
+          "title": "Mode",
+          "type": "string"
+        },
+        "playback_epoch": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Playback Epoch",
+          "type": "integer"
+        },
+        "progress": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Progress",
+          "type": "number"
+        },
+        "quality": {
+          "items": {
+            "$ref": "#/$defs/ChannelQuality"
+          },
+          "maxItems": 28,
+          "minItems": 28,
+          "title": "Quality",
+          "type": "array"
+        },
+        "raw_identity_verified": {
+          "const": true,
+          "title": "Raw Identity Verified",
+          "type": "boolean"
+        },
+        "render_seq": {
+          "maximum": 4294967295,
+          "minimum": 1,
+          "title": "Render Seq",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "source_joints": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 28,
+          "minItems": 28,
+          "title": "Source Joints",
+          "type": "array"
+        },
+        "source_sample_index": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Sample Index"
+        },
+        "target_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Target Seq",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "log_time_s",
+        "duration_s",
+        "progress",
+        "session_id",
+        "log_id",
+        "playback_epoch",
+        "control_seq",
+        "target_seq",
+        "capture_id",
+        "render_seq",
+        "joints",
+        "quality",
+        "chassis",
+        "source_joints",
+        "applied_wall_s",
+        "captured_wall_s",
+        "raw_identity_verified"
+      ],
+      "title": "RenderedFrame",
+      "type": "object"
+    },
+    "WorkerApplied": {
+      "additionalProperties": false,
+      "properties": {
+        "frame": {
+          "$ref": "#/$defs/AppliedFrame"
+        },
+        "type": {
+          "const": "applied",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "frame"
+      ],
+      "title": "WorkerApplied",
+      "type": "object"
+    },
+    "WorkerError": {
+      "additionalProperties": false,
+      "properties": {
+        "error": {
+          "$ref": "#/$defs/ProtocolError"
+        },
+        "type": {
+          "const": "error",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "error"
+      ],
+      "title": "WorkerError",
+      "type": "object"
+    },
+    "WorkerHealth": {
+      "additionalProperties": false,
+      "properties": {
+        "render_fps": {
+          "minimum": 0,
+          "title": "Render Fps",
+          "type": "number"
+        },
+        "type": {
+          "const": "health",
+          "title": "Type",
+          "type": "string"
+        },
+        "wall_time_s": {
+          "minimum": 0,
+          "title": "Wall Time S",
+          "type": "number"
+        }
+      },
+      "required": [
+        "type",
+        "render_fps",
+        "wall_time_s"
+      ],
+      "title": "WorkerHealth",
+      "type": "object"
+    },
+    "WorkerReady": {
+      "additionalProperties": false,
+      "properties": {
+        "isaacsim_version": {
+          "const": "6.2.0",
+          "default": "6.2.0",
+          "title": "Isaacsim Version",
+          "type": "string"
+        },
+        "physics_engine": {
+          "const": "physx",
+          "default": "physx",
+          "title": "Physics Engine",
+          "type": "string"
+        },
+        "type": {
+          "const": "ready",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "WorkerReady",
+      "type": "object"
+    },
+    "WorkerRendered": {
+      "additionalProperties": false,
+      "properties": {
+        "frame": {
+          "$ref": "#/$defs/RenderedFrame"
+        },
+        "type": {
+          "const": "rendered",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "frame"
+      ],
+      "title": "WorkerRendered",
+      "type": "object"
+    }
+  },
+  "$id": "https://model-evaluation.local/contracts/1/worker-event.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "event": {
+      "discriminator": {
+        "mapping": {
+          "applied": "#/$defs/WorkerApplied",
+          "error": "#/$defs/WorkerError",
+          "health": "#/$defs/WorkerHealth",
+          "ready": "#/$defs/WorkerReady",
+          "rendered": "#/$defs/WorkerRendered"
+        },
+        "propertyName": "type"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/WorkerReady"
+        },
+        {
+          "$ref": "#/$defs/WorkerHealth"
+        },
+        {
+          "$ref": "#/$defs/WorkerApplied"
+        },
+        {
+          "$ref": "#/$defs/WorkerRendered"
+        },
+        {
+          "$ref": "#/$defs/WorkerError"
+        }
+      ],
+      "title": "Event"
+    },
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "seq": {
+      "maximum": 9007199254740991,
+      "minimum": 0,
+      "title": "Seq",
+      "type": "integer"
+    },
+    "session_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Session Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "session_id",
+    "seq",
+    "event"
+  ],
+  "title": "WorkerEvent",
+  "type": "object"
+}
