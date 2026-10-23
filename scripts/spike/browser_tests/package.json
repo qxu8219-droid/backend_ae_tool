@@ -1,0 +1,20 @@
+{
+  "name": "p0-isolated-browser-tests",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Local-only P0 capability probes in isolated headless system Chrome",
+  "scripts": {
+    "test": "node --test browser-capabilities.test.mjs stamp-oracle.test.mjs",
+    "probe": "node --test browser-capabilities.test.mjs",
+    "test:whep": "node --test whep-playback.test.mjs",
+    "test:whep:lifecycle": "node --test whep-lifecycle.test.mjs",
+    "test:sync": "node --test sync-presentation.test.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "playwright": "1.58.2"
+  }
+}

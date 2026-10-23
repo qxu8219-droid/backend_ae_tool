@@ -1,0 +1,62 @@
+MediaMTX P0 local tool pin
+=========================
+Version: v1.21.2
+Platform: linux_amd64
+Checked: 2026-10-23
+Official release published_at: 2026-10-08T21:42:39Z
+Latest stable at installation (prerelease=false, draft=false).
+
+Release:
+https://github.com/bluenviron/mediamtx/releases/tag/v1.21.2
+Release metadata checked through:
+https://api.github.com/repos/bluenviron/mediamtx/releases/latest
+Archive:
+https://github.com/bluenviron/mediamtx/releases/download/v1.21.2/mediamtx_v1.21.2_linux_amd64.tar.gz
+Official checksum list (preserved unmodified as checksums.sha256):
+https://github.com/bluenviron/mediamtx/releases/download/v1.21.2/checksums.sha256
+Version-specific configuration reference:
+https://github.com/bluenviron/mediamtx/blob/v1.21.2/mediamtx.yml
+Configuration loader (MTX_ and legacy RTSP_ environment overrides):
+https://github.com/bluenviron/mediamtx/blob/v1.21.2/internal/conf/conf.go
+
+Official archive SHA256:
+121be6e00397e473a95d83c75f4fcd3819a6af3b0e1a50889cba43ab4fab6a27
+Extracted executable SHA256 (also in binary.sha256):
+0ffb7f18210d08ee38cb16668c4f3a2c96622e69d401119c0026d078a2b89523
+The archive SHA256 matched both the official checksum list and the release
+asset digest returned by the GitHub API before the executable was extracted.
+GitHub attestation verification was not performed.
+
+Reinstall from backend/ (no system packages, sudo, or GPU required):
+  cd tools/mediamtx
+  curl -fL --retry 2 -o mediamtx_v1.21.2_linux_amd64.tar.gz https://github.com/bluenviron/mediamtx/releases/download/v1.21.2/mediamtx_v1.21.2_linux_amd64.tar.gz
+  printf '%s\n' '121be6e00397e473a95d83c75f4fcd3819a6af3b0e1a50889cba43ab4fab6a27  mediamtx_v1.21.2_linux_amd64.tar.gz' | sha256sum --check -
+  tar -xzf mediamtx_v1.21.2_linux_amd64.tar.gz mediamtx LICENSE
+  sha256sum --check binary.sha256
+  cd ../..
+  ./scripts/run_mediamtx_p0.sh --validate-conf
+
+Run from backend/:
+  ./scripts/run_mediamtx_p0.sh
+Stop the foreground process with Ctrl-C.
+
+Input: rtsp://127.0.0.1:8554/stream (RTSP over TCP)
+WHEP: http://127.0.0.1:8889/stream/whep
+Built-in player: http://127.0.0.1:8889/stream
+API: http://127.0.0.1:9997/v3/paths/list
+Media: UDP 127.0.0.1:8189
+The external P0 page is expected on http://127.0.0.1:8768; this gateway does
+not serve that page. Both localhost and 127.0.0.1 origins at ports 8768/8889
+are allowed. No STUN/TURN server is used or external ICE IP advertised.
+
+The launcher verifies the pinned executable, removes inherited MTX_/RTSP_
+configuration overrides, validates the fixed config, and execs MediaMTX.
+Do not use this loopback-only configuration for remote browser clients.
+
+Recorded validation: validation.json (2026-10-23, no RTSP source present).
+The official --validate-conf accepted the config; the live API and ss confirmed
+only the three expected loopback listeners, the built-in page returned 200,
+and the WHEP OPTIONS preflight for the 8768 origin returned 204. The process
+exited with status 0 on SIGINT and its listeners closed. This validates gateway
+startup, routing and CORS only; actual H.264 ingestion, SDP negotiation, ICE
+connectivity, browser decoding and end-to-end latency still require a live source.

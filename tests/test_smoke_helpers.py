@@ -8,9 +8,23 @@ from scripts.spike.smoke import external_dependencies
 from scripts.spike.smoke import runtime_pose
 from scripts.spike.smoke import prepare_output, quaternion_angle_error
 from scripts.spike.smoke import loop_statistics
+from scripts.spike.smoke import capture_stamp
 
 
 class SmokeHelpersTests(unittest.TestCase):
+    def test_snapshot_transport_failure_cannot_be_reported_as_success(self):
+        from scripts.spike.smoke import snapshot_transport_error
+        self.assertIsNone(snapshot_transport_error({'prepared_frames':3,'stream_failed':False,'stream_errors':0}))
+        self.assertIn('failed',snapshot_transport_error({'prepared_frames':3,'stream_failed':True,'stream_errors':1}))
+        self.assertIsNotNone(snapshot_transport_error({'prepared_frames':0,'stream_failed':False,'stream_errors':0}))
+
+    def test_capture_stamp_keeps_full_id_and_crc_without_modulo_alias(self):
+        self.assertEqual(capture_stamp(1), (0x5643ef8a << 32) | 1)
+        self.assertEqual(capture_stamp(0x12345678), (0x4a090e98 << 32) | 0x12345678)
+        self.assertNotEqual(capture_stamp(1), capture_stamp(4097))
+        with self.assertRaises(ValueError):capture_stamp(0)
+        with self.assertRaises(ValueError):capture_stamp(2**32)
+
     def test_rtsp_statistics_do_not_claim_encoded_or_verified_frames(self):
         stats = loop_statistics('rtsp', 30, 2.0, [.01, .03], [0, 0])
         self.assertEqual(stats['render_iterations'], 30)

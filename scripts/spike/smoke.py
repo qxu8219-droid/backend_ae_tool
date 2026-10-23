@@ -12,6 +12,8 @@ import os
 import signal
 import sys
 import time
+import uuid
+import zlib
 from pathlib import Path
 
 
@@ -48,6 +50,12 @@ def decode_marker_rgb(samples) -> int:
     return value
 
 
+def capture_stamp(capture_id: int) -> int:
+    if type(capture_id) is not int or not 0 < capture_id < 2**32:
+        raise ValueError('capture ID must be a positive uint32 without wrap')
+    return capture_id | (zlib.crc32(capture_id.to_bytes(4, 'big')) << 32)
+
+
 def external_dependencies(asset_root, paths, builtin_material) -> list[str]:
     root = Path(asset_root).resolve()
     builtin = Path(builtin_material).resolve() if builtin_material is not None else None
@@ -80,11 +88,19 @@ def quaternion_angle_error(actual, expected) -> float:
 def loop_statistics(mode, iterations, elapsed, durations, jpeg_sizes) -> dict:
     rate = iterations / elapsed if elapsed > 0 else 0
     duration_ms = 1000 * sum(durations) / len(durations) if durations else None
-    if mode == 'rtsp':
+    if mode in ('rtsp', 'rtsp_sync'):
         return {'render_iterations': iterations, 'server_loop_fps': rate,
                 'mean_render_iteration_ms': duration_ms}
     return {'frames': iterations, 'published_fps': rate, 'mean_capture_ms': duration_ms,
             'mean_jpeg_bytes': sum(jpeg_sizes) / len(jpeg_sizes) if jpeg_sizes else None}
+
+
+def snapshot_transport_error(stats):
+    if stats.get('stream_failed') or stats.get('stream_errors', 0):
+        return 'Snapshot RTSP transport failed; inspect snapshot_writer diagnostics'
+    if stats.get('prepared_frames', 0) == 0:
+        return 'No encoded output carried a raw-validated snapshot catalog'
+    return None
 
 
 def main() -> int:
@@ -99,10 +115,11 @@ def main() -> int:
     parser.add_argument('--fps', type=float, default=30)
     parser.add_argument('--width', type=int, default=960)
     parser.add_argument('--height', type=int, default=720)
-    parser.add_argument('--mode', choices=['baseline', 'paired', 'rtsp'], default='baseline')
+    parser.add_argument('--mode', choices=['baseline', 'paired', 'rtsp', 'rtsp_sync'], default='baseline')
     parser.add_argument('--rtsp-port', type=int, default=8554)
     parser.add_argument('--renderer', choices=['RaytracedLighting', 'PathTracing'], default='RaytracedLighting')
     parser.add_argument('--diagnose-capture', action='store_true')
+    parser.add_argument('--snapshot-debug', action='store_true')
     parser.add_argument('--rt-subframes', type=int, default=8)
     parser.add_argument('--samples', type=int, default=8)
     args = parser.parse_args()
@@ -111,7 +128,7 @@ def main() -> int:
     prepare_output(args.output_dir)
     sys.path.insert(0, str(Path(__file__).parent))
     from asset_audit import CANONICAL_JOINTS, audit_asset
-    from paired_preview import publish_frame
+    from paired_preview import publish_frame, _atomic_write
     audit = audit_asset(args.asset_dir)
     if not audit['passed']:
         raise RuntimeError(f'Asset audit failed: {audit["errors"]}')
@@ -121,6 +138,7 @@ def main() -> int:
     app = SimulationApp({'headless': True, 'width': args.width, 'height': args.height,
                          'window_width': args.width, 'window_height': args.height,
                          'renderer': args.renderer, 'limit_cpu_threads': 12,
+                         'disable_viewport_updates': args.mode == 'rtsp_sync',
                          'hide_ui': True, 'anti_aliasing': 0,
                          'samples_per_pixel_per_frame': args.samples, 'denoiser': False,
                          'extra_args': physics_launch_args()},
@@ -134,6 +152,9 @@ def main() -> int:
                   'seconds': args.seconds, 'rtsp_port': args.rtsp_port},
               'python_version': sys.version, 'python_executable': sys.executable}
     running = True
+    snapshot_writer = None
+    session_id = uuid.uuid4().hex
+    report['session_id'] = session_id
 
     def terminate(*_):
         nonlocal running
@@ -225,20 +246,40 @@ def main() -> int:
             viewport = get_active_viewport()
             if viewport:
                 viewport.set_active_camera('/World/Camera')
-        product = rep.create.render_product('/World/Camera', (args.width, args.height))
-        rgb = rep.AnnotatorRegistry.get_annotator('rgb')
-        rgb.attach([product])
+        product = rep.create.render_product('/World/Camera', (args.width, args.height),
+                                            force_new=args.mode == 'rtsp_sync')
+        if args.mode == 'rtsp_sync':
+            from omni.kit.viewport.utility import get_active_viewport
+            viewport = get_active_viewport()
+            if viewport and str(viewport.render_product_path) == str(product.path):
+                raise RuntimeError('Snapshot camera must use a separate render product from disabled viewport')
+            report['capture_rendering'] = {
+                'camera_render_product': str(product.path),
+                'viewport_render_product': str(viewport.render_product_path) if viewport else None,
+                'viewport_updates_enabled': viewport.updates_enabled if viewport else None,
+                'dlss_history_reset_per_capture': True}
+        rgb = None
+        if args.mode != 'rtsp_sync':
+            rgb = rep.AnnotatorRegistry.get_annotator('rgb')
+            rgb.attach([product])
 
         # Actual scene geometry encodes render_seq; read pixels independently of metadata.
         marker_switches = []
         sample_pixels = []
-        for bit in range(12):
-            x, y, z = -0.44 + bit * 0.055, 0.32 * args.height / args.width * 4/3, -1.0
+        marker_bits = 64 if args.mode == 'rtsp_sync' else 12
+        for bit in range(marker_bits):
+            if marker_bits == 64:
+                x = -.475 + (bit % 32)*.03
+                y = (.32-(bit//32)*.04)*args.height/args.width*4/3
+                size = .022
+            else:
+                x,y,size = -.44+bit*.055, .32*args.height/args.width*4/3, .035
+            z = -1.0
             cube = UsdGeom.Cube.Define(stage, f'/World/Camera/FrameBit{bit}')
             cube.CreateSizeAttr(1)
             xf = UsdGeom.Xformable(cube)
             xf.AddTranslateOp().Set(Gf.Vec3d(x, y, z))
-            xf.AddScaleOp().Set(Gf.Vec3f(0.035, 0.035, 0.002))
+            xf.AddScaleOp().Set(Gf.Vec3f(size, size, .002))
             mat = UsdShade.Material.Define(stage, f'/World/MarkerMaterials/Bit{bit}')
             shader = UsdShade.Shader.Define(stage, f'/World/MarkerMaterials/Bit{bit}/Shader')
             shader.CreateIdAttr('UsdPreviewSurface')
@@ -252,7 +293,7 @@ def main() -> int:
             green.CreateSizeAttr(1)
             green_xf = UsdGeom.Xformable(green)
             green_xf.AddTranslateOp().Set(Gf.Vec3d(x, y, z + .005))
-            green_xf.AddScaleOp().Set(Gf.Vec3f(.035, .035, .002))
+            green_xf.AddScaleOp().Set(Gf.Vec3f(size, size, .002))
             green_mat = UsdShade.Material.Define(stage, f'/World/MarkerMaterials/Green{bit}')
             green_shader = UsdShade.Shader.Define(stage, f'/World/MarkerMaterials/Green{bit}/Shader')
             green_shader.CreateIdAttr('UsdPreviewSurface')
@@ -311,6 +352,13 @@ def main() -> int:
             visible.Set('invisible')
         for _ in range(10):
             world.render()
+        if args.mode == 'rtsp_sync':
+            from rtsp_snapshot_writer import create_snapshot_writer
+            snapshot_writer = create_snapshot_writer(stage, product, '/World/Camera',
+                port=args.rtsp_port, width=args.width, height=args.height,
+                debug_dir=args.output_dir/'capture-debug' if args.snapshot_debug else None)
+            report['transport'] = 'rtsp-h264-sei-catalog-pixel-identity-experiment'
+            report['rtsp_url'] = f'rtsp://127.0.0.1:{args.rtsp_port}/stream'
         if args.mode == 'baseline':
             q = sample_pose(1, list(CANONICAL_JOINTS))
             apply(q)
@@ -368,6 +416,37 @@ def main() -> int:
                 # Flush articulation transforms, then restore the exact logged pose before rendering.
                 world.step(render=False)
                 apply(q, (x, y, .015), yaw)
+                if args.mode == 'rtsp_sync':
+                    read = robot.get_joint_positions(joint_indices=indices)
+                    read_pos, read_quat = robot.get_world_pose()
+                    if (float(np.max(np.abs(read-np.array(runtime_pose(q, CANONICAL_JOINTS))))) > 1e-5
+                        or float(np.max(np.abs(read_pos-np.array([x,y,.015])))) > 1e-5
+                        or quaternion_angle_error(read_quat,[math.cos(yaw/2),0,0,math.sin(yaw/2)]) > 1e-5):
+                        raise RuntimeError('Readback differs from requested capture pose')
+                    wq,xq,yq,zq = map(float,read_quat)
+                    expected = capture_stamp(seq)
+                    for bit,visible in enumerate(marker_switches):
+                        visible.Set('inherited' if expected & (1<<bit) else 'invisible')
+                    snapshot = {'sei_schema':'p0.snapshot.v1','session_id':session_id,'epoch':epoch,'render_seq':seq,
+                        'log_time_s':log_time,'joints':read.tolist(),'joint_names':list(CANONICAL_JOINTS),
+                        'source_joints':q,'chassis':{'x':float(read_pos[0]),'y':float(read_pos[1]),
+                            'yaw':math.atan2(2*(wq*zq+xq*yq),1-2*(yq*yq+zq*zq))},
+                        'state':state,'speed':speed,'request_id':request_id,'captured_wall_s':time.time(),
+                        'marker_pixels':sample_pixels,'marker_bits':64,'marker_layout':'capture32_crc32'}
+                    snapshot_writer.arm(seq,snapshot)
+                    # 6.2 Real-Time 2.0 requires DLSS/RR. Reset temporal history
+                    # after pose/visibility changes so a capture cannot blend
+                    # pixels from earlier business frames (official SDG workflow).
+                    carb.settings.get_settings().set('/rtx-transient/post/dlss/forceParamReset', True)
+                    rep.orchestrator.step(delta_time=0.0,rt_subframes=args.rt_subframes,
+                                          pause_timeline=False,wait_for_render=True)
+                    _atomic_write(args.output_dir/'latest_snapshot.json',json.dumps(snapshot).encode())
+                    trace.write(json.dumps({'snapshot':snapshot,'writer':snapshot_writer.sync_stats})+'\n')
+                    trace.flush()
+                    capture_times.append(time.monotonic()-begin);jpeg_sizes.append(0)
+                    if seq%30==0:print('P0_SYNC',seq,json.dumps(snapshot_writer.sync_stats),flush=True)
+                    time.sleep(max(0,1/args.fps-(time.monotonic()-begin)))
+                    continue
                 if args.mode == 'rtsp':
                     world.render()
                     trace.write(json.dumps({'render_seq': seq, 'log_time_s': log_time,
@@ -451,6 +530,12 @@ def main() -> int:
         traceback.print_exc()
         report.update(status='fail', error=str(exc))
     finally:
+        if snapshot_writer is not None:
+            report['snapshot_writer'] = snapshot_writer.sync_stats
+            transport_error = snapshot_transport_error(report['snapshot_writer'])
+            if report['status']=='pass' and transport_error:
+                report.update(status='fail',error=transport_error)
+            snapshot_writer.detach()
         (args.output_dir / 'results.json').write_text(json.dumps(report, indent=2, allow_nan=False))
         print('P0_RESULT', report['status'], flush=True)
         app.close(wait_for_replicator=False)

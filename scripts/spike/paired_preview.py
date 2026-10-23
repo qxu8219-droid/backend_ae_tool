@@ -17,7 +17,6 @@ from pathlib import Path
 import struct
 import tempfile
 import threading
-import time
 from urllib.parse import urlsplit
 
 
@@ -170,7 +169,11 @@ class PreviewServer(ThreadingHTTPServer):
                     self.last_request_id = max(self.last_request_id, previous)
             except (OSError, ValueError, AttributeError):
                 pass
-            self.last_request_id = max(self.last_request_id + 1, time.monotonic_ns())
+            # JSON consumers use JS numbers. A nanosecond uptime exceeds exact
+            # integer range after 104 days, so use the persisted local sequence.
+            if not 0 <= self.last_request_id < 2**53-1:
+                raise ValueError('request_id exhausted safe integer range; reload in a fresh run directory')
+            self.last_request_id += 1
             control["request_id"] = self.last_request_id
             _atomic_write(path, json.dumps(control, allow_nan=False).encode("utf-8"))
         return control

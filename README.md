@@ -4,6 +4,42 @@
 
 当前结果见 [6.2 验证记录](docs/validation/p0-isaac62-status.md)。[5.1 验证记录](docs/validation/p0-isaac51-status.md)与旧资产保留供追溯，不作为当前版本的验收证据。
 
+已接通真实 Chrome 的严格同步原型：1280×720、60 秒稳定播放约 19.6fps；图像 ID＋CRC 精确匹配快照后，在同一 canvas 展示机器人、28 关节、底盘和进度。暂停、seek、单步、0.1x/10x、双向额外延迟 700ms 及两轮重连通过。详细方法、统计口径和未完成项见 [媒体路线](docs/validation/p0-video.md)与[同步报告](docs/validation/p0-sync.md)。
+
+## 当前浏览器实验入口
+
+在本目录安装测试依赖；使用系统 Chrome，临时 profile 只访问 localhost。MediaMTX 官方二进制放在项目 `tools/mediamtx/`，来源、SHA256 与重装命令见 [SOURCE.txt](tools/mediamtx/SOURCE.txt)。第三方二进制与 node_modules 均不进入 Git。
+
+```bash
+npm ci --prefix scripts/spike/browser_tests
+export ISAACSIM_PYTHON=/home/xq/work/code/projects/r1pro/.venvs/isaacsim62/bin/python
+python3 scripts/run_p0_browser_test.py --run-dir outputs/p0/my-browser-sync \
+  --test sync --delay-modes metadata,video
+```
+
+监督器自动启动源、MediaMTX、页面和浏览器，保存报告后清理本次子进程。端口已被其他服务占用时拒绝启动。每次使用新的或空的目录，不能复用旧结果目录。
+
+增加同步重连与持续运行测试：
+
+```bash
+P0_SYNC_RESILIENCE=1 P0_SYNC_SOAK_MS=60000 \
+python3 scripts/run_p0_browser_test.py --run-dir outputs/p0/my-sync-soak \
+  --test sync --delay-modes metadata,video
+```
+
+如需手动查看，分别运行下列三个命令，在 `P0_READY` 后打开 `http://127.0.0.1:8768/?autoconnect=1&sync=1`：
+
+```bash
+bash scripts/run_p0.sh --mode rtsp_sync --width 1280 --height 720 \
+  --rt-subframes 1 --seconds 300 --output-dir outputs/p0/my-sync-live
+bash scripts/run_mediamtx_p0.sh
+python3 scripts/spike/whep_preview.py --output-dir outputs/p0/my-sync-live --port 8768
+```
+
+这三个手动进程需分别退出。页面中的色块是图像身份诊断标记；该页面是 P0 验证工具。源端传输正常不等于浏览器验证通过，浏览器结果位于 `browser/<scenario>/sync-presentation.json`。
+
+可选 `P0_SYNC_RECORD_VIDEO=1` 保存 WebM，需要先完成与 Playwright 匹配的 FFmpeg 安装：在测试目录执行 `npx playwright install ffmpeg`，等待成功退出后再运行录屏。使用 `PLAYWRIGHT_BROWSERS_PATH` 时，安装与测试需指向同一目录。本机 Node 26 的一次解压停滞已保留失败记录，当前录屏工具使用该已下载、ZIP CRC 校验通过的官方包重新解压；未改系统 FFmpeg。
+
 ## 资产与运行环境
 
 完整资产包已复制到 `assets/robots/r1pro_2026/isaacsim_6_x/`：
@@ -58,7 +94,7 @@ outputs/p0/tools/rtsp_decode rtsp://127.0.0.1:8554/stream 8 \
 
 报告分别记录声明帧率、PTS 单调性、PTS 估算帧率、实际接收帧率和首帧等待时间。接收吞吐可能包含启动缓冲释放，不能当作浏览器显示帧率；首帧等待时间也不等于端到端延迟。无流、静默服务或卡住会超时退出并输出失败 JSON。
 
-**RTSP 解码通过不代表浏览器或严格同步通过。** 浏览器仍需要 WebRTC/WHEP 或其他可验证的接入。当前默认 framebuffer 流没有建立 `epoch/log_time_s/render_seq` 与显示帧的映射；不能因为 SDK 提供 metadata API 就假定浏览器能读取 SEI。
+**此默认 framebuffer RTSP 模式不提供业务帧配对。** 严格同步使用上文的 `rtsp_sync` 独立相机路线；浏览器通过编码变换显式解析 SEI，再根据实际图像 ID 选择快照。
 
 ## 成对图像实验与历史入口
 
@@ -79,4 +115,4 @@ python3 scripts/spike/paired_preview.py --output-dir outputs/p0/my-62-paired --p
 
 `results.json` 保存版本、物理引擎、运行参数、姿态检查及执行循环统计；`trace.jsonl` 在 RTSP 模式中只是服务端执行记录，不能当作编码帧时间戳。`decoder.json` 与首个解码图像提供独立媒体接收证据。
 
-仿真在 `--seconds` 后退出，也可 Ctrl+C；页面服务独立退出。故障后使用新输出目录重新加载，从头播放。实际浏览器呈现、共同显示延迟和最终画质仍需 P0 验收。
+仿真在 `--seconds` 后退出，也可 Ctrl+C；手动页面服务独立退出。故障后使用新输出目录重新加载，从头播放。同步可行性已有真实浏览器证据；完整异常注入、正式前端、真实 log 与服务器验证仍未完成。

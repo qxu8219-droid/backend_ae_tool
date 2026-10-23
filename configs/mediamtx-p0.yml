@@ -1,0 +1,53 @@
+# MediaMTX v1.21.2: loopback-only RTSP -> WebRTC/WHEP P0 gateway.
+# Fields checked against the release's mediamtx.yml, not an older WHEP schema:
+# https://github.com/bluenviron/mediamtx/blob/v1.21.2/mediamtx.yml
+logLevel: info
+logDestinations: [stdout]
+
+# Only local readers and local API requests are permitted; publishing is disabled.
+authMethod: internal
+authInternalUsers:
+  - user: any
+    pass:
+    ips: [127.0.0.1, "::1"]
+    permissions:
+      - action: read
+        path: stream
+      - action: api
+
+api: true
+apiAddress: 127.0.0.1:9997
+apiEncryption: false
+apiAllowOrigins: []
+metrics: false
+pprof: false
+playback: false
+
+# Isaac Sim owns port 8554. Disabling this listener does not disable RTSP pulling.
+rtsp: false
+rtmp: false
+hls: false
+srt: false
+moq: false
+
+# WHEP endpoint: http://127.0.0.1:8889/stream/whep
+webrtc: true
+webrtcAddress: 127.0.0.1:8889
+webrtcEncryption: false
+webrtcAllowOrigins:
+  - http://127.0.0.1:8768
+  - http://localhost:8768
+  - http://127.0.0.1:8889
+  - http://localhost:8889
+webrtcTrustedProxies: []
+webrtcLocalUDPAddress: 127.0.0.1:8189
+webrtcLocalTCPAddress: ""
+webrtcIPsFromInterfaces: false
+webrtcAdditionalHosts: [127.0.0.1]
+webrtcICEServers2: []
+
+paths:
+  stream:
+    source: rtsp://127.0.0.1:8554/stream
+    sourceOnDemand: false
+    rtspTransport: tcp

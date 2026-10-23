@@ -206,10 +206,22 @@ class HTTPTests(unittest.TestCase):
         self.assertEqual(self.request("POST", "/control", raw=" " * 4097)[0], 413)
 
     def test_control_ids_remain_monotonic_when_existing_mailbox_is_newer(self):
-        (self.output / "control.json").write_text(json.dumps({"request_id": 10**30, "action": "pause"}))
+        (self.output / "control.json").write_text(json.dumps({"request_id": 2**53-3, "action": "pause"}))
         status, _, body = self.request("POST", "/control", {"action": "play"})
         self.assertEqual(status, 200)
-        self.assertGreater(json.loads(body)["control"]["request_id"], 10**30)
+        self.assertEqual(json.loads(body)["control"]["request_id"], 2**53-2)
+
+    def test_control_id_stays_exact_after_long_uptime_and_rejects_exhaustion(self):
+        from unittest.mock import patch
+        with patch('time.monotonic_ns', return_value=2**53+1):
+            status, _, body = self.request('POST', '/control', {'action':'pause'})
+        self.assertEqual(status, 200)
+        self.assertLessEqual(json.loads(body)['control']['request_id'], 2**53-1)
+        path=self.output/'control.json'
+        path.write_text(json.dumps({'request_id':2**53-1,'action':'pause'}))
+        before=path.read_bytes()
+        self.assertEqual(self.request('POST','/control',{'action':'play'})[0],400)
+        self.assertEqual(path.read_bytes(),before)
 
 
 @unittest.skipUnless(shutil.which("node"), "Node is optional; needed for page orchestration tests")
