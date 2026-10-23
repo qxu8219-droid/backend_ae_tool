@@ -1,0 +1,14 @@
+{
+  "robot_id": "galaxea_r1pro_2026",
+  "isaacsim_version": "5.1.0",
+  "physics_backend": "PhysX",
+  "asset_directory": "assets/robots/r1pro_2026/isaacsim_5_1",
+  "entrypoint": "r1pro_2026.usd",
+  "common_config": "reproduction/configs/r1pro_2026_common.json",
+  "checksum_manifest": "CHECKSUMS.sha256",
+  "source_directory": "/home/xq/work/code/projects/r1pro/deliverables/r1pro_2026_usd_isaacsim_5_1",
+  "asset_source_root": "/r1pro_2026/base_link",
+  "referenced_runtime_root": "/World/Robot/base_link",
+  "runtime_builtin_dependency": "kit/mdl/core/Base/OmniPBR.mdl",
+  "copied_on": "2026-10-23"
+}

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P0 native stream · Isaac Sim 5.1</title>
+    <link rel="icon" href="data:," />
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">P0 native stream</p>
+        <h1>Isaac Sim 5.1 浏览器连接验证</h1>
+        <p>Kit 107.3.3 · NVIDIA WebRTC SDK 5.6.0 · 单客户端验证页</p>
+      </header>
+      <p class="notice">临时技术验证：仅验证原生画面连接。尚未验证 5.1 实际兼容性，不包含视频与 log 状态的帧同步。</p>
+      <form id="connection-form">
+        <label>Isaac 主机<input id="host" name="host" value="127.0.0.1" required spellcheck="false" /></label>
+        <label>信令端口<input id="port" name="port" type="number" min="1" max="65535" value="49100" required /></label>
+        <button id="connect" type="submit">连接 localhost:49100</button>
+        <button id="disconnect" type="button" disabled>断开</button>
+        <button id="reload" type="button">重新加载页面</button>
+      </form>
+      <div class="connection-state" role="status" aria-live="polite">
+        <strong id="status" data-kind="idle">等待连接</strong>
+        <span id="media-status">尚未收到视频</span>
+      </div>
+      <div id="viewport" tabindex="0" aria-label="Isaac 远程画面">
+        <video id="remote-video" tabindex="-1" autoplay muted playsinline></video>
+        <audio id="remote-audio" muted></audio>
+      </div>
+      <p class="hint">默认连接本机 49100；先等待 Isaac 完成加载。可使用 <code>?autoconnect=1</code> 自动连接。刷新后可重新发起独立连接。</p>
+      <details open>
+        <summary>连接事件</summary>
+        <pre id="event-log" aria-label="连接事件日志"></pre>
+      </details>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

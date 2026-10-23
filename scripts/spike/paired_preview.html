@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>P0 配对帧验证 · HTTP/JPEG</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background:#10151e; color:#e5edf6; }
+    body { max-width:1500px; margin:24px auto; padding:0 20px; }
+    h1 { font-size:22px; margin:0 0 8px; }
+    p { color:#aebed0; line-height:1.6; margin:8px 0; }
+    .badge { color:#ffcc75; font-size:13px; font-weight:600; }
+    .controls { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:18px 0 12px; }
+    button, input { font:inherit; }
+    button { color:#e5edf6; background:#243247; padding:9px 14px; border:1px solid #49627e; border-radius:6px; cursor:pointer; }
+    button:hover { background:#344861; } button:disabled { opacity:.5; cursor:wait; }
+    button:focus-visible, input:focus-visible { outline:3px solid #74c5ff; outline-offset:3px; }
+    .seek { display:flex; flex:1; min-width:270px; align-items:center; gap:12px; }
+    input[type=range] { flex:1; min-width:140px; accent-color:#70c7ed; }
+    #paired { display:block; width:100%; height:auto; border:1px solid #34465e; background:#0a1019; border-radius:8px; }
+    #transport { min-height:24px; color:#94d6ea; font-size:14px; }
+    .note { font-size:13px; }
+    code { color:#d6e8fa; }
+  </style>
+</head>
+<body>
+  <span class="badge">P0 实验 · HTTP / JPEG · 非 NVENC</span>
+  <h1>画面与 28 关节元数据配对验证</h1>
+  <p>一个二进制报文携带一张 JPEG 与对应状态。解码完成后，在同一个 canvas、同一次绘制中呈现整对数据。</p>
+  <div class="controls" aria-label="回放控制">
+    <button data-action="play">播放</button><button data-action="pause">暂停</button><button data-action="stop">停止</button>
+    <button data-action="step" data-direction="-1">← 前一步</button><button data-action="step" data-direction="1">后一步 →</button>
+    <button data-action="speed" data-speed="0.1">0.1×</button><button data-action="speed" data-speed="1">1×</button><button data-action="speed" data-speed="10">10×</button>
+    <label class="seek" for="seek">Seek 0–12 s <input id="seek" type="range" min="0" max="12" step="0.001" value="0"></label>
+  </div>
+  <div id="transport" role="status">等待第一张完整配对帧…</div>
+  <canvas id="paired" width="1480" height="890" aria-label="配对呈现：左侧仿真图像，右侧二十八个关节值，下方时间、帧编号与底盘状态。"></canvas>
+  <p class="note">左侧 JPEG 内的诊断标识由采集端写入；浏览器独立采样 12 个红绿像素块，与 capture_seq 和 render_seq % 4096 核对，错配不呈现。这里验证应用层配对，不承诺物理屏幕零毫秒同步。控制写入邮箱后，实际状态以返回帧为准。采集进程重启后请刷新页面。</p>
+  <p class="note">延迟探针：URL 参数 <code>?image_delay_ms=700</code> 或 <code>?metadata_delay_ms=700</code>（0–10000 ms）。只延迟一侧准备过程，整对等待后一起呈现。可在控制台查看 <code>window.p0Stats</code>。</p>
+<script>
+"use strict";
+(() => {
+  const canvas = document.getElementById("paired");
+  const context = canvas.getContext("2d", {alpha:false});
+  const stage = document.createElement("canvas");
+  stage.width = canvas.width; stage.height = canvas.height;
+  const draw = stage.getContext("2d", {alpha:false});
+  const markerCanvas = document.createElement("canvas");
+  const markerContext = markerCanvas.getContext("2d", {willReadFrequently:true});
+  const transport = document.getElementById("transport");
+  const seek = document.getElementById("seek");
+  const query = new URLSearchParams(location.search);
+  const delayParam = name => {
+    const value = Number(query.get(name) || 0);
+    return Number.isFinite(value) ? Math.max(0, Math.min(10000, value)) : 0;
+  };
+  const imageDelay = delayParam("image_delay_ms");
+  const metadataDelay = delayParam("metadata_delay_ms");
+  const sleep = delay => new Promise(resolve => setTimeout(resolve, delay));
+  const stats = window.p0Stats = {
+    presented_frames:0, stale_dropped:0, errors:0, last_metadata:null,
+    marker_mismatches:0, marker_verified_frames:0, marker_unavailable_frames:0,
+    last_marker_value:null,
+    image_delay_ms:imageDelay, metadata_delay_ms:metadataDelay,
+    inflight_frames:0, max_inflight_frames:0, last_presented_wall_ms:null
+  };
+  let generation = 0;
+  let stopped = false;
+  let seeking = false;
+  let busy = false;
+
+  function validMetadata(meta) {
+    if (!meta || typeof meta !== "object" || Array.isArray(meta)) throw Error("元数据不是对象");
+    for (const key of ["epoch", "render_seq", "capture_seq"]) {
+      if (!Number.isSafeInteger(meta[key]) || meta[key] < 0) throw Error(`无效的 ${key}`);
+    }
+    if (!Array.isArray(meta.joints) || meta.joints.length !== 28 || !meta.joints.every(Number.isFinite)) throw Error("必须包含 28 个有限关节值");
+    if (!Array.isArray(meta.joint_names) || meta.joint_names.length !== 28 || !meta.joint_names.every(value => typeof value === "string" && value.length)) throw Error("必须包含 28 个关节名称");
+    if (![meta.log_time_s, meta.captured_wall_s, meta.speed, meta.chassis?.x, meta.chassis?.y, meta.chassis?.yaw].every(Number.isFinite)) throw Error("元数据含无效数值");
+    if (typeof meta.state !== "string") throw Error("缺少回放状态");
+    return meta;
+  }
+
+  function isStale(meta, version) {
+    const last = stats.last_metadata;
+    return version !== generation || (last && (meta.epoch < last.epoch ||
+      (meta.epoch === last.epoch && meta.render_seq <= last.render_seq)));
+  }
+
+  function verifyMarker(bitmap, meta) {
+    if (meta.marker_pixels === undefined && meta.marker_modulus === undefined) return null;
+    if (meta.marker_modulus !== 4096 || !Array.isArray(meta.marker_pixels) || meta.marker_pixels.length !== 12) {
+      throw Error("诊断块格式无效：需要 12 个坐标 / modulus 4096");
+    }
+    markerCanvas.width=bitmap.width; markerCanvas.height=bitmap.height;
+    markerContext.drawImage(bitmap, 0, 0);
+    let decoded=0;
+    meta.marker_pixels.forEach((point,index) => {
+      if (!Array.isArray(point) || point.length !== 2 || !point.every(Number.isInteger) ||
+          point[0]<0 || point[1]<0 || point[0]>=bitmap.width || point[1]>=bitmap.height) {
+        throw Error("诊断块采样坐标超出 JPEG 范围");
+      }
+      const [red,green] = markerContext.getImageData(point[0],point[1],1,1).data;
+      if (Math.abs(red-green)<30) throw Error(`诊断块 ${index} 颜色不明确`);
+      if (green>red) decoded |= (1 << index);
+    });
+    if (decoded !== meta.capture_seq || decoded !== meta.render_seq % 4096) {
+      throw Error(`JPEG 诊断块错配：像素 ${decoded} / capture ${meta.capture_seq} / render ${meta.render_seq % 4096}`);
+    }
+    return decoded;
+  }
+
+  function text(value, x, y, size=17, color="#dbe7f3") {
+    draw.font = `${size}px ui-monospace, SFMono-Regular, Consolas, monospace`;
+    draw.fillStyle = color;
+    draw.fillText(String(value), x, y);
+  }
+
+  function compose(bitmap, meta, marker) {
+    draw.fillStyle = "#0c131e"; draw.fillRect(0, 0, stage.width, stage.height);
+    text("JPEG · 采集端嵌入诊断标识", 22, 30, 18, "#94d6ea");
+    const box = {x:18, y:46, width:1012, height:652};
+    const scale = Math.min(box.width / bitmap.width, box.height / bitmap.height);
+    const width = bitmap.width * scale, height = bitmap.height * scale;
+    draw.drawImage(bitmap, box.x + (box.width-width)/2, box.y + (box.height-height)/2, width, height);
+    draw.fillStyle = "#182334"; draw.fillRect(1050, 0, 430, 890);
+    text("28 JOINTS · rad / m", 1070, 30, 19, "#94d6ea");
+    meta.joints.forEach((value, index) => {
+      const y = 60 + index * 27;
+      if (index % 2 === 0) { draw.fillStyle="#1c2a3d"; draw.fillRect(1060, y-19, 410, 26); }
+      // Clip long names so a producer label cannot overwrite the numeric column.
+      draw.save(); draw.beginPath(); draw.rect(1070, y-20, 280, 27); draw.clip();
+      text(`${String(index+1).padStart(2,"0")} ${meta.joint_names[index]}`, 1070, y, 15);
+      draw.restore();
+      const unit = meta.joint_names[index].includes("gripper_finger") ? "m" : "rad";
+      draw.textAlign="right"; text(`${value.toFixed(5)} ${unit}`, 1455, y, 16, "#9de6c1"); draw.textAlign="left";
+    });
+    text(`epoch ${meta.epoch}   render_seq ${meta.render_seq}   capture_seq ${meta.capture_seq}`, 22, 729, 19, "#ffcf83");
+    text(`log_time_s ${meta.log_time_s.toFixed(6)} / 12.000000   ${meta.state}   ${meta.speed.toFixed(2)}×`, 22, 759, 19);
+    text(`chassis  x ${meta.chassis.x.toFixed(5)}  y ${meta.chassis.y.toFixed(5)}  yaw ${meta.chassis.yaw.toFixed(5)}`, 22, 789, 18);
+    text(`captured_wall_s ${meta.captured_wall_s.toFixed(6)}`, 22, 817, 16, "#a9bfd7");
+    draw.fillStyle="#263952"; draw.fillRect(22, 838, 1008, 12);
+    draw.fillStyle="#70c7ed"; draw.fillRect(22, 838, 1008*Math.min(1,Math.max(0,meta.log_time_s/12)),12);
+    text("0 s", 22, 875, 15); draw.textAlign="right"; text("12 s", 1030, 875, 15); draw.textAlign="left";
+    text(marker === null ? "诊断块未提供 · 合成 fixture" : `JPEG 像素诊断块 ${marker} ✓`, 1070, 850, 16, marker === null ? "#ffcf83" : "#94d6ea");
+    text(`延迟探针 image ${imageDelay} / meta ${metadataDelay} ms`, 1070, 875, 13, "#a9bfd7");
+  }
+
+  async function present(packet, version) {
+    if (packet.byteLength < 5) throw Error("截断的帧报文");
+    const length = new DataView(packet).getUint32(0, false);
+    if (!length || length > 1048576 || 4+length >= packet.byteLength) throw Error("无效的帧长度");
+    const meta = validMetadata(JSON.parse(new TextDecoder("utf-8", {fatal:true}).decode(new Uint8Array(packet, 4, length))));
+    if (isStale(meta, version)) { stats.stale_dropped++; return; }
+    const bitmap = await createImageBitmap(new Blob([packet.slice(4+length)], {type:"image/jpeg"}));
+    try {
+      let marker;
+      try { marker=verifyMarker(bitmap,meta); }
+      catch (error) { stats.marker_mismatches++; throw error; }
+      // A simulated delay to either side never exposes the other side early.
+      await Promise.all([sleep(imageDelay), sleep(metadataDelay)]);
+      await new Promise((resolve,reject) => requestAnimationFrame(() => {
+        try {
+          if (stopped || isStale(meta, version)) { stats.stale_dropped++; return; }
+          compose(bitmap, meta, marker);
+          // Only this single blit changes the visible image or metadata.
+          context.drawImage(stage, 0, 0);
+          stats.presented_frames++;
+          if (marker === null) stats.marker_unavailable_frames++;
+          else stats.marker_verified_frames++;
+          stats.last_marker_value=marker;
+          stats.last_metadata = structuredClone(meta);
+          stats.last_presented_wall_ms = Date.now();
+          if (!seeking) seek.value = Math.min(12, Math.max(0, meta.log_time_s));
+          transport.textContent = "配对流已连接 · 显示状态来自同一帧报文";
+        } catch (error) { reject(error); }
+        finally { resolve(); }
+      }));
+    } finally { bitmap.close(); }
+  }
+
+  async function poll() {
+    while (!stopped) {
+      const version = generation;
+      let backoff = 30;
+      try {
+        stats.inflight_frames++;
+        stats.max_inflight_frames = Math.max(stats.max_inflight_frames, stats.inflight_frames);
+        const response = await fetch("/frame", {cache:"no-store"});
+        if (response.status === 503) {
+          transport.textContent = "等待采集端发布第一张完整配对帧…";
+          backoff = 250;
+        } else {
+          if (!response.ok) throw Error(`HTTP ${response.status}`);
+          await present(await response.arrayBuffer(), version);
+        }
+      } catch (error) {
+        stats.errors++;
+        transport.textContent = `等待有效配对帧：${error.message}`;
+        backoff = 500;
+      } finally { stats.inflight_frames--; }
+      await sleep(backoff);
+    }
+  }
+
+  async function control(payload) {
+    if (busy) return;
+    busy = true;
+    generation++; // Pending decodes from before this command cannot repaint.
+    seek.disabled=true;
+    document.querySelectorAll("button").forEach(button => button.disabled=true);
+    try {
+      const response = await fetch("/control", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)});
+      const result = await response.json();
+      if (!response.ok) throw Error(result.error || `HTTP ${response.status}`);
+      transport.textContent = "控制已写入邮箱；等待采集端返回状态帧…";
+    } catch (error) { transport.textContent = `控制失败：${error.message}`; }
+    finally {
+      busy = false;
+      seek.disabled=false;
+      document.querySelectorAll("button").forEach(button => button.disabled=false);
+    }
+  }
+  document.querySelectorAll("button[data-action]").forEach(button => button.addEventListener("click", () => {
+    const payload = {action:button.dataset.action};
+    if (payload.action === "step") payload.direction = Number(button.dataset.direction);
+    if (payload.action === "speed") payload.speed = Number(button.dataset.speed);
+    control(payload);
+  }));
+  seek.addEventListener("input", () => { seeking=true; });
+  seek.addEventListener("change", async () => {
+    await control({action:"seek", time_s:Number(seek.value)});
+    seeking=false;
+  });
+  window.addEventListener("pagehide", () => { stopped=true; generation++; });
+  context.fillStyle="#a9bfd7"; context.font="24px system-ui";
+  context.fillText("等待完整 JPEG + metadata 配对帧…", 40, 80);
+  poll();
+})();
+</script>
+</body>
+</html>

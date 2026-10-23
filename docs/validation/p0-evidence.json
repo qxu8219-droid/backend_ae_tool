@@ -1,0 +1,878 @@
+{
+  "date": "2026-10-23",
+  "p0_complete": false,
+  "browser_verified": false,
+  "cpu_tests": 46,
+  "asset_audit": {
+    "asset_dir": "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1",
+    "entrypoint": "r1pro_2026.usd",
+    "passed": true,
+    "errors": [],
+    "checksums": {
+      "manifest": "CHECKSUMS.sha256",
+      "entries": 48,
+      "verified": 48
+    },
+    "joints": {
+      "count": 28,
+      "type_counts": {
+        "revolute": 21,
+        "continuous": 3,
+        "prismatic": 4
+      },
+      "canonical_names": [
+        "steer_motor_joint1",
+        "wheel_motor_joint1",
+        "steer_motor_joint2",
+        "wheel_motor_joint2",
+        "steer_motor_joint3",
+        "wheel_motor_joint3",
+        "torso_joint1",
+        "torso_joint2",
+        "torso_joint3",
+        "torso_joint4",
+        "left_arm_joint1",
+        "left_arm_joint2",
+        "left_arm_joint3",
+        "left_arm_joint4",
+        "left_arm_joint5",
+        "left_arm_joint6",
+        "left_arm_joint7",
+        "left_gripper_finger_joint1",
+        "left_gripper_finger_joint2",
+        "right_arm_joint1",
+        "right_arm_joint2",
+        "right_arm_joint3",
+        "right_arm_joint4",
+        "right_arm_joint5",
+        "right_arm_joint6",
+        "right_arm_joint7",
+        "right_gripper_finger_joint1",
+        "right_gripper_finger_joint2"
+      ],
+      "types_by_name": {
+        "steer_motor_joint1": "revolute",
+        "wheel_motor_joint1": "continuous",
+        "steer_motor_joint2": "revolute",
+        "wheel_motor_joint2": "continuous",
+        "steer_motor_joint3": "revolute",
+        "wheel_motor_joint3": "continuous",
+        "torso_joint1": "revolute",
+        "torso_joint2": "revolute",
+        "torso_joint3": "revolute",
+        "torso_joint4": "revolute",
+        "left_arm_joint1": "revolute",
+        "left_arm_joint2": "revolute",
+        "left_arm_joint3": "revolute",
+        "left_arm_joint4": "revolute",
+        "left_arm_joint5": "revolute",
+        "left_arm_joint6": "revolute",
+        "left_arm_joint7": "revolute",
+        "left_gripper_finger_joint1": "prismatic",
+        "left_gripper_finger_joint2": "prismatic",
+        "right_arm_joint1": "revolute",
+        "right_arm_joint2": "revolute",
+        "right_arm_joint3": "revolute",
+        "right_arm_joint4": "revolute",
+        "right_arm_joint5": "revolute",
+        "right_arm_joint6": "revolute",
+        "right_arm_joint7": "revolute",
+        "right_gripper_finger_joint1": "prismatic",
+        "right_gripper_finger_joint2": "prismatic"
+      }
+    },
+    "dependencies": {
+      "method": "text_asset_paths_only",
+      "text_layers_checked": 2,
+      "binary_layers_not_parsed": [
+        "appearance.usdc",
+        "configuration/r1pro_2026_base.usd",
+        "configuration/r1pro_2026_physics.usd",
+        "configuration/r1pro_2026_robot.usd",
+        "configuration/r1pro_2026_sensor.usd",
+        "imported.usd",
+        "r1pro_2026.usd"
+      ],
+      "references_checked": 1,
+      "usd_closure_verified": false
+    },
+    "file_count": 49
+  },
+  "baseline": {
+    "status": "pass",
+    "asset_dir": "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1",
+    "scope": "baseline",
+    "transport": null,
+    "checks": [
+      {
+        "name": "zero",
+        "joint_max_error": 0.0,
+        "base_max_error": 1.5497207642156674e-08,
+        "base_angle_error_rad": 0.0,
+        "passed": true
+      },
+      {
+        "name": "steering_wheels",
+        "joint_max_error": 5.960464455334602e-09,
+        "base_max_error": 1.5497207642156674e-08,
+        "base_angle_error_rad": 0.0,
+        "passed": true
+      },
+      {
+        "name": "torso",
+        "joint_max_error": 2.980232227667301e-09,
+        "base_max_error": 1.5497207642156674e-08,
+        "base_angle_error_rad": 0.0,
+        "passed": true
+      },
+      {
+        "name": "arms_grippers",
+        "joint_max_error": 2.0733132988226544e-08,
+        "base_max_error": 1.5497207642156674e-08,
+        "base_angle_error_rad": 0.0,
+        "passed": true
+      },
+      {
+        "name": "chassis",
+        "joint_max_error": 0.0,
+        "base_max_error": 5.960464455334602e-09,
+        "base_angle_error_rad": 1.264405455326821e-07,
+        "passed": true
+      }
+    ],
+    "marker_mismatches": 0,
+    "browser_verified": false,
+    "settings": {
+      "renderer": "RaytracedLighting",
+      "width": 960,
+      "height": 720,
+      "target_fps": 30,
+      "samples": 8,
+      "rt_subframes": 8,
+      "seconds": 20,
+      "native_webrtc": false
+    },
+    "isaacsim_version": [
+      "5.1.0",
+      "rc.19",
+      "5",
+      "1",
+      "0",
+      "rc",
+      "19",
+      "release.26219.9c81211b.gl"
+    ],
+    "renderer_settings": {
+      "/rtx/rendermode": "RaytracedLighting",
+      "/rtx/post/aa/op": 3,
+      "/app/hydraEngine/waitIdle": true,
+      "/app/updateOrder/checkForHydraRenderComplete": 1000
+    },
+    "articulation_root": "/World/Robot/base_link",
+    "dof_names": [
+      "steer_motor_joint1",
+      "steer_motor_joint2",
+      "steer_motor_joint3",
+      "torso_joint1",
+      "wheel_motor_joint1",
+      "wheel_motor_joint2",
+      "wheel_motor_joint3",
+      "torso_joint2",
+      "torso_joint3",
+      "torso_joint4",
+      "left_arm_joint1",
+      "right_arm_joint1",
+      "left_arm_joint2",
+      "right_arm_joint2",
+      "left_arm_joint3",
+      "right_arm_joint3",
+      "left_arm_joint4",
+      "right_arm_joint4",
+      "left_arm_joint5",
+      "right_arm_joint5",
+      "left_arm_joint6",
+      "right_arm_joint6",
+      "left_arm_joint7",
+      "right_arm_joint7",
+      "left_gripper_finger_joint1",
+      "left_gripper_finger_joint2",
+      "right_gripper_finger_joint1",
+      "right_gripper_finger_joint2"
+    ],
+    "canonical_order": [
+      "steer_motor_joint1",
+      "wheel_motor_joint1",
+      "steer_motor_joint2",
+      "wheel_motor_joint2",
+      "steer_motor_joint3",
+      "wheel_motor_joint3",
+      "torso_joint1",
+      "torso_joint2",
+      "torso_joint3",
+      "torso_joint4",
+      "left_arm_joint1",
+      "left_arm_joint2",
+      "left_arm_joint3",
+      "left_arm_joint4",
+      "left_arm_joint5",
+      "left_arm_joint6",
+      "left_arm_joint7",
+      "left_gripper_finger_joint1",
+      "left_gripper_finger_joint2",
+      "right_arm_joint1",
+      "right_arm_joint2",
+      "right_arm_joint3",
+      "right_arm_joint4",
+      "right_arm_joint5",
+      "right_arm_joint6",
+      "right_arm_joint7",
+      "right_gripper_finger_joint1",
+      "right_gripper_finger_joint2"
+    ],
+    "usd_layers": [
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/configuration/r1pro_2026_sensor.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/configuration/r1pro_2026_base.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/r1pro_2026.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/configuration/r1pro_2026_physics.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/imported.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/configuration/r1pro_2026_robot.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/physics.usda",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/appearance.usdc"
+    ],
+    "asset_dependencies": {
+      "layers": 8,
+      "assets": 2,
+      "external_files": [],
+      "unresolved": [],
+      "builtin_materials_allowed": [
+        "OmniPBR.mdl"
+      ]
+    },
+    "over_limit_probe": {
+      "requested": 3.1368467075,
+      "readback": 3.1368467807769775,
+      "physics_advanced": false
+    },
+    "startup_seconds": 9.80748455200046,
+    "image_size": [
+      720,
+      960,
+      4
+    ],
+    "image_std": 30.704359383089336
+  },
+  "paired_90s": {
+    "status": "pass",
+    "asset_dir": "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1",
+    "scope": "paired",
+    "transport": "paired-http-jpeg-experiment",
+    "checks": [
+      {
+        "name": "zero",
+        "joint_max_error": 0.0,
+        "base_max_error": 1.5497207642156674e-08,
+        "base_angle_error_rad": 0.0,
+        "passed": true
+      },
+      {
+        "name": "steering_wheels",
+        "joint_max_error": 5.960464455334602e-09,
+        "base_max_error": 1.5497207642156674e-08,
+        "base_angle_error_rad": 0.0,
+        "passed": true
+      },
+      {
+        "name": "torso",
+        "joint_max_error": 2.980232227667301e-09,
+        "base_max_error": 1.5497207642156674e-08,
+        "base_angle_error_rad": 0.0,
+        "passed": true
+      },
+      {
+        "name": "arms_grippers",
+        "joint_max_error": 2.0733132988226544e-08,
+        "base_max_error": 1.5497207642156674e-08,
+        "base_angle_error_rad": 0.0,
+        "passed": true
+      },
+      {
+        "name": "chassis",
+        "joint_max_error": 0.0,
+        "base_max_error": 5.960464455334602e-09,
+        "base_angle_error_rad": 1.264405455326821e-07,
+        "passed": true
+      }
+    ],
+    "marker_mismatches": 0,
+    "browser_verified": false,
+    "settings": {
+      "renderer": "PathTracing",
+      "width": 640,
+      "height": 480,
+      "target_fps": 30,
+      "samples": 1,
+      "rt_subframes": 1,
+      "seconds": 90.0,
+      "native_webrtc": false
+    },
+    "isaacsim_version": [
+      "5.1.0",
+      "rc.19",
+      "5",
+      "1",
+      "0",
+      "rc",
+      "19",
+      "release.26219.9c81211b.gl"
+    ],
+    "renderer_settings": {
+      "/rtx/rendermode": "PathTracing",
+      "/rtx/post/aa/op": 0,
+      "/app/hydraEngine/waitIdle": true,
+      "/app/updateOrder/checkForHydraRenderComplete": 1000
+    },
+    "articulation_root": "/World/Robot/base_link",
+    "dof_names": [
+      "steer_motor_joint1",
+      "steer_motor_joint2",
+      "steer_motor_joint3",
+      "torso_joint1",
+      "wheel_motor_joint1",
+      "wheel_motor_joint2",
+      "wheel_motor_joint3",
+      "torso_joint2",
+      "torso_joint3",
+      "torso_joint4",
+      "left_arm_joint1",
+      "right_arm_joint1",
+      "left_arm_joint2",
+      "right_arm_joint2",
+      "left_arm_joint3",
+      "right_arm_joint3",
+      "left_arm_joint4",
+      "right_arm_joint4",
+      "left_arm_joint5",
+      "right_arm_joint5",
+      "left_arm_joint6",
+      "right_arm_joint6",
+      "left_arm_joint7",
+      "right_arm_joint7",
+      "left_gripper_finger_joint1",
+      "left_gripper_finger_joint2",
+      "right_gripper_finger_joint1",
+      "right_gripper_finger_joint2"
+    ],
+    "canonical_order": [
+      "steer_motor_joint1",
+      "wheel_motor_joint1",
+      "steer_motor_joint2",
+      "wheel_motor_joint2",
+      "steer_motor_joint3",
+      "wheel_motor_joint3",
+      "torso_joint1",
+      "torso_joint2",
+      "torso_joint3",
+      "torso_joint4",
+      "left_arm_joint1",
+      "left_arm_joint2",
+      "left_arm_joint3",
+      "left_arm_joint4",
+      "left_arm_joint5",
+      "left_arm_joint6",
+      "left_arm_joint7",
+      "left_gripper_finger_joint1",
+      "left_gripper_finger_joint2",
+      "right_arm_joint1",
+      "right_arm_joint2",
+      "right_arm_joint3",
+      "right_arm_joint4",
+      "right_arm_joint5",
+      "right_arm_joint6",
+      "right_arm_joint7",
+      "right_gripper_finger_joint1",
+      "right_gripper_finger_joint2"
+    ],
+    "usd_layers": [
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/configuration/r1pro_2026_sensor.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/configuration/r1pro_2026_physics.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/configuration/r1pro_2026_robot.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/configuration/r1pro_2026_base.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/r1pro_2026.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/imported.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/appearance.usdc",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/physics.usda"
+    ],
+    "asset_dependencies": {
+      "layers": 8,
+      "assets": 2,
+      "external_files": [],
+      "unresolved": [],
+      "builtin_materials_allowed": [
+        "OmniPBR.mdl"
+      ]
+    },
+    "over_limit_probe": {
+      "requested": 3.1368467075,
+      "readback": 3.1368467807769775,
+      "physics_advanced": false
+    },
+    "startup_seconds": 8.524427697000647,
+    "frames": 1810,
+    "elapsed_seconds": 90.01467117700122,
+    "published_fps": 20.107833271321837,
+    "mean_capture_ms": 49.64975425635564,
+    "mean_jpeg_bytes": 129777.58950276244,
+    "last_epoch": 0,
+    "last_request_id": 8760233926783,
+    "shutdown_requested": false
+  },
+  "paired_controls": {
+    "status": "pass",
+    "asset_dir": "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1",
+    "scope": "paired",
+    "transport": "paired-http-jpeg-experiment",
+    "checks": [
+      {
+        "name": "zero",
+        "joint_max_error": 0.0,
+        "base_max_error": 1.5497207642156674e-08,
+        "base_angle_error_rad": 0.0,
+        "passed": true
+      },
+      {
+        "name": "steering_wheels",
+        "joint_max_error": 5.960464455334602e-09,
+        "base_max_error": 1.5497207642156674e-08,
+        "base_angle_error_rad": 0.0,
+        "passed": true
+      },
+      {
+        "name": "torso",
+        "joint_max_error": 2.980232227667301e-09,
+        "base_max_error": 1.5497207642156674e-08,
+        "base_angle_error_rad": 0.0,
+        "passed": true
+      },
+      {
+        "name": "arms_grippers",
+        "joint_max_error": 2.0733132988226544e-08,
+        "base_max_error": 1.5497207642156674e-08,
+        "base_angle_error_rad": 0.0,
+        "passed": true
+      },
+      {
+        "name": "chassis",
+        "joint_max_error": 0.0,
+        "base_max_error": 5.960464455334602e-09,
+        "base_angle_error_rad": 1.264405455326821e-07,
+        "passed": true
+      }
+    ],
+    "marker_mismatches": 0,
+    "browser_verified": false,
+    "settings": {
+      "renderer": "PathTracing",
+      "width": 640,
+      "height": 480,
+      "target_fps": 30,
+      "samples": 1,
+      "rt_subframes": 1,
+      "seconds": 40.0,
+      "native_webrtc": false
+    },
+    "isaacsim_version": [
+      "5.1.0",
+      "rc.19",
+      "5",
+      "1",
+      "0",
+      "rc",
+      "19",
+      "release.26219.9c81211b.gl"
+    ],
+    "renderer_settings": {
+      "/rtx/rendermode": "PathTracing",
+      "/rtx/post/aa/op": 3,
+      "/app/hydraEngine/waitIdle": true,
+      "/app/updateOrder/checkForHydraRenderComplete": 1000
+    },
+    "articulation_root": "/World/Robot/base_link",
+    "dof_names": [
+      "steer_motor_joint1",
+      "steer_motor_joint2",
+      "steer_motor_joint3",
+      "torso_joint1",
+      "wheel_motor_joint1",
+      "wheel_motor_joint2",
+      "wheel_motor_joint3",
+      "torso_joint2",
+      "torso_joint3",
+      "torso_joint4",
+      "left_arm_joint1",
+      "right_arm_joint1",
+      "left_arm_joint2",
+      "right_arm_joint2",
+      "left_arm_joint3",
+      "right_arm_joint3",
+      "left_arm_joint4",
+      "right_arm_joint4",
+      "left_arm_joint5",
+      "right_arm_joint5",
+      "left_arm_joint6",
+      "right_arm_joint6",
+      "left_arm_joint7",
+      "right_arm_joint7",
+      "left_gripper_finger_joint1",
+      "left_gripper_finger_joint2",
+      "right_gripper_finger_joint1",
+      "right_gripper_finger_joint2"
+    ],
+    "canonical_order": [
+      "steer_motor_joint1",
+      "wheel_motor_joint1",
+      "steer_motor_joint2",
+      "wheel_motor_joint2",
+      "steer_motor_joint3",
+      "wheel_motor_joint3",
+      "torso_joint1",
+      "torso_joint2",
+      "torso_joint3",
+      "torso_joint4",
+      "left_arm_joint1",
+      "left_arm_joint2",
+      "left_arm_joint3",
+      "left_arm_joint4",
+      "left_arm_joint5",
+      "left_arm_joint6",
+      "left_arm_joint7",
+      "left_gripper_finger_joint1",
+      "left_gripper_finger_joint2",
+      "right_arm_joint1",
+      "right_arm_joint2",
+      "right_arm_joint3",
+      "right_arm_joint4",
+      "right_arm_joint5",
+      "right_arm_joint6",
+      "right_arm_joint7",
+      "right_gripper_finger_joint1",
+      "right_gripper_finger_joint2"
+    ],
+    "usd_layers": [
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/configuration/r1pro_2026_physics.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/configuration/r1pro_2026_base.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/configuration/r1pro_2026_sensor.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/r1pro_2026.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/configuration/r1pro_2026_robot.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/imported.usd",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/appearance.usdc",
+      "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_5_1/physics.usda"
+    ],
+    "asset_dependencies": {
+      "layers": 8,
+      "assets": 2,
+      "external_files": [],
+      "unresolved": [],
+      "builtin_materials_allowed": [
+        "OmniPBR.mdl"
+      ]
+    },
+    "over_limit_probe": {
+      "requested": 3.1368467075,
+      "readback": 3.1368467807769775,
+      "physics_advanced": false
+    },
+    "startup_seconds": 7.974625148000996,
+    "frames": 1076,
+    "elapsed_seconds": 40.01911440200092,
+    "published_fps": 26.887151704341584,
+    "mean_capture_ms": 36.16514633365002,
+    "mean_jpeg_bytes": 130041.22026022305,
+    "last_epoch": 11,
+    "last_request_id": 8892555734055,
+    "shutdown_requested": false
+  },
+  "http_validation": {
+    "status": "pass",
+    "unique_jpeg_frames_checked": 81,
+    "marker_mismatches": 0,
+    "commands": [
+      {
+        "command": {
+          "action": "pause"
+        },
+        "request_id": 8890055382159,
+        "frame": {
+          "epoch": 0,
+          "render_seq": 21,
+          "log_time_s": 0.786753045000296,
+          "state": "paused",
+          "speed": 1.0
+        }
+      },
+      {
+        "command": {
+          "action": "seek",
+          "time_s": 3
+        },
+        "request_id": 8890265924385,
+        "frame": {
+          "epoch": 1,
+          "render_seq": 26,
+          "log_time_s": 3.0,
+          "state": "paused",
+          "speed": 1.0
+        }
+      },
+      {
+        "command": {
+          "action": "step",
+          "direction": 1
+        },
+        "request_id": 8890354371394,
+        "frame": {
+          "epoch": 2,
+          "render_seq": 28,
+          "log_time_s": 3.0166666666666666,
+          "state": "paused",
+          "speed": 1.0
+        }
+      },
+      {
+        "command": {
+          "action": "step",
+          "direction": -1
+        },
+        "request_id": 8890467037947,
+        "frame": {
+          "epoch": 3,
+          "render_seq": 30,
+          "log_time_s": 3.0,
+          "state": "paused",
+          "speed": 1.0
+        }
+      },
+      {
+        "command": {
+          "action": "speed",
+          "speed": 0.1
+        },
+        "request_id": 8890583741257,
+        "frame": {
+          "epoch": 3,
+          "render_seq": 32,
+          "log_time_s": 3.0,
+          "state": "paused",
+          "speed": 0.1
+        }
+      },
+      {
+        "command": {
+          "action": "play"
+        },
+        "request_id": 8890667189070,
+        "frame": {
+          "epoch": 3,
+          "render_seq": 34,
+          "log_time_s": 3.0,
+          "state": "playing",
+          "speed": 0.1
+        }
+      },
+      {
+        "command": {
+          "action": "speed",
+          "speed": 10
+        },
+        "request_id": 8891083097772,
+        "frame": {
+          "epoch": 3,
+          "render_seq": 43,
+          "log_time_s": 3.038556824999978,
+          "state": "playing",
+          "speed": 10.0
+        }
+      },
+      {
+        "command": {
+          "action": "play"
+        },
+        "request_id": 8891140307698,
+        "frame": {
+          "epoch": 3,
+          "render_seq": 45,
+          "log_time_s": 3.8170099950053555,
+          "state": "playing",
+          "speed": 10.0
+        }
+      },
+      {
+        "command": {
+          "action": "pause"
+        },
+        "request_id": 8891620956860,
+        "frame": {
+          "epoch": 3,
+          "render_seq": 57,
+          "log_time_s": 8.699150545003794,
+          "state": "paused",
+          "speed": 10.0
+        }
+      },
+      {
+        "command": {
+          "action": "seek",
+          "time_s": 8
+        },
+        "request_id": 8891701401421,
+        "frame": {
+          "epoch": 4,
+          "render_seq": 59,
+          "log_time_s": 8.0,
+          "state": "paused",
+          "speed": 10.0
+        }
+      },
+      {
+        "command": {
+          "action": "seek",
+          "time_s": 1
+        },
+        "request_id": 8891779286516,
+        "frame": {
+          "epoch": 5,
+          "render_seq": 61,
+          "log_time_s": 1.0,
+          "state": "paused",
+          "speed": 10.0
+        }
+      },
+      {
+        "command": {
+          "action": "seek",
+          "time_s": 11
+        },
+        "request_id": 8891860438838,
+        "frame": {
+          "epoch": 6,
+          "render_seq": 63,
+          "log_time_s": 11.0,
+          "state": "paused",
+          "speed": 10.0
+        }
+      },
+      {
+        "command": {
+          "action": "seek",
+          "time_s": 0
+        },
+        "request_id": 8891937869799,
+        "frame": {
+          "epoch": 7,
+          "render_seq": 65,
+          "log_time_s": 0.0,
+          "state": "paused",
+          "speed": 10.0
+        }
+      },
+      {
+        "command": {
+          "action": "seek",
+          "time_s": 6
+        },
+        "request_id": 8891991457349,
+        "frame": {
+          "epoch": 8,
+          "render_seq": 67,
+          "log_time_s": 6.0,
+          "state": "paused",
+          "speed": 10.0
+        }
+      },
+      {
+        "command": {
+          "action": "stop"
+        },
+        "request_id": 8892068254069,
+        "frame": {
+          "epoch": 9,
+          "render_seq": 69,
+          "log_time_s": 0.0,
+          "state": "ready",
+          "speed": 10.0
+        }
+      },
+      {
+        "command": {
+          "action": "seek",
+          "time_s": 11.9
+        },
+        "request_id": 8892143994381,
+        "frame": {
+          "epoch": 10,
+          "render_seq": 71,
+          "log_time_s": 11.9,
+          "state": "ready",
+          "speed": 10.0
+        }
+      },
+      {
+        "command": {
+          "action": "play"
+        },
+        "request_id": 8892220151501,
+        "frame": {
+          "epoch": 10,
+          "render_seq": 73,
+          "log_time_s": 11.9,
+          "state": "playing",
+          "speed": 10.0
+        }
+      },
+      {
+        "command": {
+          "action": "play"
+        },
+        "request_id": 8892478851267,
+        "frame": {
+          "epoch": 11,
+          "render_seq": 81,
+          "log_time_s": 0.0,
+          "state": "playing",
+          "speed": 10.0
+        }
+      },
+      {
+        "command": {
+          "action": "pause"
+        },
+        "request_id": 8892555734055,
+        "frame": {
+          "epoch": 11,
+          "render_seq": 83,
+          "log_time_s": 0.7738134099963645,
+          "state": "paused",
+          "speed": 10.0
+        }
+      }
+    ],
+    "http_frame_age_ms_median": 30.135035514831543,
+    "http_frame_age_ms_max": 71.8224048614502,
+    "browser_verified": false,
+    "scope": "HTTP JPEG pixels and real worker acknowledgements; not browser presentation"
+  },
+  "native_listener": {
+    "worker_exit": 0,
+    "tcp_49100_listened": true,
+    "browser_connected": false,
+    "media_received": false,
+    "scope": "5.1 native extension startup and local signaling listener only"
+  },
+  "environment": {
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti Laptop GPU, 580.178.04, 12227 MiB",
+    "isaacsim_root": "/home/xq/isaacsim",
+    "worker_python": "3.11.13",
+    "kit": "107.3.3"
+  },
+  "asset_manifest_sha256": "d4eb02f17cc81ea9128db3df4f58b0c9463d48c86a87861bccde90358ee65cd8"
+}
