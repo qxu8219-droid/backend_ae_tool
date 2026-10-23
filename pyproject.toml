@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "robot-log-replay-backend"
 version = "0.1.0"
-description = "Robot log replay API contracts; IsaacSim runs in an independent worker"
+description = "Robot log replay contracts and isolated log import; IsaacSim runs in an independent worker"
 requires-python = ">=3.12,<3.13"
 dependencies = [
   "robot-replay-protocol==0.1.0",
@@ -22,5 +22,8 @@ dev = ["httpx==0.28.1", "pytest==9.1.1", "jsonschema==4.26.0"]
 include = ["app*"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests/contracts"]
+testpaths = ["tests/contracts", "tests/adapters"]
 addopts = "-q"
+
+[tool.setuptools.package-data]
+app = ["assets/robots/*.json"]

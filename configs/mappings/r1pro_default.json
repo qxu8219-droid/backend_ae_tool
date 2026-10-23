@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "adapter": null,
+  "timestamp": {
+    "field": "timestamp",
+    "unit": "s",
+    "start_offset": 0.0
+  },
+  "joints": {
+    "unit": "rad",
+    "origin": "measured",
+    "map": {
+      "steer_motor_joint1": "steer_motor_joint1",
+      "wheel_motor_joint1": "wheel_motor_joint1",
+      "steer_motor_joint2": "steer_motor_joint2",
+      "wheel_motor_joint2": "wheel_motor_joint2",
+      "steer_motor_joint3": "steer_motor_joint3",
+      "wheel_motor_joint3": "wheel_motor_joint3",
+      "torso_joint1": "torso_joint1",
+      "torso_joint2": "torso_joint2",
+      "torso_joint3": "torso_joint3",
+      "torso_joint4": "torso_joint4",
+      "left_arm_joint1": "left_arm_joint1",
+      "left_arm_joint2": "left_arm_joint2",
+      "left_arm_joint3": "left_arm_joint3",
+      "left_arm_joint4": "left_arm_joint4",
+      "left_arm_joint5": "left_arm_joint5",
+      "left_arm_joint6": "left_arm_joint6",
+      "left_arm_joint7": "left_arm_joint7",
+      "left_gripper_finger_joint1": "left_gripper_finger_joint1",
+      "left_gripper_finger_joint2": "left_gripper_finger_joint2",
+      "right_arm_joint1": "right_arm_joint1",
+      "right_arm_joint2": "right_arm_joint2",
+      "right_arm_joint3": "right_arm_joint3",
+      "right_arm_joint4": "right_arm_joint4",
+      "right_arm_joint5": "right_arm_joint5",
+      "right_arm_joint6": "right_arm_joint6",
+      "right_arm_joint7": "right_arm_joint7",
+      "right_gripper_finger_joint1": "right_gripper_finger_joint1",
+      "right_gripper_finger_joint2": "right_gripper_finger_joint2"
+    },
+    "per_joint_overrides": {
+      "left_gripper_finger_joint1": {
+        "unit": "m",
+        "scale": 1.0,
+        "offset": 0.0,
+        "origin": null
+      },
+      "right_gripper_finger_joint2": {
+        "unit": "m",
+        "scale": 1.0,
+        "offset": 0.0,
+        "origin": null
+      },
+      "left_gripper_finger_joint2": {
+        "unit": "m",
+        "scale": 1.0,
+        "offset": 0.0,
+        "origin": null
+      },
+      "right_gripper_finger_joint1": {
+        "unit": "m",
+        "scale": 1.0,
+        "offset": 0.0,
+        "origin": null
+      }
+    }
+  },
+  "chassis": {
+    "available": false,
+    "frame": "world",
+    "map": {
+      "x": "x",
+      "y": "y",
+      "yaw": "yaw"
+    },
+    "position_unit": "m",
+    "yaw_unit": "rad",
+    "origin": "measured",
+    "transform": {
+      "rotation_rad": 0.0,
+      "translation_x_m": 0.0,
+      "translation_y_m": 0.0
+    }
+  },
+  "custom_channels": {},
+  "options": {
+    "max_forward_fill_s": 0.25,
+    "resample": "none",
+    "unwrap_continuous": false
+  }
+}

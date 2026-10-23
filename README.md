@@ -1,6 +1,6 @@
-# 机器人日志回放平台 P0
+# 机器人日志回放平台后端
 
-首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。已完成 P0 核心验证、T04 契约与 T05～T07 前端 Mock 工作台；正式回放业务和实际媒体接入仍待实现。
+首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。已完成 P0 核心验证、T04 契约、T05～T07 前端 Mock 工作台与 T08 实际 CSV/JSON 导入服务。时间轴、正式会话/worker 业务和实际媒体接入仍待实现。
 
 当前结果见 [6.2 验证记录](docs/validation/p0-isaac62-status.md)。[5.1 验证记录](docs/validation/p0-isaac51-status.md)与旧资产保留供追溯，不作为当前版本的验收证据。
 
@@ -13,6 +13,23 @@
 `app/` 提供 18 个 REST 路由声明与 WS 模型，`proto/` 是 worker 可独立导入的共享协议，`contracts/` 保存生成 Schema、49 份有效样例和 TypeScript 类型。完整说明、安装与验证命令见 [contracts-v1.md](docs/contracts-v1.md)。
 
 合法业务调用目前返回 `503 BACKEND_NOT_CONFIGURED`，WS 关闭 1013；OpenAPI 声明不代表实际会话、日志上传或回放已经实现。后端业务在 P2 接入；当前可独立运行的前端 Mock 工作台见 [frontend README](../frontend/README.md)。
+
+## T08 实际日志导入
+
+`app/adapters/` 提供 CSV/JSON 参考 reader、映射与规范化；`app/services/log_store.py` 提供原文件/映射快照/规范化结果的原子归档与查询，解析在有界独立 CPU 进程执行。它不会创建 IsaacSim 会话或改变当前播放状态。完整格式、异常表、资源界限及插件说明见 [导入说明](docs/log-import-v1.md)，本轮证据见 [T08 验证](docs/validation/t08-status.md)。
+
+```bash
+env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/import_log.py \
+  --store outputs/imports --session offline-analysis import /path/to/source.csv
+
+env -u PYTHONPATH -u PYTHONHOME PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
+  .venv/bin/python -m pytest -o addopts= -q
+
+env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_import.py \
+  --output-dir outputs/t08/my-new-probe
+```
+
+最后一个命令生成明确标注的合成 CSV，并实际解析/归档、核对哈希与夹爪方向及记录事件循环观测；输出目录必须不存在。真机字段、单位和坐标系仍需用户提供样例后分析。HTTP 上传入口保持 503，等待后续会话管理接入，不以离线导入成功冒充端到端回放成功。
 
 ## 当前浏览器实验入口
 
