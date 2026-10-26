@@ -33,6 +33,7 @@ class Session:
     process: object = None
     client: object = None
     task: object = None
+    deletion_task: object = None
     started: float = field(default_factory=time.monotonic)
     phase_started: float = field(default_factory=time.monotonic)
     last_heartbeat: float = 0.

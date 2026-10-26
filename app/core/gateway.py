@@ -56,6 +56,7 @@ class GatewayHealth:
     reachable: bool
     publishing: bool
     error: str | None = None
+    configured: bool = True
 
 
 class MediaGateway:
@@ -243,10 +244,29 @@ class MediaGateway:
             if sid is None:
                 return GatewayHealth(True, False)
             self._name(sid)
+            desired = self.owned_paths.get(sid)
+            current = await self.request('GET', '/v3/config/paths/get/' + sid, missing_ok=True)
+            if desired is None or current is None:
+                return GatewayHealth(True, False, 'Owned media path is missing', configured=False)
+            if any(current.get(key) != value for key, value in desired.items()):
+                return GatewayHealth(True, False, 'Owned media path conflicts with current configuration', configured=False)
             path = await self.request('GET', '/v3/paths/get/' + sid, missing_ok=True)
             return GatewayHealth(True, bool(path and path.get('ready') and 'H264' in path.get('tracks', [])))
         except GatewayError as exc:
             return GatewayHealth(False, False, str(exc))
+
+    async def reconcile_path(self, sid):
+        """Repair a missing owned route even when the API outage was not observed."""
+        sid = self._name(sid)
+        async with self._lock:
+            if self.closed or sid not in self.owned_paths:
+                raise GatewayError('Media path is not owned by this gateway instance')
+            desired = self.owned_paths[sid]
+            current = await self.request('GET', '/v3/config/paths/get/' + sid, missing_ok=True)
+            if current is None:
+                await self.request('POST', '/v3/config/paths/add/' + sid, desired)
+            elif any(current.get(key) != value for key, value in desired.items()):
+                raise GatewayError('Gateway recovered with a conflicting path; refusing to replace it')
 
     async def recover(self):
         async with self._lock:

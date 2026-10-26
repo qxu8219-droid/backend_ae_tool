@@ -167,15 +167,23 @@ class SessionManager:
             await asyncio.sleep(max(0., self.settings.heartbeat_interval_s - (time.monotonic() - began)))
 
     async def _media_monitor(self, record):
+        def observe(health):
+            available = health.reachable and health.configured
+            record.publishing = health.publishing and available
+            if available != record.gateway_reachable:
+                record.gateway_reachable = available
+                record.emit('gateway_recovered' if available else 'gateway_unreachable', health.error)
+            return available
+
         while not record.stop.is_set():
             health = await self.gateway.health(record.sid)
-            record.publishing = health.publishing
-            if health.reachable != record.gateway_reachable:
-                record.gateway_reachable = health.reachable
-                record.emit('gateway_recovered' if health.reachable else 'gateway_unreachable', health.error)
-            if not health.reachable:
+            if not observe(health):
                 try:
-                    await self.gateway.recover()
+                    if health.reachable:
+                        await self.gateway.reconcile_path(record.sid)
+                    else:
+                        await self.gateway.recover()
+                    observe(await self.gateway.health(record.sid))
                 except (GatewayError, OSError):
                     await asyncio.sleep(1.)
             await asyncio.sleep(self.settings.gateway_poll_s)
@@ -273,7 +281,21 @@ class SessionManager:
 
     async def delete(self, sid):
         record = self.sessions.get(sid)
-        if record is None or record.status == 'stopped':
+        if record is None:
+            return
+        task = record.deletion_task
+        if task is None or (task.done() and record.cleanup_errors):
+            task = asyncio.create_task(self._delete(record), name='delete-' + sid)
+            record.deletion_task = task
+            # The session owns finalization even when every caller is canceled.
+            task.add_done_callback(lambda done: None if done.cancelled() else done.exception())
+        await asyncio.shield(task)
+
+    async def _delete(self, record):
+        sid = record.sid
+        if record.status == 'stopped' and not record.cleanup_errors:
+            if self.active_sid == sid:
+                self.active_sid = None
             return
         record.status = 'stopping'; record.set_phase('stopping'); record.publishing = False
         record.stop.set()

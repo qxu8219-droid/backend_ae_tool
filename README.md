@@ -1,6 +1,6 @@
 # 机器人日志回放平台后端
 
-首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。已完成 P0 核心验证、T04 契约、T05～T07 前端 Mock 工作台、T08 实际 CSV/JSON 导入服务、T09 确定性采样、T10 回放时间轴核心与 T11 独立 worker/ZMQ。正式会话管理、HTTP/WS 业务绑定和前端实际媒体接入仍待后续任务。
+首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。当前开发到 T12：已具备前端 Mock 工作台、独立导入/采样/时间轴、真实 worker/ZMQ 以及会话和媒体网关生命周期。HTTP/WS 业务绑定和前端实际媒体接入仍待 T14/T15。
 
 当前结果见 [6.2 验证记录](docs/validation/p0-isaac62-status.md)。[5.1 验证记录](docs/validation/p0-isaac51-status.md)与旧资产保留供追溯，不作为当前版本的验收证据。
 
@@ -12,7 +12,7 @@
 
 `app/` 提供 18 个 REST 路由声明与 WS 模型，`proto/` 是 worker 可独立导入的共享协议，`contracts/` 保存生成 Schema、49 份有效样例和 TypeScript 类型。完整说明、安装与验证命令见 [contracts-v1.md](docs/contracts-v1.md)。
 
-合法业务调用目前返回 `503 BACKEND_NOT_CONFIGURED`，WS 关闭 1013；OpenAPI 声明不代表实际会话、日志上传或回放已经实现。后端业务在 P2 接入；当前可独立运行的前端 Mock 工作台见 [frontend README](../frontend/README.md)。
+合法业务调用目前返回 `503 BACKEND_NOT_CONFIGURED`，WS 关闭 1013；独立服务模块已实现，正式 HTTP/WS 绑定仍待 T14。当前可独立运行的前端 Mock 工作台见 [frontend README](../frontend/README.md)。
 
 ## T08 实际日志导入
 
@@ -29,7 +29,7 @@ env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_import.py \
   --output-dir outputs/t08/my-new-probe
 ```
 
-最后一个命令生成明确标注的合成 CSV，并实际解析/归档、核对哈希与夹爪方向及记录事件循环观测；输出目录必须不存在。真机字段、单位和坐标系仍需用户提供样例后分析。HTTP 上传入口保持 503，等待后续会话管理接入，不以离线导入成功冒充端到端回放成功。
+最后一个命令生成明确标注的合成 CSV，并实际解析/归档、核对哈希与夹爪方向及记录事件循环观测；输出目录必须不存在。真机样本已另行归档，夹爪标定和底盘语义仍待团队确认。HTTP 上传入口保持 503，等待 T14 接入，不以离线导入成功冒充端到端回放成功。
 
 ## T09 确定性采样
 
@@ -55,11 +55,25 @@ env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_timeline.py \
 
 ## T11 独立 worker 与本地数据
 
-`sim_worker/` 已接入真实 IsaacSim 6.2：通过 ZMQ 接收目标，应用并读回 28 DOF/底盘，在实际图像处生成帧身份和正式快照。独立 H.264 解码探针核验像素 ID/CRC、SEI 快照与发送目标。启动、协议、安装和复现命令见 [worker 说明](docs/worker-v1.md)，证据见 [T11 验证](docs/validation/t11-status.md)。正式浏览器联调仍待 T15；下一项为 T12 会话生命周期。
+`sim_worker/` 已接入真实 IsaacSim 6.2：通过 ZMQ 接收目标，应用并读回 28 DOF/底盘，在实际图像处生成帧身份和正式快照。独立 H.264 解码探针核验像素 ID/CRC、SEI 快照与发送目标。启动、协议、安装和复现命令见 [worker 说明](docs/worker-v1.md)，证据见 [T11 验证](docs/validation/t11-status.md)。正式浏览器联调仍待 T15；T12 会话生命周期见下一节。
 
-原生 SDK RTSP 实际监听所有 IPv4 接口，worker 默认拒绝该行为。合成探针显式允许并记录此监听；真实日志接入前须完成媒体端口隔离，详见 worker 说明。
+原生 SDK RTSP 默认监听所有 IPv4 接口，worker 默认拒绝该行为。T11 历史合成探针曾显式允许；T12 会话启动器已用项目内绑定适配库限制为回环监听，并再次检查实际地址。
 
 已下载的真机样本已归档到 `data/real_logs/raw/`，12 个来源条目、27 个文件，SHA256 校验并只读保存；夹爪与底盘待确认字段尚未转换。目录、溯源和后续数据放置约定见 [本地数据说明](docs/local-data-storage-v1.md)。
+
+## T12 会话生命周期
+
+异步 SessionManager 管理单会话、真实启动相位、独立 RPC/心跳期限、故障状态及资源清理；MediaMTX 支持托管和外部模式，网关恢复不会重建 worker。应用 lifespan 可显式托管该管理器，默认契约应用仍不启动 GPU。详细接口、端口、所有权与 Linux 运行边界见 [生命周期说明](docs/session-lifecycle-v1.md)，实际故障/重载证据见 [T12 验证](docs/validation/t12-status.md)。
+
+```bash
+bash scripts/build_rtsp_loopback.sh
+bash scripts/worker_validation/build_decoder.sh
+env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_sessions.py \
+  --output-dir outputs/t12/my-new-validation \
+  --isaac-python /home/xq/work/code/projects/r1pro/.venvs/isaacsim62/bin/python
+```
+
+此命令验证真实 SDK 与网关的完整资源流程，使用合成轨迹，退出时清理本次进程。下一项 T13 将实现限位元数据、历史事件与保峰曲线。
 
 ## 当前浏览器实验入口
 

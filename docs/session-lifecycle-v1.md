@@ -52,7 +52,7 @@ worker 实际输出 booting → loading_scene → loading_robot → rtsp_publish
 
 RPC 使用独立响应泵，按 session/request_id/control_seq/playback_epoch/确认阶段关联。正常 RPC 的等待不阻塞进程退出、心跳和事件观察。待请求上限 64，socket HWM 64、单消息 1 MiB；worker 事件和生命周期事件各保留 128 条，丢弃数可供后续传输层诊断。其余可靠关键帧与图像配对规则仍由 T10/T11 保证。
 
-运行中失败先记录 error，再执行清理。错误会话不会原地恢复，需删除旧会话并创建新 sid，重新加载日志首帧；worker 的采集 ID 可在新 sid 中从 1 开始。`delete` 对未知或已结束 sid 幂等，删除期间不允许新建。旧帧缓存、socket 和自有媒体路径在清理时释放。
+运行中失败先记录 error，再执行清理。错误会话不会原地恢复，需删除旧会话并创建新 sid，重新加载日志首帧；worker 的采集 ID 可在新 sid 中从 1 开始。`delete` 对未知或已结束 sid 幂等，删除期间不允许新建。删除由会话自身任务完成，调用方取消等待不会中断资源清理和名额释放；清理失败仍保留名额并允许重试。旧帧缓存、socket 和自有媒体路径在清理时释放。
 
 ## 媒体绑定与网关所有权
 
@@ -60,7 +60,7 @@ SDK 原生 RTSP 的通配监听由项目内 `rtsp_loopback.so` 限制：只把�
 
 托管 MediaMTX 默认监听本机 API 6197、WHEP 6189、ICE UDP 6188；原生 RTSP 与 ZMQ 也限本机。网关关闭 RTSP/RTMP/HLS/SRT/MoQ 对外服务，只通过 TCP 拉取 worker 的 RTSP 源；WHEP 使用 sid 作为路径。支持配置前端 CORS origins；当前配置用于本机浏览器，不作为远程访问部署。
 
-网关失联只改变媒体状态并产生 gateway_unreachable，worker 保持运行。托管模式最多自动重建三次，生成新配置恢复当前自有路径；外部模式只探测既有服务并恢复自己的路径，不停止外部进程、不替换其他路径。恢复事件为 gateway_recovered，恢复拉流和实际 publishing 分别确认。
+网关失联或自有路径不可用时改变媒体状态并产生 gateway_unreachable，worker 保持运行。托管模式最多自动重建三次，生成新配置恢复当前自有路径；外部模式每次健康检查同时核对自有路径，即使没有观察到 API 中断也能补回丢失路径。外部进程不被停止，冲突路径不被覆盖。只有 API 可用且自有配置核对成功才产生 gateway_recovered；实际 H.264 publishing 再独立确认。
 
 外部模式通过 `GatewayConfig(mode='external', api_url='http://127.0.0.1:9997', whep_origin='http://127.0.0.1:8889')` 指定本机 API 和 WHEP origin，服务须提供 v1.21.2 API 权限与相应 WHEP/CORS 配置。路径的新增、查询、删除依据[该固定版本的官方 API](https://raw.githubusercontent.com/bluenviron/mediamtx/v1.21.2/api/openapi.yaml)。
 

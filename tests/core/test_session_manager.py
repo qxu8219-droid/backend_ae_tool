@@ -19,7 +19,7 @@ def build_manager(tmp_path, mode='normal', **options):
     from app.core.config import Settings, Launch
     from app.core.session_manager import SessionManager
     settings = Settings(isaac_python=Path(sys.executable), state_dir=tmp_path,
-                        gateway=gateway_config(), startup_timeout_s=2., load_timeout_s=1.,
+                        gateway=options.pop('gateway', None) or gateway_config(), startup_timeout_s=2., load_timeout_s=1.,
                         heartbeat_interval_s=.05, heartbeat_timeout_s=.3, shutdown_grace_s=.1,
                         **options)
     def launcher(settings, config, output):

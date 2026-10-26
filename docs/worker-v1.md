@@ -53,6 +53,6 @@ env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_worker.py \
 
 实际检测发现 SDK RTSP 监听 `0.0.0.0`；`ServerConfig.public_ip=127.0.0.1` 不限制绑定地址。worker 默认在启动检查中拒绝非回环监听，关闭资源并以失败码退出；这个检查在原生服务短暂建立监听后发生，在接受日志目标和发布有效快照前完成。
 
-上述合成验证脚本显式传入 `--allow-native-rtsp-wildcard`，并把开关与实际监听地址记录到证据中。手动使用该参数表示允许原生媒体对外监听，不应直接用于真实日志。T12/T18 需落实网络隔离或经过验证的受限绑定方案，再接入私有数据；本轮没有修改防火墙或远端环境。
+上述 T11 合成验证脚本显式传入 `--allow-native-rtsp-wildcard`，并把开关与实际监听地址记录到证据中。手动使用该参数表示允许原生媒体对外监听，不应直接用于真实日志。T12 会话启动器已实现项目内的受限绑定方案，实际 SDK 仅监听回环地址，见[生命周期说明](session-lifecycle-v1.md)；未修改防火墙或远端环境。
 
 完整证据和未覆盖范围见 [T11 验证记录](validation/t11-status.md)。
