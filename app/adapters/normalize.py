@@ -18,10 +18,9 @@ _FACTORS = {'rad':1.0, 'deg':math.pi/180, 'm':1.0, 'mm':0.001, 'cm':0.01}
 
 
 def _robot():
-    path = Path(__file__).resolve().parents[1] / 'assets/robots/r1pro_2026_joints.json'
-    raw = json.loads(path.read_text(encoding='utf-8'))
-    digest = raw.pop('source_sha256')
-    return JointMetadata.model_validate(raw), digest
+    from app.analysis.metadata import load_joint_metadata
+    artifact = load_joint_metadata()
+    return artifact.metadata, artifact.source_sha256
 
 
 def _digest(path: Path, limits: ParseLimits):

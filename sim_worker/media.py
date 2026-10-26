@@ -9,6 +9,7 @@ from fractions import Fraction
 import time,uuid,zlib,json
 from .resources import start_checked,attach_checked,release_all,verify_rtsp_binding
 from replay_protocol import AppliedFrame,RenderedFrame,FrameSnapshot,SnapshotCatalog
+from replay_protocol.limits import LimitSpec,limit_flags
 
 SEI_METADATA_UUID=uuid.uuid5(uuid.NAMESPACE_DNS,'model-evaluation.snapshot_catalog.v1').bytes
 CAPTURE_ATTRIBUTE='replay:capture_id'
@@ -87,6 +88,7 @@ class SnapshotRegistry:
     def __init__(self,pixels,limits,*,capacity=16,clock=time.time,on_verified=None):
         if not 1<=capacity<=16 or len(pixels)!=64:raise ValueError('Invalid catalog geometry/capacity')
         self.pixels=tuple(tuple(p) for p in pixels);self.limits=limits;self.capacity=capacity;self.clock=clock;self.on_verified=on_verified
+        self.limit_specs=tuple(LimitSpec(limit['type'],limit['lower'],limit['upper']) for limit in limits)
         self.armed=OrderedDict();self.verified=OrderedDict();self.last_id=0;self.last_timestamp=-1;self.raw_errors=0;self.prepared=0;self.session_id=None;self.stale_time=0;self.diagnostic_errors=0;self.last_diagnostic_error=None
     def arm(self,id,applied):
         applied=AppliedFrame.model_validate(applied)
@@ -103,12 +105,7 @@ class SnapshotRegistry:
             try:
                 if decode_capture_marker(_single_output(data,'rgb'),self.pixels)!=id:raise MarkerDecodeError('Raw identity differs from capture attribute')
                 rendered=RenderedFrame(**applied.model_dump(mode='python'),capture_id=id,render_seq=id,captured_wall_s=self.clock(),raw_identity_verified=True)
-                flags=warns=0
-                for index,limit in enumerate(self.limits):
-                    if not applied.quality[index].valid or limit['type']=='continuous':continue
-                    lo,hi=limit['lower'],limit['upper'];value=applied.joints[index]
-                    if value<lo or value>hi:flags|=1<<index
-                    elif hi>lo and (value-lo)/(hi-lo)<=.05 or hi>lo and (value-lo)/(hi-lo)>=.95:warns|=1<<index
+                flags,warns=limit_flags(applied.joints,applied.quality,self.limit_specs)
                 payload={key:getattr(rendered,key) for key in FrameSnapshot.model_fields if hasattr(rendered,key)}
                 snapshot=FrameSnapshot(**payload,limit_flags=flags,limit_warn_flags=warns)
                 self.verified[id]=(rendered,snapshot)
