@@ -1,0 +1,107 @@
+{
+  "date": "2026-10-26",
+  "base_commit": "0e12899",
+  "scope": "Deterministic CPU timeline and worker delivery accounting with synthetic worker; actual log import/sampling, no real transport/IsaacSim/media runtime",
+  "tests": {
+    "backend_total": 655,
+    "suites": {
+      "contracts": 164,
+      "adapters": 199,
+      "replay": 292
+    },
+    "t10": {
+      "test_delivery": 107,
+      "test_timeline": 25,
+      "test_timeline_faults": 31,
+      "test_timeline_matrix": 49,
+      "test_timeline_regressions": 2
+    },
+    "t10_total": 214,
+    "p0_cpu_unittest": 90,
+    "failures": 0,
+    "commands": [
+      "env -u PYTHONPATH -u PYTHONHOME PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -o addopts= -q",
+      "python3 -m unittest discover -s tests -v"
+    ],
+    "warning": "Existing Starlette/httpx TestClient deprecation warning"
+  },
+  "contract_checks": {
+    "schema_export": "passed; no wire schema change",
+    "typescript": "passed"
+  },
+  "integration_probe": {
+    "scope": "Actual CPU import/sampling/timeline with test-only synthetic worker receipts; no simulator/video proof",
+    "sample_count": 121,
+    "duration_s": 2.0,
+    "target_hz": 60.0,
+    "phases": 11,
+    "stream_targets_sent_to_fake": 26,
+    "synthetic_render_receipts": 40,
+    "acceptance_is_not_render_evidence": true,
+    "critical_wait_excluded_from_clock": true,
+    "final_frame_reliable_once": true,
+    "timeout_terminal_and_late_proof_rejected": true,
+    "recreated_session_reload_at_zero": true,
+    "snapshot_protocol_validation": true,
+    "recovery_snapshot": {
+      "schema_version": 1,
+      "session_id": "recreated-session",
+      "log_id": "log-23e537c982494c44bc23c59c493b34ab",
+      "playback_epoch": 1,
+      "control_seq": 1,
+      "state": "ready",
+      "speed": 1.0,
+      "duration_s": 2.0,
+      "target_position": {
+        "log_time_s": 0.0,
+        "source_sample_index": 0,
+        "target_seq": 1
+      },
+      "applied_position": {
+        "log_time_s": 0.0,
+        "source_sample_index": 0,
+        "target_seq": 1
+      },
+      "rendered_identity": {
+        "schema_version": 1,
+        "session_id": "recreated-session",
+        "log_id": "log-23e537c982494c44bc23c59c493b34ab",
+        "playback_epoch": 1,
+        "control_seq": 1,
+        "target_seq": 1,
+        "capture_id": 1,
+        "render_seq": 1
+      }
+    }
+  },
+  "review": {
+    "important_findings": 2,
+    "critical_findings": 0,
+    "minor_findings": 0,
+    "fixed": [
+      "Late clock failure during critical installation enters terminal error and closes delivery",
+      "Missed tick scheduling uses finite remainder and next-representable deadlines instead of overflowing integer tick count"
+    ],
+    "regression_tests": [
+      "test_clock_failure_during_keyframe_install_is_terminal_instead_of_leaving_a_usable_partial_load",
+      "test_extreme_finite_target_rate_uses_bounded_latest_tick_without_integer_overflow_or_same_clock_repeats"
+    ],
+    "red_then_green": true
+  },
+  "bounds": {
+    "target_hz_default": 60,
+    "ack_timeout_s_default": 10,
+    "queued_rpc_max": 2,
+    "active_rpc_max": 1,
+    "queued_stream_max": 1,
+    "issued_target_ledger_default": 64
+  },
+  "boundaries": [
+    "tick is explicitly scheduled by caller; no actual 60Hz runtime throughput claim",
+    "REST remains accepted-only; synthetic rendered proof is not browser display evidence",
+    "Latest explicit controls supersede older pending intents, but current unsuperseded keyframe needs matching rendered proof",
+    "Worker errors/timeouts are terminal; recreate session and reload from zero",
+    "No ZMQ, IsaacSim execution, encoder/media matching, HTTP/WS binding or frontend integration added in T10",
+    "T14 must associate per-frame state/speed using matching target/control rather than filling old frames from the latest snapshot"
+  ]
+}

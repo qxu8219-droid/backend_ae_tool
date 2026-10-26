@@ -1,6 +1,6 @@
 # 机器人日志回放平台后端
 
-首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。已完成 P0 核心验证、T04 契约、T05～T07 前端 Mock 工作台、T08 实际 CSV/JSON 导入服务与 T09 确定性采样。时间轴、正式会话/worker 业务和实际媒体接入仍待实现。
+首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。已完成 P0 核心验证、T04 契约、T05～T07 前端 Mock 工作台、T08 实际 CSV/JSON 导入服务、T09 确定性采样与 T10 回放时间轴核心。正式会话/worker 业务和实际媒体接入仍待实现。
 
 当前结果见 [6.2 验证记录](docs/validation/p0-isaac62-status.md)。[5.1 验证记录](docs/validation/p0-isaac51-status.md)与旧资产保留供追溯，不作为当前版本的验收证据。
 
@@ -40,7 +40,18 @@ env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_sampling.py \
   --output-dir outputs/t09/my-new-probe
 ```
 
-该探针实际导入并归档合成 CSV，然后验证顺序/随机/反向查询的一致性和原数据不变，记录 CPU 耗时；不启动仿真。接口与缺测/角度语义见 [采样说明](docs/replay-sampling-v1.md)，本轮证据见 [T09 验证](docs/validation/t09-status.md)。下一项 T10 将实现回放状态机与时间轴。
+该探针实际导入并归档合成 CSV，然后验证顺序/随机/反向查询的一致性和原数据不变，记录 CPU 耗时；不启动仿真。接口与缺测/角度语义见 [采样说明](docs/replay-sampling-v1.md)，本轮证据见 [T09 验证](docs/validation/t09-status.md)。T10 时间轴核心现已完成，见下一节。
+
+## T10 回放时间轴核心
+
+`Timeline` 提供完整播放控制与单调时钟推进；`DeliveryTracker` 分开管理可靠关键目标和只保留最新一帧的播放队列，并区分接受、应用和渲染证据。核心由调用方显式 `tick()`，不在导入模块时启动后台任务。接口、状态矩阵与后续传输要求见 [时间轴说明](docs/replay-timeline-v1.md)，验证见 [T10 记录](docs/validation/t10-status.md)。
+
+```bash
+env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_timeline.py \
+  --output-dir outputs/t10/my-new-probe
+```
+
+探针使用真实导入和采样模块，但 worker 是测试替身，合成回执不代表实际渲染或浏览器呈现。下一项 T11 将实现 IsaacSim worker 与 ZMQ 三通道。
 
 ## 当前浏览器实验入口
 
