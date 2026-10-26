@@ -1,6 +1,6 @@
 {
   "examples": "examples.json",
-  "purpose": "contract-only; business services are not implemented",
+  "purpose": "versioned API and wire contracts; runtime is configured explicitly",
   "rest": "openapi.json",
   "schema_version": 1,
   "wire": {

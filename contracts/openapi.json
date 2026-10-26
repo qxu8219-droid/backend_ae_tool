@@ -5,7 +5,7 @@
         "properties": {
           "file": {
             "contentMediaType": "application/octet-stream",
-            "description": "Original log file, retained unchanged by the future parser.",
+            "description": "Original log file, retained unchanged in the owned session archive.",
             "title": "File",
             "type": "string"
           },
@@ -1816,7 +1816,7 @@
     }
   },
   "info": {
-    "description": "Contract-only ASGI app; real workers, logs, sessions and playback are not wired.\n\nRun/importing this module never starts IsaacSim, GPU work, or media processes.\nValid REST calls return 503, WS closes 1013; declared success models describe\nfuture service behavior and must not be mistaken for implemented functionality.\n",
+    "description": "Robot replay ASGI factory with explicit runtime ownership.\n\nImporting the default app starts no worker or media process. Without a replay\nservice, business calls return 503 and WS closes 1013. The configured factory\nbinds real services while keeping accepted, rendered and presented distinct.\n",
     "title": "Robot Log Replay Contracts",
     "version": "1.0.0"
   },
@@ -1874,7 +1874,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -1953,7 +1953,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -2021,7 +2021,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -2100,7 +2100,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -2118,7 +2118,7 @@
     },
     "/api/v1/sessions/{sid}": {
       "delete": {
-        "description": "Runtime destruction will be idempotent; no deletion is implemented yet.",
+        "description": "Idempotently destroy owned session resources and uploaded copies.",
         "operationId": "delete_session_api_v1_sessions__sid__delete",
         "parameters": [
           {
@@ -2173,7 +2173,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -2250,7 +2250,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -2359,7 +2359,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -2447,7 +2447,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -2590,7 +2590,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -2670,7 +2670,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -2759,7 +2759,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -2855,7 +2855,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -2951,7 +2951,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -3041,7 +3041,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -3130,7 +3130,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -3219,7 +3219,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -3315,7 +3315,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {
@@ -3394,7 +3394,7 @@
                 }
               }
             },
-            "description": "BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime."
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
           },
           "default": {
             "content": {

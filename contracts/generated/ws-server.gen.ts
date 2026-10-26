@@ -162,7 +162,14 @@ export type Type1 = "connection_snapshot";
  */
 export type WallTime = number;
 export type ConnectionId1 = string;
-export type Event = "worker_phase_changed" | "worker_exited" | "session_error" | "mediamtx_unreachable";
+export type Event =
+  | "worker_phase_changed"
+  | "worker_exited"
+  | "session_error"
+  | "mediamtx_unreachable"
+  | "mediamtx_recovered"
+  | "sync_resync_required"
+  | "session_stopped";
 export type Message2 = string | null;
 export type SchemaVersion3 = 1;
 /**

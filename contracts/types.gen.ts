@@ -84,7 +84,7 @@ export interface paths {
         post?: never;
         /**
          * Delete Session
-         * @description Runtime destruction will be idempotent; no deletion is implemented yet.
+         * @description Idempotently destroy owned session resources and uploaded copies.
          */
         delete: operations["delete_session_api_v1_sessions__sid__delete"];
         options?: never;
@@ -310,7 +310,7 @@ export interface components {
         Body_upload_log_api_v1_sessions__sid__logs_post: {
             /**
              * File
-             * @description Original log file, retained unchanged by the future parser.
+             * @description Original log file, retained unchanged in the owned session archive.
              */
             file: string;
             /**
@@ -1040,7 +1040,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -1107,7 +1107,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -1172,7 +1172,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -1241,7 +1241,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -1308,7 +1308,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -1373,7 +1373,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -1462,7 +1462,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -1530,7 +1530,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -1605,7 +1605,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -1672,7 +1672,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -1743,7 +1743,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -1814,7 +1814,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -1885,7 +1885,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -1956,7 +1956,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -2027,7 +2027,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -2098,7 +2098,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -2169,7 +2169,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -2236,7 +2236,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description BACKEND_NOT_CONFIGURED in this contract release; worker unavailable or not ready at runtime. */
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
             503: {
                 headers: {
                     [name: string]: unknown;

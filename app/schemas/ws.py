@@ -64,7 +64,7 @@ class ConnectionSnapshotData(ContractModel):
 
 
 class SystemData(ContractModel):
-    event: Literal["worker_phase_changed", "worker_exited", "session_error", "mediamtx_unreachable"]
+    event: Literal["worker_phase_changed", "worker_exited", "session_error", "mediamtx_unreachable", "mediamtx_recovered", "sync_resync_required", "session_stopped"]
     worker: WorkerStatus | None = None
     error: ErrorDetail | None = None
     message: str | None = None

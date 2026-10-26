@@ -14,6 +14,7 @@ dependencies = [
   "python-multipart==0.0.32",
   "uvicorn==0.54.0",
   "pyzmq==27.1.0",
+  "websockets==15.0.1",
 ]
 
 [project.optional-dependencies]
@@ -23,7 +24,7 @@ dev = ["httpx==0.28.1", "pytest==9.1.1", "jsonschema==4.26.0"]
 include = ["app*", "sim_worker*"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests/contracts", "tests/adapters", "tests/replay", "tests/worker", "tests/core", "tests/analysis"]
+testpaths = ["tests/contracts", "tests/adapters", "tests/replay", "tests/worker", "tests/core", "tests/analysis", "tests/api", "tests/sync"]
 addopts = "-q"
 
 [tool.setuptools.package-data]

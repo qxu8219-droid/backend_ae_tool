@@ -43,7 +43,7 @@ def documents():
             parsed=validators[example['schema']].validate_python(example['payload'])
             samples[key]={'schema':example['schema'],'payload':parsed.model_dump(mode='json')}
     result['examples.json']=samples
-    result['manifest.json']={'schema_version':1,'purpose':'contract-only; business services are not implemented',
+    result['manifest.json']={'schema_version':1,'purpose':'versioned API and wire contracts; runtime is configured explicitly',
         'rest':'openapi.json','wire':{name:name+'.schema.json' for name in adapters},
         'examples':'examples.json'}
     return {name:json.dumps(value,ensure_ascii=False,sort_keys=True,indent=2,allow_nan=False)+'\n'
