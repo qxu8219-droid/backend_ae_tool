@@ -98,6 +98,15 @@ class SessionManager:
     def get(self, sid):
         return self._record(sid).snapshot()
 
+    def fail_session(self, sid, code, message):
+        record = self._record(sid)
+        record.fail(code, message)
+        return record.snapshot()
+
+    def event_loss_count(self, sid):
+        record = self._record(sid)
+        return record.dropped_events + (record.client.dropped_events if record.client is not None else 0)
+
     def drain_events(self, sid):
         record = self._record(sid)
         result = list(record.events); record.events.clear()
