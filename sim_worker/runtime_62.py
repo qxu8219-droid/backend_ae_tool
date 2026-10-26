@@ -31,8 +31,9 @@ def orientation(yaw,initial):
 
 
 class Runtime62:
-    def __init__(self,config,project_root,output_dir):
+    def __init__(self,config,project_root,output_dir,*,on_phase=None):
         self.config=config;self.output_dir=Path(output_dir);self.app=None;self.writer=None;self.trace=None
+        self.on_phase=on_phase or (lambda phase:None)
         profile=load_asset_profile(Path(project_root));asset=profile['asset_path']
         audit=audit_asset(asset)
         if not audit['passed']:raise RuntimeError('Robot asset audit failed: '+str(audit['errors']))
@@ -64,9 +65,11 @@ class Runtime62:
         version=get_version()[0];engine=SimulationManager.get_active_physics_engine()
         if version!='6.2.0' or engine.lower()!='physx':raise RuntimeError(f'Expected 6.2.0/PhysX, got {version}/{engine}')
         self.report.update(isaacsim_version=version,physics_backend=engine)
+        self.on_phase('loading_scene')
         world=World(stage_units_in_meters=1,physics_dt=1/60,rendering_dt=1/config.render_hz,backend='numpy')
         self.world=world;stage=omni.usd.get_context().get_stage()
         entry=profile['asset_path']/profile['entrypoint']
+        self.on_phase('loading_robot')
         stage.DefinePrim('/World/Robot','Xform').GetReferences().AddReference(str(entry))
         PhysicsSchemaTools.addGroundPlane(stage,'/World/Ground','Z',20,Gf.Vec3f(0),Gf.Vec3f(.35))
         UsdLux.DomeLight.Define(stage,'/World/Light').CreateIntensityAttr(800)
@@ -149,6 +152,7 @@ class Runtime62:
         # Warm the scene before attaching the encoder: never discard its initial
         # SPS/IDR outputs while the snapshot catalog is still unarmed.
         for _ in range(8):world.render()
+        self.on_phase('rtsp_publishing')
         self.writer=create_snapshot_writer(stage,product,'/World/Camera',port=config.rtsp_port,width=config.width,height=config.height,registry=self.registry,allow_native_wildcard=config.allow_native_rtsp_wildcard)
         self.report['rtsp_binding_addresses']=self.writer.binding_addresses
         self.report['native_rtsp_wildcard_override']=config.allow_native_rtsp_wildcard

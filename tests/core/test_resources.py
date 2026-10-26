@@ -23,7 +23,7 @@ def unused_port():
 def alive(pid):
     try:
         return Path(f'/proc/{pid}/stat').read_text().rsplit(')', 1)[1].split()[0] != 'Z'
-    except FileNotFoundError:
+    except (FileNotFoundError, ProcessLookupError):
         return False
 
 
@@ -49,6 +49,7 @@ def test_port_transfer_releases_only_the_selected_bind_owner():
     with pool.lease(['tcp', 'udp']) as lease:
         lease.release(0)
         with socket.socket() as tcp:
+            tcp.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             tcp.bind(('127.0.0.1', lease.ports[0]))
         with socket.socket(type=socket.SOCK_DGRAM) as udp:
             with pytest.raises(OSError):

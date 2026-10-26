@@ -24,8 +24,11 @@ def main():
     runtime=None;server=None
     code=1
     try:
+        def phase(name):
+            print('WORKER_PHASE',json.dumps({'session_id':config.session_id,'phase':name}),flush=True)
+        phase('booting')
         from .runtime_62 import Runtime62
-        runtime=Runtime62(config,Path(__file__).resolve().parents[1],args.output_dir)
+        runtime=Runtime62(config,Path(__file__).resolve().parents[1],args.output_dir,on_phase=phase)
         server=WorkerServer(config,runtime)
         print('WORKER_READY',json.dumps({'session_id':config.session_id,**runtime.report}),flush=True)
         deadline=time.monotonic()
