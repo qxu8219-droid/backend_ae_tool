@@ -1,6 +1,6 @@
 # 机器人日志回放平台后端
 
-首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。当前开发到 T12：已具备前端 Mock 工作台、独立导入/采样/时间轴、真实 worker/ZMQ 以及会话和媒体网关生命周期。HTTP/WS 业务绑定和前端实际媒体接入仍待 T14/T15。
+首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。当前开发到 T13：已具备前端 Mock 工作台、独立导入/采样/时间轴、真实 worker/ZMQ、会话和媒体网关生命周期，以及限位/历史事件/保峰曲线。HTTP/WS 业务绑定和前端实际媒体接入仍待 T14/T15。
 
 当前结果见 [6.2 验证记录](docs/validation/p0-isaac62-status.md)。[5.1 验证记录](docs/validation/p0-isaac51-status.md)与旧资产保留供追溯，不作为当前版本的验收证据。
 
@@ -73,7 +73,20 @@ env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_sessions.py \
   --isaac-python /home/xq/work/code/projects/r1pro/.venvs/isaacsim62/bin/python
 ```
 
-此命令验证真实 SDK 与网关的完整资源流程，使用合成轨迹，退出时清理本次进程。下一项 T13 将实现限位元数据、历史事件与保峰曲线。
+此命令验证真实 SDK 与网关的完整资源流程，使用合成轨迹，退出时清理本次进程。
+
+## T13 限位、历史事件与保峰曲线
+
+`app/analysis/` 从原样本预扫事件并提供 `CurveResponse`。共享限位规则覆盖来源、非对称行程、容差和连续关节；缺测/推算不冒充有效实测。曲线保留分桶极值和 null 断点，预算不足明确报错；历史事件独立保存，渲染候选仍需前端配对进度释放。方法与查询边界见 [分析说明](docs/analysis-v1.md)，真实 CSV 与 SDK 位图核验见 [T13 验证](docs/validation/t13-status.md)。
+
+```bash
+env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/export_joint_metadata.py --check
+env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_analysis.py \
+  --output-dir outputs/t13/my-new-validation \
+  --isaac-python /home/xq/work/code/projects/r1pro/.venvs/isaacsim62/bin/python
+```
+
+省略 SDK 参数可仅验证 CPU 导入与分析。本轮使用合成 fixture，真机原始样本与未确认标定保持原状。下一项 T14 将绑定正式 REST/WS、日志、会话、时间轴和分析服务。
 
 ## 当前浏览器实验入口
 

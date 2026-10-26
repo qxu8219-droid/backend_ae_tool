@@ -1,0 +1,138 @@
+{
+  "date": "2026-10-26",
+  "task": "T13",
+  "cpu": {
+    "passed": true,
+    "scope": "Actual CSV import/archive and CPU analysis; synthetic observations and CPU receipt fixture, no image proof",
+    "source_samples": 2000,
+    "narrow_events": 2,
+    "curve_budget": 2,
+    "retained_peak_values": [
+      4.2,
+      -4.2
+    ],
+    "source_sha256_unchanged": "5028284e96f10d97bae380bc7ca5b2b53f33c1e722472470db7343f562d71212",
+    "event_ids_stable_on_replay": true,
+    "import_s": 2.028059423999366,
+    "prepare_s": 0.4302057169988984,
+    "curve_query_s": 0.0007460619999619666
+  },
+  "gpu": {
+    "passed": true,
+    "scope": "Real SDK raw capture and independent H264 decode; synthetic quality-class fixtures, not robot feedback",
+    "decoded_frames": 248,
+    "matched_frames": 248,
+    "cases": {
+      "1": 42,
+      "2": 57,
+      "3": 57,
+      "4": 92
+    },
+    "expected_masks": {
+      "1": [
+        131072,
+        0
+      ],
+      "2": [
+        0,
+        131072
+      ],
+      "3": [
+        0,
+        0
+      ],
+      "4": [
+        0,
+        0
+      ]
+    },
+    "raw_capture_fps": 18.232988275247944,
+    "owned_resources_released": true
+  },
+  "tests": {
+    "backend": 764,
+    "analysis_subset": 50,
+    "frontend_unit": 195,
+    "browser_mock_and_contract_boundary": 14,
+    "p0_cpu": 90,
+    "typecheck_and_build": true,
+    "metadata_and_schema_checks": true
+  },
+  "review": {
+    "important": 1,
+    "fixed": 1,
+    "critical": 0,
+    "minor": 0,
+    "fix": "Separate fixed ordered bounds from positive travel in frontend; authoritative flags retained with null fraction"
+  },
+  "boundaries": [
+    "Sample-observation intervals, not exact continuous threshold crossings",
+    "Curves query registered source channels; visual virtual-wheel estimates are not automatically exposed",
+    "Min/max preserves bucket extrema and breaks, not every oscillation; insufficient budgets fail explicitly",
+    "Rendered alerts remain candidates until frontend paired progress releases them",
+    "Formal HTTP/WS binding T14; formal SDK browser UI T15",
+    "Synthetic fixture only; real gripper/base calibration unmodified and pending confirmation"
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/t13/final-integration/cpu-evidence.json",
+      "sha256": "ccf18756db8703f25e5bdebe7ecabdf729002beab9b07d2eb46f0cb7c5531b9d"
+    },
+    {
+      "path": "outputs/t13/final-integration/synthetic-source.csv",
+      "sha256": "5028284e96f10d97bae380bc7ca5b2b53f33c1e722472470db7343f562d71212"
+    },
+    {
+      "path": "outputs/t13/final-integration/curve.json",
+      "sha256": "cccf38a2f0ca91002bba643dbd3bea087c4e457cef058964d3250eafb0731811"
+    },
+    {
+      "path": "outputs/t13/final-integration/events.json",
+      "sha256": "7383ddc91da230fcd3ff63e5b58beb55e02b8613d1a5b776085eb62e27f9499c"
+    },
+    {
+      "path": "outputs/t13/final-integration/gpu/evidence.json",
+      "sha256": "986e8295dc2ed78a4175a831b9178c205ac0799ae6a278f610cd133ec71222ba"
+    },
+    {
+      "path": "outputs/t13/final-integration/gpu/issued.json",
+      "sha256": "d63f056ff62bc04b43c10d3e3e8f1432ad09d3e4f3cfb941ffbd6f04d8e9e457"
+    },
+    {
+      "path": "outputs/t13/final-integration/gpu/decoder.json",
+      "sha256": "a7406736c0562d4bc703657f24f8b3e925000e451d2e8d30b92d16a59b96cb22"
+    },
+    {
+      "path": "outputs/t13/final-integration/gpu/decoder.json.frames.jsonl",
+      "sha256": "7b1c2e883a633b28f18959dce42db472af1ca29caa4801f962bc1983f4754d46"
+    },
+    {
+      "path": "outputs/t13/full-green.log",
+      "sha256": "f6b72d45eb208f266036e7e972191b414bfd2f22e51bc184a1060d7ed11b8ec9"
+    },
+    {
+      "path": "outputs/t13/frontend-final-tests.log",
+      "sha256": "9cc3890f91f5337938de6e1cd561219894131e8a4a0b5ecd56a7651630ae2682"
+    },
+    {
+      "path": "outputs/t13/frontend-final-build.log",
+      "sha256": "5626592a5e3625d21f688c63639b010af6fa67906789f07ea463a9a10f4dbc90"
+    },
+    {
+      "path": "outputs/t13/browser.log",
+      "sha256": "dc8aa3bdad8f37326fd888297866a707114540224be643d44a3f5130a05c89e1"
+    },
+    {
+      "path": "outputs/t13/p0-cpu.log",
+      "sha256": "891084fe03febcbd3a6c7e09cb9c8a9e5f718a6ca1a4323a8025b4537c0e9616"
+    },
+    {
+      "path": "outputs/t13/contracts.log",
+      "sha256": "46d6e24b30c787b36df21c221c72ced6fd16b7c2658c0742fa2c244bb460a6bf"
+    },
+    {
+      "path": "outputs/t13/review-red.log",
+      "sha256": "fad3d88c35c46ab79136a9085cffcbecbc5ecb7173a97495f1b8bf70d7d2f928"
+    }
+  ]
+}
