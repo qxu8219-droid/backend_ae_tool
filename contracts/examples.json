@@ -390,6 +390,8 @@
         0.0
       ],
       "source_sample_index": 1,
+      "speed": 1.0,
+      "state": "paused",
       "target_seq": 7
     },
     "schema": "AppliedFrame"
@@ -1730,6 +1732,8 @@
         0.0
       ],
       "source_sample_index": 1,
+      "speed": 1.0,
+      "state": "paused",
       "target_seq": 7
     },
     "schema": "RenderedFrame"
@@ -2936,6 +2940,8 @@
       "schema_version": 1,
       "session_id": "example-session",
       "source_sample_index": 1,
+      "speed": 1.0,
+      "state": "paused",
       "target_seq": 7
     },
     "schema": "TargetFrame"
@@ -3301,6 +3307,8 @@
         "schema_version": 1,
         "session_id": "example-session",
         "source_sample_index": 1,
+        "speed": 1.0,
+        "state": "paused",
         "target_seq": 7
       },
       "schema_version": 1,
@@ -3691,6 +3699,8 @@
           "schema_version": 1,
           "session_id": "example-session",
           "source_sample_index": 1,
+          "speed": 1.0,
+          "state": "paused",
           "target_seq": 7
         }
       },
@@ -4192,6 +4202,8 @@
           0.0
         ],
         "source_sample_index": 1,
+        "speed": 1.0,
+        "state": "paused",
         "target_seq": 7
       },
       "ok": true,
@@ -4619,6 +4631,8 @@
           0.0
         ],
         "source_sample_index": 1,
+        "speed": 1.0,
+        "state": "paused",
         "target_seq": 7
       },
       "ok": true,
@@ -5053,6 +5067,8 @@
             0.0
           ],
           "source_sample_index": 1,
+          "speed": 1.0,
+          "state": "paused",
           "target_seq": 7
         },
         "type": "applied"
@@ -5502,6 +5518,8 @@
             0.0
           ],
           "source_sample_index": 1,
+          "speed": 1.0,
+          "state": "paused",
           "target_seq": 7
         },
         "type": "rendered"

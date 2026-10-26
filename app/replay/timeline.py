@@ -138,6 +138,7 @@ class Timeline:
         sequence = self._sequence(self._target_sequence)
         try:
             frame = sampler.sample_at(position,playback_epoch=epoch,control_seq=control,target_seq=sequence)
+            frame = frame.model_copy(update={'state':state,'speed':speed if speed is not None else self._speed})
         except (ValueError, TypeError, AttributeError) as exc:
             raise TimelineError('INVALID_LOG', 'Prepared sampler could not generate the requested target', 422) from exc
         if frame.session_id != self._session_id or frame.log_id != log_id:
@@ -238,6 +239,7 @@ class Timeline:
             if position >= self._sampler.duration_s:
                 sequence = self._sequence(self._target_sequence)
                 frame = self._sampler.sample_at(self._sampler.duration_s,playback_epoch=self._epoch,control_seq=self._control,target_seq=sequence)
+                frame = frame.model_copy(update={'state':'ended','speed':self._speed})
                 self._target_sequence, self._target = sequence, frame
                 self._state, self._running = 'ended', False
                 self._anchor_position, self._anchor_time = self._sampler.duration_s, now
@@ -246,6 +248,7 @@ class Timeline:
                 next_tick = self._next_deadline(now,preserve_phase=True)
                 sequence = self._sequence(self._target_sequence)
                 frame = self._sampler.sample_at(position,playback_epoch=self._epoch,control_seq=self._control,target_seq=sequence)
+                frame = frame.model_copy(update={'state':'playing','speed':self._speed})
                 self._target_sequence, self._target = sequence, frame
                 self._delivery.queue_target(frame)
                 self._next_tick = next_tick

@@ -6,7 +6,7 @@
 
 已提供 18 个 REST 路由声明、8 类服务端 WS 消息、2 类客户端 WS 消息，以及 worker RPC、目标、事件和媒体候选目录模型。类型以 Python 为单一来源，自动生成 JSON Schema 和 TypeScript。
 
-**这是契约版本，业务服务尚未接入。** 合法 REST 调用返回 `503 BACKEND_NOT_CONFIGURED`，WS 关闭码为 1013；OpenAPI 中的成功响应描述后续实现。没有启动真实会话、上传存储、日志解析或时间轴实现，也没有把 P0 的临时控制邮箱接入正式 API。
+**正式 HTTP/WS 业务尚未接入。** 合法 REST 调用返回 `503 BACKEND_NOT_CONFIGURED`，WS 关闭码为 1013；OpenAPI 中的成功响应描述后续实现。T08～T11 已实现独立导入、采样、时间轴与真实 worker，尚待 T12/T14 绑定正式会话和 API。
 
 依赖方向为 `app → replay_protocol ← sim_worker`。`proto/` 是独立可安装包，只依赖 Pydantic 与标准库；在 IsaacSim 的 Python 中已验证可以独立导入，不加载 app、FastAPI、NumPy 或 IsaacSim。API 使用独立的 backend `.venv`。
 
@@ -15,7 +15,7 @@
 | 模型 | 含义 |
 |---|---|
 | PlaybackSnapshot | 服务端目标位置、已应用位置、已渲染身份；不包含服务端声称的已显示位置 |
-| TargetFrame | 目标日志时刻、28 个目标值、质量与底盘目标 |
+| TargetFrame | 目标日志时刻、28 个目标值、质量、底盘目标及冻结的 state/speed |
 | AppliedFrame | 实际读回值，另保留 source_joints 与应用时间 |
 | RenderedFrame | 已应用状态的采集身份；必须显式提供 raw_identity_verified=true，不能默认生成验证证据 |
 | FrameSnapshot | 可用于统一呈现的冻结状态：姿态、日志时间、进度、限位与质量 |
@@ -23,7 +23,9 @@
 
 `request_id` 是关联字符串；操作顺序使用 `control_seq`，目标顺序使用 `target_seq`。`playback_epoch` 隔离 load/seek/stop/重播等跳变。普通序列为 JavaScript 安全整数；`capture_id` 为完整正 uint32，不回绕，当前 v1 明确 `render_seq == capture_id`。它们不等于原采样点索引。
 
-控制 HTTP 响应只确认 `ack_stage=accepted`。RPC 可确认 accepted、applied、rendered；浏览器呈现由客户端自行证明。暂停顺序屏障、关键帧可靠执行与跨通道乱序处理将在 T10/T11 实现，模型校验不能替代接收端状态机。
+控制 HTTP 响应只确认 `ack_stage=accepted`。RPC 可确认 accepted、applied、rendered；浏览器呈现由客户端自行证明。T10/T11 已实现暂停顺序屏障、关键帧可靠执行与跨通道乱序处理，模型校验不能替代接收端状态机。
+
+T11 补充 TargetFrame 的 `state=ready|playing|paused|ended`（缺省 paused）和 `speed`（缺省 1）。它们在目标创建时冻结，并贯穿实际应用/渲染与快照；禁止使用最新服务端状态补写迟到帧。旧输入可以使用缺省值，旧严格消费者可能拒绝新输出字段，因此后端、worker 协议和前端生成物必须同步部署。
 
 ## 媒体与 WS
 
@@ -52,9 +54,9 @@ ReplayData 保留原文件引用/hash、映射快照、规范化原样本时间�
 
 ## IPC 拓扑与期限
 
-沿用计划：worker 绑定 RPC ROUTER、目标 SUB、事件 PUB；主服务分别以 DEALER、PUB、SUB 连接对应端口。后续会话管理器从 6100～6199 分配独占三通道端点。普通 RPC 初始期限 10 秒，启动/加载拥有单独期限，不能据此把慢启动判死。
+T11 实际拓扑：worker 绑定 RPC ROUTER 和事件 XPUB，目标 SUB 连接主服务 XPUB；主服务 DEALER/SUB 连接 worker。XPUB 仍使用 PUB 发布语义，同时观察真实订阅，以完成双方握手；目标端口由主服务侧占用。端点均为回环地址。独立 CLI 默认端口 19601/19602/19603，后续 T12 管理器负责动态分配。普通 RPC 默认 10 秒，启动握手默认 120 秒；不能把慢启动按普通 RPC 判死。
 
-subscribe_ready 用于订阅就绪握手；正式实现还需验证通路可达，不能只凭创建了 socket 宣称握手完成。普通目标可有界取最新，首末帧、seek/stop/step 和暂停屏障必须走可确认路径。
+subscribe_ready 在双方实际观察到目标和事件订阅后才确认。普通目标有界取最新，首末帧、seek/stop/step 和暂停屏障走可确认路径。具体启动、队列、媒体与退出边界见 [worker 说明](worker-v1.md)。
 
 ## 安装、导出和检查
 

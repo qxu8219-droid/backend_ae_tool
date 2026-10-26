@@ -1,6 +1,6 @@
 # 机器人日志回放平台后端
 
-首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。已完成 P0 核心验证、T04 契约、T05～T07 前端 Mock 工作台、T08 实际 CSV/JSON 导入服务、T09 确定性采样与 T10 回放时间轴核心。正式会话/worker 业务和实际媒体接入仍待实现。
+首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。已完成 P0 核心验证、T04 契约、T05～T07 前端 Mock 工作台、T08 实际 CSV/JSON 导入服务、T09 确定性采样、T10 回放时间轴核心与 T11 独立 worker/ZMQ。正式会话管理、HTTP/WS 业务绑定和前端实际媒体接入仍待后续任务。
 
 当前结果见 [6.2 验证记录](docs/validation/p0-isaac62-status.md)。[5.1 验证记录](docs/validation/p0-isaac51-status.md)与旧资产保留供追溯，不作为当前版本的验收证据。
 
@@ -51,7 +51,15 @@ env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_timeline.py \
   --output-dir outputs/t10/my-new-probe
 ```
 
-探针使用真实导入和采样模块，但 worker 是测试替身，合成回执不代表实际渲染或浏览器呈现。下一项 T11 将实现 IsaacSim worker 与 ZMQ 三通道。
+该 T10 探针使用真实导入和采样模块，但 worker 是测试替身，合成回执不代表实际渲染或浏览器呈现。真实 worker 见下一节。
+
+## T11 独立 worker 与本地数据
+
+`sim_worker/` 已接入真实 IsaacSim 6.2：通过 ZMQ 接收目标，应用并读回 28 DOF/底盘，在实际图像处生成帧身份和正式快照。独立 H.264 解码探针核验像素 ID/CRC、SEI 快照与发送目标。启动、协议、安装和复现命令见 [worker 说明](docs/worker-v1.md)，证据见 [T11 验证](docs/validation/t11-status.md)。正式浏览器联调仍待 T15；下一项为 T12 会话生命周期。
+
+原生 SDK RTSP 实际监听所有 IPv4 接口，worker 默认拒绝该行为。合成探针显式允许并记录此监听；真实日志接入前须完成媒体端口隔离，详见 worker 说明。
+
+已下载的真机样本已归档到 `data/real_logs/raw/`，12 个来源条目、27 个文件，SHA256 校验并只读保存；夹爪与底盘待确认字段尚未转换。目录、溯源和后续数据放置约定见 [本地数据说明](docs/local-data-storage-v1.md)。
 
 ## 当前浏览器实验入口
 

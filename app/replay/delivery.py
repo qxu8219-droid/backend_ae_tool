@@ -163,7 +163,7 @@ class DeliveryTracker:
         if not self._current(frame) or issued is None:
             return False
         if any(getattr(frame, field) != getattr(issued, field) for field in (
-            "log_time_s", "duration_s", "progress", "source_sample_index"
+            "log_time_s", "duration_s", "progress", "source_sample_index", "state", "speed"
         )) or frame.source_joints != issued.joints:
             return False
         rendered = isinstance(frame, RenderedFrame)

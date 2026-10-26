@@ -133,6 +133,8 @@ export type SourceJoints = [
   number
 ];
 export type SourceSampleIndex = number | null;
+export type Speed = number;
+export type State = "ready" | "playing" | "paused" | "ended";
 export type TargetSeq = number;
 export type Type2 = "applied";
 export type AppliedWallS1 = number;
@@ -254,6 +256,8 @@ export type SourceJoints1 = [
   number
 ];
 export type SourceSampleIndex1 = number | null;
+export type Speed1 = number;
+export type State1 = "ready" | "playing" | "paused" | "ended";
 export type TargetSeq1 = number;
 export type Type3 = "rendered";
 export type Code = string;
@@ -310,6 +314,8 @@ export interface AppliedFrame {
   session_id: SessionId;
   source_joints: SourceJoints;
   source_sample_index?: SourceSampleIndex;
+  speed?: Speed;
+  state?: State;
   target_seq: TargetSeq;
 }
 export interface ChassisPose {
@@ -351,6 +357,8 @@ export interface RenderedFrame {
   session_id: SessionId1;
   source_joints: SourceJoints1;
   source_sample_index?: SourceSampleIndex1;
+  speed?: Speed1;
+  state?: State1;
   target_seq: TargetSeq1;
 }
 export interface WorkerError {

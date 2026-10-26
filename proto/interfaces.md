@@ -11,7 +11,7 @@ Frame vectors, quality processing/source-index vectors and snapshot catalogs use
 - `PositionRef`: `log_time_s >= 0`, `source_sample_index: SafeInt|null`, `target_seq: SafeInt`.
 - `FrameIdentity`: `session_id/log_id/playback_epoch/control_seq/target_seq/capture_id/render_seq`; capture 1..uint32 max, render_seq equals capture_id.
 - `PlaybackSnapshot`: `schema_version=1/session_id/log_id|null/playback_epoch/control_seq/state/speed/duration_s/target_position|null/applied_position|null/rendered_identity|null`; no presented field. States idle/ready/playing/paused/ended/error. Speed [0.1,10].
-- `TargetFrame`: schema/session/log/epoch/control/target identity, `log_time_s/duration_s/progress/source_sample_index|null/joints[28]/quality[28]/chassis|null`; `mode='kinematic'`, reserved `joint_velocities=null/joint_efforts=null` (physics unsupported).
+- `TargetFrame`: schema/session/log/epoch/control/target identity, `log_time_s/duration_s/progress/source_sample_index|null/joints[28]/quality[28]/chassis|null`; frozen target context `state: ready|playing|paused|ended` (default paused), `speed` (default 1, range 0.1..10); `mode='kinematic'`, reserved `joint_velocities=null/joint_efforts=null` (physics unsupported).
 - `AppliedFrame`: TargetFrame fields plus `source_joints[28]/applied_wall_s`; joints are actual readback, source_joints are requested normalized log values.
 - `RenderedFrame`: AppliedFrame plus `capture_id/render_seq/captured_wall_s/raw_identity_verified=true`.
 - `FrameSnapshot`: schema/session/log/epoch/control/target/capture/render identity, `state/speed/log_time_s/duration_s/progress/source_sample_index|null/joints[28]/source_joints[28]/quality[28]/chassis|null/limit_flags/limit_warn_flags/captured_wall_s`.
@@ -26,3 +26,5 @@ Frame vectors, quality processing/source-index vectors and snapshot catalogs use
 Public types: `PlaybackState`, `JsonValue`, `SafeInt`, `FiniteNumber`, `ChannelSeries`, `PositionRef`, `FrameIdentity`. Public schema registries: `PROTOCOL_MODELS`; adapters `RPC_ADAPTER`, `RPC_RESPONSE_ADAPTER`, `WORKER_EVENT_ADAPTER`, `TARGET_ADAPTER` and `PROTOCOL_ADAPTERS`.
 
 Sequences are scoped by session/epoch; consumers enforce monotonic arrival and barriers. Models reject mismatched nested identities. Every capture ID is unique over its session lifetime and never reset on seek; this is a stateful producer invariant. Browser connection generations are local and independent of playback epochs. RPC stages describe observed server/worker evidence only.
+
+T11 freezes state/speed when producing each target, propagates them through actual readback/render and validates receipts against that target. Never derive delayed-frame context from current server state. The optional input defaults support older producers, but older strict readers reject the added output fields: deploy backend, worker protocol and generated frontend contracts together.

@@ -1,0 +1,3 @@
+# Install into the pinned IsaacSim 6.2 Python environment; do not install app/FastAPI.
+# Shared protocol: install ../proto (the workspace currently uses its editable package).
+pyzmq==27.1.0

@@ -160,6 +160,9 @@ class SamplePosition(ContractModel):
 
 
 class TargetFrame(TargetIdentity, SamplePosition):
+    # Frozen per-target playback context, never inferred from a later control.
+    state: Literal["ready", "playing", "paused", "ended"] = "paused"
+    speed: Speed = 1.0
     joints: JointValues
     quality: JointQualities
     chassis: ChassisPose | None

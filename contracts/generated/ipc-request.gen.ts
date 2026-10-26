@@ -100,6 +100,8 @@ export type Valid = boolean;
 export type SchemaVersion = 1;
 export type SessionId = string;
 export type SourceSampleIndex = number | null;
+export type Speed = number;
+export type State = "ready" | "playing" | "paused" | "ended";
 export type TargetSeq = number;
 export type Cmd4 = "pause_barrier";
 export type TargetSeq1 = number;
@@ -158,6 +160,8 @@ export interface TargetFrame {
   schema_version?: SchemaVersion;
   session_id: SessionId;
   source_sample_index?: SourceSampleIndex;
+  speed?: Speed;
+  state?: State;
   target_seq: TargetSeq;
 }
 export interface ChassisPose {

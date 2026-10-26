@@ -383,6 +383,24 @@
           "default": null,
           "title": "Source Sample Index"
         },
+        "speed": {
+          "default": 1.0,
+          "maximum": 10.0,
+          "minimum": 0.1,
+          "title": "Speed",
+          "type": "number"
+        },
+        "state": {
+          "default": "paused",
+          "enum": [
+            "ready",
+            "playing",
+            "paused",
+            "ended"
+          ],
+          "title": "State",
+          "type": "string"
+        },
         "target_seq": {
           "maximum": 9007199254740991,
           "minimum": 0,

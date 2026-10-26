@@ -8,3 +8,4 @@ assets/robots/
 *.egg-info/
 build/
 dist/
+data/real_logs/
