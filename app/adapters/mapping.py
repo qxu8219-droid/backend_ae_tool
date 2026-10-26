@@ -2,11 +2,12 @@
 from __future__ import annotations
 
 from typing import Annotated, Literal
-from pydantic import BeforeValidator, Field, ValidationError, model_validator
+from pydantic import BeforeValidator, Field, StrictBool, StrictInt, ValidationError, model_validator
 from replay_protocol import CANONICAL_JOINTS, ContractModel, FiniteNumber, Identifier, SchemaVersion
 from .base import MappingError
 
 PRISMATIC = frozenset(name for name in CANONICAL_JOINTS if 'gripper' in name)
+WHEEL_JOINTS = frozenset(f'wheel_motor_joint{i}' for i in range(1, 4))
 ORIGIN = Literal['measured', 'commanded']
 
 
@@ -21,6 +22,7 @@ class JointOverride(ContractModel):
     scale: FiniteNumber = 1.0
     offset: FiniteNumber = 0.0
     origin: ORIGIN | None = None
+    angle_semantics: Literal['bounded', 'angular_wrapped', 'angular_unwrapped', 'linear'] | None = None
 
 
 class JointMapping(ContractModel):
@@ -39,6 +41,10 @@ class JointMapping(ContractModel):
             allowed = {'m', 'mm', 'cm', None} if name in PRISMATIC else {'rad', 'deg', None}
             if override.unit not in allowed:
                 raise ValueError(f'unit is incompatible with joint type: {name}')
+            semantics = ({'linear'} if name in PRISMATIC else
+                         {'angular_wrapped', 'angular_unwrapped'} if name in WHEEL_JOINTS else {'bounded'})
+            if override.angle_semantics is not None and override.angle_semantics not in semantics:
+                raise ValueError(f'angle_semantics is incompatible with joint type: {name}')
         return self
 
 
@@ -54,6 +60,7 @@ class ChassisMapping(ContractModel):
     map: dict[Literal['x', 'y', 'yaw'], Identifier] = Field(default_factory=lambda: {'x': 'x', 'y': 'y', 'yaw': 'yaw'})
     position_unit: Literal['m', 'mm', 'cm'] = 'm'
     yaw_unit: Literal['rad', 'deg'] = 'rad'
+    yaw_semantics: Literal['angular_wrapped', 'angular_unwrapped'] = 'angular_wrapped'
     origin: ORIGIN = 'measured'
     transform: PlanarTransform = Field(default_factory=PlanarTransform)
 
@@ -74,9 +81,30 @@ class CustomChannel(ContractModel):
     origin: ORIGIN = 'measured'
 
 
+class WheelRollConfig(ContractModel):
+    enabled: StrictBool = False
+    wheel_radius_m: Annotated[FiniteNumber, Field(gt=0)] | None = None
+    joint_signs: dict[Literal['wheel_motor_joint1', 'wheel_motor_joint2', 'wheel_motor_joint3'], StrictInt] = Field(default_factory=dict)
+    initial_angle_rad: FiniteNumber = 0.0
+    max_lateral_ratio: FiniteNumber = Field(default=0.05, ge=0, le=1)
+    max_segment_s: Annotated[FiniteNumber, Field(gt=0)] | None = None
+
+    @model_validator(mode='after')
+    def explicit_physical_parameters(self):
+        if any(sign not in (-1, 1) for sign in self.joint_signs.values()):
+            raise ValueError('joint_signs values must be the integers -1 or +1')
+        if self.enabled and (self.wheel_radius_m is None or set(self.joint_signs) != WHEEL_JOINTS):
+            raise ValueError('enabled wheel_roll_from_chassis requires wheel_radius_m and all three explicit joint_signs')
+        return self
+
+
+class VirtualChannelsConfig(ContractModel):
+    wheel_roll_from_chassis: WheelRollConfig = Field(default_factory=WheelRollConfig)
+
+
 def _no_unwrap(value):
     if value is not False:
-        raise ValueError("unwrap_continuous must be false; unwrapping belongs to T09")
+        raise ValueError('unwrap_continuous must be false; declare per-channel angle_semantics instead')
     return value
 
 
@@ -93,6 +121,7 @@ class MappingConfig(ContractModel):
     joints: JointMapping = Field(default_factory=JointMapping)
     chassis: ChassisMapping = Field(default_factory=ChassisMapping)
     custom_channels: dict[Identifier, CustomChannel] = Field(default_factory=dict)
+    virtual_channels: VirtualChannelsConfig = Field(default_factory=VirtualChannelsConfig)
     options: ImportOptions = Field(default_factory=ImportOptions)
 
     @model_validator(mode='after')

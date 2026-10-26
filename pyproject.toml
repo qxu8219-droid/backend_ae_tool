@@ -22,7 +22,7 @@ dev = ["httpx==0.28.1", "pytest==9.1.1", "jsonschema==4.26.0"]
 include = ["app*"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests/contracts", "tests/adapters"]
+testpaths = ["tests/contracts", "tests/adapters", "tests/replay"]
 addopts = "-q"
 
 [tool.setuptools.package-data]

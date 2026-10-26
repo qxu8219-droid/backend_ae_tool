@@ -214,7 +214,7 @@ def normalize_table(table: RawTable, path: Path, config: MappingConfig, *, limit
         override = config.joints.per_joint_overrides.get(name, JointOverride())
         source_unit = override.unit or ('m' if name in PRISMATIC else config.joints.unit)
         field = config.joints.map.get(name, '')
-        semantics = 'linear' if name in PRISMATIC else 'angular_unwrapped' if descriptor.type == 'continuous' else 'bounded'
+        semantics = override.angle_semantics or ('linear' if name in PRISMATIC else 'angular_unwrapped' if descriptor.type == 'continuous' else 'bounded')
         result = series(name, field, descriptor.unit, source_unit, semantics, override.origin or config.joints.origin, override.scale, override.offset) if field else None
         if result is None:
             absent.append(name)
@@ -223,7 +223,8 @@ def normalize_table(table: RawTable, path: Path, config: MappingConfig, *, limit
             channels[name] = result
         descriptor_specs[name] = {'name':name, 'label':name, 'kind':'joint', 'source_field':field or None,
                                   'source_unit':source_unit, 'joint_index':index, 'lower':descriptor.lower, 'upper':descriptor.upper,
-                                  'unit':descriptor.unit, 'angle_semantics':semantics}
+                                  'unit':descriptor.unit, 'angle_semantics':semantics,
+                                  'wrap_period':2*math.pi if semantics == 'angular_wrapped' else None}
     if not any(any(q.valid for q in ch.quality) for ch in channels.values()):
         fatal('NO_JOINT_CHANNELS', 'At least one canonical joint must have a valid source value')
 
@@ -241,7 +242,7 @@ def normalize_table(table: RawTable, path: Path, config: MappingConfig, *, limit
     if config.chassis.available and all(field in table.columns for field in config.chassis.map.values()):
         cs = config.chassis
         axes = {axis:series(f'chassis.{axis}', cs.map[axis], 'rad' if axis == 'yaw' else 'm', cs.yaw_unit if axis == 'yaw' else cs.position_unit,
-                           'angular_wrapped' if axis == 'yaw' else 'linear', cs.origin) for axis in ('x','y','yaw')}
+                           cs.yaw_semantics if axis == 'yaw' else 'linear', cs.origin) for axis in ('x','y','yaw')}
         if all(value is not None for value in axes.values()):
             if axes['x'].timestamps_s != axes['y'].timestamps_s or axes['x'].timestamps_s != axes['yaw'].timestamps_s:
                 fatal('INCOMPATIBLE_CHASSIS_GRID', 'Chassis axis grids differ; explicit alignment belongs to the sampler')
@@ -298,7 +299,8 @@ def normalize_table(table: RawTable, path: Path, config: MappingConfig, *, limit
         spec = descriptor_specs[name]
         channels[name] = ChannelSeries(timestamps_s=list(sample_times), values=[0.0]*len(sample_times),
             quality=[ChannelQuality(origin='missing', valid=False, processing=['defaulted']) for _ in sample_times],
-            source_field=spec['source_field'], unit=spec['unit'], angle_semantics=spec['angle_semantics'])
+            source_field=spec['source_field'], unit=spec['unit'], angle_semantics=spec['angle_semantics'],
+            wrap_period=spec['wrap_period'])
         source_rows[name] = []
     if len(channels) > limits.max_channels:
         raise LimitError('Normalized channel count exceeds max_channels')

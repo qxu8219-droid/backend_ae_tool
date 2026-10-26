@@ -1,6 +1,6 @@
 # 机器人日志回放平台后端
 
-首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。已完成 P0 核心验证、T04 契约、T05～T07 前端 Mock 工作台与 T08 实际 CSV/JSON 导入服务。时间轴、正式会话/worker 业务和实际媒体接入仍待实现。
+首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。已完成 P0 核心验证、T04 契约、T05～T07 前端 Mock 工作台、T08 实际 CSV/JSON 导入服务与 T09 确定性采样。时间轴、正式会话/worker 业务和实际媒体接入仍待实现。
 
 当前结果见 [6.2 验证记录](docs/validation/p0-isaac62-status.md)。[5.1 验证记录](docs/validation/p0-isaac51-status.md)与旧资产保留供追溯，不作为当前版本的验收证据。
 
@@ -30,6 +30,17 @@ env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_import.py \
 ```
 
 最后一个命令生成明确标注的合成 CSV，并实际解析/归档、核对哈希与夹爪方向及记录事件循环观测；输出目录必须不存在。真机字段、单位和坐标系仍需用户提供样例后分析。HTTP 上传入口保持 503，等待后续会话管理接入，不以离线导入成功冒充端到端回放成功。
+
+## T09 确定性采样
+
+`app/replay/` 提供按原采样时钟定位的 `ReplaySampler`：每段日志准备一次，之后生成带真实调用方身份的 `TargetFrame`，支持独立频率通道、包角展开、保留多圈值、缺测回退和前后原采样点定位。虚拟轮角默认关闭，需要显式半径及三个关节方向，并保留来源与模型限制。
+
+```bash
+env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_sampling.py \
+  --output-dir outputs/t09/my-new-probe
+```
+
+该探针实际导入并归档合成 CSV，然后验证顺序/随机/反向查询的一致性和原数据不变，记录 CPU 耗时；不启动仿真。接口与缺测/角度语义见 [采样说明](docs/replay-sampling-v1.md)，本轮证据见 [T09 验证](docs/validation/t09-status.md)。下一项 T10 将实现回放状态机与时间轴。
 
 ## 当前浏览器实验入口
 

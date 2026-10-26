@@ -59,10 +59,10 @@ JSON：UTF-8（允许 BOM），重复键、混合歧义布局、长度不一致�
 局部配置可只填写需要覆盖的层级；若提供 `joints.map`，该字典就是完整映射，未列出的关节视为缺失。支持：
 
 - `timestamp.field/unit/start_offset`：单位 s/ms/us/ns。使用 Decimal 在绝对时间上先减首个有效时间，再转换浮点秒并加非负 start_offset，避免 Unix 纳秒精度被提前丢失。
-- `joints.unit/origin/map/per_joint_overrides`：origin 为 measured 或 commanded；单关节可覆盖 unit/scale/offset/origin。旋转 rad/deg，移动 m/mm/cm，先单位转换，再 scale，再以输出单位表示的 offset。全局角度单位不会污染夹爪单位；不夹紧超限值，不改变四夹爪正负方向。
-- `chassis.available/frame/map/position_unit/yaw_unit/origin/transform`：非 world 必须显式提供 transform。`rotation_rad` 先旋转 xy，再加 `translation_x_m/translation_y_m`；yaw 加相同旋转。非单位变换标记 derived，保留各输入字段与填充值来源。
+- `joints.unit/origin/map/per_joint_overrides`：origin 为 measured 或 commanded；单关节可覆盖 unit/scale/offset/origin；T09 增加 `angle_semantics`，连续关节可显式声明 angular_wrapped 或 angular_unwrapped（默认）。旋转 rad/deg，移动 m/mm/cm，先单位转换，再 scale，再以输出单位表示的 offset。全局角度单位不会污染夹爪单位；不夹紧超限值，不改变四夹爪正负方向。
+- `chassis.available/frame/map/position_unit/yaw_unit/origin/transform`：非 world 必须显式提供 transform。`rotation_rad` 先旋转 xy，再加 `translation_x_m/translation_y_m`；yaw 加相同旋转。非单位变换标记 derived，保留各输入字段与填充值来源。T09 增加 `chassis.yaw_semantics`（默认 angular_wrapped），可声明累计 yaw 为 angular_unwrapped。
 - `custom_channels.<name>.field/unit/scale/offset/origin`：自定义标量保留声明单位，包括 mm/cm/deg，只应用显式 scale/offset；不会偷偷变成 SI 后仍标旧单位。不能占用 canonical 或 chassis 通道名。
-- `options.max_forward_fill_s` 默认 0.25；`resample` 当前只允许 none，`unwrap_continuous` 只允许 false。统一重采样、角度展开、虚拟轮角属于 T09，相关未支持请求明确拒绝。
+- `options.max_forward_fill_s` 默认 0.25；`resample` 当前只允许 none，`unwrap_continuous` 只允许 false。导入阶段仍不生成统一重采样网格；T09 在准备采样时按每通道语义展开包角，并读取新增的 `virtual_channels.wheel_roll_from_chassis` 配置预计算轮角。该配置默认关闭，启用必须显式给出半径和三个关节方向。详见 [采样说明](replay-sampling-v1.md)。
 
 规范化时间轴保留原采样集合，`sample_times_s` 是参考时刻与各独立通道时刻的有序并集。`TimeBasis.source_origin` 保存秒单位的原始起点，精确十进制形式另存 metadata；`relative_origin_s` 等于 start_offset。UploadStats.duration 是首末样本的跨度。T09 把播放位置映射到源时间域时，需要加上 relative_origin_s；不能把非零源起点直接当成播放进度。没有导入阶段重采样或插值。
 
