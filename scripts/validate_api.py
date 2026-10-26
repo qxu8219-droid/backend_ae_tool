@@ -135,6 +135,10 @@ def verify_stream(output, observer, controls, source, sid, lid):
         else:
             # Superseded control frames may still be encoded during a barrier.
             # Never match those to the latest WS values or hide the count.
+            assert frame.control_seq < max(controls), 'Current final control lost WS evidence'
+            previous = [value['capture_id'] for value in observer.frames.values() if value['control_seq'] == frame.control_seq]
+            following = [value['capture_id'] for value in observer.frames.values() if value['control_seq'] > frame.control_seq]
+            assert previous and following and max(previous) < frame.capture_id < min(following), 'Missing WS evidence outside a control boundary'
             missed += 1
     assert matched >= 30 and final_matches >= 10, (matched, final_matches)
     assert 'playing' in states and 'paused' in states and len(epochs) >= 2, (states, epochs)
