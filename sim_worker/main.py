@@ -1,5 +1,5 @@
 """Standalone local worker process. No production fake runtime option."""
-import argparse,json,signal,time,sys
+import argparse,json,os,signal,time,sys
 from pathlib import Path
 from .config import WorkerConfig,ensure_ports_available
 from .transport import WorkerServer
@@ -13,6 +13,8 @@ def main():
     parser.add_argument('--width',type=int,default=1280);parser.add_argument('--height',type=int,default=720)
     parser.add_argument('--allow-native-rtsp-wildcard',action='store_true',help='Only for synthetic validation or an isolated deployment network')
     args=parser.parse_args();config=WorkerConfig(args.session_id,args.rpc_port,args.target_port,args.event_port,args.rtsp_port,args.width,args.height,allow_native_rtsp_wildcard=args.allow_native_rtsp_wildcard)
+    if os.environ.get('REPLAY_RTSP_LOOPBACK_PORT') not in (None,str(config.rtsp_port)):
+        raise ValueError('RTSP bind guard port does not match the worker configuration')
     ensure_ports_available(config)
     args.output_dir.mkdir(parents=True,exist_ok=False)
     alive=True
