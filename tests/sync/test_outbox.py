@@ -48,6 +48,19 @@ def test_context_reset_keeps_same_epoch_alerts_but_discards_old_frames_and_epoch
     asyncio.run(run())
 
 
+def test_resync_preserves_lifecycle_events_in_order_but_replaces_old_sync_notices():
+    from app.sync.outbox import Outbox
+    async def run():
+        box = Outbox('sid')
+        for event in ('mediamtx_unreachable', 'sync_resync_required', 'mediamtx_recovered', 'worker_exited'):
+            box.offer('system', {'event': event})
+        box.reset({'playback': {'log_id': 'log', 'playback_epoch': 2}})
+        messages = [await box.next() for _ in range(box.pending_count)]
+        assert [message['data']['event'] for message in messages if message['type'] == 'system'] == [
+            'mediamtx_unreachable', 'mediamtx_recovered', 'worker_exited']
+    asyncio.run(run())
+
+
 def test_frame_cache_expires_and_rejects_old_control_context_without_using_wall_clock():
     from app.sync.frames import FrameCache
     from pathlib import Path

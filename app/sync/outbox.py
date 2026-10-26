@@ -55,6 +55,7 @@ class Outbox:
             return
         playback = snapshot['playback']
         retained = [item for item in self._queue if item[0] in ('pong', 'telemetry_rate_changed') or
+                    (item[0] == 'system' and item[1].get('event') != 'sync_resync_required') or
                     (item[0] == 'alert' and item[1].get('log_id') == playback['log_id'] and
                      item[1].get('playback_epoch') == playback['playback_epoch'])]
         self._queue.clear()

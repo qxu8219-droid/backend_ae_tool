@@ -1,4 +1,4 @@
-"""WS contracts only; transport delivery/state sequencing is future runtime work.
+"""WS contracts used by the configured per-connection runtime.
 
 seq is monotonic per connection and restarts with a new connection_id. A gap
 requires reconnect and a fresh connection_snapshot; old connection messages must

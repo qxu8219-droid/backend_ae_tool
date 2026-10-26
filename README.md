@@ -1,6 +1,6 @@
 # 机器人日志回放平台后端
 
-首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。当前开发到 T13：已具备前端 Mock 工作台、独立导入/采样/时间轴、真实 worker/ZMQ、会话和媒体网关生命周期，以及限位/历史事件/保峰曲线。HTTP/WS 业务绑定和前端实际媒体接入仍待 T14/T15。
+首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。当前开发到 T14：已具备前端 Mock 工作台、导入/采样/时间轴、真实 worker/ZMQ、会话和媒体网关、限位/历史事件/保峰曲线，以及正式 REST/WS 业务绑定。正式前端实际媒体接入进入 T15。
 
 当前结果见 [6.2 验证记录](docs/validation/p0-isaac62-status.md)。[5.1 验证记录](docs/validation/p0-isaac51-status.md)与旧资产保留供追溯，不作为当前版本的验收证据。
 
@@ -12,7 +12,7 @@
 
 `app/` 提供 18 个 REST 路由声明与 WS 模型，`proto/` 是 worker 可独立导入的共享协议，`contracts/` 保存生成 Schema、49 份有效样例和 TypeScript 类型。完整说明、安装与验证命令见 [contracts-v1.md](docs/contracts-v1.md)。
 
-合法业务调用目前返回 `503 BACKEND_NOT_CONFIGURED`，WS 关闭 1013；独立服务模块已实现，正式 HTTP/WS 绑定仍待 T14。当前可独立运行的前端 Mock 工作台见 [frontend README](../frontend/README.md)。
+默认 `app.main:app` 仍返回 `503 BACKEND_NOT_CONFIGURED`、WS 关闭 1013；实际业务通过独立的 `app.runtime:create_runtime_app` 入口启动，见 [正式运行说明](docs/runtime-api-v1.md)。当前可独立运行的前端 Mock 工作台见 [frontend README](../frontend/README.md)。
 
 ## T08 实际日志导入
 
@@ -29,7 +29,7 @@ env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_import.py \
   --output-dir outputs/t08/my-new-probe
 ```
 
-最后一个命令生成明确标注的合成 CSV，并实际解析/归档、核对哈希与夹爪方向及记录事件循环观测；输出目录必须不存在。真机样本已另行归档，夹爪标定和底盘语义仍待团队确认。HTTP 上传入口保持 503，等待 T14 接入，不以离线导入成功冒充端到端回放成功。
+最后一个命令生成明确标注的合成 CSV，并实际解析/归档、核对哈希与夹爪方向及记录事件循环观测；输出目录必须不存在。真机样本已另行归档，夹爪标定和底盘语义仍待团队确认。T14 配置运行入口已接入 HTTP 上传，上传后仍需显式 load 才激活回放。
 
 ## T09 确定性采样
 
@@ -86,7 +86,18 @@ env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_analysis.py \
   --isaac-python /home/xq/work/code/projects/r1pro/.venvs/isaacsim62/bin/python
 ```
 
-省略 SDK 参数可仅验证 CPU 导入与分析。本轮使用合成 fixture，真机原始样本与未确认标定保持原状。下一项 T14 将绑定正式 REST/WS、日志、会话、时间轴和分析服务。
+省略 SDK 参数可仅验证 CPU 导入与分析。本轮使用合成 fixture，真机原始样本与未确认标定保持原状。T14 已绑定正式 REST/WS、日志、会话、时间轴和分析服务。
+
+## T14 正式业务接口
+
+配置入口启动实际本机会话和媒体服务，提供完整 REST 播放控制与 WS 冻结快照、元数据重同步和有界背压。安装、环境变量、调用顺序、失败重载和复现命令见 [运行说明](docs/runtime-api-v1.md)，证据见 [T14 验证](docs/validation/t14-status.md)。
+
+```bash
+ISAACSIM_PYTHON=/home/xq/work/code/projects/r1pro/.venvs/isaacsim62/bin/python \
+  bash scripts/run_backend.sh
+```
+
+默认监听 `127.0.0.1:8000`。正式前端媒体配对仍在 T15；不要将 P0 video-only 观察结果当作正式工作台验收。
 
 ## 当前浏览器实验入口
 

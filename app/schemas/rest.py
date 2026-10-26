@@ -1,8 +1,8 @@
-"""REST data contracts only; catalogs, parsing, playback and workers are not implemented.
+"""REST data contracts shared by configured runtime and unconfigured contract app.
 
 All arrays use replay_protocol.CANONICAL_JOINTS. Limits are supplied from the
 versioned robot common config, preserving each entry's provenance. HTTP 400 is
-request validation, while 422 is reserved for a future fatal log-content parse.
+request validation, while 422 is reserved for a fatal log-content parse.
 """
 from __future__ import annotations
 
