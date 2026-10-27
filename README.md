@@ -1,6 +1,8 @@
 # 机器人日志回放平台后端
 
-首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。当前开发到 T15：已具备前端 Mock 工作台、导入/采样/时间轴、真实 worker/ZMQ、会话和媒体网关、限位/历史事件/保峰曲线，以及正式 REST/WS 业务绑定。正式前端已接入真实媒体并完成同帧画布联调，见 [T15 记录](../frontend/docs/validation/t15-status.md)。
+首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。当前开发到 T16：已具备正式 REST/WS、真实媒体同帧工作台，以及 B041 真机日志专用适配、来源质量与标注展示。T15 的合成日志同帧验证保留在 [T15 记录](../frontend/docs/validation/t15-status.md)。
+
+**T16 使用入口：[B041 回放与暂定映射](docs/b041-replay-v1.md)。** 两份离线、live 与 Rim 已通过本地核对和真实 SDK/UI 回放；可直接上传 `data/real_logs/derived/<source_id>/b041_ee2_body_velocity_v1/recording.b041`，并提供同目录的 `mapping.json`。用户已授权夹爪/底盘采用明确的暂定假设，四个指关节与积分轨迹标为推算；原始 27 个文件和 catalog 保持不变。完整 MCAP、实物精确标定及 T17 长测仍待完成。下方 T08～T15 内容保留各阶段历史入口，当前真机数据能力以 T16 说明为准。
 
 当前结果见 [6.2 验证记录](docs/validation/p0-isaac62-status.md)。[5.1 验证记录](docs/validation/p0-isaac51-status.md)与旧资产保留供追溯，不作为当前版本的验收证据。
 
@@ -10,7 +12,7 @@
 
 ## P1 接口契约
 
-`app/` 提供 18 个 REST 路由声明与 WS 模型，`proto/` 是 worker 可独立导入的共享协议，`contracts/` 保存生成 Schema、49 份有效样例和 TypeScript 类型。完整说明、安装与验证命令见 [contracts-v1.md](docs/contracts-v1.md)。
+`app/` 提供 REST 路由与 WS 模型（T04 的 18 个路由加上 T16 标注查询，共 19 个），`proto/` 是 worker 可独立导入的共享协议，`contracts/` 保存生成 Schema、样例和 TypeScript 类型。完整说明、安装与验证命令见 [contracts-v1.md](docs/contracts-v1.md)。
 
 默认 `app.main:app` 仍返回 `503 BACKEND_NOT_CONFIGURED`、WS 关闭 1013；实际业务通过独立的 `app.runtime:create_runtime_app` 入口启动，见 [正式运行说明](docs/runtime-api-v1.md)。当前可独立运行的前端 Mock 工作台见 [frontend README](../frontend/README.md)。
 

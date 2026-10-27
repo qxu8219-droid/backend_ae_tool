@@ -34,35 +34,39 @@
 
 Ownership: `scripts/prepare_b041.py`（可拆focused helper）、`tests/b041/test_prepare.py`；接口见bundlecontract。
 
-- [ ] RED/GREEN真实Parquet列选择、ns字符串、6组质量、源hash、精确侧车对齐、runtime事件白名单、只读/拒绝覆盖。
-- [ ] 原文件27个hash复核；实际472/762行和live39/25、Rim88/206取样验证，输出本地新目录；不把hold/home视为连续轨迹。
-- [ ] 针对性测试与独立工具环境Parquet分支验证通过，提交。
+- [x] RED/GREEN真实Parquet列选择、ns字符串、6组质量、源hash、精确侧车对齐、runtime事件白名单、只读/拒绝覆盖。
+- [x] 原文件27个hash复核；实际472/762行和live39/25、Rim88/206取样验证，输出本地新目录；不把hold/home视为连续轨迹。
+- [x] 针对性测试与独立工具环境Parquet分支验证通过，提交。
 
 ## Task 2: 底盘质量贯通（并行B）
 
 Ownership: `proto/replay_protocol/models.py`、`app/replay/interpolator.py`质量部分、`sim_worker/`必要读回、delivery质量屏障、相关contracts/replay/worker测试。
 
-- [ ] RED/GREEN：ChassisPose增加可选3轴ChannelQuality（legacyNone）；采样→Target→readback→Rendered/SEI保留，伪造回执质量拒绝。
-- [ ] CPU测试及纯协议导入通过；主代理统一生成Schema/TS、检查SDK安装与前端拷贝。
+- [x] RED/GREEN：ChassisPose增加可选3轴ChannelQuality（legacyNone）；采样→Target→readback→Rendered/SEI保留，伪造回执质量拒绝。
+- [x] CPU测试及纯协议导入通过；主代理统一生成Schema/TS、检查SDK安装与前端拷贝。
 
 ## Task 3: 专用映射与导入（主代理）
 
 Files: `app/adapters/b041/`profile/model/reader/转换、`app/adapters/mapping.py`专用选项、registry注册`.b041`；`configs/mappings/b041_provisional_v1.json`；tests/b041。
 
-- [ ] RED/GREEN：临时夹爪端点/方向/不clamp/改参、body速度SE(2)积分及valid锁存、ns精度、basis隔离、原始自定义通道、无效组/过期/重复来源/稀疏gap。
-- [ ] 复用normalize_table建立通道/统计/问题/映射，后处理专用质量与元数据；重复来源保留前填，invalid有限数值不当有效。可读取数据与映射版本不依赖当前配置文件路径。
-- [ ] 同采样/分析选取源声明gap与服务上限；生成本地derived/<source>/<profile>，真实逐点CPU数值核对、rawhash不变；隔离HTTP实际导入通过。
+- [x] RED/GREEN：临时夹爪端点/方向/不clamp/改参、body速度SE(2)积分及valid锁存、ns精度、basis隔离、原始自定义通道、无效组/过期/重复来源/稀疏gap。
+- [x] 复用normalize_table建立通道/统计/问题/映射，后处理专用质量与元数据；重复来源保留前填，invalid有限数值不当有效。可读取数据与映射版本不依赖当前配置文件路径。
+- [x] 同采样/分析选取源声明gap与服务上限；生成本地derived/<source>/<profile>，真实逐点CPU数值核对、rawhash不变；隔离HTTP实际导入通过。
 
 ## Task 4: 标注接口与前端来源展示（可并行C，待模型就绪）
 
 Files: REST LogAnnotations/AnnotationSegment/RecordedEvent模型与路由；前端generated、APIclient、annotation store/component、同帧底盘质量标记、上传.b041识别和说明；相关测试。
 
-- [ ] RED/GREEN：按上传log返回assumptions/segments/events/reference；未知资源/错边界/无标注保持明确状态，生成契约与前端同步。
-- [ ] 临时假设在上传/工作台可见，fingerderived及3轴底盘quality通过已呈现帧驱动；当前段只由已呈现位置选择。历史列表/待审边界与当前告警分开。
-- [ ] 日志切换/重连/晚到查询不污染当前帧；Mock与原18接口回归不破坏，新增接口按需请求。
+- [x] RED/GREEN：按上传log返回assumptions/segments/events/reference；未知资源/错边界/无标注保持明确状态，生成契约与前端同步。
+- [x] 临时假设在上传/工作台可见，fingerderived及3轴底盘quality通过已呈现帧驱动；当前段只由已呈现位置选择。历史列表/待审边界与当前告警分开。
+- [x] 日志切换/重连/晚到查询不污染当前帧；Mock与原18接口回归不破坏，新增接口按需请求。
 
 ## Task 5: 真实数据SDK/UI验证、文档及审查
 
-- [ ] 本地两份Parquet和在线live/Rim全部可准备/导入/CPU核验；至少一份离线及一份在线数据在真实SDK、正式UI验证上传/播放/倍速/seek/单步/曲线/标注和假设质量。
-- [ ] 独立像素ID/CRC/文字与源值对照，记录手工关键样本数值/方向，原件hash与转换profile；无MCAP/精确标定的边界单独列出。
-- [ ] 后端/前端/契约/浏览器适当回归和一次最终独立审查；修复重要问题，更新todo/README/进度。精确标定待确认，不将临时适配说成实物精确验收。
+- [x] 本地两份Parquet和在线live/Rim全部可准备/导入/CPU核验；至少一份离线及一份在线数据在真实SDK、正式UI验证上传/播放/倍速/seek/单步/曲线/标注和假设质量。
+- [x] 独立像素ID/CRC/文字与源值对照，记录手工关键样本数值/方向，原件hash与转换profile；无MCAP/精确标定的边界单独列出。
+- [x] 后端/前端/契约/浏览器适当回归和一次最终独立审查；修复重要问题，更新todo/README/进度。精确标定待确认，不将临时适配说成实物精确验收。
+
+## 执行结论（2026-10-27）
+
+T16 暂定适配完成。四份真实来源逐点 CPU 核验和两轮 SDK/UI 验证通过，原件与 catalog hash 不变；最终 892 项后端、233 项前端、14 项既有 Chrome、90 项 P0 CPU、7 项独立准备工具、Schema/TS/build 通过。一次独立审查的两项 Important 已 RED→GREEN 修复，见 [验证记录](../validation/t16-status.md)。物理精确标定、同次完整 MCAP 和 T17 长测仍为后续范围，不阻塞已授权的暂定回放。
