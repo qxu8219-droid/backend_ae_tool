@@ -141,7 +141,8 @@ class ReplaySampler:
         if all(name in self._channels for name in ('chassis.x','chassis.y','chassis.yaw')):
             pose = [self._channels[name].sample(time) for name in ('chassis.x','chassis.y','chassis.yaw')]
             if all(value.quality.valid and value.value is not None for value in pose):
-                chassis = ChassisPose(x=pose[0].value,y=pose[1].value,yaw=pose[2].value)
+                chassis = ChassisPose(x=pose[0].value,y=pose[1].value,yaw=pose[2].value,
+                                      quality=tuple(value.quality for value in pose))
         try:
             return TargetFrame(session_id=self._session_id,log_id=self._log_id,playback_epoch=playback_epoch,
                 control_seq=control_seq,target_seq=target_seq,log_time_s=time,duration_s=self._duration,

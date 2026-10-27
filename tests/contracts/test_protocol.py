@@ -49,6 +49,29 @@ def test_protocol_import_and_valid_roundtrip():
     assert len(p.CANONICAL_JOINTS) == len(set(p.CANONICAL_JOINTS)) == 28
 
 
+def test_chassis_quality_roundtrip_preserves_axis_provenance_and_legacy_unknown():
+    p = protocol()
+    data = snapshot()
+    qualities = [dict(quality(), origin="derived", processing=["derived"],
+                      method=f"body_twist.{axis}.v1") for axis in ("x", "y", "yaw")]
+    data["chassis"]["quality"] = qualities
+    frame = p.FrameSnapshot.model_validate(data)
+    assert tuple(q.method for q in frame.chassis.quality) == (
+        "body_twist.x.v1", "body_twist.y.v1", "body_twist.yaw.v1")
+    assert p.FrameSnapshot.model_validate_json(frame.model_dump_json()) == frame
+    with pytest.raises(TypeError):
+        frame.chassis.quality[0] = p.ChannelQuality(**quality())
+    assert p.FrameSnapshot.model_validate(snapshot()).chassis.quality is None
+
+
+@pytest.mark.parametrize("count", [0, 1, 2, 4])
+def test_chassis_quality_requires_exactly_three_axes_when_present(count):
+    data = snapshot()
+    data["chassis"]["quality"] = [quality()] * count
+    with pytest.raises(ValidationError):
+        protocol().FrameSnapshot.model_validate(data)
+
+
 def test_render_identity_verification_cannot_be_invented_by_a_default():
     p=protocol()
     data=dict(target(),source_joints=[0.0]*28,applied_wall_s=999.0,

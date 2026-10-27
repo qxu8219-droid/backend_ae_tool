@@ -178,7 +178,8 @@ class Runtime62:
             raise RuntimeError('Articulation readback mismatch: '+str(errors))
         pose=None
         if frame.chassis is not None:
-            w,x,y,z=map(float,quat);pose={'x':float(xyz[0]),'y':float(xyz[1]),'yaw':math.atan2(2*(w*z+x*y),1-2*(y*y+z*z))}
+            w,x,y,z=map(float,quat);pose=frame.chassis.model_dump(mode='python')
+            pose.update(x=float(xyz[0]),y=float(xyz[1]),yaw=math.atan2(2*(w*z+x*y),1-2*(y*y+z*z)))
         payload=frame.model_dump(mode='python');payload.update(joints=read.tolist(),chassis=pose,source_joints=frame.joints,applied_wall_s=time.time())
         return AppliedFrame.model_validate(payload)
     def render(self,applied):

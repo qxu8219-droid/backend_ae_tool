@@ -79,6 +79,8 @@ class ChassisPose(ContractModel):
     y: FiniteNumber
     yaw: FiniteNumber
     frame: Literal["world"] = "world"
+    # x/y/yaw provenance; omitted legacy quality stays unknown, never measured.
+    quality: Annotated[tuple[ChannelQuality, ...], Field(min_length=3, max_length=3, strict=False)] | None = None
 
 
 class SessionIdentity(ContractModel):

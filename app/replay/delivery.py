@@ -166,6 +166,8 @@ class DeliveryTracker:
             "log_time_s", "duration_s", "progress", "source_sample_index", "state", "speed", "quality"
         )) or frame.source_joints != issued.joints:
             return False
+        if getattr(frame.chassis, 'quality', None) != getattr(issued.chassis, 'quality', None):
+            return False
         rendered = isinstance(frame, RenderedFrame)
         if rendered:
             if frame.capture_id <= self._capture_floor or (

@@ -101,9 +101,28 @@ def test_world_chassis_is_sampled_without_second_transform_and_wrapped_yaw_uses_
     assert frame.chassis is not None
     assert frame.chassis.x==3. and frame.chassis.y==0.
     assert frame.chassis.yaw==pytest.approx(math.pi)
-    assert set(frame.chassis.model_dump())=={'x','y','yaw','frame'}
+    assert frame.chassis.quality[0].processing==('interpolated',)
+    assert frame.chassis.quality[2].origin=='derived'
     channels['chassis.y']=series([0.,1.],[-1.,None],unit='m',semantics='linear')
     assert ReplaySampler(replay(channels,mapping=mapping),session_id='s').sample_at(.5).chassis is None
+
+
+def test_chassis_derived_quality_reaches_targets_without_becoming_measured():
+    channels={}
+    for axis,values in [('x',[0.,2.]),('y',[0.,4.]),('yaw',[0.,.4])]:
+        qualities=[{'origin':'derived','valid':True,'processing':['derived'],
+                    'source_indices':[index],'method':f'body_twist.{axis}.v1'} for index in [0,1]]
+        channels[f'chassis.{axis}']=series([0.,1.],values,
+            unit='rad' if axis=='yaw' else 'm',semantics='angular_unwrapped' if axis=='yaw' else 'linear',quality=qualities)
+    sampler=ReplaySampler(replay(channels),session_id='s')
+    first=sampler.sample_at(0.)
+    assert [q.method for q in first.chassis.quality]==['body_twist.x.v1','body_twist.y.v1','body_twist.yaw.v1']
+    middle=sampler.sample_at(.5)
+    assert (middle.chassis.x,middle.chassis.y,middle.chassis.yaw)==(1.,2.,.2)
+    assert all(q.origin=='derived' and q.processing==('derived','interpolated') and q.source_indices==(0,1)
+               for q in middle.chassis.quality)
+    assert all(q.origin=='missing' and not q.valid for q in middle.quality[:6])
+    assert TargetFrame.model_validate_json(middle.model_dump_json()).chassis.quality==middle.chassis.quality
 
 
 def test_accumulated_continuous_angles_are_preserved_and_explicit_wrapped_angle_is_lifted():

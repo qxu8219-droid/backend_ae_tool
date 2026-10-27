@@ -148,6 +148,8 @@ class WorkerEngine:
                 applied=AppliedFrame.model_validate(self.runtime.apply(frame))
                 if any(getattr(applied,key)!=getattr(frame,key) for key in ('session_id','log_id','target_seq','playback_epoch','control_seq','log_time_s','duration_s','progress','source_sample_index','state','speed','quality')) or applied.source_joints!=frame.joints:
                     raise RuntimeError('Runtime application did not identify its exact source target')
+                if getattr(applied.chassis,'quality',None)!=getattr(frame.chassis,'quality',None):
+                    raise RuntimeError('Runtime application changed chassis source quality')
                 self.last_sequence=frame.target_seq;self.floor=max(self.floor,frame.target_seq);self.held=applied
                 self._event({'type':'applied','frame':applied})
                 if pending:self._response(*pending,stage='applied',frame=applied)
@@ -156,6 +158,8 @@ class WorkerEngine:
                 rendered=RenderedFrame.model_validate(self.runtime.render(self.held))
                 if any(getattr(rendered,key)!=getattr(self.held,key) for key in ('session_id','log_id','target_seq','playback_epoch','control_seq','log_time_s','duration_s','progress','source_sample_index','state','speed','quality','source_joints')) or rendered.capture_id<=self.last_capture:
                     raise RuntimeError('Rendered evidence belongs to another target')
+                if getattr(rendered.chassis,'quality',None)!=getattr(self.held.chassis,'quality',None):
+                    raise RuntimeError('Rendered evidence changed chassis source quality')
                 self.last_capture=rendered.capture_id
                 self._event({'type':'rendered','frame':rendered})
                 if pending:self._response(*pending,stage='rendered',frame=rendered);self.pending=None

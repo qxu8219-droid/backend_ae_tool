@@ -188,6 +188,37 @@ def test_actual_readback_joints_and_chassis_may_differ_from_source():
     assert delivery.rendered_identity.capture_id == 1
 
 
+@pytest.mark.parametrize('capture', [None, 1])
+@pytest.mark.parametrize('change', ['missing', 'measured', 'method', 'unavailable', 'invented'])
+def test_receipt_cannot_replace_chassis_provenance(capture, change):
+    from replay_protocol import ChassisPose
+    qualities=[{'origin':'derived','valid':True,'processing':['derived'],
+                'source_indices':[4,5],'method':'body_twist.v1'}]*3
+    source=target().model_copy(update={'chassis':ChassisPose(x=1.,y=2.,yaw=.3,
+        quality=None if change=='invented' else qualities)})
+    chassis=source.chassis.model_dump()
+    if change=='missing':chassis['quality']=None
+    elif change in ('measured','invented'):
+        chassis['quality']=[{'origin':'measured','valid':True,'processing':['original']}]*3
+    elif change=='method':chassis['quality'][0]['method']='another_method.v1'
+    elif change=='unavailable':chassis=None
+    delivery,_=tracker();delivery.keyframe(source);delivery.take_rpc()
+    assert not delivery.receive_event(event(evidence(source,capture=capture,chassis=chassis)))
+    assert delivery.applied_position is None and delivery.critical_pending
+
+
+def test_derived_chassis_receipt_keeps_quality_with_actual_readback_values():
+    from replay_protocol import ChassisPose
+    qualities=[{'origin':'derived','valid':True,'processing':['derived'],
+                'source_indices':[4,5],'method':'body_twist.v1'}]*3
+    source=target().model_copy(update={'chassis':ChassisPose(x=1.,y=2.,yaw=.3,quality=qualities)})
+    delivery,_=tracker();delivery.keyframe(source);request=delivery.take_rpc()
+    chassis=source.chassis.model_dump();chassis.update(x=1.000001,y=1.999999,yaw=.300001)
+    assert delivery.receive_rpc(response(request,stage='rendered',
+        frame=evidence(source,capture=1,chassis=chassis)))
+    assert delivery.rendered_identity.capture_id==1
+
+
 @pytest.mark.parametrize("stage", ["accepted", "applied", "rendered"])
 def test_timeout_includes_prefix_wait_and_rejects_late_rpc(stage):
     delivery, clock = tracker()
