@@ -24,7 +24,7 @@ dev = ["httpx==0.28.1", "pytest==9.1.1", "jsonschema==4.26.0"]
 include = ["app*", "sim_worker*"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests/contracts", "tests/adapters", "tests/replay", "tests/worker", "tests/core", "tests/analysis", "tests/api", "tests/sync"]
+testpaths = ["tests/contracts", "tests/adapters", "tests/replay", "tests/worker", "tests/core", "tests/analysis", "tests/api", "tests/sync", "tests/b041"]
 addopts = "-q"
 
 [tool.setuptools.package-data]

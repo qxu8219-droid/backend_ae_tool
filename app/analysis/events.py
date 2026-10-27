@@ -22,6 +22,8 @@ class HistoryIndex:
             if max_gap_s <= 0:
                 raise AnalysisError('INVALID_MAX_GAP', 'max_gap_s must be positive')
         source = ReplayData.model_validate(data.model_dump(mode='python'))
+        from app.replay.gaps import effective_gap
+        max_gap_s = effective_gap(source.mapping_snapshot, max_gap_s)
         artifact = metadata or load_joint_metadata()
         meta = type(artifact.metadata).model_validate(artifact.metadata.model_dump(mode='python'))
         artifact = MetadataArtifact(meta, artifact.source_sha256)

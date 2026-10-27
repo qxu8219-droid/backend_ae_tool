@@ -19,6 +19,8 @@ class AdapterRegistry:
         self._suffixes = {}
         self.register("csv_v1", CSVAdapter(limits), suffixes=(".csv",))
         self.register("json_v1", JSONAdapter(limits), suffixes=(".json",))
+        from .b041.adapter import B041Adapter
+        self.register("b041_bundle_v1", B041Adapter(limits), suffixes=(".b041",))
 
     def register(self, name, adapter, suffixes=()):
         if not isinstance(name, str) or re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,63}", name) is None:

@@ -1,0 +1,46 @@
+{
+  "adapter": "b041_bundle_v1",
+  "b041": {
+    "profile_id": "b041_ee2_body_velocity_v1",
+    "status": "provisional",
+    "basis": "state",
+    "left_gripper": {
+      "native_closed": 0.0,
+      "native_open": 100.0,
+      "zero1_m": 0.0,
+      "zero2_m": 0.0,
+      "travel1_m": 0.05,
+      "travel2_m": -0.05
+    },
+    "right_gripper": {
+      "native_closed": 0.0,
+      "native_open": 100.0,
+      "zero1_m": 0.0,
+      "zero2_m": 0.0,
+      "travel1_m": 0.05,
+      "travel2_m": -0.05
+    },
+    "chassis": {
+      "mode": "auto",
+      "velocity_frame": "body",
+      "initial_pose": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "velocity_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "velocity_bias": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max_gap_s": 0.2
+    },
+    "max_source_age_s": 0.2,
+    "max_interpolation_gap_s": 0.25
+  }
+}

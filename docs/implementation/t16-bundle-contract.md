@@ -39,3 +39,16 @@ annotations.alignment=`source_frames|reference_only|none`。full23按精确sourc
 准备工具输出目录必须全新，包名`recording.b041`；同时输出manifest/QC与source hashes，不改原件。支持`prepare_b041.py parquet <file> --source-id <id> --annotations <json> --output-dir <new-dir>`及`runtime <run-dir> --output-dir <new-dir>`；PyArrow只在parquet分支惰性导入。没有同次MCAP，不补造raw wheel/steering/odometry。
 
 后端映射计划：`MappingConfig.b041`为可选专用配置，basis=state(default)|action；profile_id、status=provisional、左右独立native_closed/open/zero1/2/travel1/2；默认0/100、0/0、+0.05/-0.05m，不静默clamp。gripper结果derived，原native scalar作为自定义通道保留。chassis.mode=auto|integrate_body|unavailable；auto仅离线state轨迹积分；body vx/vy/wz、初值0、最大源age0.2s和积分gap0.2s，遇无效/过期/缺口累计valid永久中断，不重锚拼接。六个底盘关节仍missing，虚拟轮角默认关闭。运行时最大插值gap默认0.25s，同采样与分析使用。
+
+## 运行时标注接口（Task4独立所有权）
+
+新增`GET /api/v1/sessions/{sid}/logs/{lid}/annotations`返回`LogAnnotations`：
+
+- `log_id: Identifier`；`source_id: Identifier|null`；`source_sha256: str|null`；`alignment: source_frames|reference_only|none`。
+- `provisional: bool`；`assumptions: list[str]`；`reference: dict[str,JsonValue]`。
+- `segments: list[AnnotationSegment]`：`id, start_s, end_s, start_frame, end_frame, label, review_status, boundary_status, training_approved, details`。start/end秒为相对所选回放起点，半开；start_frame/end_frame为原数据帧号；review/boundary状态用str（缺时unknown），training_approved为bool|null，details保留来源。
+- `events: list[RecordedEvent]`：`id, time_s: NonnegativeNumber|null, kind: str, message: str, details: dict`。time_s=null表示无法对齐/超出当前basis时间域，不能seek。
+
+adapter（主代理）把以上**除log_id**的对象放`ReplayData.metadata['log_annotations']`；service读取并补当前归档log_id，使用模型验证。不访问任何元数据路径或远端。普通CSV/JSON无该对象时返回alignment=none、空列表、provisional=false、source_id=null、source_sha256=data.raw_file_sha256。source_frames之外不得含可对齐segments。所有模型有有界字符串/列表和区间校验，错误以既有信封返回。
+
+前端新增API方法/loader/panel；只按已呈现帧的log_id/time选当前段，数据请求迟到不得覆盖新日志；显示临时假设、来源和待审状态，reference_only明确不能映射当前run。新ChassisPose.quality已有3轴质量，renderer据同帧质量显示推算/暂定，不从最新WS状态猜测。`.b041`后缀允许上传并由后端自动选择parser；现有Mock对标注接口返回无标注响应，保留旧用例行为。

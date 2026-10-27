@@ -63,6 +63,8 @@ class ReplaySampler:
             mapping = parse_mapping(source.mapping_snapshot)
         except (ValidationError, MappingError, AttributeError, ValueError) as exc:
             raise SamplingError('INVALID_REPLAY_DATA', 'Replay source or mapping is invalid') from exc
+        from .gaps import effective_gap
+        max_gap_s = effective_gap(source.mapping_snapshot, max_gap_s)
         self._session_id = session_id
         self._log_id = source.log_id
         self._source_origin = source.time_basis.relative_origin_s

@@ -5,6 +5,7 @@ from typing import Annotated, Literal
 from pydantic import BeforeValidator, Field, StrictBool, StrictInt, ValidationError, model_validator
 from replay_protocol import CANONICAL_JOINTS, ContractModel, FiniteNumber, Identifier, SchemaVersion
 from .base import MappingError
+from .b041.profile import B041Profile
 
 PRISMATIC = frozenset(name for name in CANONICAL_JOINTS if 'gripper' in name)
 WHEEL_JOINTS = frozenset(f'wheel_motor_joint{i}' for i in range(1, 4))
@@ -123,6 +124,7 @@ class MappingConfig(ContractModel):
     custom_channels: dict[Identifier, CustomChannel] = Field(default_factory=dict)
     virtual_channels: VirtualChannelsConfig = Field(default_factory=VirtualChannelsConfig)
     options: ImportOptions = Field(default_factory=ImportOptions)
+    b041: B041Profile | None = None
 
     @model_validator(mode='after')
     def unique_channel_names(self):
