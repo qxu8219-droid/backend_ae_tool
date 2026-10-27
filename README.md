@@ -1,6 +1,6 @@
 # 机器人日志回放平台后端
 
-首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。当前开发到 T14：已具备前端 Mock 工作台、导入/采样/时间轴、真实 worker/ZMQ、会话和媒体网关、限位/历史事件/保峰曲线，以及正式 REST/WS 业务绑定。正式前端实际媒体接入进入 T15。
+首期基线现为 **Isaac Sim 6.2.0 / Python 3.12 / PhysX**，使用对应的 6.x USD。服务器后续需要部署同一运行环境；只替换 USD 不能替代运行时升级。当前开发到 T15：已具备前端 Mock 工作台、导入/采样/时间轴、真实 worker/ZMQ、会话和媒体网关、限位/历史事件/保峰曲线，以及正式 REST/WS 业务绑定。正式前端已接入真实媒体并完成同帧画布联调，见 [T15 记录](../frontend/docs/validation/t15-status.md)。
 
 当前结果见 [6.2 验证记录](docs/validation/p0-isaac62-status.md)。[5.1 验证记录](docs/validation/p0-isaac51-status.md)与旧资产保留供追溯，不作为当前版本的验收证据。
 
@@ -97,7 +97,19 @@ ISAACSIM_PYTHON=/home/xq/work/code/projects/r1pro/.venvs/isaacsim62/bin/python \
   bash scripts/run_backend.sh
 ```
 
-默认监听 `127.0.0.1:8000`。正式前端媒体配对仍在 T15；不要将 P0 video-only 观察结果当作正式工作台验收。
+默认监听 `127.0.0.1:8000`。T14 的 P0 video-only 观察只是该阶段证据；正式工作台的同帧呈现现已由 T15 单独验证。
+
+## T15 正式工作台验证
+
+前端 `VITE_USE_MOCK=false` 已通过 WHEP/WebCodecs 读取真实 SDK 图像，以实际像素 ID＋CRC 选择正式 SEI 快照，在同一 canvas 绘制图像、28关节、底盘、进度和曲线游标。运行步骤见 [真实媒体说明](../frontend/docs/real-media-v1.md)，结果见 [T15 验证](../frontend/docs/validation/t15-status.md)。
+
+```bash
+env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_frontend.py \
+  --output-dir outputs/t15/my-new-validation \
+  --isaac-python /home/xq/work/code/projects/r1pro/.venvs/isaacsim62/bin/python
+```
+
+该脚本使用本地合成 command CSV，实际操作网页、核对画布、注入延迟与 worker 故障，并清理本次服务。它不访问真机或服务器。下一项 T16 继续真实数据专用适配；原始资料、尚未确认的夹爪/底盘语义保持原状。
 
 ## 当前浏览器实验入口
 
