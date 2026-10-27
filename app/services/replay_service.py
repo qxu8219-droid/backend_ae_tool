@@ -10,6 +10,7 @@ from app.core.session_manager import SessionError
 from app.schemas.rest import LogAnnotations, RESTPlaybackResponse, Scene, SceneList, Robot, RobotList, USDVariant
 from app.sync.outbox import Outbox
 from .prepared import prepare_log
+from .annotation_bounds import source_frame_end_s
 from .replay_session import ReplaySession
 from replay_protocol.limits import finite
 
@@ -132,8 +133,11 @@ class ReplayService:
             times = data.sample_times_s
             duration = times[-1]
             terminal_interval = times[-1] - times[-2] if len(times) > 1 else 0.
+            end_bound = source_frame_end_s(data) if result.segments else None
+            if end_bound is None:
+                end_bound = duration + terminal_interval
             tolerance = 1e-8
-            if any(segment.start_s > duration + tolerance or segment.end_s > duration + terminal_interval + tolerance
+            if any(segment.start_s > duration + tolerance or segment.end_s > end_bound + tolerance
                    for segment in result.segments):
                 raise ValueError('annotation time lies outside the source domain')
             source = data.metadata.get('b041', {})

@@ -104,3 +104,16 @@ def test_safe_component_rejects_traversal_and_destination_reuse(tmp_path):
     assert module.safe_component("B041-safe_2026") == "B041-safe_2026"
     with pytest.raises(FileExistsError):
         module.new_directory(tmp_path)
+
+
+def test_comparison_checks_regressed_velocity_source_clock(tmp_path):
+    module = validator()
+    value = bundle()
+    value['samples'][2]['state_quality'][4].update(
+        source_time=str(int(value['samples'][0]['time']) + 50000000), age_s=.15)
+    path = tmp_path / 'recording.b041'
+    path.write_text(json.dumps(value))
+    data = AdapterRegistry().load(path, profile())
+    report = module.compare_recording(value, data, profile())
+    assert report['trajectory']['valid_samples'] == 2
+    assert report['trajectory']['invalid_latched_samples'] == 1

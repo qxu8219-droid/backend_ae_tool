@@ -202,6 +202,14 @@ def compare_recording(recording, data, mapping):
         observed = [r["state"] is not None and all(v is not None for v in velocity) and
                     observed_valid(recording, r, "state", 4, profile["max_source_age_s"])
                     for r, velocity in zip(selected, velocities)]
+        # A numerically fresh row can still be a late delivery from an older
+        # sensor sample. Such a discontinuity invalidates the cumulative path.
+        accepted_stamps = []
+        for index, record in enumerate(selected):
+            if observed[index]:
+                stamp = Decimal(record['state_quality'][4]['source_time'])
+                observed[index] = not accepted_stamps or stamp >= accepted_stamps[-1]
+                if observed[index]: accepted_stamps.append(stamp)
         pose_expected, pose_valid = oracle_pose(times, velocities, observed, profile["chassis"])
         for j, axis in enumerate(("x", "y", "yaw")):
             series = data.channels["chassis."+axis]

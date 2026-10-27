@@ -14,10 +14,10 @@ def payload():
             training_approved=False, details={})], events=[])
 
 
-def build_service(value=None):
+def build_service(value=None, *, replay_data=None):
     # Only the archive I/O and process-owning context are substituted; the query
     # still exercises real validation, scope checks and boundary enforcement.
-    data = SimpleNamespace(metadata={} if value is None else {'log_annotations': value, 'b041': {'source_frame_count': 3}},
+    data = replay_data or SimpleNamespace(metadata={} if value is None else {'log_annotations': value, 'b041': {'source_frame_count': 3}},
         raw_file_sha256='b' * 64, sample_times_s=[0., .1, .2])
     service = object.__new__(ReplayService)
     context = SimpleNamespace(closed=False)
@@ -94,3 +94,65 @@ def test_annotation_http_route_returns_fallback_and_bounded_resource_errors():
             'message': 'Stored annotations violate their contract or source bounds', 'details': {}}}
     finally:
         client.close()
+
+
+def test_action_basis_without_final_sample_keeps_complete_source_annotation_end(tmp_path):
+    from tests.b041.test_adapter import bundle, load
+    value = bundle()
+    value['samples'][-1]['action'] = value['samples'][-1]['action_quality'] = None
+    data = load(tmp_path, value, {'b041': {'basis': 'action'}})
+    assert data.sample_times_s == [0., .1]
+    assert data.metadata['log_annotations']['segments'][0]['end_s'] == .3
+    result = query(build_service(replay_data=data))
+    assert result.segments[0].start_s == 0.
+    assert result.segments[0].end_s == .3
+    assert (result.segments[0].start_frame, result.segments[0].end_frame) == (0, 3)
+
+
+@pytest.mark.parametrize('mutation', [
+    'count', 'count_bool', 'missing_samples', 'frame_order', 'frame_bool', 'time_order',
+    'nonfinite_time', 'fractional_ns', 'overflow_time', 'numeric_time', 'wrong_unit',
+    'wrong_format', 'wrong_clock', 'missing_origin', 'nonfinite_origin', 'origin_not_sample',
+    'selected_grid_not_source', 'wrong_source_id', 'wrong_source_hash',
+])
+def test_complete_source_metadata_must_be_valid_before_extending_annotation_bounds(tmp_path, mutation):
+    from tests.b041.test_adapter import load
+    data = load(tmp_path)
+    source = data.metadata['b041']
+    if mutation == 'count': source['source_frame_count'] = 4
+    elif mutation == 'count_bool': source['source_frame_count'] = True
+    elif mutation == 'missing_samples': source.pop('samples')
+    elif mutation == 'frame_order': source['samples'][1]['frame_index'] = 0
+    elif mutation == 'frame_bool': source['samples'][1]['frame_index'] = True
+    elif mutation == 'time_order': source['samples'][1]['time'] = source['samples'][0]['time']
+    elif mutation == 'nonfinite_time': source['samples'][1]['time'] = 'NaN'
+    elif mutation == 'fractional_ns': source['samples'][1]['time'] += '.5'
+    elif mutation == 'overflow_time': source['samples'][-1]['time'] = '1e999999'
+    elif mutation == 'numeric_time': source['samples'][1]['time'] = int(source['samples'][1]['time'])
+    elif mutation == 'wrong_unit': source['source']['time_unit'] = 's'
+    elif mutation == 'wrong_format': source['source']['format'] = 'runtime_events'
+    elif mutation == 'wrong_clock': source['source']['clock'] = 'run_monotonic_event_time'
+    elif mutation == 'missing_origin': data.metadata.pop('source_origin_exact_s')
+    elif mutation == 'nonfinite_origin': data.metadata['source_origin_exact_s'] = 'Infinity'
+    elif mutation == 'origin_not_sample': data.metadata['source_origin_exact_s'] = '1800000000.050000001'
+    elif mutation == 'selected_grid_not_source': data.sample_times_s[1] = .11
+    elif mutation == 'wrong_source_id': source['source']['id'] = 'unrelated-source'
+    elif mutation == 'wrong_source_hash': source['source']['sha256'] = 'c' * 64
+    with pytest.raises(SessionError) as caught:
+        query(build_service(replay_data=data))
+    assert caught.value.status_code == 422 and caught.value.code == 'INVALID_LOG_ANNOTATIONS'
+
+
+@pytest.mark.parametrize('mutation', ['segment_end', 'segment_start', 'event_time'])
+def test_full_source_end_does_not_relax_selected_start_or_event_bounds(tmp_path, mutation):
+    from tests.b041.test_adapter import bundle, load
+    value = bundle()
+    value['samples'][-1]['action'] = value['samples'][-1]['action_quality'] = None
+    data = load(tmp_path, value, {'b041': {'basis': 'action'}})
+    annotations = data.metadata['log_annotations']
+    if mutation == 'segment_end': annotations['segments'][0]['end_s'] = .31
+    elif mutation == 'segment_start': annotations['segments'][0]['start_s'] = .15
+    else: annotations['events'] = [dict(id='outside-action', time_s=.15, kind='feedback', message='', details={})]
+    with pytest.raises(SessionError) as caught:
+        query(build_service(replay_data=data))
+    assert caught.value.status_code == 422 and caught.value.code == 'INVALID_LOG_ANNOTATIONS'

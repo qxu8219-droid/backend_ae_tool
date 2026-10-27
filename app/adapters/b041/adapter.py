@@ -4,7 +4,7 @@ from decimal import Decimal, InvalidOperation, localcontext
 from pathlib import Path
 from pydantic import ValidationError
 
-from app.adapters.base import AdapterError, LimitError, ParseLimits, RawColumn, RawTable
+from app.adapters.base import AdapterError, LimitError, MappingError, ParseLimits, RawColumn, RawTable
 from app.adapters.mapping import MappingConfig, parse_mapping
 from app.adapters.normalize import normalize_table
 from replay_protocol import CANONICAL_JOINTS, ChannelQuality, ReplayData
@@ -84,6 +84,14 @@ class B041Adapter:
         if can_integrate:
             velocities = [list(record.state[16:19]) if record.state is not None else [None] * 3 for record in records]
             valid = [record.state is not None and all(value is not None for value in velocity) and source_valid(recording, record, 4, 'state', profile) for record, velocity in zip(records, velocities)]
+            previous_source = None
+            for index, record in enumerate(records):
+                if not valid[index]: continue
+                source_time = Decimal(record.state_quality[4].source_time)
+                if previous_source is not None and source_time < previous_source:
+                    valid[index] = False
+                else:
+                    previous_source = source_time
             positions, pose_valid = integrate_pose(times, velocities, valid, profile.chassis)
             for index, axis in enumerate(('x', 'y', 'yaw')):
                 columns['pose_' + axis] = RawColumn([pose[index] for pose in positions], timestamps=[record.time for record in records], lines=[record.row for record in records])
@@ -107,6 +115,12 @@ class B041Adapter:
             chassis={'available': can_integrate, 'map': {'x': 'pose_x', 'y': 'pose_y', 'yaw': 'pose_yaw'}, 'yaw_semantics': 'angular_unwrapped'},
             custom_channels=raw_custom, options={'max_forward_fill_s': 0., 'resample': 'none', 'unwrap_continuous': False})
         mapping = MappingConfig.model_validate(effective)
+        defaults = MappingConfig()
+        for name in ('timestamp', 'joints', 'chassis', 'custom_channels', 'options'):
+            # Accept an unchanged exported mapping as well as a small b041-only
+            # profile. Never silently discard an operator's generic override.
+            if getattr(requested, name) not in (getattr(defaults, name), getattr(mapping, name)):
+                raise MappingError(f'B041 source fields are fixed; configure conversion with b041, not {name}')
         data = normalize_table(RawTable(columns, 'b041.recording.v1'), Path(path), mapping, limits=self.limits, parser='b041_bundle_v1')
         payload = data.model_dump(mode='json'); channels = payload['channels']
         counters = Counter()
@@ -145,6 +159,31 @@ class B041Adapter:
                     channels['chassis.' + axis]['quality'][position] = ChannelQuality(origin='derived', valid=pose_valid[index], processing=['derived'],
                         source_indices=[index], method=f'b041.{profile.status}.se2_{profile.chassis.velocity_frame}_velocity.v1').model_dump(mode='json')
         metadata = payload['metadata']
+        # The generic normalizer saw an intermediate SI table. Replace its
+        # placeholder origins with the actual recording-to-output derivations.
+        steps = {}
+        for name, (_selected, basis, group, method) in contexts.items():
+            if name in JOINT_INDEX: index = JOINT_INDEX[name]
+            elif 'gripper_finger' in name: index = 14 if name.startswith('left_') else 15
+            else: index = RAW_NAMES.index(name.split('.', 2)[2])
+            step = {'field': f'{basis}[{index}]', 'group': group, 'unit': channels[name]['unit'],
+                'origin': 'derived' if method else 'measured' if basis == 'state' else 'commanded',
+                'input_origin': 'measured' if basis == 'state' else 'commanded',
+                'source_unit': 'native_opening' if index in (14, 15) else 'm/s' if index in (16, 17) else 'rad/s' if index == 18 else 'rad',
+                'method': method or 'b041.recorded_scalar.v1'}
+            if method:
+                step['formula'] = 'zero_finger_m + (native - native_closed) / (native_open - native_closed) * travel_finger_m'
+                step['calibration'] = getattr(profile, 'left_gripper' if index == 14 else 'right_gripper').model_dump(mode='json')
+            steps[name] = step
+        if can_integrate:
+            for axis in ('x', 'y', 'yaw'):
+                steps['chassis.' + axis] = {'field': 'state[16:19]', 'group': 4, 'origin': 'derived', 'input_origin': 'measured',
+                    'source_units': ['m/s', 'm/s', 'rad/s'], 'unit': 'rad' if axis == 'yaw' else 'm',
+                    'method': f'b041.{profile.status}.se2_{profile.chassis.velocity_frame}_velocity.v1',
+                    'dependency': 'all valid source intervals from the initial pose to this sample; left-held velocities',
+                    'parameters': profile.chassis.model_dump(mode='json')}
+        metadata['conversion_steps'] = steps
+        metadata['composite_sources'] = {}
         for descriptor in metadata['channel_descriptors']:
             qualities = [ChannelQuality.model_validate(value) for value in channels[descriptor['name']]['quality']]
             chosen = next((quality for quality in qualities if quality.valid), qualities[0])
@@ -157,6 +196,9 @@ class B041Adapter:
         mapped = [name for name in CANONICAL_JOINTS if any(quality['valid'] for quality in channels[name]['quality'])]
         if not mapped: raise AdapterError('NO_JOINT_CHANNELS', 'Selected B041 basis has no valid canonical joint observations')
         metadata['stats']['joints_mapped'] = mapped; metadata['stats']['joints_missing'] = [name for name in CANONICAL_JOINTS if name not in mapped]
+        pose_available = can_integrate and any(quality['valid'] for quality in channels['chassis.x']['quality'])
+        metadata['stats']['chassis']['available'] = bool(pose_available)
+        metadata['stats']['chassis']['frame'] = 'world' if pose_available else None
         metadata['issues'].extend(notes)
         if len(metadata['issues']) > self.limits.max_issues: raise LimitError('B041 diagnostics exceed issue budget')
         metadata['b041'] = {'source': recording.source.model_dump(mode='json'), 'profile': profile.model_dump(mode='json'),

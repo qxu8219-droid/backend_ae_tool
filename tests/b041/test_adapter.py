@@ -48,6 +48,9 @@ def test_default_provisional_mapping_keeps_raw_values_and_precise_ns_clock(tmp_p
     assert not any(q.valid for q in data.channels['wheel_motor_joint1'].quality)
     assert data.metadata['log_annotations']['segments'][0]['end_s'] == .3
     assert not data.metadata['log_annotations']['segments'][0]['training_approved']
+    step = data.metadata['conversion_steps']['left_gripper_finger_joint1']
+    assert step['origin'] == 'derived' and step['field'] == 'state[14]' and step['source_unit'] == 'native_opening'
+    assert data.metadata['conversion_steps']['chassis.x']['origin'] == 'derived'
 
 
 def test_basis_does_not_replace_invalid_actions_with_feedback(tmp_path):
@@ -69,6 +72,15 @@ def test_side_specific_calibration_changes_mapping_identity_without_clamping(tmp
     assert second.mapping_snapshot_id != first.mapping_snapshot_id
 
 
+def test_saved_mapping_roundtrips_but_ignored_generic_overrides_are_rejected(tmp_path):
+    first = load(tmp_path)
+    second = load(tmp_path, config=first.mapping_snapshot)
+    assert second.mapping_snapshot_id == first.mapping_snapshot_id
+    with pytest.raises(AdapterError) as error:
+        load(tmp_path, config={'joints': {'per_joint_overrides': {'left_arm_joint1': {'scale': 2.}}}})
+    assert error.value.status_code == 400
+
+
 def test_body_velocity_is_provisional_pose_and_invalidity_latches_after_gap(tmp_path):
     data = load(tmp_path)
     assert data.channels['chassis.x'].values == pytest.approx([0., .1, .2])
@@ -78,6 +90,35 @@ def test_body_velocity_is_provisional_pose_and_invalidity_latches_after_gap(tmp_
     invalid = load(tmp_path, raw)
     assert [q.valid for q in invalid.channels['chassis.x'].quality] == [True, False, False]
     assert ReplaySampler(invalid, session_id='s').sample_at(.2).chassis is None
+
+
+def test_no_valid_integrated_pose_does_not_advertise_chassis_availability(tmp_path):
+    raw = bundle(); raw['samples'][0]['state_quality'][4]['valid'] = False
+    data = load(tmp_path, raw)
+    assert data.metadata['stats']['chassis']['available'] is False
+    assert data.metadata['stats']['chassis']['frame'] is None
+    assert not any(quality.valid for quality in data.channels['chassis.x'].quality)
+
+
+@pytest.mark.parametrize('basis', ['state', 'action'])
+def test_regressed_velocity_source_clock_invalidates_pose_without_reanchoring(tmp_path, basis):
+    raw = bundle(); raw['annotations'].update(alignment='none', segments=[])
+    recovered = copy.deepcopy(raw['samples'][-1])
+    recovered.update(time=str(int(raw['samples'][0]['time']) + 300000000), row=4, frame_index=3)
+    for role in ('state', 'action'):
+        for quality in recovered[role + '_quality']:
+            if quality['valid']: quality.update(source_time=recovered['time'], age_s=0.)
+    raw['samples'].append(recovered)
+    raw['samples'][2]['state_quality'][4].update(
+        source_time=str(int(raw['samples'][0]['time']) + 50000000), age_s=.15)
+    data = load(tmp_path, raw, {'b041': {'basis': basis}})
+    assert [q.valid for q in data.channels['raw.state.base_vx'].quality] == [True, True, False, True]
+    assert [q.valid for q in data.channels['chassis.x'].quality] == [True, True, False, False]
+    assert data.channels['chassis.x'].values == pytest.approx([0., .1, .1, .1])
+    sampler = ReplaySampler(data, session_id='s')
+    assert sampler.sample_at(.1).chassis is not None
+    assert sampler.sample_at(.2).chassis is None
+    assert sampler.sample_at(.3).chassis is None
 
 
 def test_runtime_locked_base_and_sparse_feedback_remain_unavailable(tmp_path):
