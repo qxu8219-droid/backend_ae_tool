@@ -109,6 +109,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/sessions/{sid}/logs/{lid}/annotations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Annotations */
+        get: operations["get_annotations_api_v1_sessions__sid__logs__lid__annotations_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/sessions/{sid}/logs/{lid}/channels": {
         parameters: {
             query?: never;
@@ -306,6 +323,40 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /**
+         * AnnotationSegment
+         * @description Source labels, never promoted to confirmed robot state or approved training data.
+         */
+        AnnotationSegment: {
+            /**
+             * Boundary Status
+             * @default unknown
+             */
+            boundary_status?: string;
+            /** Details */
+            details?: {
+                [key: string]: components["schemas"]["JsonValue"];
+            };
+            /** End Frame */
+            end_frame: number;
+            /** End S */
+            end_s: number;
+            /** Id */
+            id: string;
+            /** Label */
+            label: string;
+            /**
+             * Review Status
+             * @default unknown
+             */
+            review_status?: string;
+            /** Start Frame */
+            start_frame: number;
+            /** Start S */
+            start_s: number;
+            /** Training Approved */
+            training_approved?: boolean | null;
+        };
         /** Body_upload_log_api_v1_sessions__sid__logs_post */
         Body_upload_log_api_v1_sessions__sid__logs_post: {
             /**
@@ -626,6 +677,32 @@ export interface components {
              */
             request_id?: string | null;
         };
+        /** LogAnnotations */
+        LogAnnotations: {
+            /**
+             * Alignment
+             * @enum {string}
+             */
+            alignment: "source_frames" | "reference_only" | "none";
+            /** Assumptions */
+            assumptions: string[];
+            /** Events */
+            events: components["schemas"]["RecordedEvent"][];
+            /** Log Id */
+            log_id: string;
+            /** Provisional */
+            provisional: boolean;
+            /** Reference */
+            reference: {
+                [key: string]: components["schemas"]["JsonValue"];
+            };
+            /** Segments */
+            segments: components["schemas"]["AnnotationSegment"][];
+            /** Source Id */
+            source_id: string | null;
+            /** Source Sha256 */
+            source_sha256: string | null;
+        };
         /** LogChannels */
         LogChannels: {
             /** Channels */
@@ -725,6 +802,21 @@ export interface components {
             playback_epoch: number;
             /** Request Id */
             request_id: string;
+        };
+        /** RecordedEvent */
+        RecordedEvent: {
+            /** Details */
+            details?: {
+                [key: string]: components["schemas"]["JsonValue"];
+            };
+            /** Id */
+            id: string;
+            /** Kind */
+            kind: string;
+            /** Message */
+            message: string;
+            /** Time S */
+            time_s: number | null;
         };
         /** Robot */
         Robot: {
@@ -1454,6 +1546,83 @@ export interface operations {
                 };
             };
             /** @description Fatal log-content parse failure; error.details.issues contains ParseIssue records. Never request validation. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Runtime is not configured, or the worker is unavailable/not ready. */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Other transport errors use the same error envelope. */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    get_annotations_api_v1_sessions__sid__logs__lid__annotations_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                sid: string;
+                lid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LogAnnotations"];
+                };
+            };
+            /** @description Invalid request syntax, parameters, fields, or non-finite numbers. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Requested scene, robot, session, log, or channel does not exist. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Stored annotation metadata violates its source bounds or contract. */
             422: {
                 headers: {
                     [name: string]: unknown;

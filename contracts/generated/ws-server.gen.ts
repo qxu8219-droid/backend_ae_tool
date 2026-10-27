@@ -200,6 +200,14 @@ export type ConnectionId3 = string;
 export type CaptureId1 = number;
 export type CapturedWallS = number;
 export type Frame = "world";
+export type Quality = [ChannelQuality, ChannelQuality, ChannelQuality] | null;
+export type Method = string | null;
+export type Origin = "measured" | "commanded" | "derived" | "missing";
+export type Processing = (
+  "original" | "unit_converted" | "interpolated" | "forward_filled" | "defaulted" | "derived"
+)[];
+export type SourceIndices = number[];
+export type Valid = boolean;
 export type X = number;
 export type Y = number;
 export type Yaw = number;
@@ -249,7 +257,7 @@ export type Progress = number;
  * @minItems 28
  * @maxItems 28
  */
-export type Quality = [
+export type Quality1 = [
   ChannelQuality,
   ChannelQuality,
   ChannelQuality,
@@ -279,13 +287,6 @@ export type Quality = [
   ChannelQuality,
   ChannelQuality
 ];
-export type Method = string | null;
-export type Origin = "measured" | "commanded" | "derived" | "missing";
-export type Processing = (
-  "original" | "unit_converted" | "interpolated" | "forward_filled" | "defaulted" | "derived"
-)[];
-export type SourceIndices = number[];
-export type Valid = boolean;
 export type RenderSeq1 = number;
 export type SchemaVersion5 = 1;
 export type SessionId5 = string;
@@ -559,7 +560,7 @@ export interface FrameSnapshot {
   log_time_s: LogTimeS1;
   playback_epoch: PlaybackEpoch3;
   progress: Progress;
-  quality: Quality;
+  quality: Quality1;
   render_seq: RenderSeq1;
   schema_version?: SchemaVersion5;
   session_id: SessionId5;
@@ -571,6 +572,7 @@ export interface FrameSnapshot {
 }
 export interface ChassisPose {
   frame?: Frame;
+  quality?: Quality;
   x: X;
   y: Y;
   yaw: Yaw;

@@ -25,6 +25,7 @@ ROUTES = [
     ("delete", "/sessions/s1", None, 204),
     ("post", "/sessions/s1/logs", "upload", 201),
     ("get", "/sessions/s1/logs/l1/channels", None, 200),
+    ("get", "/sessions/s1/logs/l1/annotations", None, 200),
     ("get", "/sessions/s1/logs/l1/curve?channels=joint1", None, 200),
     ("post", "/sessions/s1/playback/load", {"log_id": "l1"}, 200),
     ("post", "/sessions/s1/playback/play", {}, 200),
@@ -50,7 +51,7 @@ def test_valid_routes_report_unconfigured_instead_of_faking_success(client, meth
 def test_openapi_declares_all_routes_and_error_meanings(client):
     schema = client.get("/openapi.json").json()
     operations = [op for path, methods in schema["paths"].items() if path.startswith("/api/v1/") for method, op in methods.items() if method in {"get", "post", "delete"}]
-    assert len(operations) == 18
+    assert len(operations) == 19
     for op in operations:
         assert "400" in op["responses"] and "503" in op["responses"]
         for code in ("400", "404", "409", "413", "422", "503"):

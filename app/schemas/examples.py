@@ -61,4 +61,11 @@ def examples():
     result["playback_ack"] = {"schema": "RESTPlaybackResponse", "payload": {"request_id": "example-control", "control_seq": 2, "playback_epoch": 1, "ack_stage": "accepted", "playback": playback}}
     result["joint_metadata"] = {"schema": "JointMetadata", "payload": joint_meta}
     result["upload_result"] = {"schema": "UploadResult", "payload": {"log_id": "example-log", "parser": "csv_v1", "stats": {"sample_count": 2, "duration_s": 1.0, "nominal_rate_hz": 1.0, "joints_mapped": [CANONICAL_JOINTS[0]], "joints_missing": list(CANONICAL_JOINTS[1:]), "chassis": {"available": False}}, "issues": [{"severity": "warning", "code": "MISSING_JOINT", "line": None, "message": "Example has only one measured joint channel"}], "mapping_snapshot_id": "example-mapping", "mapping_snapshot": {"schema_version": 1, "timestamp": {"field": "time", "unit": "s"}, "joints": {"unit": "rad", "map": {CANONICAL_JOINTS[0]: "steer1"}}}, "raw_file_ref": "uploads/example-log/source.csv", "raw_file_sha256": "a" * 64, "channels": [{"name": CANONICAL_JOINTS[0], "label": "Steer 1", "kind": "joint", "unit": "rad", "source_field": "steer1", "joint_index": 0, "angle_semantics": "bounded", "quality": quality}]}}
+    result["log_annotations"] = {"schema": "LogAnnotations", "payload": {
+        "log_id": "example-log", "source_id": "example-source", "source_sha256": "a" * 64,
+        "alignment": "source_frames", "provisional": True, "assumptions": ["Example provisional calibration"],
+        "reference": {}, "segments": [{"id": "example-stage", "start_s": 0., "end_s": 1.,
+            "start_frame": 0, "end_frame": 2, "label": "Example stage", "review_status": "pending_review",
+            "boundary_status": "pending_review", "training_approved": False, "details": {}}],
+        "events": [{"id": "example-event", "time_s": None, "kind": "request", "message": "Historical diagnostic", "details": {}}]}}
     return result

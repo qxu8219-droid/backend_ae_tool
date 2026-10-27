@@ -93,6 +93,23 @@
           "title": "Frame",
           "type": "string"
         },
+        "quality": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/ChannelQuality"
+              },
+              "maxItems": 3,
+              "minItems": 3,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quality"
+        },
         "x": {
           "title": "X",
           "type": "number"

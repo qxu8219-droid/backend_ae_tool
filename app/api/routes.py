@@ -14,7 +14,7 @@ from pydantic import ValidationError
 
 from app.schemas import (
     ControlRequest, CreateSessionRequest, CurveQuery, CurveResponse, ErrorEnvelope,
-    JointMetadata, LoadRequest, LogChannels, PlaybackSnapshot, PlayRequest,
+    JointMetadata, LoadRequest, LogAnnotations, LogChannels, PlaybackSnapshot, PlayRequest,
     RESTPlaybackResponse, RobotList, SceneList, SeekRequest, SessionCreated,
     SessionStatus, SpeedRequest, StepRequest, UploadOptions, UploadResult, VideoInfo,
 )
@@ -130,6 +130,12 @@ async def upload_log(
 @router.get("/sessions/{sid}/logs/{lid}/channels", response_model=LogChannels, status_code=200)
 async def get_channels(sid: str, lid: str, request: Request):
     return await service(request).channels(sid, lid)
+
+
+@router.get("/sessions/{sid}/logs/{lid}/annotations", response_model=LogAnnotations, status_code=200,
+            responses={422: {"model": ErrorEnvelope, "description": "Stored annotation metadata violates its source bounds or contract."}})
+async def get_annotations(sid: str, lid: str, request: Request):
+    return await service(request).annotations(sid, lid)
 
 
 @router.get("/sessions/{sid}/logs/{lid}/curve", response_model=CurveResponse, status_code=200)

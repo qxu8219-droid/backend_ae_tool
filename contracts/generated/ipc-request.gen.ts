@@ -10,6 +10,14 @@ export type Cmd2 = "load_log";
 export type LogId = string;
 export type Cmd3 = "apply_keyframe";
 export type Frame = "world";
+export type Quality = [ChannelQuality, ChannelQuality, ChannelQuality] | null;
+export type Method = string | null;
+export type Origin = "measured" | "commanded" | "derived" | "missing";
+export type Processing = (
+  "original" | "unit_converted" | "interpolated" | "forward_filled" | "defaulted" | "derived"
+)[];
+export type SourceIndices = number[];
+export type Valid = boolean;
 export type X = number;
 export type Y = number;
 export type Yaw = number;
@@ -60,7 +68,7 @@ export type Progress = number;
  * @minItems 28
  * @maxItems 28
  */
-export type Quality = [
+export type Quality1 = [
   ChannelQuality,
   ChannelQuality,
   ChannelQuality,
@@ -90,13 +98,6 @@ export type Quality = [
   ChannelQuality,
   ChannelQuality
 ];
-export type Method = string | null;
-export type Origin = "measured" | "commanded" | "derived" | "missing";
-export type Processing = (
-  "original" | "unit_converted" | "interpolated" | "forward_filled" | "defaulted" | "derived"
-)[];
-export type SourceIndices = number[];
-export type Valid = boolean;
 export type SchemaVersion = 1;
 export type SessionId = string;
 export type SourceSampleIndex = number | null;
@@ -156,7 +157,7 @@ export interface TargetFrame {
   mode?: Mode;
   playback_epoch: PlaybackEpoch;
   progress: Progress;
-  quality: Quality;
+  quality: Quality1;
   schema_version?: SchemaVersion;
   session_id: SessionId;
   source_sample_index?: SourceSampleIndex;
@@ -166,6 +167,7 @@ export interface TargetFrame {
 }
 export interface ChassisPose {
   frame?: Frame;
+  quality?: Quality;
   x: X;
   y: Y;
   yaw: Yaw;

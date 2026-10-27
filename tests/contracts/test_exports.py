@@ -36,7 +36,7 @@ def test_export_includes_rest_and_independent_wire_contracts(tmp_path):
             'replay-data.schema.json','examples.json'}<=files
     document=json.loads((tmp_path/'openapi.json').read_text())
     methods={'get','post','delete','put','patch'}
-    assert sum(len(methods & set(operations)) for operations in document['paths'].values())==18
+    assert sum(len(methods & set(operations)) for operations in document['paths'].values())==19
     assert document['openapi'].startswith('3.1.')
     assert json.loads((tmp_path/'ws-server.schema.json').read_text())['discriminator']['propertyName']=='type'
     examples=json.loads((tmp_path/'examples.json').read_text())

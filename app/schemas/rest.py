@@ -234,6 +234,59 @@ class LogChannels(ContractModel):
     channels: list[ChannelDescriptor]
 
 
+AnnotationText = Annotated[str, Field(max_length=4096)]
+AnnotationStatus = Annotated[str, Field(min_length=1, max_length=128)]
+
+
+class AnnotationSegment(ContractModel):
+    """Source labels, never promoted to confirmed robot state or approved training data."""
+    id: Identifier
+    start_s: NonnegativeNumber
+    end_s: NonnegativeNumber
+    start_frame: SafeInt
+    end_frame: SafeInt
+    label: AnnotationText
+    review_status: AnnotationStatus = "unknown"
+    boundary_status: AnnotationStatus = "unknown"
+    training_approved: bool | None = None
+    details: dict[str, JsonValue] = Field(default_factory=dict, max_length=256)
+
+    @model_validator(mode="after")
+    def half_open_interval(self):
+        if self.start_s >= self.end_s or self.start_frame >= self.end_frame:
+            raise ValueError("annotation intervals must be nonempty and half-open")
+        return self
+
+
+class RecordedEvent(ContractModel):
+    id: Identifier
+    time_s: NonnegativeNumber | None
+    kind: AnnotationStatus
+    message: AnnotationText
+    details: dict[str, JsonValue] = Field(default_factory=dict, max_length=256)
+
+
+class LogAnnotations(ContractModel):
+    log_id: Identifier
+    source_id: Identifier | None
+    source_sha256: Annotated[str, Field(pattern=r"^[0-9a-f]{64}$")] | None
+    alignment: Literal["source_frames", "reference_only", "none"]
+    provisional: bool
+    assumptions: list[AnnotationText] = Field(max_length=128)
+    reference: dict[str, JsonValue] = Field(max_length=256)
+    segments: list[AnnotationSegment] = Field(max_length=10000)
+    events: list[RecordedEvent] = Field(max_length=10000)
+
+    @model_validator(mode="after")
+    def aligned_segments_and_unique_ids(self):
+        if self.segments and self.alignment != "source_frames":
+            raise ValueError("only source_frames alignment permits timeline segments")
+        for items in (self.segments, self.events):
+            if len({item.id for item in items}) != len(items):
+                raise ValueError("annotation and event ids must be unique within each collection")
+        return self
+
+
 def _csv_channels(value):
     if not isinstance(value, str):
         raise ValueError("channels must be a comma-separated string")
@@ -373,7 +426,7 @@ REST_MODELS = {model.__name__: model for model in (
     JointDescriptor, JointMetadata, WorkerStatus, IceServer, VideoInfo,
     CreateSessionRequest, SessionCreated, SessionStatus, ParseIssue,
     ChassisAvailability, UploadStats, ChannelDescriptor, UploadOptions,
-    UploadResult, LogChannels, CurveQuery, LimitInterval, CurvePoint,
+    UploadResult, LogChannels, AnnotationSegment, RecordedEvent, LogAnnotations, CurveQuery, LimitInterval, CurvePoint,
     CurveSeries, CurveResponse, ControlRequest, LoadRequest, PlayRequest,
     SeekRequest, StepRequest, SpeedRequest, RESTPlaybackResponse, PlaybackSnapshot,
 )}

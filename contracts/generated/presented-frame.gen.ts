@@ -7,6 +7,14 @@ export type SchemaVersion = 1;
 export type CaptureId = number;
 export type CapturedWallS = number;
 export type Frame = "world";
+export type Quality = [ChannelQuality, ChannelQuality, ChannelQuality] | null;
+export type Method = string | null;
+export type Origin = "measured" | "commanded" | "derived" | "missing";
+export type Processing = (
+  "original" | "unit_converted" | "interpolated" | "forward_filled" | "defaulted" | "derived"
+)[];
+export type SourceIndices = number[];
+export type Valid = boolean;
 export type X = number;
 export type Y = number;
 export type Yaw = number;
@@ -56,7 +64,7 @@ export type Progress = number;
  * @minItems 28
  * @maxItems 28
  */
-export type Quality = [
+export type Quality1 = [
   ChannelQuality,
   ChannelQuality,
   ChannelQuality,
@@ -86,13 +94,6 @@ export type Quality = [
   ChannelQuality,
   ChannelQuality
 ];
-export type Method = string | null;
-export type Origin = "measured" | "commanded" | "derived" | "missing";
-export type Processing = (
-  "original" | "unit_converted" | "interpolated" | "forward_filled" | "defaulted" | "derived"
-)[];
-export type SourceIndices = number[];
-export type Valid = boolean;
 export type RenderSeq = number;
 export type SchemaVersion1 = 1;
 export type SessionId = string;
@@ -155,7 +156,7 @@ export interface FrameSnapshot {
   log_time_s: LogTimeS;
   playback_epoch: PlaybackEpoch;
   progress: Progress;
-  quality: Quality;
+  quality: Quality1;
   render_seq: RenderSeq;
   schema_version?: SchemaVersion1;
   session_id: SessionId;
@@ -167,6 +168,7 @@ export interface FrameSnapshot {
 }
 export interface ChassisPose {
   frame?: Frame;
+  quality?: Quality;
   x: X;
   y: Y;
   yaw: Yaw;

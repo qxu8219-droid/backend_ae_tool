@@ -9,6 +9,14 @@ export type Type1 = "health";
 export type WallTimeS = number;
 export type AppliedWallS = number;
 export type Frame = "world";
+export type Quality = [ChannelQuality, ChannelQuality, ChannelQuality] | null;
+export type Method = string | null;
+export type Origin = "measured" | "commanded" | "derived" | "missing";
+export type Processing = (
+  "original" | "unit_converted" | "interpolated" | "forward_filled" | "defaulted" | "derived"
+)[];
+export type SourceIndices = number[];
+export type Valid = boolean;
 export type X = number;
 export type Y = number;
 export type Yaw = number;
@@ -59,7 +67,7 @@ export type Progress = number;
  * @minItems 28
  * @maxItems 28
  */
-export type Quality = [
+export type Quality1 = [
   ChannelQuality,
   ChannelQuality,
   ChannelQuality,
@@ -89,13 +97,6 @@ export type Quality = [
   ChannelQuality,
   ChannelQuality
 ];
-export type Method = string | null;
-export type Origin = "measured" | "commanded" | "derived" | "missing";
-export type Processing = (
-  "original" | "unit_converted" | "interpolated" | "forward_filled" | "defaulted" | "derived"
-)[];
-export type SourceIndices = number[];
-export type Valid = boolean;
 export type SchemaVersion = 1;
 export type SessionId = string;
 /**
@@ -187,7 +188,7 @@ export type Progress1 = number;
  * @minItems 28
  * @maxItems 28
  */
-export type Quality1 = [
+export type Quality2 = [
   ChannelQuality,
   ChannelQuality,
   ChannelQuality,
@@ -309,7 +310,7 @@ export interface AppliedFrame {
   mode?: Mode;
   playback_epoch: PlaybackEpoch;
   progress: Progress;
-  quality: Quality;
+  quality: Quality1;
   schema_version?: SchemaVersion;
   session_id: SessionId;
   source_joints: SourceJoints;
@@ -320,6 +321,7 @@ export interface AppliedFrame {
 }
 export interface ChassisPose {
   frame?: Frame;
+  quality?: Quality;
   x: X;
   y: Y;
   yaw: Yaw;
@@ -350,7 +352,7 @@ export interface RenderedFrame {
   mode?: Mode1;
   playback_epoch: PlaybackEpoch1;
   progress: Progress1;
-  quality: Quality1;
+  quality: Quality2;
   raw_identity_verified: RawIdentityVerified;
   render_seq: RenderSeq;
   schema_version?: SchemaVersion1;

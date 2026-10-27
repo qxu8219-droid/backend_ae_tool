@@ -2,10 +2,12 @@
 import asyncio
 import uuid
 
+from pydantic import ValidationError
+
 from app.analysis.metadata import load_joint_metadata
 from app.analysis.cursor import RenderedEventCursor
 from app.core.session_manager import SessionError
-from app.schemas.rest import RESTPlaybackResponse, Scene, SceneList, Robot, RobotList, USDVariant
+from app.schemas.rest import LogAnnotations, RESTPlaybackResponse, Scene, SceneList, Robot, RobotList, USDVariant
 from app.sync.outbox import Outbox
 from .prepared import prepare_log
 from .replay_session import ReplaySession
@@ -113,6 +115,38 @@ class ReplayService:
     async def channels(self, sid, lid):
         self.context(sid)
         return await self.logs.channels(sid, lid)
+
+    async def annotations(self, sid, lid):
+        context = self.context(sid)
+        data = await self.logs.get(sid, lid)
+        if context.closed:
+            raise SessionError(409, 'SESSION_STOPPING', 'Session closed during query')
+        if 'log_annotations' not in data.metadata:
+            return LogAnnotations(log_id=lid, source_id=None, source_sha256=data.raw_file_sha256,
+                alignment='none', provisional=False, assumptions=[], reference={}, segments=[], events=[])
+        try:
+            value = data.metadata['log_annotations']
+            if not isinstance(value, dict) or 'log_id' in value:
+                raise ValueError('archive annotations must be an inline object without log identity')
+            result = LogAnnotations.model_validate({**value, 'log_id': lid})
+            times = data.sample_times_s
+            duration = times[-1]
+            terminal_interval = times[-1] - times[-2] if len(times) > 1 else 0.
+            tolerance = 1e-8
+            if any(segment.start_s > duration + tolerance or segment.end_s > duration + terminal_interval + tolerance
+                   for segment in result.segments):
+                raise ValueError('annotation time lies outside the source domain')
+            source = data.metadata.get('b041', {})
+            count = source.get('source_frame_count') if isinstance(source, dict) else None
+            if result.segments and (type(count) is not int or count <= 0 or
+                    any(segment.end_frame > count for segment in result.segments)):
+                raise ValueError('annotation frame lies outside the verified source domain')
+            if any(event.time_s is not None and event.time_s > duration + tolerance for event in result.events):
+                raise ValueError('recorded event time lies outside the replay domain')
+            return result
+        except (ValueError, ValidationError):
+            # Do not echo arbitrary metadata, file paths, or large validation inputs.
+            raise SessionError(422, 'INVALID_LOG_ANNOTATIONS', 'Stored annotations violate their contract or source bounds') from None
 
     async def control(self, sid, command, body=None):
         context = self.context(sid, ready=True)

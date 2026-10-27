@@ -1,6 +1,88 @@
 {
   "components": {
     "schemas": {
+      "AnnotationSegment": {
+        "additionalProperties": false,
+        "description": "Source labels, never promoted to confirmed robot state or approved training data.",
+        "properties": {
+          "boundary_status": {
+            "default": "unknown",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Boundary Status",
+            "type": "string"
+          },
+          "details": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "maxProperties": 256,
+            "title": "Details",
+            "type": "object"
+          },
+          "end_frame": {
+            "maximum": 9007199254740991.0,
+            "minimum": 0.0,
+            "title": "End Frame",
+            "type": "integer"
+          },
+          "end_s": {
+            "minimum": 0.0,
+            "title": "End S",
+            "type": "number"
+          },
+          "id": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "maxLength": 4096,
+            "title": "Label",
+            "type": "string"
+          },
+          "review_status": {
+            "default": "unknown",
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Review Status",
+            "type": "string"
+          },
+          "start_frame": {
+            "maximum": 9007199254740991.0,
+            "minimum": 0.0,
+            "title": "Start Frame",
+            "type": "integer"
+          },
+          "start_s": {
+            "minimum": 0.0,
+            "title": "Start S",
+            "type": "number"
+          },
+          "training_approved": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Training Approved"
+          }
+        },
+        "required": [
+          "id",
+          "start_s",
+          "end_s",
+          "start_frame",
+          "end_frame",
+          "label"
+        ],
+        "title": "AnnotationSegment",
+        "type": "object"
+      },
       "Body_upload_log_api_v1_sessions__sid__logs_post": {
         "properties": {
           "file": {
@@ -811,6 +893,101 @@
         "title": "LoadRequest",
         "type": "object"
       },
+      "LogAnnotations": {
+        "additionalProperties": false,
+        "properties": {
+          "alignment": {
+            "enum": [
+              "source_frames",
+              "reference_only",
+              "none"
+            ],
+            "title": "Alignment",
+            "type": "string"
+          },
+          "assumptions": {
+            "items": {
+              "maxLength": 4096,
+              "type": "string"
+            },
+            "maxItems": 128,
+            "title": "Assumptions",
+            "type": "array"
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/RecordedEvent"
+            },
+            "maxItems": 10000,
+            "title": "Events",
+            "type": "array"
+          },
+          "log_id": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Log Id",
+            "type": "string"
+          },
+          "provisional": {
+            "title": "Provisional",
+            "type": "boolean"
+          },
+          "reference": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "maxProperties": 256,
+            "title": "Reference",
+            "type": "object"
+          },
+          "segments": {
+            "items": {
+              "$ref": "#/components/schemas/AnnotationSegment"
+            },
+            "maxItems": 10000,
+            "title": "Segments",
+            "type": "array"
+          },
+          "source_id": {
+            "anyOf": [
+              {
+                "maxLength": 256,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Id"
+          },
+          "source_sha256": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Sha256"
+          }
+        },
+        "required": [
+          "log_id",
+          "source_id",
+          "source_sha256",
+          "alignment",
+          "provisional",
+          "assumptions",
+          "reference",
+          "segments",
+          "events"
+        ],
+        "title": "LogAnnotations",
+        "type": "object"
+      },
       "LogChannels": {
         "additionalProperties": false,
         "properties": {
@@ -1112,6 +1289,56 @@
           "playback"
         ],
         "title": "RESTPlaybackResponse",
+        "type": "object"
+      },
+      "RecordedEvent": {
+        "additionalProperties": false,
+        "properties": {
+          "details": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JsonValue"
+            },
+            "maxProperties": 256,
+            "title": "Details",
+            "type": "object"
+          },
+          "id": {
+            "maxLength": 256,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Kind",
+            "type": "string"
+          },
+          "message": {
+            "maxLength": 4096,
+            "title": "Message",
+            "type": "string"
+          },
+          "time_s": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time S"
+          }
+        },
+        "required": [
+          "id",
+          "time_s",
+          "kind",
+          "message"
+        ],
+        "title": "RecordedEvent",
         "type": "object"
       },
       "Robot": {
@@ -2373,6 +2600,104 @@
           }
         },
         "summary": "Upload Log"
+      }
+    },
+    "/api/v1/sessions/{sid}/logs/{lid}/annotations": {
+      "get": {
+        "operationId": "get_annotations_api_v1_sessions__sid__logs__lid__annotations_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sid",
+            "required": true,
+            "schema": {
+              "title": "Sid",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "lid",
+            "required": true,
+            "schema": {
+              "title": "Lid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogAnnotations"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Invalid request syntax, parameters, fields, or non-finite numbers."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Requested scene, robot, session, log, or channel does not exist."
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Stored annotation metadata violates its source bounds or contract."
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Runtime is not configured, or the worker is unavailable/not ready."
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            },
+            "description": "Other transport errors use the same error envelope."
+          }
+        },
+        "summary": "Get Annotations"
       }
     },
     "/api/v1/sessions/{sid}/logs/{lid}/channels": {

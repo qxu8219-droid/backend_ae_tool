@@ -4,6 +4,7 @@
       "applied_wall_s": 1750000000.0,
       "chassis": {
         "frame": "world",
+        "quality": null,
         "x": 1.25,
         "y": -0.5,
         "yaw": 0.2
@@ -467,6 +468,7 @@
   "protocol/ChassisPose": {
     "payload": {
       "frame": "world",
+      "quality": null,
       "x": 1.25,
       "y": -0.5,
       "yaw": 0.2
@@ -492,6 +494,7 @@
       "captured_wall_s": 1750000000.01,
       "chassis": {
         "frame": "world",
+        "quality": null,
         "x": 1.25,
         "y": -0.5,
         "yaw": 0.2
@@ -936,6 +939,7 @@
         "captured_wall_s": 1750000000.01,
         "chassis": {
           "frame": "world",
+          "quality": null,
           "x": 1.25,
           "y": -0.5,
           "yaw": 0.2
@@ -1344,6 +1348,7 @@
       "captured_wall_s": 1750000000.01,
       "chassis": {
         "frame": "world",
+        "quality": null,
         "x": 1.25,
         "y": -0.5,
         "yaw": 0.2
@@ -2186,6 +2191,7 @@
           "captured_wall_s": 1750000000.01,
           "chassis": {
             "frame": "world",
+            "quality": null,
             "x": 1.25,
             "y": -0.5,
             "yaw": 0.2
@@ -2584,6 +2590,7 @@
     "payload": {
       "chassis": {
         "frame": "world",
+        "quality": null,
         "x": 1.25,
         "y": -0.5,
         "yaw": 0.2
@@ -2951,6 +2958,7 @@
       "frame": {
         "chassis": {
           "frame": "world",
+          "quality": null,
           "x": 1.25,
           "y": -0.5,
           "yaw": 0.2
@@ -3343,6 +3351,7 @@
         "frame": {
           "chassis": {
             "frame": "world",
+            "quality": null,
             "x": 1.25,
             "y": -0.5,
             "yaw": 0.2
@@ -3816,6 +3825,7 @@
         "applied_wall_s": 1750000000.0,
         "chassis": {
           "frame": "world",
+          "quality": null,
           "x": 1.25,
           "y": -0.5,
           "yaw": 0.2
@@ -4243,6 +4253,7 @@
         "captured_wall_s": 1750000000.01,
         "chassis": {
           "frame": "world",
+          "quality": null,
           "x": 1.25,
           "y": -0.5,
           "yaw": 0.2
@@ -4681,6 +4692,7 @@
           "applied_wall_s": 1750000000.0,
           "chassis": {
             "frame": "world",
+            "quality": null,
             "x": 1.25,
             "y": -0.5,
             "yaw": 0.2
@@ -5130,6 +5142,7 @@
           "captured_wall_s": 1750000000.01,
           "chassis": {
             "frame": "world",
+            "quality": null,
             "x": 1.25,
             "y": -0.5,
             "yaw": 0.2
@@ -5803,6 +5816,43 @@
     },
     "schema": "JointMetadata"
   },
+  "service/log_annotations": {
+    "payload": {
+      "alignment": "source_frames",
+      "assumptions": [
+        "Example provisional calibration"
+      ],
+      "events": [
+        {
+          "details": {},
+          "id": "example-event",
+          "kind": "request",
+          "message": "Historical diagnostic",
+          "time_s": null
+        }
+      ],
+      "log_id": "example-log",
+      "provisional": true,
+      "reference": {},
+      "segments": [
+        {
+          "boundary_status": "pending_review",
+          "details": {},
+          "end_frame": 2,
+          "end_s": 1.0,
+          "id": "example-stage",
+          "label": "Example stage",
+          "review_status": "pending_review",
+          "start_frame": 0,
+          "start_s": 0.0,
+          "training_approved": false
+        }
+      ],
+      "source_id": "example-source",
+      "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "schema": "LogAnnotations"
+  },
   "service/playback_ack": {
     "payload": {
       "ack_stage": "accepted",
@@ -6283,6 +6333,7 @@
         "captured_wall_s": 1000.0,
         "chassis": {
           "frame": "world",
+          "quality": null,
           "x": 0.0,
           "y": 0.0,
           "yaw": 0.0
