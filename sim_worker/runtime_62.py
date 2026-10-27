@@ -8,7 +8,11 @@ from .media import SnapshotRegistry,create_snapshot_writer,SEI_METADATA_UUID
 
 
 def physics_launch_args():
-    return ['--/exts/isaacsim.physics.newton/auto_switch_on_startup=false','--/exts/isaacsim.core.simulation_manager/default_engine=physx','--/app/settings/persistent=false']
+    # This worker captures one camera at one rate. The SDK's multi-rate sensor
+    # path adds render flush updates that are unnecessary for this topology.
+    # Keep zero-delay/render-completion waits and raw identity verification.
+    return ['--/exts/isaacsim.physics.newton/auto_switch_on_startup=false','--/exts/isaacsim.core.simulation_manager/default_engine=physx','--/app/settings/persistent=false',
+            '--/rtx/hydra/supportMultiTickRate=false']
 
 
 def runtime_pose(values):
@@ -64,7 +68,8 @@ class Runtime62:
         self.np=np;self.rep=rep;self.carb=carb
         version=get_version()[0];engine=SimulationManager.get_active_physics_engine()
         if version!='6.2.0' or engine.lower()!='physx':raise RuntimeError(f'Expected 6.2.0/PhysX, got {version}/{engine}')
-        self.report.update(isaacsim_version=version,physics_backend=engine)
+        self.report.update(isaacsim_version=version,physics_backend=engine,
+            multi_tick_rate_enabled=carb.settings.get_settings().get_as_bool('/rtx/hydra/supportMultiTickRate'))
         self.on_phase('loading_scene')
         world=World(stage_units_in_meters=1,physics_dt=1/60,rendering_dt=1/config.render_hz,backend='numpy')
         self.world=world;stage=omni.usd.get_context().get_stage()
@@ -162,6 +167,8 @@ class Runtime62:
         stamp=id|(zlib.crc32(id.to_bytes(4,'big'))<<32)
         for bit,visible in enumerate(self.marker_switches):visible.Set('inherited' if stamp&(1<<bit) else 'invisible')
     def apply(self,frame):
+        # A failed application must never leave an older readback capture-ready.
+        self._capture_applied=None
         self._requested=frame
         np=self.np;values=np.array(runtime_pose(frame.joints));position=self.initial_pos.copy();quaternion=self.initial_quat.copy()
         if frame.chassis is not None:
@@ -181,14 +188,18 @@ class Runtime62:
             w,x,y,z=map(float,quat);pose=frame.chassis.model_dump(mode='python')
             pose.update(x=float(xyz[0]),y=float(xyz[1]),yaw=math.atan2(2*(w*z+x*y),1-2*(y*y+z*z)))
         payload=frame.model_dump(mode='python');payload.update(joints=read.tolist(),chassis=pose,source_joints=frame.joints,applied_wall_s=time.time())
-        return AppliedFrame.model_validate(payload)
+        self._capture_applied=AppliedFrame.model_validate(payload)
+        return self._capture_applied
     def render(self,applied):
-        # Replicator delta_time=0 holds the business pose. Advance the render
-        # fabric clock and restore/read back that exact target even while paused,
-        # matching the proven P0 capture sequence instead of reusing old readback.
-        if (applied.session_id,applied.target_seq)!=(self._requested.session_id,self._requested.target_seq):
+        # A fresh apply already advanced the fabric clock and verified the pose.
+        # Held captures still require their own step/restore/readback because
+        # Replicator delta_time=0 does not advance that clock while paused.
+        if any(getattr(applied,key)!=getattr(self._requested,key)
+               for key in ('session_id','log_id','playback_epoch','control_seq','target_seq')):
             raise RuntimeError('Capture target differs from the applied request')
-        applied=self.apply(self._requested)
+        applied=self._capture_applied if self._capture_applied is not None else self.apply(self._requested)
+        # Consume before marker/arm: a failed capture cannot reuse this readback.
+        self._capture_applied=None
         self.capture_id+=1
         if self.capture_id>0xffffffff:raise RuntimeError('Capture ID exhausted; recreate worker')
         self._marker(self.capture_id);self.writer.arm(self.capture_id,applied)
