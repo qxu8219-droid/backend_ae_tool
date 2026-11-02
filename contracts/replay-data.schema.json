@@ -1,0 +1,315 @@
+{
+  "$defs": {
+    "ChannelQuality": {
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Method"
+        },
+        "origin": {
+          "enum": [
+            "measured",
+            "commanded",
+            "derived",
+            "missing"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "processing": {
+          "default": [],
+          "items": {
+            "enum": [
+              "original",
+              "unit_converted",
+              "interpolated",
+              "forward_filled",
+              "defaulted",
+              "derived"
+            ],
+            "type": "string"
+          },
+          "title": "Processing",
+          "type": "array"
+        },
+        "source_indices": {
+          "default": [],
+          "items": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "Source Indices",
+          "type": "array"
+        },
+        "valid": {
+          "title": "Valid",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "origin",
+        "valid"
+      ],
+      "title": "ChannelQuality",
+      "type": "object"
+    },
+    "ChannelSeries": {
+      "additionalProperties": false,
+      "properties": {
+        "angle_semantics": {
+          "enum": [
+            "bounded",
+            "angular_wrapped",
+            "angular_unwrapped",
+            "linear"
+          ],
+          "title": "Angle Semantics",
+          "type": "string"
+        },
+        "quality": {
+          "items": {
+            "$ref": "#/$defs/ChannelQuality"
+          },
+          "title": "Quality",
+          "type": "array"
+        },
+        "source_field": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Field"
+        },
+        "timestamps_s": {
+          "items": {
+            "minimum": 0,
+            "type": "number"
+          },
+          "minItems": 1,
+          "title": "Timestamps S",
+          "type": "array"
+        },
+        "unit": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Values",
+          "type": "array"
+        },
+        "wrap_period": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Wrap Period"
+        }
+      },
+      "required": [
+        "timestamps_s",
+        "values",
+        "quality",
+        "unit",
+        "angle_semantics"
+      ],
+      "title": "ChannelSeries",
+      "type": "object"
+    },
+    "JsonValue": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "array"
+        },
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "TimeBasis": {
+      "additionalProperties": false,
+      "properties": {
+        "relative_origin_s": {
+          "default": 0.0,
+          "minimum": 0,
+          "title": "Relative Origin S",
+          "type": "number"
+        },
+        "source_origin": {
+          "title": "Source Origin",
+          "type": "number"
+        },
+        "unit": {
+          "const": "s",
+          "default": "s",
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_origin"
+      ],
+      "title": "TimeBasis",
+      "type": "object"
+    }
+  },
+  "$id": "https://model-evaluation.local/contracts/1/replay-data.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "canonical_order": {
+      "items": {
+        "maxLength": 256,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 28,
+      "minItems": 28,
+      "title": "Canonical Order",
+      "type": "array"
+    },
+    "channels": {
+      "additionalProperties": {
+        "$ref": "#/$defs/ChannelSeries"
+      },
+      "propertyNames": {
+        "maxLength": 256,
+        "minLength": 1
+      },
+      "title": "Channels",
+      "type": "object"
+    },
+    "log_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Log Id",
+      "type": "string"
+    },
+    "mapping_snapshot": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Mapping Snapshot",
+      "type": "object"
+    },
+    "mapping_snapshot_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Mapping Snapshot Id",
+      "type": "string"
+    },
+    "metadata": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Metadata",
+      "type": "object"
+    },
+    "raw_file_ref": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Raw File Ref",
+      "type": "string"
+    },
+    "raw_file_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Raw File Sha256",
+      "type": "string"
+    },
+    "robot_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "title": "Robot Id",
+      "type": "string"
+    },
+    "sample_times_s": {
+      "items": {
+        "minimum": 0,
+        "type": "number"
+      },
+      "minItems": 1,
+      "title": "Sample Times S",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "time_basis": {
+      "$ref": "#/$defs/TimeBasis"
+    }
+  },
+  "required": [
+    "log_id",
+    "robot_id",
+    "raw_file_ref",
+    "raw_file_sha256",
+    "mapping_snapshot_id",
+    "mapping_snapshot",
+    "time_basis",
+    "canonical_order",
+    "sample_times_s",
+    "channels"
+  ],
+  "title": "ReplayData",
+  "type": "object"
+}

@@ -1,0 +1,39 @@
+name: Publish release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Verify tag and publish reviewed release notes
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+          RELEASE_COMMIT: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo 'Expected vMAJOR.MINOR.PATCH'; exit 1; }
+          status=$(gh api "repos/$GH_REPO/compare/main...$RELEASE_COMMIT" --jq '.status')
+          [[ "$status" == identical || "$status" == behind ]] || { echo 'Release commit must already belong to main'; exit 1; }
+          notes_file="$RUNNER_TEMP/release-notes.md"
+          gh api "repos/$GH_REPO/contents/docs/releases/$RELEASE_TAG.md?ref=$RELEASE_COMMIT" --jq '.content' | base64 --decode > "$notes_file"
+          test -s "$notes_file"
+          if gh release view "$RELEASE_TAG" --repo "$GH_REPO" >/dev/null 2>&1; then
+            echo 'Release already exists; preserving its published contents.'
+            exit 0
+          fi
+          gh release create "$RELEASE_TAG" --repo "$GH_REPO" --verify-tag \
+            --title "$RELEASE_TAG — Robot Log Replay Platform" --notes-file "$notes_file" --latest

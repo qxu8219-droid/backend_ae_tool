@@ -1,0 +1,226 @@
+{
+  "date": "2026-10-27",
+  "scope": "B041 recorded numeric replay using explicit provisional gripper and chassis mappings; not physical calibration, high-rate MCAP, or T17 sustained performance acceptance",
+  "profile": "configs/mappings/b041_provisional_v1.json",
+  "cpu": {
+    "evidence": "outputs/t16/data-validation-reviewed/evidence.json",
+    "status": "passed",
+    "raw_files": 27,
+    "catalog_files": 1,
+    "originals_unchanged": true,
+    "reports": [
+      {
+        "destination": "data/real_logs/derived/RBA60725B041_20261016100605618_RAW/b041_ee2_body_velocity_v1",
+        "log_id": "log-78a893e0d8b049b2890eeccdbc23de85",
+        "status": "passed",
+        "source_id": "RBA60725B041_20261016100605618_RAW",
+        "basis": "state",
+        "state_or_action_samples": 472,
+        "channels": 77,
+        "canonical_mapped": 22,
+        "duration_s": 31.4,
+        "raw_finite_invalid_points": 0,
+        "gap_count": 0,
+        "trajectory": {
+          "available": true,
+          "valid_samples": 472,
+          "invalid_latched_samples": 0,
+          "final_pose": [
+            -0.0010222033781696145,
+            1.1891001468824006e-05,
+            -0.0035503994652248826
+          ],
+          "method": "independent complex midpoint-sinc body twist"
+        }
+      },
+      {
+        "destination": "data/real_logs/derived/RBA60725B041_20261020114048516_RAW/b041_ee2_body_velocity_v1",
+        "log_id": "log-6db32fca5b4b4beda82b8c074fac94e9",
+        "status": "passed",
+        "source_id": "RBA60725B041_20261020114048516_RAW",
+        "basis": "state",
+        "state_or_action_samples": 762,
+        "channels": 77,
+        "canonical_mapped": 22,
+        "duration_s": 50.733333333,
+        "raw_finite_invalid_points": 5509,
+        "gap_count": 0,
+        "trajectory": {
+          "available": true,
+          "valid_samples": 762,
+          "invalid_latched_samples": 0,
+          "final_pose": [
+            0.014197999151094563,
+            1.0712304944066477e-05,
+            -0.004612816832575123
+          ],
+          "method": "independent complex midpoint-sinc body twist"
+        }
+      },
+      {
+        "destination": "data/real_logs/derived/live_run_20261023T123221109918Z/b041_ee2_body_velocity_v1",
+        "log_id": "log-9ca73c6d8cad4f78ab63fb812c1016e3",
+        "status": "passed",
+        "source_id": "live_run_20261023T123221109918Z",
+        "basis": "state",
+        "state_or_action_samples": 39,
+        "channels": 74,
+        "canonical_mapped": 22,
+        "duration_s": 6.970334223,
+        "raw_finite_invalid_points": 0,
+        "gap_count": 3,
+        "trajectory": {
+          "available": false,
+          "valid_samples": 0,
+          "invalid_latched_samples": 0
+        }
+      },
+      {
+        "destination": "data/real_logs/derived/rim_R2_case02_20261021T052946929344Z/b041_ee2_body_velocity_v1",
+        "log_id": "log-e28cd269c5ff429da3cb0ec5f6111a4c",
+        "status": "passed",
+        "source_id": "rim_R2_case02_20261021T052946929344Z",
+        "basis": "state",
+        "state_or_action_samples": 88,
+        "channels": 74,
+        "canonical_mapped": 22,
+        "duration_s": 70.354511078,
+        "raw_finite_invalid_points": 0,
+        "gap_count": 22,
+        "trajectory": {
+          "available": false,
+          "valid_samples": 0,
+          "invalid_latched_samples": 0
+        }
+      },
+      {
+        "destination": "/home/xq/work/code/projects/Model_Evaluation/backend/outputs/t16/data-validation-reviewed/action-basis/RBA60725B041_20261020114048516_RAW",
+        "log_id": "log-75f6849b640343cb881af5c2a8fa288e",
+        "status": "passed",
+        "source_id": "RBA60725B041_20261020114048516_RAW",
+        "basis": "action",
+        "state_or_action_samples": 762,
+        "channels": 77,
+        "canonical_mapped": 15,
+        "duration_s": 50.733333333,
+        "raw_finite_invalid_points": 5509,
+        "gap_count": 0,
+        "trajectory": {
+          "available": true,
+          "valid_samples": 762,
+          "invalid_latched_samples": 0,
+          "final_pose": [
+            0.014197999151094563,
+            1.0712304944066477e-05,
+            -0.004612816832575123
+          ],
+          "method": "independent complex midpoint-sinc body twist"
+        }
+      }
+    ]
+  },
+  "actual_sdk_browser": [
+    {
+      "directory": "outputs/t16/real-ui-sdk-01",
+      "passed": true,
+      "source_ids": [
+        "RBA60725B041_20261020114048516_RAW",
+        "live_run_20261023T123221109918Z"
+      ],
+      "canvas_samples": 32,
+      "source_value_checkpoints": 11,
+      "annotation_checkpoints": 5,
+      "errors": [],
+      "reference_only_exercised": false,
+      "history_pagination": null,
+      "gap": {
+        "before": 0.5821893679985806,
+        "after": 1.4919981129987718,
+        "checked": 1.0370937404986762,
+        "noPredictionFill": true
+      },
+      "source_hashes_unchanged": true,
+      "owned_resources_released": true
+    },
+    {
+      "directory": "outputs/t16/real-ui-sdk-02",
+      "passed": true,
+      "source_ids": [
+        "RBA60725B041_20261016100605618_RAW",
+        "rim_R2_case02_20261021T052946929344Z"
+      ],
+      "canvas_samples": 32,
+      "source_value_checkpoints": 11,
+      "annotation_checkpoints": 5,
+      "errors": [],
+      "reference_only_exercised": true,
+      "history_pagination": {
+        "total": 256,
+        "lastEventId": "row-256-console",
+        "lastPage": 3
+      },
+      "gap": {
+        "before": 0,
+        "after": 30.13677466899935,
+        "checked": 15.068387334499675,
+        "noPredictionFill": true
+      },
+      "source_hashes_unchanged": true,
+      "owned_resources_released": true
+    }
+  ],
+  "regression": {
+    "backend": {
+      "passed": 892,
+      "skipped_optional_pyarrow": 2,
+      "subtests": 5,
+      "log": "outputs/t16/full-backend-reviewed.log"
+    },
+    "frontend": {
+      "passed": 233,
+      "build": "passed",
+      "existing_chrome": 14,
+      "parquet_tools_unittest": 7,
+      "p0_cpu": 90,
+      "schema_and_typescript": "passed",
+      "unit_log": "outputs/t16/frontend-unit-latest.log",
+      "build_log": "outputs/t16/frontend-build-latest.log",
+      "browser_log": "outputs/t16/frontend-browser-latest.log"
+    }
+  },
+  "review": {
+    "critical": 0,
+    "important": 2,
+    "status": "both_important_fixed",
+    "findings": [
+      "Regressed source clock must invalidate cumulative chassis pose",
+      "Annotation bounds must use complete source frames when action basis ends early"
+    ],
+    "remaining_critical": 0,
+    "remaining_important": 0,
+    "remaining_minor": 0,
+    "rounds": 1,
+    "regressions": [
+      "outputs/t16/review-clock-red.log",
+      "outputs/t16/review-clock-green.log",
+      "outputs/t16/review-clock-oracle-red.log",
+      "outputs/t16/review-clock-oracle-green.log",
+      "outputs/t16/review-annotation-red.log",
+      "outputs/t16/review-annotation-green.log",
+      "outputs/t16/review-real-annotations.json"
+    ]
+  },
+  "limitations": [
+    "Gripper zero/endpoints/absolute finger gap need team confirmation",
+    "Chassis body velocity semantics are provisional; relative integration is not measured world odometry",
+    "Runtime sparse event clocks are not sensor capture times; chassis pose stays unavailable",
+    "Same-run high-rate MCAP not adapted",
+    "T17 full fault/network and 30-minute performance matrix pending"
+  ],
+  "actual_sdk_browser_scope_note": "Two native runs precede final review edge-case fixes; focused and final CPU regressions cover those fixes. Default four-source numeric mappings rechecked after fixes.",
+  "status": "passed_provisional_adaptation",
+  "implementation_commits": {
+    "backend": "c09c979",
+    "frontend": "1fc17d3"
+  }
+}

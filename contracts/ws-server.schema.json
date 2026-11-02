@@ -1,0 +1,1794 @@
+{
+  "$defs": {
+    "AlertData": {
+      "additionalProperties": false,
+      "properties": {
+        "alert_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Alert Id",
+          "type": "string"
+        },
+        "code": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Code",
+          "type": "string"
+        },
+        "details": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Details",
+          "type": "object"
+        },
+        "joint_index": {
+          "anyOf": [
+            {
+              "maximum": 27,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Joint Index"
+        },
+        "log_id": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Log Id"
+        },
+        "log_time_s": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Log Time S"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "playback_epoch": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Playback Epoch"
+        },
+        "severity": {
+          "enum": [
+            "error",
+            "warning",
+            "info"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "source": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "alert_id",
+        "severity",
+        "source",
+        "code",
+        "message"
+      ],
+      "title": "AlertData",
+      "type": "object"
+    },
+    "ChannelQuality": {
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Method"
+        },
+        "origin": {
+          "enum": [
+            "measured",
+            "commanded",
+            "derived",
+            "missing"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "processing": {
+          "default": [],
+          "items": {
+            "enum": [
+              "original",
+              "unit_converted",
+              "interpolated",
+              "forward_filled",
+              "defaulted",
+              "derived"
+            ],
+            "type": "string"
+          },
+          "title": "Processing",
+          "type": "array"
+        },
+        "source_indices": {
+          "default": [],
+          "items": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "Source Indices",
+          "type": "array"
+        },
+        "valid": {
+          "title": "Valid",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "origin",
+        "valid"
+      ],
+      "title": "ChannelQuality",
+      "type": "object"
+    },
+    "ChassisPose": {
+      "additionalProperties": false,
+      "properties": {
+        "frame": {
+          "const": "world",
+          "default": "world",
+          "title": "Frame",
+          "type": "string"
+        },
+        "quality": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/ChannelQuality"
+              },
+              "maxItems": 3,
+              "minItems": 3,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quality"
+        },
+        "x": {
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "title": "Y",
+          "type": "number"
+        },
+        "yaw": {
+          "title": "Yaw",
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "yaw"
+      ],
+      "title": "ChassisPose",
+      "type": "object"
+    },
+    "ConnectionSnapshotData": {
+      "additionalProperties": false,
+      "properties": {
+        "joint_meta": {
+          "$ref": "#/$defs/JointMetadata"
+        },
+        "playback": {
+          "$ref": "#/$defs/PlaybackSnapshot"
+        },
+        "sync": {
+          "$ref": "#/$defs/SyncStatus"
+        },
+        "telemetry_hz": {
+          "default": 20,
+          "enum": [
+            10,
+            20,
+            30
+          ],
+          "title": "Telemetry Hz",
+          "type": "integer"
+        },
+        "video": {
+          "$ref": "#/$defs/VideoInfo"
+        },
+        "worker": {
+          "$ref": "#/$defs/WorkerStatus"
+        }
+      },
+      "required": [
+        "joint_meta",
+        "playback",
+        "worker",
+        "video",
+        "sync"
+      ],
+      "title": "ConnectionSnapshotData",
+      "type": "object"
+    },
+    "ErrorDetail": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Code",
+          "type": "string"
+        },
+        "details": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Details",
+          "type": "object"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "ErrorDetail",
+      "type": "object"
+    },
+    "FrameIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_id": {
+          "maximum": 4294967295,
+          "minimum": 1,
+          "title": "Capture Id",
+          "type": "integer"
+        },
+        "control_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Control Seq",
+          "type": "integer"
+        },
+        "log_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Log Id",
+          "type": "string"
+        },
+        "playback_epoch": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Playback Epoch",
+          "type": "integer"
+        },
+        "render_seq": {
+          "maximum": 4294967295,
+          "minimum": 1,
+          "title": "Render Seq",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "target_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Target Seq",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "session_id",
+        "log_id",
+        "playback_epoch",
+        "control_seq",
+        "target_seq",
+        "capture_id",
+        "render_seq"
+      ],
+      "title": "FrameIdentity",
+      "type": "object"
+    },
+    "FrameSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_id": {
+          "maximum": 4294967295,
+          "minimum": 1,
+          "title": "Capture Id",
+          "type": "integer"
+        },
+        "captured_wall_s": {
+          "minimum": 0,
+          "title": "Captured Wall S",
+          "type": "number"
+        },
+        "chassis": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ChassisPose"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "control_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Control Seq",
+          "type": "integer"
+        },
+        "duration_s": {
+          "minimum": 0,
+          "title": "Duration S",
+          "type": "number"
+        },
+        "joints": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 28,
+          "minItems": 28,
+          "title": "Joints",
+          "type": "array"
+        },
+        "limit_flags": {
+          "exclusiveMaximum": 268435456,
+          "minimum": 0,
+          "title": "Limit Flags",
+          "type": "integer"
+        },
+        "limit_warn_flags": {
+          "exclusiveMaximum": 268435456,
+          "minimum": 0,
+          "title": "Limit Warn Flags",
+          "type": "integer"
+        },
+        "log_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Log Id",
+          "type": "string"
+        },
+        "log_time_s": {
+          "minimum": 0,
+          "title": "Log Time S",
+          "type": "number"
+        },
+        "playback_epoch": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Playback Epoch",
+          "type": "integer"
+        },
+        "progress": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Progress",
+          "type": "number"
+        },
+        "quality": {
+          "items": {
+            "$ref": "#/$defs/ChannelQuality"
+          },
+          "maxItems": 28,
+          "minItems": 28,
+          "title": "Quality",
+          "type": "array"
+        },
+        "render_seq": {
+          "maximum": 4294967295,
+          "minimum": 1,
+          "title": "Render Seq",
+          "type": "integer"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "source_joints": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 28,
+          "minItems": 28,
+          "title": "Source Joints",
+          "type": "array"
+        },
+        "source_sample_index": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Sample Index"
+        },
+        "speed": {
+          "maximum": 10.0,
+          "minimum": 0.1,
+          "title": "Speed",
+          "type": "number"
+        },
+        "state": {
+          "enum": [
+            "ready",
+            "playing",
+            "paused",
+            "ended"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "target_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Target Seq",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "log_time_s",
+        "duration_s",
+        "progress",
+        "session_id",
+        "log_id",
+        "playback_epoch",
+        "control_seq",
+        "target_seq",
+        "capture_id",
+        "render_seq",
+        "state",
+        "speed",
+        "joints",
+        "source_joints",
+        "quality",
+        "chassis",
+        "limit_flags",
+        "limit_warn_flags",
+        "captured_wall_s"
+      ],
+      "title": "FrameSnapshot",
+      "type": "object"
+    },
+    "HealthTelemetryData": {
+      "additionalProperties": false,
+      "description": "Wall-clock resources only; contains no current-pose or log-progress fields.",
+      "properties": {
+        "cpu_percent": {
+          "anyOf": [
+            {
+              "maximum": 100,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cpu Percent"
+        },
+        "gpu_memory_bytes": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gpu Memory Bytes"
+        },
+        "gpu_percent": {
+          "anyOf": [
+            {
+              "maximum": 100,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Gpu Percent"
+        },
+        "memory_bytes": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Memory Bytes"
+        },
+        "render_fps": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Render Fps"
+        },
+        "worker_alive": {
+          "title": "Worker Alive",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "worker_alive"
+      ],
+      "title": "HealthTelemetryData",
+      "type": "object"
+    },
+    "IceServer": {
+      "additionalProperties": false,
+      "properties": {
+        "credential": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Credential"
+        },
+        "urls": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Urls",
+          "type": "array"
+        },
+        "username": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Username"
+        }
+      },
+      "required": [
+        "urls"
+      ],
+      "title": "IceServer",
+      "type": "object"
+    },
+    "JointDescriptor": {
+      "additionalProperties": false,
+      "properties": {
+        "limits_provenance": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Limits Provenance",
+          "type": "string"
+        },
+        "lower": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Lower"
+        },
+        "name": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "revolute",
+            "continuous",
+            "prismatic"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "unit": {
+          "enum": [
+            "rad",
+            "m"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "upper": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Upper"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "unit",
+        "lower",
+        "upper",
+        "limits_provenance"
+      ],
+      "title": "JointDescriptor",
+      "type": "object"
+    },
+    "JointMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "canonical_order": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 28,
+          "minItems": 28,
+          "title": "Canonical Order",
+          "type": "array"
+        },
+        "joints": {
+          "items": {
+            "$ref": "#/$defs/JointDescriptor"
+          },
+          "maxItems": 28,
+          "minItems": 28,
+          "title": "Joints",
+          "type": "array"
+        },
+        "limits_source": {
+          "description": "Authoritative versioned r1pro_2026_common.json path; limits retain per-joint provenance.",
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Limits Source",
+          "type": "string"
+        },
+        "robot_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Robot Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "robot_id",
+        "canonical_order",
+        "joints",
+        "limits_source"
+      ],
+      "title": "JointMetadata",
+      "type": "object"
+    },
+    "JsonValue": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "array"
+        },
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "PingData": {
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Request Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "request_id"
+      ],
+      "title": "PingData",
+      "type": "object"
+    },
+    "PlaybackSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "applied_position": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PositionRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "control_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Control Seq",
+          "type": "integer"
+        },
+        "duration_s": {
+          "default": 0.0,
+          "minimum": 0,
+          "title": "Duration S",
+          "type": "number"
+        },
+        "log_id": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Log Id"
+        },
+        "playback_epoch": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Playback Epoch",
+          "type": "integer"
+        },
+        "rendered_identity": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FrameIdentity"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "speed": {
+          "default": 1.0,
+          "maximum": 10.0,
+          "minimum": 0.1,
+          "title": "Speed",
+          "type": "number"
+        },
+        "state": {
+          "enum": [
+            "idle",
+            "ready",
+            "playing",
+            "paused",
+            "ended",
+            "error"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "target_position": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PositionRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "session_id",
+        "playback_epoch",
+        "control_seq",
+        "state"
+      ],
+      "title": "PlaybackSnapshot",
+      "type": "object"
+    },
+    "PlaybackStateData": {
+      "additionalProperties": false,
+      "properties": {
+        "playback": {
+          "$ref": "#/$defs/PlaybackSnapshot"
+        },
+        "reason": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "request_id": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Request Id"
+        }
+      },
+      "required": [
+        "playback",
+        "reason"
+      ],
+      "title": "PlaybackStateData",
+      "type": "object"
+    },
+    "PositionRef": {
+      "additionalProperties": false,
+      "properties": {
+        "log_time_s": {
+          "minimum": 0,
+          "title": "Log Time S",
+          "type": "number"
+        },
+        "source_sample_index": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Sample Index"
+        },
+        "target_seq": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Target Seq",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "log_time_s",
+        "target_seq"
+      ],
+      "title": "PositionRef",
+      "type": "object"
+    },
+    "SyncStatus": {
+      "additionalProperties": false,
+      "properties": {
+        "gap_action": {
+          "const": "reconnect_and_wait_for_pair",
+          "default": "reconnect_and_wait_for_pair",
+          "title": "Gap Action",
+          "type": "string"
+        },
+        "identity_scheme": {
+          "const": "capture32_crc32",
+          "default": "capture32_crc32",
+          "title": "Identity Scheme",
+          "type": "string"
+        },
+        "last_rendered_identity": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FrameIdentity"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "playback_epoch": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Playback Epoch",
+          "type": "integer"
+        },
+        "presentation": {
+          "const": "verified_pair_single_canvas",
+          "default": "verified_pair_single_canvas",
+          "title": "Presentation",
+          "type": "string"
+        },
+        "snapshot_catalog_capacity": {
+          "const": 16,
+          "default": 16,
+          "title": "Snapshot Catalog Capacity",
+          "type": "integer"
+        },
+        "state": {
+          "enum": [
+            "awaiting_pair",
+            "paired",
+            "stalled",
+            "resync_required"
+          ],
+          "title": "State",
+          "type": "string"
+        }
+      },
+      "required": [
+        "state",
+        "playback_epoch"
+      ],
+      "title": "SyncStatus",
+      "type": "object"
+    },
+    "SystemData": {
+      "additionalProperties": false,
+      "properties": {
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ErrorDetail"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "event": {
+          "enum": [
+            "worker_phase_changed",
+            "worker_exited",
+            "session_error",
+            "mediamtx_unreachable",
+            "mediamtx_recovered",
+            "sync_resync_required",
+            "session_stopped"
+          ],
+          "title": "Event",
+          "type": "string"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        },
+        "worker": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/WorkerStatus"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "event"
+      ],
+      "title": "SystemData",
+      "type": "object"
+    },
+    "TelemetryRateData": {
+      "additionalProperties": false,
+      "properties": {
+        "hz": {
+          "enum": [
+            10,
+            20,
+            30
+          ],
+          "title": "Hz",
+          "type": "integer"
+        },
+        "request_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Request Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "request_id",
+        "hz"
+      ],
+      "title": "TelemetryRateData",
+      "type": "object"
+    },
+    "VideoInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "catalog_schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Catalog Schema Version",
+          "type": "integer"
+        },
+        "decoder": {
+          "const": "webcodecs_h264",
+          "default": "webcodecs_h264",
+          "title": "Decoder",
+          "type": "string"
+        },
+        "ice_servers": {
+          "items": {
+            "$ref": "#/$defs/IceServer"
+          },
+          "title": "Ice Servers",
+          "type": "array"
+        },
+        "identity_scheme": {
+          "const": "capture32_crc32",
+          "default": "capture32_crc32",
+          "title": "Identity Scheme",
+          "type": "string"
+        },
+        "presentation": {
+          "const": "verified_pair_single_canvas",
+          "default": "verified_pair_single_canvas",
+          "title": "Presentation",
+          "type": "string"
+        },
+        "publishing": {
+          "title": "Publishing",
+          "type": "boolean"
+        },
+        "receiver_transform": {
+          "const": "rtcrtp_script_transform_or_encoded_streams",
+          "default": "rtcrtp_script_transform_or_encoded_streams",
+          "title": "Receiver Transform",
+          "type": "string"
+        },
+        "render_fps": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Render Fps"
+        },
+        "sei_uuid_hex": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{32}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sei Uuid Hex"
+        },
+        "snapshot_transport": {
+          "const": "h264_sei_snapshot_catalog",
+          "default": "h264_sei_snapshot_catalog",
+          "title": "Snapshot Transport",
+          "type": "string"
+        },
+        "stream_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Stream Path"
+        },
+        "transport": {
+          "const": "whep",
+          "default": "whep",
+          "title": "Transport",
+          "type": "string"
+        },
+        "whep_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Whep Url"
+        }
+      },
+      "required": [
+        "publishing",
+        "whep_url",
+        "stream_path"
+      ],
+      "title": "VideoInfo",
+      "type": "object"
+    },
+    "WSAlert": {
+      "additionalProperties": false,
+      "properties": {
+        "connection_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Connection Id",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/AlertData"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "seq": {
+          "description": "Monotonic within this connection_id only; gaps require reconnect/snapshot recovery.",
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "alert",
+          "title": "Type",
+          "type": "string"
+        },
+        "wall_time": {
+          "description": "UTC Unix seconds; system clock, not log time.",
+          "minimum": 0,
+          "title": "Wall Time",
+          "type": "number"
+        }
+      },
+      "required": [
+        "session_id",
+        "connection_id",
+        "seq",
+        "wall_time",
+        "type",
+        "data"
+      ],
+      "title": "WSAlert",
+      "type": "object"
+    },
+    "WSConnectionSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "connection_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Connection Id",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/ConnectionSnapshotData"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "seq": {
+          "description": "Monotonic within this connection_id only; gaps require reconnect/snapshot recovery.",
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "connection_snapshot",
+          "title": "Type",
+          "type": "string"
+        },
+        "wall_time": {
+          "description": "UTC Unix seconds; system clock, not log time.",
+          "minimum": 0,
+          "title": "Wall Time",
+          "type": "number"
+        }
+      },
+      "required": [
+        "session_id",
+        "connection_id",
+        "seq",
+        "wall_time",
+        "type",
+        "data"
+      ],
+      "title": "WSConnectionSnapshot",
+      "type": "object"
+    },
+    "WSFrameSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "connection_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Connection Id",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/FrameSnapshot"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "seq": {
+          "description": "Monotonic within this connection_id only; gaps require reconnect/snapshot recovery.",
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "frame_snapshot",
+          "title": "Type",
+          "type": "string"
+        },
+        "wall_time": {
+          "description": "UTC Unix seconds; system clock, not log time.",
+          "minimum": 0,
+          "title": "Wall Time",
+          "type": "number"
+        }
+      },
+      "required": [
+        "session_id",
+        "connection_id",
+        "seq",
+        "wall_time",
+        "type",
+        "data"
+      ],
+      "title": "WSFrameSnapshot",
+      "type": "object"
+    },
+    "WSHealthTelemetry": {
+      "additionalProperties": false,
+      "properties": {
+        "connection_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Connection Id",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/HealthTelemetryData"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "seq": {
+          "description": "Monotonic within this connection_id only; gaps require reconnect/snapshot recovery.",
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "health_telemetry",
+          "title": "Type",
+          "type": "string"
+        },
+        "wall_time": {
+          "description": "UTC Unix seconds; system clock, not log time.",
+          "minimum": 0,
+          "title": "Wall Time",
+          "type": "number"
+        }
+      },
+      "required": [
+        "session_id",
+        "connection_id",
+        "seq",
+        "wall_time",
+        "type",
+        "data"
+      ],
+      "title": "WSHealthTelemetry",
+      "type": "object"
+    },
+    "WSPlaybackState": {
+      "additionalProperties": false,
+      "properties": {
+        "connection_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Connection Id",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/PlaybackStateData"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "seq": {
+          "description": "Monotonic within this connection_id only; gaps require reconnect/snapshot recovery.",
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "playback_state",
+          "title": "Type",
+          "type": "string"
+        },
+        "wall_time": {
+          "description": "UTC Unix seconds; system clock, not log time.",
+          "minimum": 0,
+          "title": "Wall Time",
+          "type": "number"
+        }
+      },
+      "required": [
+        "session_id",
+        "connection_id",
+        "seq",
+        "wall_time",
+        "type",
+        "data"
+      ],
+      "title": "WSPlaybackState",
+      "type": "object"
+    },
+    "WSPong": {
+      "additionalProperties": false,
+      "properties": {
+        "connection_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Connection Id",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/PingData"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "seq": {
+          "description": "Monotonic within this connection_id only; gaps require reconnect/snapshot recovery.",
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "pong",
+          "title": "Type",
+          "type": "string"
+        },
+        "wall_time": {
+          "description": "UTC Unix seconds; system clock, not log time.",
+          "minimum": 0,
+          "title": "Wall Time",
+          "type": "number"
+        }
+      },
+      "required": [
+        "session_id",
+        "connection_id",
+        "seq",
+        "wall_time",
+        "type",
+        "data"
+      ],
+      "title": "WSPong",
+      "type": "object"
+    },
+    "WSSystem": {
+      "additionalProperties": false,
+      "properties": {
+        "connection_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Connection Id",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/SystemData"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "seq": {
+          "description": "Monotonic within this connection_id only; gaps require reconnect/snapshot recovery.",
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "system",
+          "title": "Type",
+          "type": "string"
+        },
+        "wall_time": {
+          "description": "UTC Unix seconds; system clock, not log time.",
+          "minimum": 0,
+          "title": "Wall Time",
+          "type": "number"
+        }
+      },
+      "required": [
+        "session_id",
+        "connection_id",
+        "seq",
+        "wall_time",
+        "type",
+        "data"
+      ],
+      "title": "WSSystem",
+      "type": "object"
+    },
+    "WSTelemetryRateChanged": {
+      "additionalProperties": false,
+      "properties": {
+        "connection_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Connection Id",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/TelemetryRateData"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "seq": {
+          "description": "Monotonic within this connection_id only; gaps require reconnect/snapshot recovery.",
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "telemetry_rate_changed",
+          "title": "Type",
+          "type": "string"
+        },
+        "wall_time": {
+          "description": "UTC Unix seconds; system clock, not log time.",
+          "minimum": 0,
+          "title": "Wall Time",
+          "type": "number"
+        }
+      },
+      "required": [
+        "session_id",
+        "connection_id",
+        "seq",
+        "wall_time",
+        "type",
+        "data"
+      ],
+      "title": "WSTelemetryRateChanged",
+      "type": "object"
+    },
+    "WorkerStatus": {
+      "additionalProperties": false,
+      "properties": {
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ErrorDetail"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Message"
+        },
+        "phase": {
+          "enum": [
+            "booting",
+            "loading_scene",
+            "loading_robot",
+            "rtsp_publishing",
+            "ready",
+            "stopping",
+            "stopped",
+            "error"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "pid": {
+          "anyOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pid"
+        },
+        "restart_policy": {
+          "const": "recreate_session_reload_from_start",
+          "default": "recreate_session_reload_from_start",
+          "title": "Restart Policy",
+          "type": "string"
+        }
+      },
+      "required": [
+        "phase"
+      ],
+      "title": "WorkerStatus",
+      "type": "object"
+    }
+  },
+  "$id": "https://model-evaluation.local/contracts/1/ws-server.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "discriminator": {
+    "mapping": {
+      "alert": "#/$defs/WSAlert",
+      "connection_snapshot": "#/$defs/WSConnectionSnapshot",
+      "frame_snapshot": "#/$defs/WSFrameSnapshot",
+      "health_telemetry": "#/$defs/WSHealthTelemetry",
+      "playback_state": "#/$defs/WSPlaybackState",
+      "pong": "#/$defs/WSPong",
+      "system": "#/$defs/WSSystem",
+      "telemetry_rate_changed": "#/$defs/WSTelemetryRateChanged"
+    },
+    "propertyName": "type"
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/WSConnectionSnapshot"
+    },
+    {
+      "$ref": "#/$defs/WSSystem"
+    },
+    {
+      "$ref": "#/$defs/WSPlaybackState"
+    },
+    {
+      "$ref": "#/$defs/WSFrameSnapshot"
+    },
+    {
+      "$ref": "#/$defs/WSAlert"
+    },
+    {
+      "$ref": "#/$defs/WSHealthTelemetry"
+    },
+    {
+      "$ref": "#/$defs/WSPong"
+    },
+    {
+      "$ref": "#/$defs/WSTelemetryRateChanged"
+    }
+  ]
+}

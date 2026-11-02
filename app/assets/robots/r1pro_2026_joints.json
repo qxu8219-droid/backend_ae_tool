@@ -1,0 +1,261 @@
+{
+  "robot_id": "galaxea_r1pro_2026",
+  "canonical_order": [
+    "steer_motor_joint1",
+    "wheel_motor_joint1",
+    "steer_motor_joint2",
+    "wheel_motor_joint2",
+    "steer_motor_joint3",
+    "wheel_motor_joint3",
+    "torso_joint1",
+    "torso_joint2",
+    "torso_joint3",
+    "torso_joint4",
+    "left_arm_joint1",
+    "left_arm_joint2",
+    "left_arm_joint3",
+    "left_arm_joint4",
+    "left_arm_joint5",
+    "left_arm_joint6",
+    "left_arm_joint7",
+    "left_gripper_finger_joint1",
+    "left_gripper_finger_joint2",
+    "right_arm_joint1",
+    "right_arm_joint2",
+    "right_arm_joint3",
+    "right_arm_joint4",
+    "right_arm_joint5",
+    "right_arm_joint6",
+    "right_arm_joint7",
+    "right_gripper_finger_joint1",
+    "right_gripper_finger_joint2"
+  ],
+  "limits_source": "assets/robots/r1pro_2026/isaacsim_6_x/reproduction/configs/r1pro_2026_common.json",
+  "source_sha256": "c12882b99cbc89c65fbb0e99be9830a9a81f74a4df1317b06f55c4481a541ad8",
+  "joints": [
+    {
+      "name": "steer_motor_joint1",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -3.1416,
+      "upper": 3.1416,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "wheel_motor_joint1",
+      "type": "continuous",
+      "unit": "rad",
+      "lower": null,
+      "upper": null,
+      "limits_provenance": "simulation assumption (wheel missing URDF ratings)"
+    },
+    {
+      "name": "steer_motor_joint2",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -3.1416,
+      "upper": 3.1416,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "wheel_motor_joint2",
+      "type": "continuous",
+      "unit": "rad",
+      "lower": null,
+      "upper": null,
+      "limits_provenance": "simulation assumption (wheel missing URDF ratings)"
+    },
+    {
+      "name": "steer_motor_joint3",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -3.1416,
+      "upper": 3.1416,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "wheel_motor_joint3",
+      "type": "continuous",
+      "unit": "rad",
+      "lower": null,
+      "upper": null,
+      "limits_provenance": "simulation assumption (wheel missing URDF ratings)"
+    },
+    {
+      "name": "torso_joint1",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -1.1170467075,
+      "upper": 1.8151467075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "torso_joint2",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -2.7750467075,
+      "upper": 2.5132467075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "torso_joint3",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -1.8151467075,
+      "upper": 1.5533467075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "torso_joint4",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -3.0368467075,
+      "upper": 3.0368467075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "left_arm_joint1",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -4.4331467075,
+      "upper": 1.2915467075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "left_arm_joint2",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -0.1570467075,
+      "upper": 3.1241467075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "left_arm_joint3",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -2.3387427075,
+      "upper": 2.3387427075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "left_arm_joint4",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -2.0769467075,
+      "upper": 0.3316467075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "left_arm_joint5",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -2.3387427075,
+      "upper": 2.3387427075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "left_arm_joint6",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -1.0297447075,
+      "upper": 1.0297447075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "left_arm_joint7",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -1.5533467075,
+      "upper": 1.5533467075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "left_gripper_finger_joint1",
+      "type": "prismatic",
+      "unit": "m",
+      "lower": 0.0,
+      "upper": 0.05,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "left_gripper_finger_joint2",
+      "type": "prismatic",
+      "unit": "m",
+      "lower": -0.05,
+      "upper": 0.0,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "right_arm_joint1",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -4.4331467075,
+      "upper": 1.2915467075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "right_arm_joint2",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -3.1241467075,
+      "upper": 0.1570467075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "right_arm_joint3",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -2.3387427075,
+      "upper": 2.3387427075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "right_arm_joint4",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -2.0769467075,
+      "upper": 0.3316467075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "right_arm_joint5",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -2.3387427075,
+      "upper": 2.3387427075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "right_arm_joint6",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -1.0297447075,
+      "upper": 1.0297447075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "right_arm_joint7",
+      "type": "revolute",
+      "unit": "rad",
+      "lower": -1.5533467075,
+      "upper": 1.5533467075,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "right_gripper_finger_joint1",
+      "type": "prismatic",
+      "unit": "m",
+      "lower": 0.0,
+      "upper": 0.05,
+      "limits_provenance": "vendor URDF"
+    },
+    {
+      "name": "right_gripper_finger_joint2",
+      "type": "prismatic",
+      "unit": "m",
+      "lower": -0.05,
+      "upper": 0.0,
+      "limits_provenance": "vendor URDF"
+    }
+  ]
+}

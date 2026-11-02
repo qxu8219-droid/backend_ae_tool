@@ -1,0 +1,6867 @@
+{
+  "protocol/AppliedFrame": {
+    "payload": {
+      "applied_wall_s": 1750000000.0,
+      "chassis": {
+        "frame": "world",
+        "quality": null,
+        "x": 1.25,
+        "y": -0.5,
+        "yaw": 0.2
+      },
+      "control_seq": 3,
+      "duration_s": 2.0,
+      "joint_efforts": null,
+      "joint_velocities": null,
+      "joints": [
+        0.0,
+        7.25,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "log_id": "example-log",
+      "log_time_s": 1.0,
+      "mode": "kinematic",
+      "playback_epoch": 2,
+      "progress": 0.5,
+      "quality": [
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            1
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        }
+      ],
+      "schema_version": 1,
+      "session_id": "example-session",
+      "source_joints": [
+        0.0,
+        7.25,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "source_sample_index": 1,
+      "speed": 1.0,
+      "state": "paused",
+      "target_seq": 7
+    },
+    "schema": "AppliedFrame"
+  },
+  "protocol/ChannelQuality": {
+    "payload": {
+      "method": null,
+      "origin": "measured",
+      "processing": [
+        "original"
+      ],
+      "source_indices": [
+        0
+      ],
+      "valid": true
+    },
+    "schema": "ChannelQuality"
+  },
+  "protocol/ChannelSeries": {
+    "payload": {
+      "angle_semantics": "angular_unwrapped",
+      "quality": [
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            1
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            2
+          ],
+          "valid": true
+        }
+      ],
+      "source_field": "wheel_angle",
+      "timestamps_s": [
+        0.0,
+        1.0,
+        2.0
+      ],
+      "unit": "rad",
+      "values": [
+        0.0,
+        7.25,
+        14.5
+      ],
+      "wrap_period": null
+    },
+    "schema": "ChannelSeries"
+  },
+  "protocol/ChassisPose": {
+    "payload": {
+      "frame": "world",
+      "quality": null,
+      "x": 1.25,
+      "y": -0.5,
+      "yaw": 0.2
+    },
+    "schema": "ChassisPose"
+  },
+  "protocol/FrameIdentity": {
+    "payload": {
+      "capture_id": 10,
+      "control_seq": 3,
+      "log_id": "example-log",
+      "playback_epoch": 2,
+      "render_seq": 10,
+      "schema_version": 1,
+      "session_id": "example-session",
+      "target_seq": 7
+    },
+    "schema": "FrameIdentity"
+  },
+  "protocol/FrameSnapshot": {
+    "payload": {
+      "capture_id": 10,
+      "captured_wall_s": 1750000000.01,
+      "chassis": {
+        "frame": "world",
+        "quality": null,
+        "x": 1.25,
+        "y": -0.5,
+        "yaw": 0.2
+      },
+      "control_seq": 3,
+      "duration_s": 2.0,
+      "joints": [
+        0.0,
+        7.25,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "limit_flags": 0,
+      "limit_warn_flags": 0,
+      "log_id": "example-log",
+      "log_time_s": 1.0,
+      "playback_epoch": 2,
+      "progress": 0.5,
+      "quality": [
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            1
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        }
+      ],
+      "render_seq": 10,
+      "schema_version": 1,
+      "session_id": "example-session",
+      "source_joints": [
+        0.0,
+        7.25,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "source_sample_index": 1,
+      "speed": 1.0,
+      "state": "playing",
+      "target_seq": 7
+    },
+    "schema": "FrameSnapshot"
+  },
+  "protocol/PlaybackSnapshot": {
+    "payload": {
+      "applied_position": {
+        "log_time_s": 1.0,
+        "source_sample_index": 1,
+        "target_seq": 7
+      },
+      "control_seq": 3,
+      "duration_s": 2.0,
+      "log_id": "example-log",
+      "playback_epoch": 2,
+      "rendered_identity": {
+        "capture_id": 10,
+        "control_seq": 3,
+        "log_id": "example-log",
+        "playback_epoch": 2,
+        "render_seq": 10,
+        "schema_version": 1,
+        "session_id": "example-session",
+        "target_seq": 7
+      },
+      "schema_version": 1,
+      "session_id": "example-session",
+      "speed": 1.0,
+      "state": "playing",
+      "target_position": {
+        "log_time_s": 1.0,
+        "source_sample_index": 1,
+        "target_seq": 7
+      }
+    },
+    "schema": "PlaybackSnapshot"
+  },
+  "protocol/PositionRef": {
+    "payload": {
+      "log_time_s": 1.0,
+      "source_sample_index": 1,
+      "target_seq": 7
+    },
+    "schema": "PositionRef"
+  },
+  "protocol/PresentedFrame": {
+    "payload": {
+      "connection_generation": 2,
+      "connection_id": "browser-connection-2",
+      "presented_wall_s": 1750000000.11,
+      "schema_version": 1,
+      "snapshot": {
+        "capture_id": 10,
+        "captured_wall_s": 1750000000.01,
+        "chassis": {
+          "frame": "world",
+          "quality": null,
+          "x": 1.25,
+          "y": -0.5,
+          "yaw": 0.2
+        },
+        "control_seq": 3,
+        "duration_s": 2.0,
+        "joints": [
+          0.0,
+          7.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "limit_flags": 0,
+        "limit_warn_flags": 0,
+        "log_id": "example-log",
+        "log_time_s": 1.0,
+        "playback_epoch": 2,
+        "progress": 0.5,
+        "quality": [
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              1
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          }
+        ],
+        "render_seq": 10,
+        "schema_version": 1,
+        "session_id": "example-session",
+        "source_joints": [
+          0.0,
+          7.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "source_sample_index": 1,
+        "speed": 1.0,
+        "state": "playing",
+        "target_seq": 7
+      }
+    },
+    "schema": "PresentedFrame"
+  },
+  "protocol/ProtocolError": {
+    "payload": {
+      "code": "WORKER_UNAVAILABLE",
+      "details": {},
+      "message": "Synthetic worker failure example"
+    },
+    "schema": "ProtocolError"
+  },
+  "protocol/RenderedFrame": {
+    "payload": {
+      "applied_wall_s": 1750000000.0,
+      "capture_id": 10,
+      "captured_wall_s": 1750000000.01,
+      "chassis": {
+        "frame": "world",
+        "quality": null,
+        "x": 1.25,
+        "y": -0.5,
+        "yaw": 0.2
+      },
+      "control_seq": 3,
+      "duration_s": 2.0,
+      "joint_efforts": null,
+      "joint_velocities": null,
+      "joints": [
+        0.0,
+        7.25,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "log_id": "example-log",
+      "log_time_s": 1.0,
+      "mode": "kinematic",
+      "playback_epoch": 2,
+      "progress": 0.5,
+      "quality": [
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            1
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        }
+      ],
+      "raw_identity_verified": true,
+      "render_seq": 10,
+      "schema_version": 1,
+      "session_id": "example-session",
+      "source_joints": [
+        0.0,
+        7.25,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "source_sample_index": 1,
+      "speed": 1.0,
+      "state": "paused",
+      "target_seq": 7
+    },
+    "schema": "RenderedFrame"
+  },
+  "protocol/ReplayData": {
+    "payload": {
+      "canonical_order": [
+        "steer_motor_joint1",
+        "wheel_motor_joint1",
+        "steer_motor_joint2",
+        "wheel_motor_joint2",
+        "steer_motor_joint3",
+        "wheel_motor_joint3",
+        "torso_joint1",
+        "torso_joint2",
+        "torso_joint3",
+        "torso_joint4",
+        "left_arm_joint1",
+        "left_arm_joint2",
+        "left_arm_joint3",
+        "left_arm_joint4",
+        "left_arm_joint5",
+        "left_arm_joint6",
+        "left_arm_joint7",
+        "left_gripper_finger_joint1",
+        "left_gripper_finger_joint2",
+        "right_arm_joint1",
+        "right_arm_joint2",
+        "right_arm_joint3",
+        "right_arm_joint4",
+        "right_arm_joint5",
+        "right_arm_joint6",
+        "right_arm_joint7",
+        "right_gripper_finger_joint1",
+        "right_gripper_finger_joint2"
+      ],
+      "channels": {
+        "left_arm_joint1": {
+          "angle_semantics": "bounded",
+          "quality": [
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "missing",
+              "processing": [],
+              "source_indices": [
+                1
+              ],
+              "valid": false
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                2
+              ],
+              "valid": true
+            }
+          ],
+          "source_field": "left_arm_1",
+          "timestamps_s": [
+            0.0,
+            1.0,
+            2.0
+          ],
+          "unit": "rad",
+          "values": [
+            0.1,
+            null,
+            0.3
+          ],
+          "wrap_period": null
+        },
+        "wheel_motor_joint1": {
+          "angle_semantics": "angular_unwrapped",
+          "quality": [
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                1
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                2
+              ],
+              "valid": true
+            }
+          ],
+          "source_field": "wheel_angle",
+          "timestamps_s": [
+            0.0,
+            1.0,
+            2.0
+          ],
+          "unit": "rad",
+          "values": [
+            0.0,
+            7.25,
+            14.5
+          ],
+          "wrap_period": null
+        }
+      },
+      "log_id": "example-log",
+      "mapping_snapshot": {
+        "joints": {
+          "left_arm_joint1": {
+            "angle_semantics": "bounded",
+            "field": "left_arm_1"
+          },
+          "wheel_motor_joint1": {
+            "angle_semantics": "angular_unwrapped",
+            "field": "wheel_angle"
+          }
+        },
+        "timestamp": {
+          "unit": "s"
+        }
+      },
+      "mapping_snapshot_id": "example-mapping-v1",
+      "metadata": {
+        "issues": [
+          {
+            "code": "MISSING_SAMPLE",
+            "line": 3
+          }
+        ],
+        "synthetic": true
+      },
+      "raw_file_ref": "uploads/example-session/synthetic.csv",
+      "raw_file_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "robot_id": "r1pro_2026",
+      "sample_times_s": [
+        0.0,
+        1.0,
+        2.0
+      ],
+      "schema_version": 1,
+      "time_basis": {
+        "relative_origin_s": 0.0,
+        "source_origin": 42.0,
+        "unit": "s"
+      }
+    },
+    "schema": "ReplayData"
+  },
+  "protocol/SnapshotCatalog": {
+    "payload": {
+      "encoder_poll_capture_id": 11,
+      "identity_scheme": "capture32_crc32",
+      "marker_bits": 64,
+      "marker_pixels": [
+        [
+          32,
+          32
+        ],
+        [
+          64,
+          32
+        ],
+        [
+          96,
+          32
+        ],
+        [
+          128,
+          32
+        ],
+        [
+          160,
+          32
+        ],
+        [
+          192,
+          32
+        ],
+        [
+          224,
+          32
+        ],
+        [
+          256,
+          32
+        ],
+        [
+          288,
+          32
+        ],
+        [
+          320,
+          32
+        ],
+        [
+          352,
+          32
+        ],
+        [
+          384,
+          32
+        ],
+        [
+          416,
+          32
+        ],
+        [
+          448,
+          32
+        ],
+        [
+          480,
+          32
+        ],
+        [
+          512,
+          32
+        ],
+        [
+          544,
+          32
+        ],
+        [
+          576,
+          32
+        ],
+        [
+          608,
+          32
+        ],
+        [
+          640,
+          32
+        ],
+        [
+          672,
+          32
+        ],
+        [
+          704,
+          32
+        ],
+        [
+          736,
+          32
+        ],
+        [
+          768,
+          32
+        ],
+        [
+          800,
+          32
+        ],
+        [
+          832,
+          32
+        ],
+        [
+          864,
+          32
+        ],
+        [
+          896,
+          32
+        ],
+        [
+          928,
+          32
+        ],
+        [
+          960,
+          32
+        ],
+        [
+          992,
+          32
+        ],
+        [
+          1024,
+          32
+        ],
+        [
+          32,
+          64
+        ],
+        [
+          64,
+          64
+        ],
+        [
+          96,
+          64
+        ],
+        [
+          128,
+          64
+        ],
+        [
+          160,
+          64
+        ],
+        [
+          192,
+          64
+        ],
+        [
+          224,
+          64
+        ],
+        [
+          256,
+          64
+        ],
+        [
+          288,
+          64
+        ],
+        [
+          320,
+          64
+        ],
+        [
+          352,
+          64
+        ],
+        [
+          384,
+          64
+        ],
+        [
+          416,
+          64
+        ],
+        [
+          448,
+          64
+        ],
+        [
+          480,
+          64
+        ],
+        [
+          512,
+          64
+        ],
+        [
+          544,
+          64
+        ],
+        [
+          576,
+          64
+        ],
+        [
+          608,
+          64
+        ],
+        [
+          640,
+          64
+        ],
+        [
+          672,
+          64
+        ],
+        [
+          704,
+          64
+        ],
+        [
+          736,
+          64
+        ],
+        [
+          768,
+          64
+        ],
+        [
+          800,
+          64
+        ],
+        [
+          832,
+          64
+        ],
+        [
+          864,
+          64
+        ],
+        [
+          896,
+          64
+        ],
+        [
+          928,
+          64
+        ],
+        [
+          960,
+          64
+        ],
+        [
+          992,
+          64
+        ],
+        [
+          1024,
+          64
+        ]
+      ],
+      "schema_version": 1,
+      "session_id": "example-session",
+      "snapshots": [
+        {
+          "capture_id": 10,
+          "captured_wall_s": 1750000000.01,
+          "chassis": {
+            "frame": "world",
+            "quality": null,
+            "x": 1.25,
+            "y": -0.5,
+            "yaw": 0.2
+          },
+          "control_seq": 3,
+          "duration_s": 2.0,
+          "joints": [
+            0.0,
+            7.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "limit_flags": 0,
+          "limit_warn_flags": 0,
+          "log_id": "example-log",
+          "log_time_s": 1.0,
+          "playback_epoch": 2,
+          "progress": 0.5,
+          "quality": [
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                1
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            }
+          ],
+          "render_seq": 10,
+          "schema_version": 1,
+          "session_id": "example-session",
+          "source_joints": [
+            0.0,
+            7.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "source_sample_index": 1,
+          "speed": 1.0,
+          "state": "playing",
+          "target_seq": 7
+        }
+      ]
+    },
+    "schema": "SnapshotCatalog"
+  },
+  "protocol/TargetFrame": {
+    "payload": {
+      "chassis": {
+        "frame": "world",
+        "quality": null,
+        "x": 1.25,
+        "y": -0.5,
+        "yaw": 0.2
+      },
+      "control_seq": 3,
+      "duration_s": 2.0,
+      "joint_efforts": null,
+      "joint_velocities": null,
+      "joints": [
+        0.0,
+        7.25,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "log_id": "example-log",
+      "log_time_s": 1.0,
+      "mode": "kinematic",
+      "playback_epoch": 2,
+      "progress": 0.5,
+      "quality": [
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            1
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        },
+        {
+          "method": null,
+          "origin": "measured",
+          "processing": [
+            "original"
+          ],
+          "source_indices": [
+            0
+          ],
+          "valid": true
+        }
+      ],
+      "schema_version": 1,
+      "session_id": "example-session",
+      "source_sample_index": 1,
+      "speed": 1.0,
+      "state": "paused",
+      "target_seq": 7
+    },
+    "schema": "TargetFrame"
+  },
+  "protocol/TargetMessage": {
+    "payload": {
+      "frame": {
+        "chassis": {
+          "frame": "world",
+          "quality": null,
+          "x": 1.25,
+          "y": -0.5,
+          "yaw": 0.2
+        },
+        "control_seq": 3,
+        "duration_s": 2.0,
+        "joint_efforts": null,
+        "joint_velocities": null,
+        "joints": [
+          0.0,
+          7.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "log_id": "example-log",
+        "log_time_s": 1.0,
+        "mode": "kinematic",
+        "playback_epoch": 2,
+        "progress": 0.5,
+        "quality": [
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              1
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          }
+        ],
+        "schema_version": 1,
+        "session_id": "example-session",
+        "source_sample_index": 1,
+        "speed": 1.0,
+        "state": "paused",
+        "target_seq": 7
+      },
+      "schema_version": 1,
+      "type": "target"
+    },
+    "schema": "TargetMessage"
+  },
+  "protocol/TimeBasis": {
+    "payload": {
+      "relative_origin_s": 0.0,
+      "source_origin": 42.0,
+      "unit": "s"
+    },
+    "schema": "TimeBasis"
+  },
+  "protocol/missing-quality": {
+    "payload": {
+      "method": null,
+      "origin": "missing",
+      "processing": [],
+      "source_indices": [
+        1
+      ],
+      "valid": false
+    },
+    "schema": "ChannelQuality"
+  },
+  "protocol/rpc-apply_keyframe": {
+    "payload": {
+      "command": {
+        "cmd": "apply_keyframe",
+        "frame": {
+          "chassis": {
+            "frame": "world",
+            "quality": null,
+            "x": 1.25,
+            "y": -0.5,
+            "yaw": 0.2
+          },
+          "control_seq": 3,
+          "duration_s": 2.0,
+          "joint_efforts": null,
+          "joint_velocities": null,
+          "joints": [
+            0.0,
+            7.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "log_id": "example-log",
+          "log_time_s": 1.0,
+          "mode": "kinematic",
+          "playback_epoch": 2,
+          "progress": 0.5,
+          "quality": [
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                1
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            }
+          ],
+          "schema_version": 1,
+          "session_id": "example-session",
+          "source_sample_index": 1,
+          "speed": 1.0,
+          "state": "paused",
+          "target_seq": 7
+        }
+      },
+      "control_seq": 3,
+      "playback_epoch": 2,
+      "request_id": "example-request",
+      "schema_version": 1,
+      "session_id": "example-session"
+    },
+    "schema": "RPCRequest"
+  },
+  "protocol/rpc-heartbeat": {
+    "payload": {
+      "command": {
+        "cmd": "heartbeat"
+      },
+      "control_seq": 3,
+      "playback_epoch": 2,
+      "request_id": "example-request",
+      "schema_version": 1,
+      "session_id": "example-session"
+    },
+    "schema": "RPCRequest"
+  },
+  "protocol/rpc-load_log": {
+    "payload": {
+      "command": {
+        "cmd": "load_log",
+        "log_id": "example-log"
+      },
+      "control_seq": 3,
+      "playback_epoch": 2,
+      "request_id": "example-request",
+      "schema_version": 1,
+      "session_id": "example-session"
+    },
+    "schema": "RPCRequest"
+  },
+  "protocol/rpc-load_robot": {
+    "payload": {
+      "command": {
+        "cmd": "load_robot",
+        "robot_id": "r1pro_2026"
+      },
+      "control_seq": 3,
+      "playback_epoch": 2,
+      "request_id": "example-request",
+      "schema_version": 1,
+      "session_id": "example-session"
+    },
+    "schema": "RPCRequest"
+  },
+  "protocol/rpc-load_scene": {
+    "payload": {
+      "command": {
+        "cmd": "load_scene",
+        "scene_id": "empty-ground"
+      },
+      "control_seq": 3,
+      "playback_epoch": 2,
+      "request_id": "example-request",
+      "schema_version": 1,
+      "session_id": "example-session"
+    },
+    "schema": "RPCRequest"
+  },
+  "protocol/rpc-pause_barrier": {
+    "payload": {
+      "command": {
+        "cmd": "pause_barrier",
+        "target_seq": 7
+      },
+      "control_seq": 3,
+      "playback_epoch": 2,
+      "request_id": "example-request",
+      "schema_version": 1,
+      "session_id": "example-session"
+    },
+    "schema": "RPCRequest"
+  },
+  "protocol/rpc-reset": {
+    "payload": {
+      "command": {
+        "cmd": "reset"
+      },
+      "control_seq": 3,
+      "playback_epoch": 2,
+      "request_id": "example-request",
+      "schema_version": 1,
+      "session_id": "example-session"
+    },
+    "schema": "RPCRequest"
+  },
+  "protocol/rpc-response-accepted": {
+    "payload": {
+      "control_seq": 3,
+      "error": null,
+      "frame": null,
+      "ok": true,
+      "playback_epoch": 2,
+      "request_id": "example-request",
+      "schema_version": 1,
+      "session_id": "example-session",
+      "stage": "accepted"
+    },
+    "schema": "RPCResponse"
+  },
+  "protocol/rpc-response-applied": {
+    "payload": {
+      "control_seq": 3,
+      "error": null,
+      "frame": {
+        "applied_wall_s": 1750000000.0,
+        "chassis": {
+          "frame": "world",
+          "quality": null,
+          "x": 1.25,
+          "y": -0.5,
+          "yaw": 0.2
+        },
+        "control_seq": 3,
+        "duration_s": 2.0,
+        "joint_efforts": null,
+        "joint_velocities": null,
+        "joints": [
+          0.0,
+          7.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "log_id": "example-log",
+        "log_time_s": 1.0,
+        "mode": "kinematic",
+        "playback_epoch": 2,
+        "progress": 0.5,
+        "quality": [
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              1
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          }
+        ],
+        "schema_version": 1,
+        "session_id": "example-session",
+        "source_joints": [
+          0.0,
+          7.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "source_sample_index": 1,
+        "speed": 1.0,
+        "state": "paused",
+        "target_seq": 7
+      },
+      "ok": true,
+      "playback_epoch": 2,
+      "request_id": "example-request",
+      "schema_version": 1,
+      "session_id": "example-session",
+      "stage": "applied"
+    },
+    "schema": "RPCResponse"
+  },
+  "protocol/rpc-response-error": {
+    "payload": {
+      "control_seq": 3,
+      "error": {
+        "code": "WORKER_UNAVAILABLE",
+        "details": {},
+        "message": "Synthetic worker failure example"
+      },
+      "frame": null,
+      "ok": false,
+      "playback_epoch": 2,
+      "request_id": "example-request",
+      "schema_version": 1,
+      "session_id": "example-session",
+      "stage": "accepted"
+    },
+    "schema": "RPCResponse"
+  },
+  "protocol/rpc-response-rendered": {
+    "payload": {
+      "control_seq": 3,
+      "error": null,
+      "frame": {
+        "applied_wall_s": 1750000000.0,
+        "capture_id": 10,
+        "captured_wall_s": 1750000000.01,
+        "chassis": {
+          "frame": "world",
+          "quality": null,
+          "x": 1.25,
+          "y": -0.5,
+          "yaw": 0.2
+        },
+        "control_seq": 3,
+        "duration_s": 2.0,
+        "joint_efforts": null,
+        "joint_velocities": null,
+        "joints": [
+          0.0,
+          7.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "log_id": "example-log",
+        "log_time_s": 1.0,
+        "mode": "kinematic",
+        "playback_epoch": 2,
+        "progress": 0.5,
+        "quality": [
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              1
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          }
+        ],
+        "raw_identity_verified": true,
+        "render_seq": 10,
+        "schema_version": 1,
+        "session_id": "example-session",
+        "source_joints": [
+          0.0,
+          7.25,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "source_sample_index": 1,
+        "speed": 1.0,
+        "state": "paused",
+        "target_seq": 7
+      },
+      "ok": true,
+      "playback_epoch": 2,
+      "request_id": "example-request",
+      "schema_version": 1,
+      "session_id": "example-session",
+      "stage": "rendered"
+    },
+    "schema": "RPCResponse"
+  },
+  "protocol/rpc-shutdown": {
+    "payload": {
+      "command": {
+        "cmd": "shutdown"
+      },
+      "control_seq": 3,
+      "playback_epoch": 2,
+      "request_id": "example-request",
+      "schema_version": 1,
+      "session_id": "example-session"
+    },
+    "schema": "RPCRequest"
+  },
+  "protocol/rpc-subscribe_ready": {
+    "payload": {
+      "command": {
+        "channels": [
+          "target",
+          "telemetry"
+        ],
+        "cmd": "subscribe_ready"
+      },
+      "control_seq": 3,
+      "playback_epoch": 2,
+      "request_id": "example-request",
+      "schema_version": 1,
+      "session_id": "example-session"
+    },
+    "schema": "RPCRequest"
+  },
+  "protocol/worker-applied": {
+    "payload": {
+      "event": {
+        "frame": {
+          "applied_wall_s": 1750000000.0,
+          "chassis": {
+            "frame": "world",
+            "quality": null,
+            "x": 1.25,
+            "y": -0.5,
+            "yaw": 0.2
+          },
+          "control_seq": 3,
+          "duration_s": 2.0,
+          "joint_efforts": null,
+          "joint_velocities": null,
+          "joints": [
+            0.0,
+            7.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "log_id": "example-log",
+          "log_time_s": 1.0,
+          "mode": "kinematic",
+          "playback_epoch": 2,
+          "progress": 0.5,
+          "quality": [
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                1
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            }
+          ],
+          "schema_version": 1,
+          "session_id": "example-session",
+          "source_joints": [
+            0.0,
+            7.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "source_sample_index": 1,
+          "speed": 1.0,
+          "state": "paused",
+          "target_seq": 7
+        },
+        "type": "applied"
+      },
+      "schema_version": 1,
+      "seq": 3,
+      "session_id": "example-session"
+    },
+    "schema": "WorkerEvent"
+  },
+  "protocol/worker-error": {
+    "payload": {
+      "event": {
+        "error": {
+          "code": "WORKER_UNAVAILABLE",
+          "details": {},
+          "message": "Synthetic worker failure example"
+        },
+        "type": "error"
+      },
+      "schema_version": 1,
+      "seq": 5,
+      "session_id": "example-session"
+    },
+    "schema": "WorkerEvent"
+  },
+  "protocol/worker-health": {
+    "payload": {
+      "event": {
+        "render_fps": 20.0,
+        "type": "health",
+        "wall_time_s": 1750000000.0
+      },
+      "schema_version": 1,
+      "seq": 2,
+      "session_id": "example-session"
+    },
+    "schema": "WorkerEvent"
+  },
+  "protocol/worker-ready": {
+    "payload": {
+      "event": {
+        "isaacsim_version": "6.2.0",
+        "physics_engine": "physx",
+        "type": "ready"
+      },
+      "schema_version": 1,
+      "seq": 1,
+      "session_id": "example-session"
+    },
+    "schema": "WorkerEvent"
+  },
+  "protocol/worker-rendered": {
+    "payload": {
+      "event": {
+        "frame": {
+          "applied_wall_s": 1750000000.0,
+          "capture_id": 10,
+          "captured_wall_s": 1750000000.01,
+          "chassis": {
+            "frame": "world",
+            "quality": null,
+            "x": 1.25,
+            "y": -0.5,
+            "yaw": 0.2
+          },
+          "control_seq": 3,
+          "duration_s": 2.0,
+          "joint_efforts": null,
+          "joint_velocities": null,
+          "joints": [
+            0.0,
+            7.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "log_id": "example-log",
+          "log_time_s": 1.0,
+          "mode": "kinematic",
+          "playback_epoch": 2,
+          "progress": 0.5,
+          "quality": [
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                1
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            },
+            {
+              "method": null,
+              "origin": "measured",
+              "processing": [
+                "original"
+              ],
+              "source_indices": [
+                0
+              ],
+              "valid": true
+            }
+          ],
+          "raw_identity_verified": true,
+          "render_seq": 10,
+          "schema_version": 1,
+          "session_id": "example-session",
+          "source_joints": [
+            0.0,
+            7.25,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "source_sample_index": 1,
+          "speed": 1.0,
+          "state": "paused",
+          "target_seq": 7
+        },
+        "type": "rendered"
+      },
+      "schema_version": 1,
+      "seq": 4,
+      "session_id": "example-session"
+    },
+    "schema": "WorkerEvent"
+  },
+  "service/create_session": {
+    "payload": {
+      "isaacsim_version": "6.2.0",
+      "mode": "kinematic",
+      "physics_engine": "physx",
+      "robot_id": "r1pro_2026",
+      "scene_id": "empty"
+    },
+    "schema": "CreateSessionRequest"
+  },
+  "service/joint_metadata": {
+    "payload": {
+      "canonical_order": [
+        "steer_motor_joint1",
+        "wheel_motor_joint1",
+        "steer_motor_joint2",
+        "wheel_motor_joint2",
+        "steer_motor_joint3",
+        "wheel_motor_joint3",
+        "torso_joint1",
+        "torso_joint2",
+        "torso_joint3",
+        "torso_joint4",
+        "left_arm_joint1",
+        "left_arm_joint2",
+        "left_arm_joint3",
+        "left_arm_joint4",
+        "left_arm_joint5",
+        "left_arm_joint6",
+        "left_arm_joint7",
+        "left_gripper_finger_joint1",
+        "left_gripper_finger_joint2",
+        "right_arm_joint1",
+        "right_arm_joint2",
+        "right_arm_joint3",
+        "right_arm_joint4",
+        "right_arm_joint5",
+        "right_arm_joint6",
+        "right_arm_joint7",
+        "right_gripper_finger_joint1",
+        "right_gripper_finger_joint2"
+      ],
+      "joints": [
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -3.1416,
+          "name": "steer_motor_joint1",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 3.1416
+        },
+        {
+          "limits_provenance": "simulation assumption (wheel missing URDF ratings)",
+          "lower": null,
+          "name": "wheel_motor_joint1",
+          "type": "continuous",
+          "unit": "rad",
+          "upper": null
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -3.1416,
+          "name": "steer_motor_joint2",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 3.1416
+        },
+        {
+          "limits_provenance": "simulation assumption (wheel missing URDF ratings)",
+          "lower": null,
+          "name": "wheel_motor_joint2",
+          "type": "continuous",
+          "unit": "rad",
+          "upper": null
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -3.1416,
+          "name": "steer_motor_joint3",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 3.1416
+        },
+        {
+          "limits_provenance": "simulation assumption (wheel missing URDF ratings)",
+          "lower": null,
+          "name": "wheel_motor_joint3",
+          "type": "continuous",
+          "unit": "rad",
+          "upper": null
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -1.1170467075,
+          "name": "torso_joint1",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 1.8151467075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -2.7750467075,
+          "name": "torso_joint2",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 2.5132467075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -1.8151467075,
+          "name": "torso_joint3",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 1.5533467075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -3.0368467075,
+          "name": "torso_joint4",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 3.0368467075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -4.4331467075,
+          "name": "left_arm_joint1",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 1.2915467075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -0.1570467075,
+          "name": "left_arm_joint2",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 3.1241467075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -2.3387427075,
+          "name": "left_arm_joint3",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 2.3387427075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -2.0769467075,
+          "name": "left_arm_joint4",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 0.3316467075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -2.3387427075,
+          "name": "left_arm_joint5",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 2.3387427075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -1.0297447075,
+          "name": "left_arm_joint6",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 1.0297447075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -1.5533467075,
+          "name": "left_arm_joint7",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 1.5533467075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": 0.0,
+          "name": "left_gripper_finger_joint1",
+          "type": "prismatic",
+          "unit": "m",
+          "upper": 0.05
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -0.05,
+          "name": "left_gripper_finger_joint2",
+          "type": "prismatic",
+          "unit": "m",
+          "upper": 0.0
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -4.4331467075,
+          "name": "right_arm_joint1",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 1.2915467075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -3.1241467075,
+          "name": "right_arm_joint2",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 0.1570467075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -2.3387427075,
+          "name": "right_arm_joint3",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 2.3387427075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -2.0769467075,
+          "name": "right_arm_joint4",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 0.3316467075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -2.3387427075,
+          "name": "right_arm_joint5",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 2.3387427075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -1.0297447075,
+          "name": "right_arm_joint6",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 1.0297447075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -1.5533467075,
+          "name": "right_arm_joint7",
+          "type": "revolute",
+          "unit": "rad",
+          "upper": 1.5533467075
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": 0.0,
+          "name": "right_gripper_finger_joint1",
+          "type": "prismatic",
+          "unit": "m",
+          "upper": 0.05
+        },
+        {
+          "limits_provenance": "vendor URDF",
+          "lower": -0.05,
+          "name": "right_gripper_finger_joint2",
+          "type": "prismatic",
+          "unit": "m",
+          "upper": 0.0
+        }
+      ],
+      "limits_source": "assets/robots/r1pro_2026/isaacsim_6_x/reproduction/configs/r1pro_2026_common.json",
+      "robot_id": "r1pro_2026"
+    },
+    "schema": "JointMetadata"
+  },
+  "service/log_annotations": {
+    "payload": {
+      "alignment": "source_frames",
+      "assumptions": [
+        "Example provisional calibration"
+      ],
+      "events": [
+        {
+          "details": {},
+          "id": "example-event",
+          "kind": "request",
+          "message": "Historical diagnostic",
+          "time_s": null
+        }
+      ],
+      "log_id": "example-log",
+      "provisional": true,
+      "reference": {},
+      "segments": [
+        {
+          "boundary_status": "pending_review",
+          "details": {},
+          "end_frame": 2,
+          "end_s": 1.0,
+          "id": "example-stage",
+          "label": "Example stage",
+          "review_status": "pending_review",
+          "start_frame": 0,
+          "start_s": 0.0,
+          "training_approved": false
+        }
+      ],
+      "source_id": "example-source",
+      "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "schema": "LogAnnotations"
+  },
+  "service/playback_ack": {
+    "payload": {
+      "ack_stage": "accepted",
+      "control_seq": 2,
+      "playback": {
+        "applied_position": null,
+        "control_seq": 2,
+        "duration_s": 1.0,
+        "log_id": "example-log",
+        "playback_epoch": 1,
+        "rendered_identity": null,
+        "schema_version": 1,
+        "session_id": "example-session",
+        "speed": 1.0,
+        "state": "paused",
+        "target_position": {
+          "log_time_s": 0.5,
+          "source_sample_index": 0,
+          "target_seq": 3
+        }
+      },
+      "playback_epoch": 1,
+      "request_id": "example-control"
+    },
+    "schema": "RESTPlaybackResponse"
+  },
+  "service/upload_result": {
+    "payload": {
+      "channels": [
+        {
+          "angle_semantics": "bounded",
+          "joint_index": 0,
+          "kind": "joint",
+          "label": "Steer 1",
+          "lower": null,
+          "name": "steer_motor_joint1",
+          "quality": {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          "source_field": "steer1",
+          "source_unit": null,
+          "unit": "rad",
+          "upper": null,
+          "wrap_period": null
+        }
+      ],
+      "issues": [
+        {
+          "channel": null,
+          "code": "MISSING_JOINT",
+          "details": {},
+          "line": null,
+          "message": "Example has only one measured joint channel",
+          "severity": "warning"
+        }
+      ],
+      "log_id": "example-log",
+      "mapping_snapshot": {
+        "joints": {
+          "map": {
+            "steer_motor_joint1": "steer1"
+          },
+          "unit": "rad"
+        },
+        "schema_version": 1,
+        "timestamp": {
+          "field": "time",
+          "unit": "s"
+        }
+      },
+      "mapping_snapshot_id": "example-mapping",
+      "parser": "csv_v1",
+      "raw_file_ref": "uploads/example-log/source.csv",
+      "raw_file_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "stats": {
+        "chassis": {
+          "available": false,
+          "frame": null,
+          "source_channels": []
+        },
+        "duration_s": 1.0,
+        "joints_mapped": [
+          "steer_motor_joint1"
+        ],
+        "joints_missing": [
+          "wheel_motor_joint1",
+          "steer_motor_joint2",
+          "wheel_motor_joint2",
+          "steer_motor_joint3",
+          "wheel_motor_joint3",
+          "torso_joint1",
+          "torso_joint2",
+          "torso_joint3",
+          "torso_joint4",
+          "left_arm_joint1",
+          "left_arm_joint2",
+          "left_arm_joint3",
+          "left_arm_joint4",
+          "left_arm_joint5",
+          "left_arm_joint6",
+          "left_arm_joint7",
+          "left_gripper_finger_joint1",
+          "left_gripper_finger_joint2",
+          "right_arm_joint1",
+          "right_arm_joint2",
+          "right_arm_joint3",
+          "right_arm_joint4",
+          "right_arm_joint5",
+          "right_arm_joint6",
+          "right_arm_joint7",
+          "right_gripper_finger_joint1",
+          "right_gripper_finger_joint2"
+        ],
+        "nominal_rate_hz": 1.0,
+        "sample_count": 2
+      }
+    },
+    "schema": "UploadResult"
+  },
+  "service/ws_alert": {
+    "payload": {
+      "connection_id": "example-connection",
+      "data": {
+        "alert_id": "example-alert",
+        "code": "NEAR_LIMIT",
+        "details": {},
+        "joint_index": 0,
+        "log_id": "example-log",
+        "log_time_s": 0.5,
+        "message": "Example joint approaches its bound",
+        "playback_epoch": 1,
+        "severity": "warning",
+        "source": "limits"
+      },
+      "schema_version": 1,
+      "seq": 5,
+      "session_id": "example-session",
+      "type": "alert",
+      "wall_time": 1000.5
+    },
+    "schema": "ws-server"
+  },
+  "service/ws_connection_snapshot": {
+    "payload": {
+      "connection_id": "example-connection",
+      "data": {
+        "joint_meta": {
+          "canonical_order": [
+            "steer_motor_joint1",
+            "wheel_motor_joint1",
+            "steer_motor_joint2",
+            "wheel_motor_joint2",
+            "steer_motor_joint3",
+            "wheel_motor_joint3",
+            "torso_joint1",
+            "torso_joint2",
+            "torso_joint3",
+            "torso_joint4",
+            "left_arm_joint1",
+            "left_arm_joint2",
+            "left_arm_joint3",
+            "left_arm_joint4",
+            "left_arm_joint5",
+            "left_arm_joint6",
+            "left_arm_joint7",
+            "left_gripper_finger_joint1",
+            "left_gripper_finger_joint2",
+            "right_arm_joint1",
+            "right_arm_joint2",
+            "right_arm_joint3",
+            "right_arm_joint4",
+            "right_arm_joint5",
+            "right_arm_joint6",
+            "right_arm_joint7",
+            "right_gripper_finger_joint1",
+            "right_gripper_finger_joint2"
+          ],
+          "joints": [
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -3.1416,
+              "name": "steer_motor_joint1",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 3.1416
+            },
+            {
+              "limits_provenance": "simulation assumption (wheel missing URDF ratings)",
+              "lower": null,
+              "name": "wheel_motor_joint1",
+              "type": "continuous",
+              "unit": "rad",
+              "upper": null
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -3.1416,
+              "name": "steer_motor_joint2",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 3.1416
+            },
+            {
+              "limits_provenance": "simulation assumption (wheel missing URDF ratings)",
+              "lower": null,
+              "name": "wheel_motor_joint2",
+              "type": "continuous",
+              "unit": "rad",
+              "upper": null
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -3.1416,
+              "name": "steer_motor_joint3",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 3.1416
+            },
+            {
+              "limits_provenance": "simulation assumption (wheel missing URDF ratings)",
+              "lower": null,
+              "name": "wheel_motor_joint3",
+              "type": "continuous",
+              "unit": "rad",
+              "upper": null
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -1.1170467075,
+              "name": "torso_joint1",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 1.8151467075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -2.7750467075,
+              "name": "torso_joint2",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 2.5132467075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -1.8151467075,
+              "name": "torso_joint3",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 1.5533467075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -3.0368467075,
+              "name": "torso_joint4",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 3.0368467075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -4.4331467075,
+              "name": "left_arm_joint1",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 1.2915467075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -0.1570467075,
+              "name": "left_arm_joint2",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 3.1241467075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -2.3387427075,
+              "name": "left_arm_joint3",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 2.3387427075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -2.0769467075,
+              "name": "left_arm_joint4",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 0.3316467075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -2.3387427075,
+              "name": "left_arm_joint5",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 2.3387427075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -1.0297447075,
+              "name": "left_arm_joint6",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 1.0297447075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -1.5533467075,
+              "name": "left_arm_joint7",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 1.5533467075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": 0.0,
+              "name": "left_gripper_finger_joint1",
+              "type": "prismatic",
+              "unit": "m",
+              "upper": 0.05
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -0.05,
+              "name": "left_gripper_finger_joint2",
+              "type": "prismatic",
+              "unit": "m",
+              "upper": 0.0
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -4.4331467075,
+              "name": "right_arm_joint1",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 1.2915467075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -3.1241467075,
+              "name": "right_arm_joint2",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 0.1570467075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -2.3387427075,
+              "name": "right_arm_joint3",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 2.3387427075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -2.0769467075,
+              "name": "right_arm_joint4",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 0.3316467075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -2.3387427075,
+              "name": "right_arm_joint5",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 2.3387427075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -1.0297447075,
+              "name": "right_arm_joint6",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 1.0297447075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -1.5533467075,
+              "name": "right_arm_joint7",
+              "type": "revolute",
+              "unit": "rad",
+              "upper": 1.5533467075
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": 0.0,
+              "name": "right_gripper_finger_joint1",
+              "type": "prismatic",
+              "unit": "m",
+              "upper": 0.05
+            },
+            {
+              "limits_provenance": "vendor URDF",
+              "lower": -0.05,
+              "name": "right_gripper_finger_joint2",
+              "type": "prismatic",
+              "unit": "m",
+              "upper": 0.0
+            }
+          ],
+          "limits_source": "assets/robots/r1pro_2026/isaacsim_6_x/reproduction/configs/r1pro_2026_common.json",
+          "robot_id": "r1pro_2026"
+        },
+        "playback": {
+          "applied_position": null,
+          "control_seq": 2,
+          "duration_s": 1.0,
+          "log_id": "example-log",
+          "playback_epoch": 1,
+          "rendered_identity": null,
+          "schema_version": 1,
+          "session_id": "example-session",
+          "speed": 1.0,
+          "state": "paused",
+          "target_position": {
+            "log_time_s": 0.5,
+            "source_sample_index": 0,
+            "target_seq": 3
+          }
+        },
+        "sync": {
+          "gap_action": "reconnect_and_wait_for_pair",
+          "identity_scheme": "capture32_crc32",
+          "last_rendered_identity": null,
+          "playback_epoch": 1,
+          "presentation": "verified_pair_single_canvas",
+          "snapshot_catalog_capacity": 16,
+          "state": "awaiting_pair"
+        },
+        "telemetry_hz": 20,
+        "video": {
+          "catalog_schema_version": 1,
+          "decoder": "webcodecs_h264",
+          "ice_servers": [],
+          "identity_scheme": "capture32_crc32",
+          "presentation": "verified_pair_single_canvas",
+          "publishing": true,
+          "receiver_transform": "rtcrtp_script_transform_or_encoded_streams",
+          "render_fps": 30.0,
+          "sei_uuid_hex": "83249d41b6545e6e8d7779430f88bb0d",
+          "snapshot_transport": "h264_sei_snapshot_catalog",
+          "stream_path": "example-session",
+          "transport": "whep",
+          "whep_url": "http://localhost:8889/example-session/whep"
+        },
+        "worker": {
+          "error": null,
+          "message": null,
+          "phase": "ready",
+          "pid": 12345,
+          "restart_policy": "recreate_session_reload_from_start"
+        }
+      },
+      "schema_version": 1,
+      "seq": 1,
+      "session_id": "example-session",
+      "type": "connection_snapshot",
+      "wall_time": 1000.1
+    },
+    "schema": "ws-server"
+  },
+  "service/ws_frame_snapshot": {
+    "payload": {
+      "connection_id": "example-connection",
+      "data": {
+        "capture_id": 4,
+        "captured_wall_s": 1000.0,
+        "chassis": {
+          "frame": "world",
+          "quality": null,
+          "x": 0.0,
+          "y": 0.0,
+          "yaw": 0.0
+        },
+        "control_seq": 2,
+        "duration_s": 1.0,
+        "joints": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "limit_flags": 0,
+        "limit_warn_flags": 0,
+        "log_id": "example-log",
+        "log_time_s": 0.5,
+        "playback_epoch": 1,
+        "progress": 0.5,
+        "quality": [
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          },
+          {
+            "method": null,
+            "origin": "measured",
+            "processing": [
+              "original"
+            ],
+            "source_indices": [
+              0
+            ],
+            "valid": true
+          }
+        ],
+        "render_seq": 4,
+        "schema_version": 1,
+        "session_id": "example-session",
+        "source_joints": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "source_sample_index": 0,
+        "speed": 1.0,
+        "state": "paused",
+        "target_seq": 3
+      },
+      "schema_version": 1,
+      "seq": 4,
+      "session_id": "example-session",
+      "type": "frame_snapshot",
+      "wall_time": 1000.4
+    },
+    "schema": "ws-server"
+  },
+  "service/ws_health_telemetry": {
+    "payload": {
+      "connection_id": "example-connection",
+      "data": {
+        "cpu_percent": 12.0,
+        "gpu_memory_bytes": null,
+        "gpu_percent": null,
+        "memory_bytes": 1048576,
+        "render_fps": 30.0,
+        "worker_alive": true
+      },
+      "schema_version": 1,
+      "seq": 6,
+      "session_id": "example-session",
+      "type": "health_telemetry",
+      "wall_time": 1000.6
+    },
+    "schema": "ws-server"
+  },
+  "service/ws_ping": {
+    "payload": {
+      "connection_id": "example-connection",
+      "data": {
+        "request_id": "example-ping"
+      },
+      "schema_version": 1,
+      "seq": 1,
+      "session_id": "example-session",
+      "type": "ping",
+      "wall_time": 1000.1
+    },
+    "schema": "ws-client"
+  },
+  "service/ws_playback_state": {
+    "payload": {
+      "connection_id": "example-connection",
+      "data": {
+        "playback": {
+          "applied_position": null,
+          "control_seq": 2,
+          "duration_s": 1.0,
+          "log_id": "example-log",
+          "playback_epoch": 1,
+          "rendered_identity": null,
+          "schema_version": 1,
+          "session_id": "example-session",
+          "speed": 1.0,
+          "state": "paused",
+          "target_position": {
+            "log_time_s": 0.5,
+            "source_sample_index": 0,
+            "target_seq": 3
+          }
+        },
+        "reason": "pause",
+        "request_id": "example-control"
+      },
+      "schema_version": 1,
+      "seq": 3,
+      "session_id": "example-session",
+      "type": "playback_state",
+      "wall_time": 1000.3
+    },
+    "schema": "ws-server"
+  },
+  "service/ws_pong": {
+    "payload": {
+      "connection_id": "example-connection",
+      "data": {
+        "request_id": "example-ping"
+      },
+      "schema_version": 1,
+      "seq": 7,
+      "session_id": "example-session",
+      "type": "pong",
+      "wall_time": 1000.7
+    },
+    "schema": "ws-server"
+  },
+  "service/ws_set_telemetry_rate": {
+    "payload": {
+      "connection_id": "example-connection",
+      "data": {
+        "hz": 20,
+        "request_id": "example-rate"
+      },
+      "schema_version": 1,
+      "seq": 2,
+      "session_id": "example-session",
+      "type": "set_telemetry_rate",
+      "wall_time": 1000.2
+    },
+    "schema": "ws-client"
+  },
+  "service/ws_system": {
+    "payload": {
+      "connection_id": "example-connection",
+      "data": {
+        "error": null,
+        "event": "worker_phase_changed",
+        "message": null,
+        "worker": {
+          "error": null,
+          "message": null,
+          "phase": "ready",
+          "pid": 12345,
+          "restart_policy": "recreate_session_reload_from_start"
+        }
+      },
+      "schema_version": 1,
+      "seq": 2,
+      "session_id": "example-session",
+      "type": "system",
+      "wall_time": 1000.2
+    },
+    "schema": "ws-server"
+  },
+  "service/ws_telemetry_rate_changed": {
+    "payload": {
+      "connection_id": "example-connection",
+      "data": {
+        "hz": 20,
+        "request_id": "example-rate"
+      },
+      "schema_version": 1,
+      "seq": 8,
+      "session_id": "example-session",
+      "type": "telemetry_rate_changed",
+      "wall_time": 1000.8
+    },
+    "schema": "ws-server"
+  }
+}

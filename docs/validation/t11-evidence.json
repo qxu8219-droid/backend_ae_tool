@@ -1,0 +1,171 @@
+{
+  "date": "2026-10-26",
+  "task": "T11",
+  "scope": "Real IsaacSim 6.2.0 / PhysX, local ZMQ, raw capture and independently decoded H264 identity; synthetic data only; no browser claim",
+  "run_directory": "outputs/t11/binding-guard-isolated-gpu",
+  "tests": {
+    "backend": 689,
+    "worker_subset": 34,
+    "p0_cpu": 90,
+    "frontend_unit": 191,
+    "schema_check": true,
+    "typescript_check": true,
+    "frontend_typecheck_and_build": true
+  },
+  "worker": {
+    "passed": true,
+    "event_count": 93,
+    "paused_recaptures": 19,
+    "stale_target_rejected": true,
+    "worker_exit_code": 0,
+    "paused_raw_capture_fps": 17.6496870991429,
+    "media_decode_verified": true,
+    "rtsp_listening_address": "LISTEN 0      5      0.0.0.0:50239 0.0.0.0:*"
+  },
+  "encoded_identity": {
+    "decoded_frames": 170,
+    "matched_frames": 170,
+    "warmup_frames": 0,
+    "unique_capture_ids": 169,
+    "pixel_crc_errors": 0,
+    "catalog_mismatches": 0,
+    "encoded_image_differs_from_poll": 169,
+    "states": {
+      "ready": 1,
+      "playing": 30,
+      "paused": 139
+    },
+    "epochs": {
+      "1": 50,
+      "2": 37,
+      "3": 83
+    },
+    "source_and_readback_values_verified": true,
+    "scope": "Independent software H264 decode of real IsaacSim output; not browser presentation"
+  },
+  "decoder_timing": {
+    "nonmonotonic_pts": 1,
+    "declared_avg_frame_rate": [
+      60,
+      1
+    ],
+    "observed_receive_fps": 21.079626105,
+    "startup_to_first_frame_seconds": 2.113603
+  },
+  "registry": {
+    "catalog_size": 13,
+    "armed": 64,
+    "last_capture_id": 175,
+    "raw_errors": 0,
+    "prepared_frames": 175,
+    "nonmonotonic_video_time": 0,
+    "diagnostic_errors": 0,
+    "last_diagnostic_error": null
+  },
+  "writer": {
+    "catalog_size": 13,
+    "armed": 64,
+    "last_capture_id": 175,
+    "raw_errors": 0,
+    "prepared_frames": 175,
+    "nonmonotonic_video_time": 0,
+    "diagnostic_errors": 0,
+    "last_diagnostic_error": null,
+    "stream_calls": 175,
+    "streamed_frames": 171,
+    "stream_rejected": 4,
+    "stream_errors": 0,
+    "failed_stream_drops": 0,
+    "metadata_uuid_hex": "83249d41b6545e6e8d7779430f88bb0d",
+    "stream_failed": false,
+    "debug_frames": 0,
+    "debug_attempts": 0,
+    "debug_errors": 0,
+    "debug_last_error": null
+  },
+  "native_binding": {
+    "default_reject_verified": true,
+    "default_reject_evidence": "outputs/t11/default-binding-rejection-fixed/evidence.json",
+    "default_reject_exit_code": 1,
+    "synthetic_override_explicit": true,
+    "addresses": [
+      "0.0.0.0"
+    ]
+  },
+  "ports_released": {
+    "rpc": [],
+    "target": [],
+    "event": [],
+    "rtsp": []
+  },
+  "local_data": {
+    "directory": "data/real_logs",
+    "source_entries": 12,
+    "files": 27,
+    "sha256_verified": true,
+    "raw_files_read_only": true,
+    "real_log_conversion_activated": false
+  },
+  "failed_runs_preserved": [
+    {
+      "directory": "outputs/t11/first-gpu",
+      "reason": "Quaternion roundoff before normalized comparison"
+    },
+    {
+      "directory": "outputs/t11/encoded-gpu",
+      "reason": "Cadence/initial encoder packet and paused Fabric timing before fixes"
+    },
+    {
+      "directory": "outputs/t11/default-binding-rejection",
+      "reason": "SDK fast shutdown hid failure as exit code zero; fixed and reverified"
+    },
+    {
+      "directory": "outputs/t11/binding-guard-final-gpu",
+      "reason": "Raw capture 14.573682493781487 fps during concurrent test/build workload; below 15 fps, not passed"
+    }
+  ],
+  "limitations": [
+    "No formal browser/WHEP acceptance or end-to-end common-latency measurement in T11",
+    "One nonmonotonic decoded PTS; exact pairing uses pixel ID/CRC, never PTS",
+    "Independent healthy run is a short window, not sustained or concurrent-load guarantee",
+    "Real data calibration pending; native media isolation required before private replay"
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/t11/binding-guard-isolated-gpu/evidence.json",
+      "sha256": "acd9c92a3b90ae94fd8e548c40f81cb96775d9d74b12f102bc9a2b3105860047"
+    },
+    {
+      "path": "outputs/t11/binding-guard-isolated-gpu/issued.json",
+      "sha256": "7499f63c6b81770c790f475d05f74f140be410f5ed77f7847ce0c90e168ca1f0"
+    },
+    {
+      "path": "outputs/t11/binding-guard-isolated-gpu/encoded-identity-evidence.json",
+      "sha256": "ad49e958ae461171db14cf97b9f0ebb0434f5d8719ce87481138405e6da3dcd7"
+    },
+    {
+      "path": "outputs/t11/binding-guard-isolated-gpu/decoder.json",
+      "sha256": "af0676d9535fa04c7e1aad0eee561413ffab87f301c0463a983bccc0d6811ec6"
+    },
+    {
+      "path": "outputs/t11/binding-guard-isolated-gpu/decoder.json.frames.jsonl",
+      "sha256": "0659891e22227aba44d503e01882c62f44aa8c7ea7fbe1e506ae8e63d235895a"
+    },
+    {
+      "path": "outputs/t11/binding-guard-isolated-gpu/worker/runtime-final.json",
+      "sha256": "8dea04008536ca4bacf9cf11b62fdd32d8a1aa5dbfa67610ecb007457861718f"
+    },
+    {
+      "path": "outputs/t11/binding-guard-isolated-gpu/worker/shutdown.json",
+      "sha256": "01c887b97fc1e14e23c0b0be956ff2cee3b3d5671d6103eead7a82791cf86f18"
+    },
+    {
+      "path": "outputs/t11/binding-guard-isolated-gpu/rtsp-listener.txt",
+      "sha256": "77c77914288e3c730e486ba44843930bc2e691e60489d1af74691f8fe2232a0a"
+    },
+    {
+      "path": "outputs/t11/binding-guard-isolated-gpu/port-release.json",
+      "sha256": "486b098605d70dc7f4010131e7f76e2c7f43ff0d4660aa2522a91d1a9e3dd1af"
+    }
+  ]
+}

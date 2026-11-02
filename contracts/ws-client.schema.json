@@ -1,0 +1,171 @@
+{
+  "$defs": {
+    "PingData": {
+      "additionalProperties": false,
+      "properties": {
+        "request_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Request Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "request_id"
+      ],
+      "title": "PingData",
+      "type": "object"
+    },
+    "TelemetryRateData": {
+      "additionalProperties": false,
+      "properties": {
+        "hz": {
+          "enum": [
+            10,
+            20,
+            30
+          ],
+          "title": "Hz",
+          "type": "integer"
+        },
+        "request_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Request Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "request_id",
+        "hz"
+      ],
+      "title": "TelemetryRateData",
+      "type": "object"
+    },
+    "WSPing": {
+      "additionalProperties": false,
+      "properties": {
+        "connection_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Connection Id",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/PingData"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "seq": {
+          "description": "Monotonic within this connection_id only; gaps require reconnect/snapshot recovery.",
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "ping",
+          "title": "Type",
+          "type": "string"
+        },
+        "wall_time": {
+          "description": "UTC Unix seconds; system clock, not log time.",
+          "minimum": 0,
+          "title": "Wall Time",
+          "type": "number"
+        }
+      },
+      "required": [
+        "session_id",
+        "connection_id",
+        "seq",
+        "wall_time",
+        "type",
+        "data"
+      ],
+      "title": "WSPing",
+      "type": "object"
+    },
+    "WSSetTelemetryRate": {
+      "additionalProperties": false,
+      "properties": {
+        "connection_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Connection Id",
+          "type": "string"
+        },
+        "data": {
+          "$ref": "#/$defs/TelemetryRateData"
+        },
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "seq": {
+          "description": "Monotonic within this connection_id only; gaps require reconnect/snapshot recovery.",
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "session_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Session Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "set_telemetry_rate",
+          "title": "Type",
+          "type": "string"
+        },
+        "wall_time": {
+          "description": "UTC Unix seconds; system clock, not log time.",
+          "minimum": 0,
+          "title": "Wall Time",
+          "type": "number"
+        }
+      },
+      "required": [
+        "session_id",
+        "connection_id",
+        "seq",
+        "wall_time",
+        "type",
+        "data"
+      ],
+      "title": "WSSetTelemetryRate",
+      "type": "object"
+    }
+  },
+  "$id": "https://model-evaluation.local/contracts/1/ws-client.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "discriminator": {
+    "mapping": {
+      "ping": "#/$defs/WSPing",
+      "set_telemetry_rate": "#/$defs/WSSetTelemetryRate"
+    },
+    "propertyName": "type"
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/WSPing"
+    },
+    {
+      "$ref": "#/$defs/WSSetTelemetryRate"
+    }
+  ]
+}

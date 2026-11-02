@@ -1,5 +1,7 @@
 # P0 native stream — Isaac Sim 5.1 浏览器验证页
 
+> 历史归档：首期基线已改为 6.2。本页与 SDK 5.6.0 不作为当前 6.2 浏览器入口；复现使用 `feature/p0-isaac51` 的独立工作区。
+
 这是可丢弃的原生 WebRTC 连接 spike，不是正式前端。目标是把 5.1 的流呈现在自研浏览器页面，便于记录连接事件。**构建通过不等于已确认 Isaac 5.1 兼容；本页未实现视频/关节/底盘/log 游标帧同步。**
 
 固定依赖：`@nvidia/omniverse-webrtc-streaming-library` **5.6.0**，按官方 `web-viewer-sample` **1.5.2** 的 `StreamType.DIRECT` / `AppStreamer.connect` 调用形状接入。该样例标明面向 Kit 107.3.1 及以后；本机 Isaac 5.1 使用 Kit 107.3.3。具体能否连接此安装仍须真实实例验证。

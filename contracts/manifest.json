@@ -1,0 +1,17 @@
+{
+  "examples": "examples.json",
+  "purpose": "versioned API and wire contracts; runtime is configured explicitly",
+  "rest": "openapi.json",
+  "schema_version": 1,
+  "wire": {
+    "frame-catalog": "frame-catalog.schema.json",
+    "ipc-request": "ipc-request.schema.json",
+    "ipc-response": "ipc-response.schema.json",
+    "presented-frame": "presented-frame.schema.json",
+    "replay-data": "replay-data.schema.json",
+    "target": "target.schema.json",
+    "worker-event": "worker-event.schema.json",
+    "ws-client": "ws-client.schema.json",
+    "ws-server": "ws-server.schema.json"
+  }
+}

@@ -1,7 +1,7 @@
 """Audit the local R1Pro 2026 asset using only the Python standard library.
 
 This checks bytes, names and textual USD asset paths. Binary USD composition
-must additionally be checked by the Isaac Sim 5.1 runtime.
+must additionally be checked by the selected Isaac Sim runtime.
 """
 
 import argparse
@@ -212,9 +212,10 @@ def audit_asset(asset_dir) -> dict:
 
 
 def main() -> int:
+    from runtime_profile import load_profile
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--asset-dir", type=Path,
-                        default=Path(__file__).resolve().parents[2] / "assets/robots/r1pro_2026/isaacsim_5_1")
+                        default=load_profile(Path(__file__).resolve().parents[2])['asset_path'])
     parser.add_argument("--output", type=Path, help="Write the JSON report to this path")
     args = parser.parse_args()
     result = audit_asset(args.asset_dir)

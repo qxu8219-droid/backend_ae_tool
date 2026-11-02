@@ -1,0 +1,113 @@
+{
+  "date": "2026-10-26",
+  "base_commit": "9326f49",
+  "scope": "Deterministic CPU ReplayData-to-TargetFrame sampling; synthetic fixtures, no running timeline, HTTP session or IsaacSim/media acceptance",
+  "tests": {
+    "backend_total": 441,
+    "suites": {
+      "contracts": 164,
+      "adapters": 199,
+      "replay": 78
+    },
+    "p0_cpu_unittest": 90,
+    "failures": 0,
+    "backend_command": "env -u PYTHONPATH -u PYTHONHOME PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -o addopts= -q",
+    "p0_cpu_command": "python3 -m unittest discover -s tests -v",
+    "warning": "Existing Starlette/httpx TestClient deprecation warning"
+  },
+  "contract_checks": {
+    "schema_export_check": "passed, wire schemas unchanged",
+    "typescript_contracts": "passed"
+  },
+  "sampling_probe": {
+    "scope": "CPU source-to-TargetFrame sampling only; no IsaacSim/video/final replay performance",
+    "samples": 1200,
+    "canonical_joints": 28,
+    "queries_per_order": 2000,
+    "orders_checked": [
+      "forward",
+      "seeded-random",
+      "reverse"
+    ],
+    "prepare_s": 0.2635229759999902,
+    "query_s": 0.3372710310000002,
+    "queries_per_s": 5929.948961433331,
+    "mean_query_ms": 0.1686355155000001,
+    "source_and_archive_unchanged": true,
+    "original_sample_index_preserved": true,
+    "shared_target_json_valid": true,
+    "signed_wheel_estimate_verified": true,
+    "synthetic_wheel_radius_m": 0.1,
+    "sampler_metadata": {
+      "source_relative_origin_s": 0.5,
+      "sampling": "per-channel linear / explicitly wrapped shortest-path interpolation",
+      "wrapped_lift_provenance": "Lift uses the contiguous valid source-run prefix; source_indices identify current raw endpoints, not an expanded copy of the prefix.",
+      "missing_joint_policy": "last valid source at or before query, invalid quality; leading fallback zero",
+      "chassis_policy": "already world xy/yaw; unavailable is None; worker must preserve initial z/roll/pitch",
+      "virtual_wheels": {
+        "enabled": true,
+        "model": "signed_body_forward_distance.v1",
+        "wheel_radius_m": 0.1,
+        "joint_signs": {
+          "wheel_motor_joint1": 1,
+          "wheel_motor_joint2": -1,
+          "wheel_motor_joint3": 1
+        },
+        "initial_angle_rad": 0.0,
+        "initial_reference": "Configured visual angle at the start of the log; not an observed absolute wheel angle.",
+        "max_lateral_ratio": 0.05,
+        "max_segment_s": null,
+        "limitations": [
+          "Visual center-distance approximation ignores wheel-specific steering and offsets, including during arcs.",
+          "Wrapped yaw cannot recover unknown full turns between source samples.",
+          "Missing or unsupported motion makes all subsequent cumulative roll unavailable; integration never restarts."
+        ],
+        "source_indices_semantics": "Indices into data.sample_times_s identify only the current integration interval endpoints.",
+        "all_prior_trajectory_contributes": true,
+        "preserved_channels": [],
+        "derived_channels": [
+          "wheel_motor_joint1",
+          "wheel_motor_joint2",
+          "wheel_motor_joint3"
+        ],
+        "status": "derived",
+        "reason": null,
+        "first_unavailable_index": null,
+        "channel_statuses": {
+          "wheel_motor_joint1": {
+            "status": "derived",
+            "reason": null
+          },
+          "wheel_motor_joint2": {
+            "status": "derived",
+            "reason": null
+          },
+          "wheel_motor_joint3": {
+            "status": "derived",
+            "reason": null
+          }
+        }
+      }
+    }
+  },
+  "review": {
+    "important_findings": 1,
+    "fix": "Check every chassis source edge over each virtual integration interval using an invalid-edge prefix; an unrelated union timestamp cannot change whether a forbidden gap is crossed",
+    "red_green_regressions": [
+      "test_virtual_wheels_cannot_cross_a_rejected_chassis_interval_even_without_a_union_point_inside_it",
+      "test_interval_eligibility_checks_every_source_edge_and_exact_coverage_boundaries"
+    ],
+    "critical_findings": 0,
+    "minor_findings": 0
+  },
+  "boundaries": [
+    "Virtual wheels disabled by default; enabling requires explicit radius and all three joint signs",
+    "Synthetic radius/sign values in tests are not confirmed hardware parameters",
+    "Forward center-distance approximation ignores wheel-specific steering/offsets; lateral/pure rotation/unknown intervals invalidate cumulative estimates from that point onward",
+    "Raw chassis-axis imports still require aligned grids; sampler consumes normalized world coordinates",
+    "World transformation is applied only at import; future worker must implement initial z/roll/pitch and unavailable-pose policy",
+    "Prepared target identity is not rendered or presented-frame evidence",
+    "No global resampling grid and no mutation of archived source values or hashes",
+    "One small CPU benchmark does not establish simulation, media, long-duration or large-file performance"
+  ]
+}

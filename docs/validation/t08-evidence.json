@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-23",
+  "base_commit": "856ad38",
+  "scope": "Actual CPU reference CSV/JSON import and archive, synthetic fixtures only; not HTTP runtime or real robot playback",
+  "tests": {
+    "total": 305,
+    "adapters": 141,
+    "contracts": 164,
+    "failures": 0,
+    "errors": 0,
+    "command": "env -u PYTHONPATH -u PYTHONHOME PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv/bin/python -m pytest -o addopts= -q",
+    "warning": "Existing Starlette httpx TestClient deprecation warning; no failures"
+  },
+  "checks": {
+    "schema_export": "scripts/export_contracts.py --check passed; wire schemas unchanged",
+    "typescript_contracts": "npm run check --prefix tools/contracts passed",
+    "diff_check": "git diff --check passed",
+    "asset_metadata": "Source common-config SHA256 verified by actual probe"
+  },
+  "actual_process_probe": {
+    "scope": "Actual isolated CPU import of synthetic CSV, not a real robot log",
+    "input_bytes": 698027,
+    "samples": 1200,
+    "joint_channels": 28,
+    "normalized_points": 33600,
+    "elapsed_s": 1.1170081300006132,
+    "heartbeat_count": 85,
+    "max_event_loop_gap_s": 0.05419946199981496,
+    "child_peak_rss_bytes": 75300864,
+    "source_hash_verified": true,
+    "signed_gripper_values_verified": true,
+    "limits_metadata_matches_asset": true,
+    "log_id": "log-c5e39ac172774377abe69eba824637c9"
+  },
+  "review": {
+    "independent_findings": 4,
+    "fixed": [
+      "Custom channel values preserve declared units",
+      "Cleanup releases admission slot even under repeated cancellation",
+      "Planar transform retains all contributing fill provenance and named source indices",
+      "Invalid plugin output and incomplete metadata use structured errors"
+    ],
+    "regression_red_green": true,
+    "additional_fix": "Explicit CLI null mapping file is rejected instead of silently using default mapping"
+  },
+  "limits": {
+    "max_file_bytes": 67108864,
+    "max_samples": 20000,
+    "max_channels": 128,
+    "max_points": 600000,
+    "max_field_bytes": 65536,
+    "max_issues": 1000,
+    "child_address_space_bytes": 805306368,
+    "parse_timeout_s": 30,
+    "one_import_per_store": true
+  },
+  "boundaries": [
+    "No real log fields inferred; reference mappings are declarations",
+    "No interpolation, uniform resampling, unwrapping or virtual wheels until T09",
+    "No active session, playback mutation or real HTTP import runtime; existing routes503 until T12/T14",
+    "Linux child memory cap; parent-process budget and large/hour-long file capacity not established by this small probe",
+    "One application-owned LogStore; no multi-process coordination or crash/directory-fsync durability guarantee",
+    "Trusted installed plugin factories only; no client code paths"
+  ]
+}

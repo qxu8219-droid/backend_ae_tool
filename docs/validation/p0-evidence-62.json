@@ -1,0 +1,233 @@
+{
+  "date": "2026-10-23",
+  "target_runtime": "6.2.0",
+  "p0_complete": false,
+  "browser_verified": false,
+  "cpu_tests_passed": 53,
+  "asset_audit": {
+    "asset_dir": "/home/xq/work/code/projects/Model_Evaluation/backend/assets/robots/r1pro_2026/isaacsim_6_x",
+    "entrypoint": "r1pro_2026.usd",
+    "passed": true,
+    "errors": [],
+    "checksums": {
+      "manifest": "CHECKSUMS.sha256",
+      "entries": 53,
+      "verified": 53
+    },
+    "joints": {
+      "count": 28,
+      "type_counts": {
+        "revolute": 21,
+        "continuous": 3,
+        "prismatic": 4
+      },
+      "canonical_names": [
+        "steer_motor_joint1",
+        "wheel_motor_joint1",
+        "steer_motor_joint2",
+        "wheel_motor_joint2",
+        "steer_motor_joint3",
+        "wheel_motor_joint3",
+        "torso_joint1",
+        "torso_joint2",
+        "torso_joint3",
+        "torso_joint4",
+        "left_arm_joint1",
+        "left_arm_joint2",
+        "left_arm_joint3",
+        "left_arm_joint4",
+        "left_arm_joint5",
+        "left_arm_joint6",
+        "left_arm_joint7",
+        "left_gripper_finger_joint1",
+        "left_gripper_finger_joint2",
+        "right_arm_joint1",
+        "right_arm_joint2",
+        "right_arm_joint3",
+        "right_arm_joint4",
+        "right_arm_joint5",
+        "right_arm_joint6",
+        "right_arm_joint7",
+        "right_gripper_finger_joint1",
+        "right_gripper_finger_joint2"
+      ],
+      "types_by_name": {
+        "steer_motor_joint1": "revolute",
+        "wheel_motor_joint1": "continuous",
+        "steer_motor_joint2": "revolute",
+        "wheel_motor_joint2": "continuous",
+        "steer_motor_joint3": "revolute",
+        "wheel_motor_joint3": "continuous",
+        "torso_joint1": "revolute",
+        "torso_joint2": "revolute",
+        "torso_joint3": "revolute",
+        "torso_joint4": "revolute",
+        "left_arm_joint1": "revolute",
+        "left_arm_joint2": "revolute",
+        "left_arm_joint3": "revolute",
+        "left_arm_joint4": "revolute",
+        "left_arm_joint5": "revolute",
+        "left_arm_joint6": "revolute",
+        "left_arm_joint7": "revolute",
+        "left_gripper_finger_joint1": "prismatic",
+        "left_gripper_finger_joint2": "prismatic",
+        "right_arm_joint1": "revolute",
+        "right_arm_joint2": "revolute",
+        "right_arm_joint3": "revolute",
+        "right_arm_joint4": "revolute",
+        "right_arm_joint5": "revolute",
+        "right_arm_joint6": "revolute",
+        "right_arm_joint7": "revolute",
+        "right_gripper_finger_joint1": "prismatic",
+        "right_gripper_finger_joint2": "prismatic"
+      }
+    },
+    "dependencies": {
+      "method": "text_asset_paths_only",
+      "text_layers_checked": 10,
+      "binary_layers_not_parsed": [
+        "appearance.usdc",
+        "imported.usd",
+        "native/resolved_source/payloads/geometries.usd",
+        "r1pro_2026.usd"
+      ],
+      "references_checked": 231,
+      "usd_closure_verified": false
+    },
+    "file_count": 54
+  },
+  "asset_manifest_sha256": "8681e03dafaf74e6e3450ae98e95774493494e9bf5d654d7f98e5c39dceb917d",
+  "runtime": {
+    "isaacsim_version": [
+      "6.2.0",
+      "rc.14",
+      "6",
+      "2",
+      "0",
+      "rc",
+      "14",
+      "release.52805.02189a84.gl"
+    ],
+    "python_version": "3.12.15 (main, Oct 21 2026, 17:47:06) [Clang 23.1.3 ]",
+    "python_executable": "/home/xq/work/code/projects/r1pro/.venvs/isaacsim62/bin/python",
+    "physics_backend": "physx",
+    "articulation_root": "/World/Robot/Geometry/base_link",
+    "settings": {
+      "renderer": "RaytracedLighting",
+      "width": 1280,
+      "height": 720,
+      "target_fps": 30,
+      "samples": 8,
+      "rt_subframes": 8,
+      "seconds": 20.0,
+      "rtsp_port": 8554
+    },
+    "checks": [
+      {
+        "name": "zero",
+        "joint_max_error": 0.0,
+        "base_max_error": 1.5497207642156674e-08,
+        "base_angle_error_rad": 0.0,
+        "passed": true
+      },
+      {
+        "name": "steering_wheels",
+        "joint_max_error": 5.960464455334602e-09,
+        "base_max_error": 1.5497207642156674e-08,
+        "base_angle_error_rad": 0.0,
+        "passed": true
+      },
+      {
+        "name": "torso",
+        "joint_max_error": 2.980232227667301e-09,
+        "base_max_error": 1.5497207642156674e-08,
+        "base_angle_error_rad": 0.0,
+        "passed": true
+      },
+      {
+        "name": "arms_grippers",
+        "joint_max_error": 2.0733132988226544e-08,
+        "base_max_error": 1.5497207642156674e-08,
+        "base_angle_error_rad": 0.0,
+        "passed": true
+      },
+      {
+        "name": "chassis",
+        "joint_max_error": 0.0,
+        "base_max_error": 5.960464455334602e-09,
+        "base_angle_error_rad": 1.264405455326821e-07,
+        "passed": true
+      }
+    ],
+    "asset_dependencies": {
+      "layers": 13,
+      "assets": 1,
+      "external_files": [],
+      "unresolved": [],
+      "builtin_materials_allowed": []
+    },
+    "over_limit_probe": {
+      "requested": 3.1368467075,
+      "readback": 3.1368467807769775,
+      "physics_advanced": false
+    },
+    "startup_seconds": 6.827267909000511
+  },
+  "server_loop": {
+    "render_iterations": 598,
+    "rate_hz": 29.857224955604007,
+    "meaning": "server loop only; raw results from before the statistics-label correction"
+  },
+  "rtsp_decoder": {
+    "status": "pass",
+    "url": "rtsp://127.0.0.1:8554/stream",
+    "error_stage": "",
+    "error": "",
+    "codec": "h264",
+    "transport": "tcp",
+    "decoder": "software",
+    "requested_capture_seconds": 6.0,
+    "startup_timeout_seconds": 5,
+    "read_inactivity_timeout_seconds": 2,
+    "stop_reason": 1,
+    "stop_reason_name": "capture_duration_complete",
+    "elapsed_wall_seconds": 7.881793,
+    "valid_decoded_frames": 209,
+    "width": 1280,
+    "height": 720,
+    "dimension_changes": 0,
+    "time_base": [
+      1,
+      90000
+    ],
+    "declared_avg_frame_rate": [
+      30,
+      1
+    ],
+    "pts_samples": 209,
+    "nonmonotonic_pts": 1,
+    "pts_source": "AVFrame.best_effort_timestamp in stream time_base",
+    "first_pts": 18000,
+    "last_pts": 624000,
+    "pts_span_seconds": 6.733333333,
+    "pts_estimated_fps": null,
+    "receive_wall_span_seconds": 6.032488,
+    "observed_receive_fps": 34.479969127,
+    "startup_to_first_frame_seconds": 1.849073,
+    "frames_with_unregistered_sei": 0,
+    "first_frame_ppm_saved": true,
+    "browser_frame_identity_verified": false
+  },
+  "gpu_utilization_dmon": "# gpu     sm    mem    enc    dec    jpg    ofa \n# Idx      %      %      %      %      %      % \n    0     54     15      0      0      0      0 \n    0     31      9      1      0      0      0 \n    0     30     10      2      0      0      0 \n    0     30     10      2      0      0      0 \n    0     30     10      2      0      0      0 \n    0     30     10      2      0      0      0 \n    0     30     10      2      0      0      0 \n    0     30     10      2      0      0      0 \n    0     30     10      2      0      0      0 \n    0     29     10      0      0      0      0 \n",
+  "frame_identity_verified": false,
+  "source_reports": [
+    "outputs/p0/rtsp-62-final/results.json",
+    "outputs/p0/rtsp-62-final/decoder.json"
+  ],
+  "limitations": [
+    "No browser available in this session",
+    "Framebuffer RTSP has no verified business-frame identity mapping",
+    "A non-increasing decoded PTS was observed",
+    "Server GPU and driver have not been tested"
+  ]
+}

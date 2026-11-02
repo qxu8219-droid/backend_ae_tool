@@ -1,0 +1,84 @@
+{
+  "checked_at": "2026-10-23T06:22:23.428803+00:00",
+  "version": "v1.21.2",
+  "mode": "no RTSP source; no GPU process",
+  "source_tcp_8554_listening": false,
+  "environment_override_cleanup_exercised": true,
+  "paths_api": {
+    "itemCount": 1,
+    "pageCount": 1,
+    "items": [
+      {
+        "name": "stream",
+        "confName": "stream",
+        "ready": false,
+        "readyTime": null,
+        "available": false,
+        "availableTime": null,
+        "online": true,
+        "onlineTime": "0001-01-01T00:00:00Z",
+        "source": {
+          "type": "rtspSource",
+          "id": ""
+        },
+        "tracks": [],
+        "tracks2": [],
+        "readers": [],
+        "inboundBytes": 0,
+        "outboundBytes": 0,
+        "inboundFramesInError": 0,
+        "bytesReceived": 0,
+        "bytesSent": 0
+      }
+    ]
+  },
+  "effective_config": {
+    "api": true,
+    "apiAddress": "127.0.0.1:9997",
+    "rtsp": false,
+    "rtmp": false,
+    "hls": false,
+    "srt": false,
+    "moq": false,
+    "metrics": false,
+    "pprof": false,
+    "playback": false,
+    "webrtc": true,
+    "webrtcAddress": "127.0.0.1:8889",
+    "webrtcLocalUDPAddress": "127.0.0.1:8189",
+    "webrtcLocalTCPAddress": "",
+    "webrtcIPsFromInterfaces": false,
+    "webrtcAdditionalHosts": [
+      "127.0.0.1"
+    ],
+    "webrtcICEServers2": []
+  },
+  "listeners": [
+    "udp UNCONN 0      0          127.0.0.1:8189  0.0.0.0:* users:((\"mediamtx\",pid=97125,fd=6))   ",
+    "tcp LISTEN 0      4096       127.0.0.1:9997  0.0.0.0:* users:((\"mediamtx\",pid=97125,fd=7))   ",
+    "tcp LISTEN 0      4096       127.0.0.1:8889  0.0.0.0:* users:((\"mediamtx\",pid=97125,fd=3))   "
+  ],
+  "builtin_player_status": 200,
+  "whep_preflight": {
+    "status": 204,
+    "allow_origin": "http://127.0.0.1:8768",
+    "allow_methods": "OPTIONS, GET, POST, PATCH, DELETE"
+  },
+  "exit_code": 0,
+  "shutdown_log": [
+    "configuration file: /home/xq/work/code/projects/Model_Evaluation/backend/configs/mediamtx-p0.yml",
+    "configuration file is valid",
+    "2026/10/23 14:22:23 INF MediaMTX v1.21.2, linux, amd64",
+    "2026/10/23 14:22:23 INF configuration loaded from /home/xq/work/code/projects/Model_Evaluation/backend/configs/mediamtx-p0.yml",
+    "2026/10/23 14:22:23 INF [WebRTC] started with listeners on 127.0.0.1:8889 (TCP/HTTP), 127.0.0.1:8189 (UDP/ICE)",
+    "2026/10/23 14:22:23 INF [API] started with listener on 127.0.0.1:9997 (TCP/HTTP)",
+    "2026/10/23 14:22:23 INF [path stream] [RTSP source] started",
+    "2026/10/23 14:22:23 ERR [path stream] [RTSP source] dial tcp 127.0.0.1:8554: connect: connection refused",
+    "2026/10/23 14:22:23 INF shutting down gracefully",
+    "2026/10/23 14:22:23 INF [API] closing",
+    "2026/10/23 14:22:23 INF [WebRTC] closing",
+    "2026/10/23 14:22:23 INF [path stream] [RTSP source] stopped: path is closing",
+    "2026/10/23 14:22:23 INF waiting for running hooks"
+  ],
+  "owned_listeners_closed": true
+}

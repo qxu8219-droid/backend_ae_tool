@@ -5,3 +5,10 @@ outputs/
 assets/robots/
 .superpowers/
 *.local.json
+*.egg-info/
+build/
+dist/
+data/real_logs/
+.env
+.env.*
+!.env.example

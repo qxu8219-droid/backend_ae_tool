@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools==84.2.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robot-replay-protocol"
+version = "0.1.0"
+description = "Shared validated wire contracts for robot log replay"
+requires-python = ">=3.12"
+dependencies = ["pydantic>=2.14,<3"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["replay_protocol*"]

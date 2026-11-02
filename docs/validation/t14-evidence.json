@@ -1,0 +1,34 @@
+{
+  "scope": "Actual configured HTTP/WS + SDK 6.2 + H264 + native WHEP observation; synthetic commands; formal paired UI deferred to T15",
+  "identity": {
+    "decoded_frames": 280,
+    "exact_ws_video_matches": 271,
+    "video_frames_without_ws_match": 9,
+    "final_stop_matches": 197,
+    "states": [
+      "paused",
+      "playing",
+      "ready"
+    ],
+    "epochs": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "all_video_values_checked_against_saved_csv": true,
+    "pixel_crc_errors": 0
+  },
+  "native_browser_pixel_matches": 5,
+  "raw_capture_fps": 17.940356471373637,
+  "worker_exit_detection_s": 0.6469700169982389,
+  "new_session_reload": {
+    "new_sid": "s-9e6deaf7492e49028d6008b723c08e41",
+    "capture_id": 1,
+    "log_time_s": 0.0
+  },
+  "passed": true,
+  "owned_resources_released": true,
+  "original_source_sha256": "4c0e713d142519d34820e299fa41c3fdbd63e67a519b324dc9d9c89d9cfff811"
+}

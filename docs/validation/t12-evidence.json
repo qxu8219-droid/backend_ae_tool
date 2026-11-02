@@ -1,0 +1,172 @@
+{
+  "date": "2026-10-26",
+  "task": "T12",
+  "run_directory": "outputs/t12/final-lifecycle",
+  "lifecycle": {
+    "scope": "Real IsaacSim 6.2 / local ZMQ / real MediaMTX; synthetic trajectories; no browser presentation claim",
+    "sessions": [
+      {
+        "sid": "s-6248844e45c2413e9639cf1872d39911",
+        "phases": [
+          "booting",
+          "loading_scene",
+          "loading_robot",
+          "rtsp_publishing",
+          "ready"
+        ],
+        "raw_capture_fps": 17.633249686229036,
+        "worker_kill_detection_s": 0.6314652849978302,
+        "worker_pid_unchanged_on_gateway_recovery": true,
+        "native_rtsp_loopback_only": true,
+        "ports_released": [
+          6100,
+          6101,
+          6102,
+          6103
+        ]
+      },
+      {
+        "sid": "s-b650ed79814846f3ad265d77995d382b",
+        "reload_log_time_s": 0.0,
+        "reload_capture_id": 1
+      },
+      {
+        "sid": "s-ffc041c13c484814b24ac602041a2c4e",
+        "delete_during_start": true,
+        "delete_idempotent": true
+      }
+    ],
+    "owned_pids": [
+      70941,
+      70961,
+      71315,
+      71335,
+      71676,
+      71693
+    ],
+    "media_ports": [
+      6400,
+      6401,
+      6402
+    ],
+    "application_close_cleaned_ready_session": true,
+    "passed": true,
+    "all_owned_processes_exited": true
+  },
+  "decoded_identity": {
+    "decoded_frames": 174,
+    "matched_frames": 174,
+    "warmup_frames": 0,
+    "unique_capture_ids": 174,
+    "pixel_crc_errors": 0,
+    "catalog_mismatches": 0,
+    "encoded_image_differs_from_poll": 174,
+    "states": {
+      "ready": 1,
+      "playing": 37,
+      "paused": 136
+    },
+    "epochs": {
+      "1": 38,
+      "2": 39,
+      "3": 97
+    },
+    "source_and_readback_values_verified": true,
+    "scope": "Independent software H264 decode of real IsaacSim output; not browser presentation"
+  },
+  "tests": {
+    "backend_total": 714,
+    "core_subset": 25,
+    "p0_cpu": 90,
+    "schema_check": true,
+    "typescript_contract_check": true,
+    "frontend_changed": false,
+    "frontend_browser_retested": false
+  },
+  "review": {
+    "critical": 0,
+    "important": 2,
+    "minor": 0,
+    "important_fixed": 2,
+    "new_regressions_passed": 4,
+    "findings": [
+      "Cancellation-safe deletion owns cleanup and slot release",
+      "External gateway checks owned configuration even without an observed API outage; restores missing paths and refuses conflicts"
+    ]
+  },
+  "failed_runs_preserved": [
+    {
+      "directory": "outputs/t12/phase-red",
+      "reason": "Actual runtime lacked intermediate startup phase notifications, fixed at scene/robot/media startup"
+    },
+    {
+      "directory": "outputs/t12/real-lifecycle",
+      "reason": "Validation CLI dereferenced venv python symlink to base interpreter, fixed by preserving venv entry path"
+    }
+  ],
+  "deployment_boundary": {
+    "platform": "Linux/glibc",
+    "sdk": "IsaacSim 6.2.0/PhysX",
+    "native_rtsp_binding": "127.0.0.1; actual listener guard enforced",
+    "scope": "single event-loop owner, single active session, local WHEP/ICE/API",
+    "remote_data_hosts_modified": false,
+    "real_log_playback_performed": false
+  },
+  "limitations": [
+    "HTTP/WS business binding is T14 and formal browser presentation T15",
+    "Failure detection measured at manager state/events, not browser badge",
+    "Raw FPS is a short capture window, not sustained/browser performance",
+    "Parent-death signal covers direct children; graceful cleanup covers owned process group",
+    "Managed gateway has three automatic restart attempts; external deletion can remain pending until API/path ownership is resolved"
+  ],
+  "artifacts": [
+    {
+      "path": "outputs/t12/final-lifecycle/evidence.json",
+      "sha256": "b52fa50f28965b4bef041578fef8952a2eac85a600155acb501aa324eb2a27ce"
+    },
+    {
+      "path": "outputs/t12/final-lifecycle/identity/issued.json",
+      "sha256": "b8f01ebb55d5cdf4ddda0acf37fdbcb6dcc3097a4d0a121650b3452365abc8af"
+    },
+    {
+      "path": "outputs/t12/final-lifecycle/identity/decoder.json",
+      "sha256": "7831dc902fa64f69d49de984e8e06153b3508453a854f86689d227e4fc047904"
+    },
+    {
+      "path": "outputs/t12/final-lifecycle/identity/decoder.json.frames.jsonl",
+      "sha256": "4d70f814f1b4a0463aac56580130daf004b7f3059c53c6904849aff93c1c8bb4"
+    },
+    {
+      "path": "outputs/t12/final-lifecycle/identity/encoded-identity-evidence.json",
+      "sha256": "5b9ddeaf9603f352edf12908b1cb9a61de3cb11f76493f5259fc840a925fe590"
+    },
+    {
+      "path": "outputs/t12/final-tests.xml",
+      "sha256": "4302f65fb4465fc3926a64a685deb3f01a6dc4d579dd8563156597047399da61"
+    },
+    {
+      "path": "outputs/t12/final-contracts.log",
+      "sha256": "bb442fe337177f86e009e571adb1065820607e188f6606a9dbd29e2939b24838"
+    },
+    {
+      "path": "outputs/t12/p0-cpu.log",
+      "sha256": "ec82b9b2a8f342f5dae4a5fa6e29a2cdc78325e08ccbc592b62853377ef2f14c"
+    },
+    {
+      "path": "outputs/t12/final-lifecycle/state/s-6248844e45c2413e9639cf1872d39911/lifecycle-final.json",
+      "sha256": "b8fec9fb152a1a19d610ca91dd7a774acf5457238e3de503492313ffafacfa99"
+    },
+    {
+      "path": "outputs/t12/final-lifecycle/state/s-b650ed79814846f3ad265d77995d382b/lifecycle-final.json",
+      "sha256": "0a8de5c4cc02f8b1d7b82a0c4d4ef51c85b277c19035db4d5ed690f39504046c"
+    },
+    {
+      "path": "outputs/t12/final-lifecycle/state/s-ffc041c13c484814b24ac602041a2c4e/lifecycle-final.json",
+      "sha256": "528e26f0ad6a21febff70168aafa8674dcab13c65c193f72a98e27417429c0e0"
+    },
+    {
+      "path": "outputs/t12/final-lifecycle/state/s-b650ed79814846f3ad265d77995d382b/worker/runtime-final.json",
+      "sha256": "1d56fbd7581fe10e6ea2ac7f601f7041f9fe3263c1b883ec44f165625474a41e"
+    }
+  ]
+}

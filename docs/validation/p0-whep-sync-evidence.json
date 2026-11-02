@@ -1,0 +1,420 @@
+{
+  "date": "2026-10-23",
+  "scope": "P0 real headless Chrome local media/sync feasibility; not full production acceptance",
+  "versions": {
+    "isaacsim": [
+      "6.2.0",
+      "rc.14",
+      "6",
+      "2",
+      "0",
+      "rc",
+      "14",
+      "release.52805.02189a84.gl"
+    ],
+    "python": "3.12.15 (main, Oct 21 2026, 17:47:06) [Clang 23.1.3 ]",
+    "mediamtx": "1.21.2",
+    "playwright": "1.58.2",
+    "chrome": "152.0.7977.82"
+  },
+  "cpu_tests": {
+    "count": 86,
+    "passed": true,
+    "report": "outputs/p0/unit-tests-whep-sync.log"
+  },
+  "worker": {
+    "report": "outputs/p0/catalog-sync-final/worker/results.json",
+    "startup_seconds": 6.81095272300081,
+    "startup_scope": "fresh process with existing shader/cache directories",
+    "server_loop_fps": 19.492055458364188,
+    "capture_rendering": {
+      "camera_render_product": "/Render/OmniverseKit/HydraTextures/Replicator",
+      "viewport_render_product": "/Render/OmniverseKit/HydraTextures/omni_kit_widget_viewport_ViewportTexture_0",
+      "viewport_updates_enabled": false,
+      "dlss_history_reset_per_capture": true
+    },
+    "snapshot_writer": {
+      "armed": 1994,
+      "payloads": 1994,
+      "prepared_frames": 1994,
+      "snapshots_evicted": 1482,
+      "empty_h264": 0,
+      "invalid_capture_id": 0,
+      "unknown_snapshot": 0,
+      "missing_render_time": 0,
+      "nonmonotonic_render_time": 0,
+      "empty_catalog": 0,
+      "raw_marker_errors": 0,
+      "raw_crc_mismatches": 0,
+      "raw_id_mismatches": 0,
+      "raw_validated_frames": 1994,
+      "catalog_additions": 1994,
+      "catalog_evicted": 1978,
+      "retained_snapshots": 512,
+      "catalog_size": 16,
+      "last_armed_capture_id": 1994,
+      "last_encoder_poll_capture_id": 1994,
+      "last_raw_capture_id": 1994,
+      "last_raw_error": null,
+      "last_reference_time": [
+        33283333333,
+        1000000000
+      ],
+      "last_rp_fabric_time": [
+        33283333333,
+        1000000000
+      ],
+      "last_video_timestamp_ns": 33283333333,
+      "last_catalog_bytes": 39775,
+      "stream_calls": 1994,
+      "streamed_frames": 1990,
+      "stream_rejected": 4,
+      "stream_errors": 0,
+      "failed_stream_drops": 0,
+      "metadata_uuid_hex": "3654537366c659f396416e41d4c037f5",
+      "stream_failed": false,
+      "debug_frames": 0,
+      "debug_attempts": 0,
+      "debug_errors": 0,
+      "debug_last_error": null
+    }
+  },
+  "scenarios": {
+    "base": {
+      "status": "passed",
+      "report": "outputs/p0/catalog-sync-final/browser/base/sync-presentation.json",
+      "presentations": 1362,
+      "independent_canvas_samples": 628,
+      "rejected_marker_mismatches": 0,
+      "browser_errors": [],
+      "controls_verified": 22,
+      "latency_ms": {
+        "count": 1362,
+        "minimum": 63.341796875,
+        "median": 94.709228515625,
+        "p95": 147.591552734375,
+        "maximum": 907.16845703125
+      },
+      "whole_run_performance": {
+        "status": "measured-only",
+        "thresholdsApplied": false,
+        "scope": "Same-frame canvas presentations retained by the client; includes paused/control intervals.",
+        "presentationCount": 1362,
+        "durationMs": 74492,
+        "presentationFps": 18.27041829995167,
+        "latencyMs": {
+          "count": 1362,
+          "minimum": 63.341796875,
+          "median": 94.709228515625,
+          "p95": 147.591552734375,
+          "maximum": 907.16845703125
+        }
+      },
+      "initial_window": {
+        "status": "measured-only",
+        "thresholdsApplied": false,
+        "scope": "Same-frame canvas presentations retained by the client; includes paused/control intervals.",
+        "presentationCount": 35,
+        "durationMs": 1678,
+        "presentationFps": 20.262216924910607,
+        "latencyMs": {
+          "count": 35,
+          "minimum": 68.017822265625,
+          "median": 86.401611328125,
+          "p95": 145.306884765625,
+          "maximum": 218.14697265625
+        }
+      },
+      "soak": {
+        "requestedDurationMs": 60000,
+        "status": "passed",
+        "sampleIntervalMs": 100,
+        "scope": "Independent CRC for each sampled canvas presentation, not every source/decoded frame; FPS uses the presentation counter.",
+        "elapsedMs": 60006.026736,
+        "sampleCount": 561,
+        "uniqueSamples": 542,
+        "firstCaptureId": 287,
+        "lastCaptureId": 1464,
+        "newPresentations": 1177,
+        "maximumSampleIntervalMs": 137,
+        "markerMismatches": 0,
+        "steadyPresentationFps": 19.614696456712256,
+        "performanceThresholdsApplied": false
+      },
+      "resilience": {
+        "status": "passed",
+        "cycles": 2
+      },
+      "recording": "outputs/p0/catalog-sync-final/browser/base/bc1a4f158a0e74545768bb720320c53a.webm",
+      "recording_sha256": "51c287b923f971783718a661baa1254ec98471228b9557e91f6783a0ddc3653e",
+      "profile_removed": true
+    },
+    "metadata": {
+      "status": "passed",
+      "report": "outputs/p0/catalog-sync-final/browser/metadata/sync-presentation.json",
+      "presentations": 66,
+      "independent_canvas_samples": 30,
+      "rejected_marker_mismatches": 0,
+      "browser_errors": [],
+      "controls_verified": 10,
+      "latency_ms": {
+        "count": 66,
+        "minimum": 764.827880859375,
+        "median": 798.30517578125,
+        "p95": 833.51953125,
+        "maximum": 880.06787109375
+      },
+      "whole_run_performance": {
+        "status": "measured-only",
+        "thresholdsApplied": false,
+        "scope": "Same-frame canvas presentations retained by the client; includes paused/control intervals.",
+        "presentationCount": 66,
+        "durationMs": 11243,
+        "presentationFps": 5.781375077826203,
+        "latencyMs": {
+          "count": 66,
+          "minimum": 764.827880859375,
+          "median": 798.30517578125,
+          "p95": 833.51953125,
+          "maximum": 880.06787109375
+        }
+      },
+      "initial_window": {
+        "status": "measured-only",
+        "thresholdsApplied": false,
+        "scope": "Same-frame canvas presentations retained by the client; includes paused/control intervals.",
+        "presentationCount": 35,
+        "durationMs": 1743,
+        "presentationFps": 19.506597819850832,
+        "latencyMs": {
+          "count": 35,
+          "minimum": 770.921142578125,
+          "median": 799.0791015625,
+          "p95": 826.94775390625,
+          "maximum": 841.050537109375
+        }
+      },
+      "soak": {
+        "requestedDurationMs": 0,
+        "status": "not-requested",
+        "sampleIntervalMs": 100,
+        "scope": "Independent CRC for each sampled canvas presentation, not every source/decoded frame; FPS uses the presentation counter."
+      },
+      "resilience": {
+        "status": "not-requested",
+        "cycles": 0
+      },
+      "recording": "outputs/p0/catalog-sync-final/browser/metadata/92dd644b667132a8cf0e72b25077cbfc.webm",
+      "recording_sha256": "ca036afee7972020729276bf0059cf812d9ce73905c8ecf45b76b4e368e0aac6",
+      "profile_removed": true
+    },
+    "video": {
+      "status": "passed",
+      "report": "outputs/p0/catalog-sync-final/browser/video/sync-presentation.json",
+      "presentations": 67,
+      "independent_canvas_samples": 30,
+      "rejected_marker_mismatches": 0,
+      "browser_errors": [],
+      "controls_verified": 10,
+      "latency_ms": {
+        "count": 67,
+        "minimum": 776.378662109375,
+        "median": 798.772705078125,
+        "p95": 832.525390625,
+        "maximum": 849.77392578125
+      },
+      "whole_run_performance": {
+        "status": "measured-only",
+        "thresholdsApplied": false,
+        "scope": "Same-frame canvas presentations retained by the client; includes paused/control intervals.",
+        "presentationCount": 67,
+        "durationMs": 11295,
+        "presentationFps": 5.843293492695883,
+        "latencyMs": {
+          "count": 67,
+          "minimum": 776.378662109375,
+          "median": 798.772705078125,
+          "p95": 832.525390625,
+          "maximum": 849.77392578125
+        }
+      },
+      "initial_window": {
+        "status": "measured-only",
+        "thresholdsApplied": false,
+        "scope": "Same-frame canvas presentations retained by the client; includes paused/control intervals.",
+        "presentationCount": 35,
+        "durationMs": 1711,
+        "presentationFps": 19.871420222092343,
+        "latencyMs": {
+          "count": 35,
+          "minimum": 791.488525390625,
+          "median": 803.01318359375,
+          "p95": 814.9384765625,
+          "maximum": 817.20751953125
+        }
+      },
+      "soak": {
+        "requestedDurationMs": 0,
+        "status": "not-requested",
+        "sampleIntervalMs": 100,
+        "scope": "Independent CRC for each sampled canvas presentation, not every source/decoded frame; FPS uses the presentation counter."
+      },
+      "resilience": {
+        "status": "not-requested",
+        "cycles": 0
+      },
+      "recording": "outputs/p0/catalog-sync-final/browser/video/325a1fb5f571990d291f0f4e6d957d7c.webm",
+      "recording_sha256": "1906d75a768dd4cd9c74cfa81b773ba4f0ee2f98d2af679174ca079ba01c0343",
+      "profile_removed": true
+    }
+  },
+  "lifecycle": {
+    "report": "outputs/p0/whep-lifecycle-release/browser/whep-lifecycle.json",
+    "status": "passed",
+    "cycles": 2
+  },
+  "supervisor": {
+    "report": "outputs/p0/catalog-sync-final/supervisor.json",
+    "status": "passed",
+    "cleanup_complete": true
+  },
+  "resource_probe": {
+    "report": "outputs/p0/catalog-sync-resource/resource-samples.json",
+    "browser_status": "passed",
+    "soak": {
+      "requestedDurationMs": 30000,
+      "status": "passed",
+      "sampleIntervalMs": 100,
+      "scope": "Independent CRC for each sampled canvas presentation, not every source/decoded frame; FPS uses the presentation counter.",
+      "elapsedMs": 30004.950438000003,
+      "sampleCount": 285,
+      "uniqueSamples": 272,
+      "firstCaptureId": 158,
+      "lastCaptureId": 689,
+      "newPresentations": 531,
+      "maximumSampleIntervalMs": 121,
+      "markerMismatches": 0,
+      "steadyPresentationFps": 17.69707972346826,
+      "performanceThresholdsApplied": false
+    },
+    "measurements": {
+      "scope": "owned process tree; sum RSS includes shared mappings; CPU 100% = one core; GPU whole device; 5s samples",
+      "samples": [
+        {
+          "wall_s": 1792741136.887085,
+          "observed_processes": 1,
+          "sum_rss_mib": 324.734375,
+          "cpu_percent_one_core": null,
+          "gpu_csv_memoryMiB_gpuPct_encoderPct_decoderPct_watts": "607, 1, 0, 0, 8.12"
+        },
+        {
+          "wall_s": 1792741141.9258692,
+          "observed_processes": 2,
+          "sum_rss_mib": 5594.515625,
+          "cpu_percent_one_core": 190.45490473188786,
+          "gpu_csv_memoryMiB_gpuPct_encoderPct_decoderPct_watts": "2062, 11, 0, 0, 16.95"
+        },
+        {
+          "wall_s": 1792741146.974566,
+          "observed_processes": 19,
+          "sum_rss_mib": 7692.1328125,
+          "cpu_percent_one_core": 157.92517577116263,
+          "gpu_csv_memoryMiB_gpuPct_encoderPct_decoderPct_watts": "2455, 90, 8, 0, 65.44"
+        },
+        {
+          "wall_s": 1792741152.0202525,
+          "observed_processes": 19,
+          "sum_rss_mib": 8048.67578125,
+          "cpu_percent_one_core": 204.10297537064687,
+          "gpu_csv_memoryMiB_gpuPct_encoderPct_decoderPct_watts": "2453, 82, 8, 0, 64.04"
+        },
+        {
+          "wall_s": 1792741157.0626807,
+          "observed_processes": 19,
+          "sum_rss_mib": 8052.27734375,
+          "cpu_percent_one_core": 203.05751763138645,
+          "gpu_csv_memoryMiB_gpuPct_encoderPct_decoderPct_watts": "2388, 65, 7, 0, 63.28"
+        },
+        {
+          "wall_s": 1792741162.1078446,
+          "observed_processes": 19,
+          "sum_rss_mib": 8066.68359375,
+          "cpu_percent_one_core": 194.70011700801402,
+          "gpu_csv_memoryMiB_gpuPct_encoderPct_decoderPct_watts": "2388, 89, 9, 0, 65.37"
+        },
+        {
+          "wall_s": 1792741167.1527374,
+          "observed_processes": 19,
+          "sum_rss_mib": 8082.41015625,
+          "cpu_percent_one_core": 197.59427178510646,
+          "gpu_csv_memoryMiB_gpuPct_encoderPct_decoderPct_watts": "2388, 90, 9, 0, 63.16"
+        },
+        {
+          "wall_s": 1792741172.1929162,
+          "observed_processes": 19,
+          "sum_rss_mib": 8093.34765625,
+          "cpu_percent_one_core": 149.16024803539904,
+          "gpu_csv_memoryMiB_gpuPct_encoderPct_decoderPct_watts": "2388, 1, 0, 0, 47.92"
+        },
+        {
+          "wall_s": 1792741177.2876084,
+          "observed_processes": 19,
+          "sum_rss_mib": 8107.27734375,
+          "cpu_percent_one_core": 193.28677636004053,
+          "gpu_csv_memoryMiB_gpuPct_encoderPct_decoderPct_watts": "2388, 88, 8, 0, 63.62"
+        },
+        {
+          "wall_s": 1792741182.3335214,
+          "observed_processes": 19,
+          "sum_rss_mib": 8096.9140625,
+          "cpu_percent_one_core": 207.12412408081062,
+          "gpu_csv_memoryMiB_gpuPct_encoderPct_decoderPct_watts": "2390, 90, 8, 0, 65.18"
+        },
+        {
+          "wall_s": 1792741187.3753855,
+          "observed_processes": 0,
+          "sum_rss_mib": 0.0,
+          "cpu_percent_one_core": 0.0,
+          "gpu_csv_memoryMiB_gpuPct_encoderPct_decoderPct_watts": "609, 1, 0, 0, 13.90"
+        },
+        {
+          "wall_s": 1792741192.4290483,
+          "observed_processes": 0,
+          "sum_rss_mib": 0.0,
+          "cpu_percent_one_core": null,
+          "gpu_csv_memoryMiB_gpuPct_encoderPct_decoderPct_watts": "608, 1, 0, 0, 9.10"
+        },
+        {
+          "wall_s": 1792741197.4878724,
+          "observed_processes": 0,
+          "sum_rss_mib": 0.0,
+          "cpu_percent_one_core": null,
+          "gpu_csv_memoryMiB_gpuPct_encoderPct_decoderPct_watts": "609, 1, 0, 0, 8.97"
+        }
+      ]
+    }
+  },
+  "recording_review": {
+    "scope": "two extracted frames manually compared with visible capture text; not exhaustive OCR of recording",
+    "frames": [
+      {
+        "file": "outputs/p0/catalog-sync-final/browser/base/recording-review-5s.png",
+        "pixel_capture_id": 112,
+        "text_capture_id": 112,
+        "crc_valid": true
+      },
+      {
+        "file": "outputs/p0/catalog-sync-final/browser/base/recording-review-40s.png",
+        "pixel_capture_id": 780,
+        "text_capture_id": 780,
+        "crc_valid": true
+      }
+    ]
+  },
+  "remaining": [
+    "actual loss/reordering/outage injection and gateway/worker crash tests",
+    "formal frontend/API/log ingestion",
+    "final user confirmation of common latency ceiling",
+    "30-minute stability and server environment validation"
+  ]
+}

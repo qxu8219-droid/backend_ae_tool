@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>P0 WHEP 视频与同帧数据验证</title>
+<style>
+body{margin:20px;background:#101722;color:#e7edf5;font:15px system-ui}h1{font-size:22px}button,input{font:inherit;padding:6px;margin:4px}video,canvas{display:block;max-width:100%;background:#05080c}pre{white-space:pre-wrap;max-height:220px;overflow:auto}#status{color:#9ee8c2}#syncCanvas{display:none}#notice{color:#f5cb85}
+</style>
+<h1>IsaacSim 6.2 · P0 WHEP 验证</h1>
+<p id="notice">当前验证视频链路；没有同帧元数据时不显示机器人数据面板。</p>
+<p id="status">未连接</p>
+<button id="connect">连接视频</button><button id="disconnect">断开</button>
+<video id="source" autoplay muted playsinline width="1280" height="720"></video>
+<canvas id="syncCanvas" width="1640" height="800"></canvas>
+<div><button data-action="play">播放</button><button data-action="pause">暂停</button><button data-action="stop">停止归零</button>
+<button data-step="-1">后退一帧</button><button data-step="1">前进一帧</button>
+<button data-speed="0.1">0.1×</button><button data-speed="1">1×</button><button data-speed="10">10×</button>
+<label>定位秒 <input id="seekTime" type="number" min="0" max="12" step="0.1" value="3"></label><button id="seek">定位</button></div>
+<pre id="stats"></pre><pre id="events"></pre>
+<script type="module" src="/whep_client.js"></script>
+</html>
