@@ -1,5 +1,7 @@
 # 机器人日志回放平台后端
 
+当前发布基线：**v1.0.0**。查看[发布说明](docs/releases/v1.0.0.md)与[Git 开发规范](CONTRIBUTING.md)。两个仓库需使用同名版本标签；后续需求从 `main` 新建分支。
+
 首期本地版本：**IsaacSim 6.2.0 / Python 3.12 / PhysX / R1Pro 2026**。提供正式 REST/WS、CSV/JSON/B041 导入、完整播放控制、真实仿真与网页同帧显示、限位曲线和标注回看。单机单会话；夹爪和部分底盘轨迹保留推算标识。
 
 **首次安装和交付请从 [本地运行手册](docs/delivery-v1.md) 开始。** 它包括 SDK/资产/MediaMTX 准备、环境模板、端口、网络隔离、保留策略、合成演示和验收命令。排错见 [错误码与定位说明](docs/troubleshooting-v1.md)。T17 的 30 分钟性能记录与本次 T18 交付证据分别保存，不能互相代替。
@@ -33,7 +35,7 @@ VITE_USE_MOCK=false API_PROXY_TARGET=http://127.0.0.1:8000 npm run dev
 | 入口 | 当前支持 |
 | --- | --- |
 | CSV/JSON | 约定格式、显式字段映射、单位/时间/角度转换、独立通道、质量诊断 |
-| B041 | 两份离线Parquet及live/Rim记录经本地准备工具形成 `.b041`；上传时选择保存的mapping |
+| B041 | 离线Parquet及live/Rim记录经本地准备工具形成 `.b041`；上传时选择保存的mapping |
 | 真实原频率MCAP/相机录像 | 尚未直接接入；不能把原文件改后缀当作 `.b041` |
 | 回放与诊断 | 播放/暂停/停止、0.1–10倍速、时间/帧定位、单步、28关节面板、底盘、保峰曲线、限位与阶段/历史事件 |
 
@@ -69,7 +71,7 @@ env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_frontend.py \
 
 - [T18交付记录](docs/validation/t18-status.md)：本次版本、验证结果、来源和后续边界。
 - [T17验收](docs/validation/t17-status.md)：本地30分钟、消息/进程故障、录屏与资源口径；单核CPU低于5%的目标未达到。
-- [T16真机适配](docs/validation/t16-status.md)、[T15正式媒体](../frontend/docs/validation/t15-status.md)：来源数值、质量与同帧证据。
+- [T16真机适配](docs/validation/t16-status.md)、[T15正式媒体](https://github.com/qxu8219-droid/frontend_ae_tool/blob/v1.0.0/docs/validation/t15-status.md)：来源数值、质量与同帧证据。
 - [REST/WS运行](docs/runtime-api-v1.md)、[契约](docs/contracts-v1.md)、[日志映射与扩展](docs/log-import-v1.md)、[采样](docs/replay-sampling-v1.md)、[分析](docs/analysis-v1.md)。
 - [P0媒体选型](docs/validation/p0-video.md)、[同步原型](docs/validation/p0-sync.md)、[6.2基线](docs/validation/p0-isaac62-status.md)：保留历史证明范围。5.1/旧WebRTC和spike入口不作为当前操作入口。
 

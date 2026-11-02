@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "robot-log-replay-backend"
-version = "0.1.0"
+version = "1.0.0"
 description = "Robot log replay contracts and isolated log import; IsaacSim runs in an independent worker"
 requires-python = ">=3.12,<3.13"
 dependencies = [

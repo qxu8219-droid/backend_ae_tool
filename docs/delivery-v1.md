@@ -125,13 +125,13 @@ print(path.absolute())
 PY
 ```
 
-在 UI 选择该 CSV，展开“解析器与映射配置”，在“映射 JSON”粘贴以下配置，再上传并激活。它把合成值标为指令，并启用文件中的底盘 x/y/yaw；默认映射会把关节标为实测且不导入底盘，不能用于这个演示：
+在 UI 先展开“解析器与映射配置”，在“映射 JSON”粘贴以下配置，再选择该 CSV；选择文件会触发上传，成功后再激活。它把合成值标为指令，并启用文件中的底盘 x/y/yaw；默认映射会把关节标为实测且不导入底盘，不能用于这个演示：
 
 ```json
 {"joints":{"origin":"commanded"},"chassis":{"available":true,"origin":"commanded","yaw_semantics":"angular_unwrapped"}}
 ```
 
-真实 B041 数据选择 `data/real_logs/derived/<source>/<profile>/recording.b041`，将同目录 `mapping.json` 内容粘贴到映射 JSON。原始 Parquet/runtime 目录不能直接当作这个包上传，准备步骤和标定边界见 [B041 说明](b041-replay-v1.md)。
+真实 B041 数据先将 `data/real_logs/derived/<source>/<profile>/mapping.json` 内容粘贴到映射 JSON，再选择同目录 `recording.b041` 上传。原始 Parquet/runtime 目录不能直接当作这个包上传，准备步骤和标定边界见 [B041 说明](b041-replay-v1.md)。
 
 ### 关闭与重建
 
