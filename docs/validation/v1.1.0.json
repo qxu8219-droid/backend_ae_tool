@@ -1,0 +1,239 @@
+{
+  "release": "v1.1.0",
+  "date": "2026-11-02",
+  "component": "backend",
+  "application_version": "1.1.0",
+  "implementation_commit": "e7401036addb518ef8303cbe364dd84cfe10b45e",
+  "business_source_unchanged_from": "v1.0.0",
+  "checks": [
+    {
+      "name": "pytest",
+      "command": [
+        "env",
+        "-u",
+        "PYTHONPATH",
+        "-u",
+        "PYTHONHOME",
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1",
+        ".venv/bin/python",
+        "-m",
+        "pytest",
+        "-o",
+        "addopts=",
+        "-q"
+      ],
+      "returncode": 0,
+      "duration_s": 53.901,
+      "log": "outputs/release-v1.1.0/backend-pytest.log",
+      "log_sha256": "69d70782909094f7e2c02746ab672648ed153ab7781b9a22d64a18a070a6a240"
+    },
+    {
+      "name": "contracts",
+      "command": [
+        "env",
+        "-u",
+        "PYTHONPATH",
+        "-u",
+        "PYTHONHOME",
+        ".venv/bin/python",
+        "scripts/export_contracts.py",
+        "--check"
+      ],
+      "returncode": 0,
+      "duration_s": 0.83,
+      "log": "outputs/release-v1.1.0/backend-contracts.log",
+      "log_sha256": "9322b2210b567263402ef90c903c2d825682ee518d650480eebe2b46e9cb0455"
+    },
+    {
+      "name": "joint-metadata",
+      "command": [
+        "env",
+        "-u",
+        "PYTHONPATH",
+        "-u",
+        "PYTHONHOME",
+        ".venv/bin/python",
+        "scripts/export_joint_metadata.py",
+        "--check"
+      ],
+      "returncode": 0,
+      "duration_s": 0.298,
+      "log": "outputs/release-v1.1.0/backend-joint-metadata.log",
+      "log_sha256": "05d7db3b6d947c63b7a81b97464753cdd1ab8ff281dd044c3c3a77a9155bb871"
+    },
+    {
+      "name": "contract-types",
+      "command": [
+        "npm",
+        "run",
+        "check",
+        "--prefix",
+        "tools/contracts"
+      ],
+      "returncode": 0,
+      "duration_s": 1.584,
+      "log": "outputs/release-v1.1.0/backend-contract-types.log",
+      "log_sha256": "da06a765a719b3820e6eeef2f12cf6f0c412864b6b0f571993b549e20d0e37e5"
+    }
+  ],
+  "summary": {
+    "backend_business_diff_from_v1_0_0": [],
+    "all_check_returncodes_zero": true,
+    "pytest_summary": "955 passed, 3 skipped, 1 warning, 11 subtests passed in 53.09s",
+    "skip_scope": [
+      "optional OpenCV recording validation module unavailable in API venv",
+      "two optional PyArrow Parquet cases unavailable in API venv"
+    ],
+    "warning": "Existing StarletteDeprecationWarning for httpx with starlette.testclient",
+    "gpu_validation_rerun": false
+  },
+  "paired_contracts": {
+    "byte_comparisons": [
+      {
+        "backend": "contracts/generated/worker-event.gen.ts",
+        "frontend": "src/api/generated/worker-event.gen.ts",
+        "equal": true,
+        "sha256": "691a3e52978956fd34266f48bd985a0e9c7962b3d3dee37df8a617a758f8ac65"
+      },
+      {
+        "backend": "contracts/generated/replay-data.gen.ts",
+        "frontend": "src/api/generated/replay-data.gen.ts",
+        "equal": true,
+        "sha256": "3eac1632670328d837c96fd54c14ca00da3d161271032f557a2c617e3614769c"
+      },
+      {
+        "backend": "contracts/generated/ws-client.gen.ts",
+        "frontend": "src/api/generated/ws-client.gen.ts",
+        "equal": true,
+        "sha256": "fc97468481da5ac0222a468cdb0b68493bd7232f65df97a352906dd5882707d0"
+      },
+      {
+        "backend": "contracts/generated/presented-frame.gen.ts",
+        "frontend": "src/api/generated/presented-frame.gen.ts",
+        "equal": true,
+        "sha256": "2e93be7b07bdf2fd4f56415bac6a2d108662ae7806f2b7869f9bc9184584fa2f"
+      },
+      {
+        "backend": "contracts/generated/frame-catalog.gen.ts",
+        "frontend": "src/api/generated/frame-catalog.gen.ts",
+        "equal": true,
+        "sha256": "66c78ce944d3523cb563f9c4b110359588b8b0aa01317c3c7b4a4d30ed5259a0"
+      },
+      {
+        "backend": "contracts/generated/target.gen.ts",
+        "frontend": "src/api/generated/target.gen.ts",
+        "equal": true,
+        "sha256": "52026f4f95005c4e8c62b4a15d4b1a9214489f42d13026ccd4cc85237c11652a"
+      },
+      {
+        "backend": "contracts/generated/ipc-response.gen.ts",
+        "frontend": "src/api/generated/ipc-response.gen.ts",
+        "equal": true,
+        "sha256": "493e785a28c6968078e325c59d1f0532de282b36d85ed237127821d710343b9b"
+      },
+      {
+        "backend": "contracts/generated/json-value.gen.ts",
+        "frontend": "src/api/generated/json-value.gen.ts",
+        "equal": true,
+        "sha256": "e1dca25e86690715ff3a7beaf3145e105cd7055068d23a721b01247d211a0879"
+      },
+      {
+        "backend": "contracts/generated/ipc-request.gen.ts",
+        "frontend": "src/api/generated/ipc-request.gen.ts",
+        "equal": true,
+        "sha256": "271413b9d3b3168d6218814257df6eb194d07aef3be9f126b4a8cd114f970a12"
+      },
+      {
+        "backend": "contracts/generated/ws-server.gen.ts",
+        "frontend": "src/api/generated/ws-server.gen.ts",
+        "equal": true,
+        "sha256": "dbe42c248bd86121909cdc613373d4d48d2cea772599b9aa44ba3f5dae1fbeed"
+      },
+      {
+        "backend": "contracts/types.gen.ts",
+        "frontend": "src/api/types.gen.ts",
+        "equal": true,
+        "sha256": "b594157bc90b8a0264ec0d851202756d4e807aee755e0108cc88c8f69c95b002"
+      },
+      {
+        "backend": "contracts/messages.gen.ts",
+        "frontend": "src/api/messages.gen.ts",
+        "equal": true,
+        "sha256": "48fa97edce7d9e488c6bd8ef7c80d34c92ac5cd07c9b785f86d1dbdb37ff3687"
+      },
+      {
+        "backend": "contracts/ipc-request.schema.json",
+        "frontend": "src/api/schemas/ipc-request.schema.json",
+        "equal": true,
+        "sha256": "008c5c5af59bc93f89875bacee00b6336f32241d668f90a30853e4647588d63a"
+      },
+      {
+        "backend": "contracts/ws-client.schema.json",
+        "frontend": "src/api/schemas/ws-client.schema.json",
+        "equal": true,
+        "sha256": "ebbac4b7b3c87bb03ef2b8ad1a8b51105cbc48846ff54ed3134ff7accfec7006"
+      },
+      {
+        "backend": "contracts/frame-catalog.schema.json",
+        "frontend": "src/api/schemas/frame-catalog.schema.json",
+        "equal": true,
+        "sha256": "d35fd997c60c4ff2d665da894d82a3b168fdfb890ac043db22ec83a3cf8d1907"
+      },
+      {
+        "backend": "contracts/worker-event.schema.json",
+        "frontend": "src/api/schemas/worker-event.schema.json",
+        "equal": true,
+        "sha256": "d1606db735609345d103b05a5dfcae4d2fc65352941e62d00a4905d70845606a"
+      },
+      {
+        "backend": "contracts/replay-data.schema.json",
+        "frontend": "src/api/schemas/replay-data.schema.json",
+        "equal": true,
+        "sha256": "1f86d15ddc727eff4eef80be7aeaaf0f0dfb5340cadd478db7a717c03dddc402"
+      },
+      {
+        "backend": "contracts/presented-frame.schema.json",
+        "frontend": "src/api/schemas/presented-frame.schema.json",
+        "equal": true,
+        "sha256": "1ba796ebb69e613c736549abe83268d623a82409a6e87d3e230ee1a88ecda03d"
+      },
+      {
+        "backend": "contracts/ipc-response.schema.json",
+        "frontend": "src/api/schemas/ipc-response.schema.json",
+        "equal": true,
+        "sha256": "3ad6184b81ff0b41e8aab4cecbacb7bfcd547337ec1618c084626312c08e0411"
+      },
+      {
+        "backend": "contracts/ws-server.schema.json",
+        "frontend": "src/api/schemas/ws-server.schema.json",
+        "equal": true,
+        "sha256": "c226c99f9c8bc4fd8151379a962624b295a20eaafa6ae9b010ba8722a9b5ec5a"
+      },
+      {
+        "backend": "contracts/target.schema.json",
+        "frontend": "src/api/schemas/target.schema.json",
+        "equal": true,
+        "sha256": "a3e9776a95b7e4594c5d07d7c9f38e1c2cbcf4dced01c0d109f187c54ea0cc5e"
+      },
+      {
+        "backend": "contracts/openapi.json",
+        "frontend": "src/api/schemas/openapi.json",
+        "equal": true,
+        "sha256": "17701b9049d39c01e7fd32c0f053edb72c35ecb8d2234e492e41558d742d743f"
+      },
+      {
+        "backend": "contracts/examples.json",
+        "frontend": "src/api/fixtures/examples.json",
+        "equal": true,
+        "sha256": "f456aa0377e40ed4e0dfdf11f618abbb21729cb43ac4b6078cf2846f0c2cb60c"
+      }
+    ],
+    "joint_metadata_semantic_equal": true,
+    "backend_business_diff_from_v1_0_0": [],
+    "backend_head": "e7401036addb518ef8303cbe364dd84cfe10b45e"
+  },
+  "scope": "Fresh CPU and contract checks; only application package metadata and release documentation changed. No GPU rerun during release preparation.",
+  "ui_gpu_evidence": "https://github.com/qxu8219-droid/frontend_ae_tool/blob/v1.1.0/docs/validation/light-workbench-evidence.json",
+  "raw_test_logs_tracked": false,
+  "user_services_restarted": false
+}
