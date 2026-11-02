@@ -1,0 +1,237 @@
+{
+  "schema": "t18.local-delivery.v1",
+  "date": "2026-11-02",
+  "status": "local_delivery_validated",
+  "delivery_tag": "t18-local-20261102",
+  "base_commits": {
+    "backend": "fa6f6d0",
+    "frontend": "7306e1e"
+  },
+  "scope": "local single session; existing SDK and shader cache; fresh service processes/storage; no remote access",
+  "environment": {
+    "date": "2026-11-02",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+    "sdk": {
+      "python": "3.12.15",
+      "prefix": "/home/xq/work/code/projects/r1pro/.venvs/isaacsim62",
+      "protocol_path": "/home/xq/work/code/projects/Model_Evaluation/backend/proto/replay_protocol/__init__.py",
+      "packages": {
+        "isaacsim": "6.2.0.0",
+        "isaacsim-core": "6.2.0.0",
+        "isaacsim-kernel": "6.2.0.0",
+        "pydantic": "2.14.1",
+        "pyzmq": "27.1.0",
+        "robot-replay-protocol": "0.1.0"
+      }
+    },
+    "chrome": "Google Chrome 156.0.8078.73",
+    "node": "v26.8.1",
+    "npm": "11.19.0",
+    "nvidia": "NVIDIA GeForce RTX 5070 Ti Laptop GPU, 580.178.04, 12227 MiB",
+    "sha256": {
+      "requirements.lock": "a6e93131c9f4420925d3c71e77429b7cced8d92bc9efb7c650e90e8253a1406e",
+      "sim_worker/requirements.txt": "b07bfbbcd0e517b0718d7f18c521a59a6e53f3af1deb49d73e916814db674160",
+      "configs/robot-asset.json": "3440a185816032f302bb694402a1e24e3115888ed3889956ddd05253453f1ddd",
+      "assets/robots/r1pro_2026/isaacsim_6_x/CHECKSUMS.sha256": "8681e03dafaf74e6e3450ae98e95774493494e9bf5d654d7f98e5c39dceb917d",
+      "tools/mediamtx/mediamtx": "0ffb7f18210d08ee38cb16668c4f3a2c96622e69d401119c0026d078a2b89523",
+      "outputs/tools/rtsp_loopback.so": "e4817ae53b4fa77ca03003d619478da68f923439b1e05cb85a96bd52dc6d995a",
+      "contracts/manifest.json": "d9118e6f052906ee1f2c1dc7fe2476ff2dd169cb1d9d8623c6fc7aa1d8060a83",
+      "../frontend/package-lock.json": "3fd9d4f4668e9a248ec50474f4e6b048c449c1f316c8d7fa59d40c9cfd3aa247"
+    }
+  },
+  "installation": {
+    "fresh_api_venv": true,
+    "pip_check": true,
+    "factory_operations": 19,
+    "fresh_npm_ci": true,
+    "fresh_frontend_real_build": true
+  },
+  "regression": {
+    "backend_passed": 953,
+    "backend_optional_skips": 3,
+    "backend_subtests": 5,
+    "final_contract_tests_passed": 182,
+    "frontend_passed": 264,
+    "chrome_passed": 14,
+    "p0_cpu_passed": 90,
+    "schema_typescript_real_build": "passed"
+  },
+  "synthetic": {
+    "passed": true,
+    "samples_checked": 68,
+    "healthy": {
+      "presentedFps": 19.23114374184537,
+      "maxCaptureAgeMs": 156.6376953125,
+      "sampleCount": 38
+    },
+    "worker_error_visible_ms": 864,
+    "new_sid_reloaded_at_zero": true,
+    "owned_resources_released": true
+  },
+  "matrix": {
+    "passed": true,
+    "samples_checked": 82,
+    "mismatches": 0,
+    "worker_error_visible_ms": 876.6081679999988,
+    "gateway_recovery_ms": 1232.838631999999,
+    "decoded_injections": {
+      "delayed": 25,
+      "dropped": 9,
+      "duplicated": 11,
+      "reordered": 11
+    },
+    "ws_injections": 3,
+    "sources_unchanged": true,
+    "owned_resources_released": true,
+    "cleanup_errors": []
+  },
+  "recording": {
+    "recorded_frames": 212,
+    "counts": {
+      "matched": 212,
+      "panel_mismatch": 0,
+      "unreadable_stamp": 0,
+      "crc_mismatch": 0,
+      "missing_reference": 0,
+      "stamp_outside_viewport": 0,
+      "panel_outside_viewport": 0,
+      "recording_read_error": 0
+    },
+    "strict_full_frame_passed": true,
+    "active_seconds": 10.999559,
+    "active_frames": 211
+  },
+  "power_comparison": {
+    "power_saver_native_window_fps": 14.174495810270898,
+    "balanced_60s_fps": 19.029938462916263,
+    "balanced_minimum_window_fps": 18.50320971000771,
+    "balanced_max_latency_ms": 361.01904296875,
+    "qualifies_30_minutes": false,
+    "original_profile_restored": true
+  },
+  "network": {
+    "live_ss_evidence": "outputs/t18/synthetic-01/network-isolation.json",
+    "final_runtime_binding_reports": [
+      {
+        "report": "outputs/t18/synthetic-03/service/state/s-9032958d187548b8ae45b7937e81acc4/worker/runtime.json",
+        "rtsp_binding_addresses": [
+          "127.0.0.1"
+        ],
+        "wildcard_override": false
+      },
+      {
+        "report": "outputs/t18/synthetic-03/service/state/s-664632f9441647eea85bca86f8b17b2c/worker/runtime.json",
+        "rtsp_binding_addresses": [
+          "127.0.0.1"
+        ],
+        "wildcard_override": false
+      },
+      {
+        "report": "outputs/t18/matrix-01/service/state/s-32e8e03fbee64457af787cfed46d4f53/worker/runtime.json",
+        "rtsp_binding_addresses": [
+          "127.0.0.1"
+        ],
+        "wildcard_override": false
+      },
+      {
+        "report": "outputs/t18/matrix-01/service/state/s-f6647ffa39924b8e9e584fa11af4760a/worker/runtime.json",
+        "rtsp_binding_addresses": [
+          "127.0.0.1"
+        ],
+        "wildcard_override": false
+      },
+      {
+        "report": "outputs/t18/matrix-01/service/state/s-32da9f13778a4a51bb422bd0e1f8b833/worker/runtime.json",
+        "rtsp_binding_addresses": [
+          "127.0.0.1"
+        ],
+        "wildcard_override": false
+      },
+      {
+        "report": "outputs/t18/matrix-01/service/state/s-6f44eaf8c06b4c44b466db4a2b8d1e43/worker/runtime.json",
+        "rtsp_binding_addresses": [
+          "127.0.0.1"
+        ],
+        "wildcard_override": false
+      },
+      {
+        "report": "outputs/t18/matrix-01/service/state/s-8cf0bd5dc155488f9cd7777a7fa61087/worker/runtime.json",
+        "rtsp_binding_addresses": [
+          "127.0.0.1"
+        ],
+        "wildcard_override": false
+      },
+      {
+        "report": "outputs/t18/matrix-01/service/state/s-342b2ceee31749ac8a1635fb3e3b5f39/worker/runtime.json",
+        "rtsp_binding_addresses": [
+          "127.0.0.1"
+        ],
+        "wildcard_override": false
+      }
+    ],
+    "remaining_owned_port_listeners": []
+  },
+  "review": {
+    "important": 1,
+    "minor": 1,
+    "outstanding": 0,
+    "fixes": [
+      "Document explicit commanded/chassis synthetic mapping; CPU imported241samples31channels confirms recipe",
+      "Place WS_CAPACITY in preaccept WebSocket rejection, not HTTP409"
+    ]
+  },
+  "dependency_audit": {
+    "all": {
+      "info": 0,
+      "low": 0,
+      "moderate": 3,
+      "high": 0,
+      "critical": 2,
+      "total": 5
+    },
+    "runtime": {
+      "info": 0,
+      "low": 0,
+      "moderate": 2,
+      "high": 0,
+      "critical": 0,
+      "total": 2
+    },
+    "resolved": false,
+    "scope": "not a security certification; trigger analysis and restrictions in t18-status.md"
+  },
+  "failed_runs_preserved": [
+    "outputs/t18/failed-controls-first",
+    "outputs/t18/synthetic-01",
+    "outputs/t18/synthetic-02",
+    "outputs/t18/native-profile-01"
+  ],
+  "limitations": [
+    "No new30minute run: T17 historical evidence retained; T18 uses60second diagnostic and full functional matrix",
+    "No new SDK/OS installation or cleared shader cache; SDK reused without modifications",
+    "No remote deployment, real IP/RTP fault test, physical calibration or full MCAP reader",
+    "Power-saver mode below15fps on this laptop; balanced mode is the tested runtime condition",
+    "Dependency advisories remain; upgrades/revalidation required before expanded untrusted-test/shared-CI/public-service scope",
+    "Unknown SID page destruction before create response still lacks server lease recovery"
+  ],
+  "evidence_sha256": {
+    "outputs/t18/environment.json": "ed2bdf4a9eb0072d9399e31773887a21f3e5ee03596adca65fa253182b055416",
+    "outputs/t18/installation-smoke.json": "862c38c1bad673c739afffd09d405de1995729f4b9cf10fbceddf2589bd8c0e6",
+    "outputs/t18/ignore-check.json": "c0623e81c12371187a39b2876db7a17218be1f39b2d39f0286627ccb1f9d72f2",
+    "outputs/t18/manual-demo-verification.json": "64803f0147e4bd9297fddf152cdc479e2629e6a879adb10389248531fbbb23e8",
+    "outputs/t18/synthetic-oracle-check.json": "cfdacc8862f66f975ef1dd3ac35508024d394e05446b576b85eafe27eb998150",
+    "outputs/t18/delivery-power.json": "33c136bb0d0ef358b5d892dab30eff7b2599e344d6a878456af7adcfca252ce6",
+    "outputs/t18/npm-audit.json": "46d049dcfcb86b16fceb66b7929dffbb827cd8412d1bcec1f2fdfc9252b18adf",
+    "outputs/t18/npm-runtime-audit.json": "21b9c9e4b2e7e884ac25bc3f310b40dc98a3729951da2879b0b63a51d5ef0978",
+    "outputs/t18/synthetic-03/browser-evidence.json": "0668feaca53a97c6d83476ceea21e266591d773c071b7b5bd67795c91e89640f",
+    "outputs/t18/matrix-01/validation-evidence.json": "e49a02b44d28385d07de6d2b87d77c10a0536c3856672acaf3fc1dddeaaea0f4",
+    "outputs/t18/matrix-01/browser-evidence.json": "8a23c604011c2d0cbc904c9a306af9f9daed109ee7cd1eaf606af9f63180ed74",
+    "outputs/t18/matrix-01/recording/recording-report.json": "bc38b1232b9e9447bbd8b73b7e0c26804a36c1905b36a5b0b7bf53799bd8135d",
+    "outputs/t18/balanced-profile-01/validation-evidence.json": "75f0409763bfa0c890c6607f11e29401a595d276e91b1cff09599bbf702e7ecd",
+    "outputs/t18/synthetic-01/network-isolation.json": "cf1c240145c9ce0ba2727aa45786651f32c527dc1ab3b1bc2d7ec21a3eea62ba"
+  },
+  "delivery_revision": {
+    "frontend": "232634f",
+    "backend": "resolve local tag t18-local-20261102 (this report is part of that commit)"
+  }
+}

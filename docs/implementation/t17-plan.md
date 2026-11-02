@@ -16,7 +16,7 @@
 - 自有新输出目录、回环监听、独立端口；只给本轮拥有且PID身份/命令已核验的worker/gateway注入故障，不改变系统网络、防火墙或其他服务。
 - SDK Python入口保留venv symlink，环境清除PYTHONPATH/PYTHONHOME/LD_PRELOAD/LD_LIBRARY_PATH。一个GPU会话序列；不并行运行GPU或后端进程测试。
 - B041仍用T16provisional profile；数据语义不在T17重猜或提升为精确标定。
-- 运行时每个实际呈现检查图像ID/CRC/同帧文字与源值；录屏分析独立解码实际WebM，逐帧列出可读/不可读/未覆盖，不把抽样冒称全帧覆盖。
+- 运行时每个实际呈现统计捕获延迟和有界缓存；约每5秒独立核对图像ID/CRC/同帧文字与源值，并离线核对完整worker采集追踪的数值/质量。录屏分析独立读取实际Chrome无损PNG帧，预声明短活动区间逐帧核对，列出可读/不可读/未覆盖；不把30分钟抽样冒称30分钟全帧像素覆盖。
 - 正式快照在同一H264 access unit的SEI内；WS帧快照不驱动显示。WS延迟应如实记为控制/遥测延迟，不能宣称独立延迟了帧内SEI。包级网络故障与消息级注入分别标记。
 - 30分钟按真实单调墙钟计，不以日志时间/倍速替代；快速smoke不得给出正式soak通过。
 - CPU同时列单核百分比和整机百分比，包含worker/gateway/API/browser；GPU利用率注明整卡，显存只将拥有PID计入。原CPU<5%不偷换统计口径，按实际结果重新评估。
@@ -35,8 +35,8 @@
 Files: `scripts/validation_resources.py`, `tests/core/test_validation_resources.py`。
 Interface: `ResourceSampler(roots, roles=None).sample() -> dict`；`summarize_resources(samples, stable_after_s=60, window_s=60) -> dict`。
 
-- [ ] RED/GREEN固定CPU ticks/单核与整机分母、PID身份/消失、无GPU/超时、稳定窗口汇总。
-- [ ] /proc只读采样、拥有子进程及角色、RSS/FD/线程、bounded nvidia-smi；只报告有依据的增长趋势。
+- [x] RED/GREEN固定CPU ticks/单核与整机分母、PID身份/消失、无GPU/超时、稳定窗口汇总。
+- [x] /proc只读采样、拥有子进程及角色、RSS/FD/线程、bounded nvidia-smi；只报告有依据的增长趋势。
 
 ## Task 2：正式浏览器矩阵与soak（并行）
 
@@ -44,24 +44,28 @@ Files: `frontend/e2e/resilience-real.spec.ts`及focused helpers，`playwright.re
 Inputs: `T17_MODE=matrix|soak`, `T17_SOAK_SECONDS=1800`, `REAL_*`, `B041_OFFLINE_BUNDLE`, `B041_PROFILE`, `T17_OWNERSHIP_DIR`, `T17_API_PID`。
 Outputs: `browser-evidence.json`, `observations.jsonl`, `progress.json`；有界缓冲，不保存30分钟全部快照到RAM。
 
-- [ ] 控制.1/1/4/10x、播放/暂停/单步/seek/结束/停止，真实数据独立数值与像素核对。
-- [ ] 原生Worker消息延迟/重排/丢弃/重复、WS延迟/断开；worker SIGKILL、owned gateway中断、创建中取消、刷新、至少多轮新sid重载0。
-- [ ] 连续1800秒回放/重复seek、健康窗口fps/捕获延迟/缓冲占用与源值检查；smoke标签独立。
-- [ ] 仅有生产缺陷才修改产品代码，并先复现RED、修复GREEN。
+- [x] 控制.1/1/4/10x、播放/暂停/单步/seek/结束/停止，真实数据独立数值与像素核对。
+- [x] 原生Worker消息延迟/重排/丢弃/重复、WS延迟/断开；worker SIGKILL、owned gateway中断、创建中取消、刷新、至少多轮新sid重载0。
+- [x] 连续1800秒回放/重复seek、健康窗口fps/捕获延迟/缓冲占用与源值检查；smoke标签独立。
+- [x] 仅有生产缺陷才修改产品代码，并先复现RED、修复GREEN。
 
 ## Task 3：逐帧录屏核验（并行）
 
 Files: `scripts/validate_recording.py`, `tests/core/test_recording_validation.py`, `frontend/e2e/resilience-video.ts`。
 
-- [ ] 独立模板/CRC算法覆盖正确画面及故意错误面板，确定损失编码容差；不可读不记作匹配。
-- [ ] 对实际短矩阵录屏全部解码帧逐一检查图像身份、对应文字ROI，输出覆盖/错配/未知及逐帧JSONL。
+- [x] 独立模板/CRC算法覆盖正确画面及故意错误面板，确定损失编码容差；不可读不记作匹配。
+- [x] 对实际短矩阵无损录屏的全部已保存帧逐一检查图像身份、对应文字ROI，输出覆盖/错配/未知及逐帧JSONL。
 
 ## Task 4：启动器与最终运行（主代理）
 
 Files: `scripts/validate_resilience.py`, `tests/core/test_resilience_runner.py`, docs/validation/t17-*。
 
-- [ ] 完成参数/正式soak时长/资源及清理验收RED/GREEN，复用ManagedProcess、T16输入hash；失败也写结果。
-- [ ] 创建独立输出并采样每5秒resource JSONL；短smoke后，顺序运行完整30分钟与matrix，不改变全局进程/网络。
-- [ ] 收集worker故障<3秒、清理10秒开始强制收尾证据；检查新sid0起点和全部拥有进程/端口释放。
-- [ ] 核验录屏、CPU/GPU/显存、内存与缓存增长，记录已测条件和未覆盖包级网络条件。
-- [ ] 适当回归、一次独立审查和必要修复；更新原todo/README/进度，保存源码提交与完整验收报告。
+- [x] 完成参数/正式soak时长/资源及清理验收RED/GREEN，复用ManagedProcess、T16输入hash；失败也写结果。
+- [x] 创建独立输出并采样每5秒resource JSONL；短smoke后，顺序运行完整30分钟与matrix，不改变全局进程/网络。
+- [x] 收集worker故障<3秒、清理10秒开始强制收尾证据；检查新sid0起点和全部拥有进程/端口释放。
+- [x] 核验录屏、CPU/GPU/显存、内存与缓存增长，记录已测条件和未覆盖包级网络条件。
+- [x] 适当回归、一次独立审查和必要修复；更新原todo/README/进度，保存源码提交与完整验收报告。
+
+## 执行结论（2026-10-27）
+
+本地矩阵、1800.057秒同会话28次seek、全量worker追踪和无损屏幕序列通过。完整证据见 [T17记录](../validation/t17-status.md)。CPU口径明确：主服务12.406%单核/0.517%整机，不将原单核5%标为通过。暂定实物语义、远程网络/服务器、未知SID的文档销毁恢复边界单列；下一阶段T18。

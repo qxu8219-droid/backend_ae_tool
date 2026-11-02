@@ -1123,7 +1123,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -1190,7 +1190,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -1255,7 +1255,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -1324,7 +1324,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -1391,7 +1391,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -1456,7 +1456,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -1527,7 +1527,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -1613,7 +1613,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -1690,7 +1690,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -1765,7 +1765,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -1832,7 +1832,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -1903,7 +1903,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -1974,7 +1974,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -2045,7 +2045,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -2116,7 +2116,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -2187,7 +2187,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -2258,7 +2258,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -2329,7 +2329,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;
@@ -2396,7 +2396,7 @@ export interface operations {
                     "application/json": components["schemas"]["ErrorEnvelope"];
                 };
             };
-            /** @description State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED. */
+            /** @description State conflict, including NO_LOG_LOADED or SESSION_CAPACITY. */
             409: {
                 headers: {
                     [name: string]: unknown;

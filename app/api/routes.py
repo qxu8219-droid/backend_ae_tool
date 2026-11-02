@@ -46,7 +46,7 @@ def invalid(message: str, details=None) -> NoReturn:
 ERROR_RESPONSES = {
     400: {"model": ErrorEnvelope, "description": "Invalid request syntax, parameters, fields, or non-finite numbers."},
     404: {"model": ErrorEnvelope, "description": "Requested scene, robot, session, log, or channel does not exist."},
-    409: {"model": ErrorEnvelope, "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."},
+    409: {"model": ErrorEnvelope, "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."},
     503: {"model": ErrorEnvelope, "description": "Runtime is not configured, or the worker is unavailable/not ready."},
     "default": {"model": ErrorEnvelope, "description": "Other transport errors use the same error envelope."},
 }

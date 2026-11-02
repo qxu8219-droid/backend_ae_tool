@@ -1,6 +1,6 @@
 # T11：独立 IsaacSim worker
 
-当前固定 IsaacSim **6.2.0 / Python 3.12 / PhysX**，使用 `configs/robot-asset.json` 指向的完整 6.x 资产。`sim_worker` 只依赖共享 `replay_protocol`、pyzmq 和 SDK；导入模块不会启动仿真，也不导入 `app`。T12 将提供会话管理，T14 绑定 HTTP/WS，T15 接入正式浏览器媒体。
+当前固定 IsaacSim **6.2.0 / Python 3.12 / PhysX**，使用 `configs/robot-asset.json` 指向的完整 6.x 资产。`sim_worker` 只依赖共享 `replay_protocol`、pyzmq 和 SDK；导入模块不会启动仿真，也不导入 `app`。T12/T14/T15 已接入会话、HTTP/WS 与正式浏览器媒体；日常运行使用 [交付手册](delivery-v1.md)，下文独立 worker 命令供开发验证。
 
 ## 进程与通道
 
@@ -15,7 +15,7 @@
 
 每个 socket 只归调用线程所有。HWM 为 64，消息上限 1 MiB，每轮最多读取 64 条；普通目标只有一个待执行槽，始终保留合法最新目标。可靠关键帧单独保留，不能被普通目标覆盖。request_id 缓存上限 128；缓存内重复请求返回已有阶段，相同 ID 不同内容拒绝。客户端事件队列上限 128，故事件不能替代可靠 RPC。
 
-常规 RPC 期限默认 10 秒，启动握手默认 120 秒；集成验证允许 150 秒的整个冷启动期限。socket 建立不代表 SDK 或媒体已经就绪。当前 CLI 在场景、机器人、相机与媒体完成初始化后输出 `WORKER_READY`；加载相位与独立加载期限由 T12 接入。
+常规 RPC 期限默认 10 秒，启动握手默认 120 秒；集成验证允许 150 秒的整个冷启动期限。socket 建立不代表 SDK 或媒体已经就绪。当前 CLI 在场景、机器人、相机与媒体完成初始化后输出 `WORKER_READY`；加载相位与独立加载期限已由 T12 接入。
 
 ## 目标执行与证明
 
@@ -23,7 +23,7 @@
 
 普通目标必须匹配当前 session/log/epoch/control、playing 状态和倍速。旧序号、重复序号、占用可靠关键帧身份、跨控制代次消息均拒绝。pause_barrier 清除待执行普通帧与旧可靠目标；随后由新的可靠关键帧确定暂停画面。RPC 的 accepted、applied、rendered 分别表示接收、实际读回、实际原始图像验证，均不表示浏览器已呈现。
 
-启动核验版本、PhysX、53 项资产 checksum、USD 引用闭包和 28 DOF 名称。姿态按名称映射，关节和底盘读回误差门槛为 1e-5；四元数先归一化再比较。连续轮角只在应用时转为等价主值，source_joints 保留累计圈数。底盘 x/y/yaw 使用世界系，保留初始化 z/roll/pitch；底盘缺测时回到初始位姿，不沿用上一个目标的位置。
+启动核验版本、PhysX、53 项资产 checksum、文本资产引用和 28 DOF 名称。静态审计不遍历二进制 USD 引用闭包；实际 USD 加载与画面验证另有运行证据。姿态按名称映射，关节和底盘读回误差门槛为 1e-5；四元数先归一化再比较。连续轮角只在应用时转为等价主值，source_joints 保留累计圈数。底盘 x/y/yaw 使用世界系，保留初始化 z/roll/pitch；底盘缺测时回到初始位姿，不沿用上一个目标的位置。
 
 暂停时继续采集相同日志时刻，每次重新设定并读回姿态，生成新的 capture_id。渲染保持业务姿态，物理步仅用于刷新运行时状态，不作动态仿真。固定第三人称相机上的 64 个实际几何色块编码完整 uint32 capture_id 和 CRC32。RGB 像素身份与同次渲染属性一致后，才产生 RenderedFrame。
 
@@ -37,8 +37,8 @@ H.264 SEI 使用正式 UUID `83249d41b6545e6e8d7779430f88bb0d`，内容为 Snaps
 
 ```bash
 export ISAACSIM_PYTHON=/home/xq/work/code/projects/r1pro/.venvs/isaacsim62/bin/python
-"$ISAACSIM_PYTHON" -m pip install -e proto
 "$ISAACSIM_PYTHON" -m pip install -r sim_worker/requirements.txt
+"$ISAACSIM_PYTHON" -m pip install --no-deps -e proto
 bash scripts/worker_validation/build_decoder.sh
 env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_worker.py \
   --output-dir outputs/t11/my-new-validation \

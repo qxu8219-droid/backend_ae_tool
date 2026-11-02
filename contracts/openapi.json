@@ -2091,7 +2091,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {
@@ -2170,7 +2170,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {
@@ -2238,7 +2238,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {
@@ -2317,7 +2317,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {
@@ -2390,7 +2390,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {
@@ -2467,7 +2467,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {
@@ -2556,7 +2556,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "413": {
             "content": {
@@ -2664,7 +2664,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "422": {
             "content": {
@@ -2762,7 +2762,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {
@@ -2905,7 +2905,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {
@@ -2985,7 +2985,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {
@@ -3074,7 +3074,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {
@@ -3170,7 +3170,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {
@@ -3266,7 +3266,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {
@@ -3356,7 +3356,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {
@@ -3445,7 +3445,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {
@@ -3534,7 +3534,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {
@@ -3630,7 +3630,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {
@@ -3709,7 +3709,7 @@
                 }
               }
             },
-            "description": "State conflict, including NO_LOG_LOADED or MAX_SESSIONS_REACHED."
+            "description": "State conflict, including NO_LOG_LOADED or SESSION_CAPACITY."
           },
           "503": {
             "content": {

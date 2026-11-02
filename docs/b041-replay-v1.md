@@ -45,7 +45,7 @@ env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/import_log.py \
 
 ## 夹爪假设与可改参数
 
-full23 的 14、15 槽分别为左右夹爪原生标量 `g`。默认按 EE2 两指对称关节行程换算：
+full23 的 14、15 槽分别为左右夹爪原生标量 `g`。[官方2026驱动接口](https://docs.galaxea-dynamics.com/R1Pro/docs/2026/software_interface/r1pro_driver/)定义反馈为0–100mm行程；这不等于已经确认历史数据到模型的几何零位，也不能把低层电机角度或高层目标直接混作同一单位。默认按 EE2 两指对称关节行程换算：
 
 ```text
 q1 = g / 2000 m
@@ -141,4 +141,4 @@ env -u PYTHONPATH -u PYTHONHOME .venv/bin/python scripts/validate_b041.py \
 
 ## 验证范围
 
-本轮两份离线、live 与 Rim 已通过本地数值/质量核对及真实 IsaacSim 6.2 正式 UI 回放验证，见 [T16 验证记录](validation/t16-status.md)。所有验证只驱动本地仿真，没有向机器人发送命令。完整 MCAP 原频率适配、物理精确标定及 T17 长时间稳定性验证尚未完成；不能把本次暂定映射通过解释为这些项目已经验收。
+本轮两份离线、live 与 Rim 已通过本地数值/质量核对及真实 IsaacSim 6.2 正式 UI 回放验证，见 [T16 验证记录](validation/t16-status.md)。所有验证只驱动本地仿真，没有向机器人发送命令。完整 MCAP 原频率适配与物理精确标定尚未完成。T17 已另行完成本地长测，见 [T17记录](validation/t17-status.md)；其结果不代表实物标定完成。

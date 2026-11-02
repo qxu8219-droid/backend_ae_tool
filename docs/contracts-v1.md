@@ -4,9 +4,9 @@
 
 ## 交付范围
 
-已提供 18 个 REST 路由声明、8 类服务端 WS 消息、2 类客户端 WS 消息，以及 worker RPC、目标、事件和媒体候选目录模型。类型以 Python 为单一来源，自动生成 JSON Schema 和 TypeScript。
+T04 提供18个路由，T16增加标注查询后当前为19个 REST 路由、8 类服务端 WS 消息、2 类客户端 WS 消息，以及 worker RPC、目标、事件和媒体候选目录模型。类型以 Python 为单一来源，自动生成 JSON Schema 和 TypeScript。
 
-**正式 HTTP/WS 业务尚未接入。** 合法 REST 调用返回 `503 BACKEND_NOT_CONFIGURED`，WS 关闭码为 1013；OpenAPI 中的成功响应描述后续实现。T08～T11 已实现独立导入、采样、时间轴与真实 worker，尚待 T12/T14 绑定正式会话和 API。
+正式 HTTP/WS 已通过 `app.runtime:create_runtime_app` 接入。无配置的 `app.main:app` 保留契约测试用途，合法业务返回503、WS关闭1013。见 [运行说明](runtime-api-v1.md)与[交付手册](delivery-v1.md)。
 
 依赖方向为 `app → replay_protocol ← sim_worker`。`proto/` 是独立可安装包，只依赖 Pydantic 与标准库；在 IsaacSim 的 Python 中已验证可以独立导入，不加载 app、FastAPI、NumPy 或 IsaacSim。API 使用独立的 backend `.venv`。
 
@@ -31,7 +31,7 @@ T11 补充 TargetFrame 的 `state=ready|playing|paused|ended`（缺省 paused）
 
 `SnapshotCatalog` 包含同 session 的 1～16 份快照、64 个唯一标记像素坐标、完整 ID＋CRC32 布局与诊断性的 encoder_poll_capture_id。浏览器必须从实际解码图像读取身份，再精确选择快照；未知、缺失或过期配对保持整个显示区域。
 
-`VideoInfo` 声明 WHEP 地址、SEI UUID、目录版本、WebCodecs H.264 与编码接收变换能力。发布状态为 true 时必须提供 UUID 和端点。正式 v1 样例 UUID 为 `83249d41b6545e6e8d7779430f88bb0d`；它与 P0 的 `p0.snapshot_catalog.v1`/旧 UUID 分开，当前 P0 页面继续使用原格式。T11/T15 正式集成时需要显式迁移，不能直接宣称两种格式兼容。
+`VideoInfo` 声明 WHEP 地址、SEI UUID、目录版本、WebCodecs H.264 与编码接收变换能力。发布状态为 true 时必须提供 UUID 和端点。正式 v1 样例 UUID 为 `83249d41b6545e6e8d7779430f88bb0d`；它与 P0 的 `p0.snapshot_catalog.v1`/旧 UUID 分开，当前 P0 页面继续使用原格式。T11/T15 已使用正式目录完成集成；旧P0页面仍不能宣称与正式目录兼容。
 
 WS 信封包含 session_id、connection_id、seq、wall_time、type、data。type 在运行时和导出 Schema 中都必填；seq 只在同一连接内递增。重连先发送包含关节元数据、回放、worker、video 与同步状态的 connection_snapshot。10/20/30Hz 设置仅影响健康遥测，同步必需的快照不受该降频规则约束。
 
@@ -39,7 +39,7 @@ WS 信封包含 session_id、connection_id、seq、wall_time、type、data。typ
 
 ## REST 和数据边界
 
-路由完整保留计划的目录 3 个、会话 3 个、日志 3 个、播放 8 个、视频 1 个。请求参数错误为 400，资源不存在 404、状态冲突 409、上传超限 413、日志内容致命解析错误 422、worker 未就绪 503。当前仅参数校验与未接入服务的 503 已实现，其他业务结果属于后续实现。
+当前包含目录3个、会话3个、日志3个、标注查询1个、播放8个、视频1个。请求参数错误为 400，资源不存在 404、状态冲突 409、上传超限 413、日志内容致命解析错误 422、worker 未就绪 503。正式factory已实现上述业务结果；默认契约入口仍返回未配置503。
 
 - seek 必须恰好选择 time_s 或 frame_index，二者不可同时出现，显式 null 不能冒充缺省；负值允许进入后续 clamp。导出类型也表达互斥。
 - speed 范围 `[0.1,10]`；step 方向为 forward/backward。单步索引指规范化原采样时间集合，不是采集或编码序号。
@@ -50,11 +50,11 @@ WS 信封包含 session_id、connection_id、seq、wall_time、type、data。typ
 
 ReplayData 保留原文件引用/hash、映射快照、规范化原样本时间集合和每通道独立时序，不用回放网格覆盖原样本。规范化时间单位为秒；原始时间单位与转换保留在映射快照。来源区分 measured/commanded/derived/missing，处理标记区分转换、填充、插值等。累计轮角样例保留超过 2π 的值；包角通道必须声明周期。
 
-具体首值、长缺口、单位映射、插值与轮角派生算法属于 T08/T09，当前不执行清洗。样例中的数值是合成数据，不是对真机 log 字段含义的推断。
+首值、长缺口、单位映射、插值与轮角派生算法已由 T08/T09 实现；契约模型本身不执行清洗。样例中的数值是合成数据，不是对真机 log 字段含义的推断。
 
 ## IPC 拓扑与期限
 
-T11 实际拓扑：worker 绑定 RPC ROUTER 和事件 XPUB，目标 SUB 连接主服务 XPUB；主服务 DEALER/SUB 连接 worker。XPUB 仍使用 PUB 发布语义，同时观察真实订阅，以完成双方握手；目标端口由主服务侧占用。端点均为回环地址。独立 CLI 默认端口 19601/19602/19603，后续 T12 管理器负责动态分配。普通 RPC 默认 10 秒，启动握手默认 120 秒；不能把慢启动按普通 RPC 判死。
+T11 实际拓扑：worker 绑定 RPC ROUTER 和事件 XPUB，目标 SUB 连接主服务 XPUB；主服务 DEALER/SUB 连接 worker。XPUB 仍使用 PUB 发布语义，同时观察真实订阅，以完成双方握手；目标端口由主服务侧占用。端点均为回环地址。独立 CLI 默认端口 19601/19602/19603，正式 T12 管理器已负责动态分配。普通 RPC 默认 10 秒，启动握手默认 120 秒；不能把慢启动按普通 RPC 判死。
 
 subscribe_ready 在双方实际观察到目标和事件订阅后才确认。普通目标有界取最新，首末帧、seek/stop/step 和暂停屏障走可确认路径。具体启动、队列、媒体与退出边界见 [worker 说明](worker-v1.md)。
 

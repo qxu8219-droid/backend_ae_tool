@@ -1,0 +1,488 @@
+{
+  "schema": "t17.local-acceptance.v1",
+  "date": "2026-10-27",
+  "status": "local_matrix_and_30minute_validation_passed_with_explicit_cpu_scope",
+  "environment": {
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+    "logical_cpus": 24,
+    "browser": "Google Chrome 152.0.7977.82",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti Laptop GPU, 12227 MiB, 580.178.04",
+    "python_backend": "Python 3.12.15",
+    "node": "v26.8.1",
+    "validation_mode": "local loopback; Chrome software video decoding; original1280x720 camera,1280x1080 pairedcanvas; no system network impairment",
+    "ffmpeg": {
+      "build": 1011,
+      "source": "https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip",
+      "archive_sha256": "ebc74fc5b94830176a3c2914ae96bd8bc7f6a91f4f33890230f84a172ee61ccc",
+      "binary_sha256": "460d44f3416005662f528d4b92e7b94ace924e8a0288106d3803b73c56eaadc8",
+      "extraction": "Python stdlib zip CRC checked; Node26 installer stalled while writing executable; no SDK/system install"
+    }
+  },
+  "source_id": "RBA60725B041_20261020114048516_RAW",
+  "input_profile": "configs/mappings/b041_provisional_v1.json",
+  "soak": {
+    "directory": "outputs/t17/soak-03",
+    "wall_seconds": 1800.057425391,
+    "same_session": true,
+    "seek_cycles": 28,
+    "pixel_source_checkpoints": 437,
+    "checkpoint_mismatches": 0,
+    "healthy_presentations": 33155,
+    "healthy_windows": 349,
+    "healthy_fps": 19.026206991898942,
+    "minimum_full_window_fps": 16.979709247444244,
+    "max_capture_to_presentation_ms": 590.1025390625,
+    "max_presentation_callback_ms": 505.61000000312924,
+    "healthy_wall_ms": 1742596.4100000001,
+    "control_settling_ms": 52899.085399999414,
+    "partial_window_fps_exclusion_ms": 0,
+    "final_window_active": false,
+    "worker_trace_frames_checked": 34364,
+    "worker_trace_failures": 0,
+    "sources_unchanged": true,
+    "owned_resources_released": true
+  },
+  "matrix": {
+    "directory": "outputs/t17/matrix-02",
+    "pixel_source_checkpoints": 82,
+    "mismatches": 0,
+    "sessions_created": 5,
+    "worker_fault_visible_ms": 882.1448829999936,
+    "gateway_recovered_ms": 1275.958135000008,
+    "decoded_injections": {
+      "delayed": 22,
+      "dropped": 11,
+      "duplicated": 9,
+      "reordered": 11
+    },
+    "ws_faults_applied": 3,
+    "duplicate_tab_preserved_original_session": true,
+    "reload_cleanup_by": "application; test performs GET only",
+    "worker_trace_frames_checked": 1197,
+    "worker_trace_failures": 0,
+    "empty_cancelled_trace_exclusions": [
+      {
+        "path": "outputs/t17/matrix-02/service/state/s-defffc2e77ef42d6a20541d30e6c5ab6/worker/rendered.jsonl",
+        "reason": "Intentionally canceled before loading a log; zero captures expected"
+      }
+    ],
+    "sources_unchanged": true,
+    "owned_resources_released": true
+  },
+  "recording": {
+    "directory": "outputs/t17/matrix-02/recording",
+    "format": "chromium-cdp-png/v1",
+    "frames_checked": 215,
+    "counts": {
+      "matched": 215,
+      "panel_mismatch": 0,
+      "unreadable_stamp": 0,
+      "crc_mismatch": 0,
+      "missing_reference": 0,
+      "stamp_outside_viewport": 0,
+      "panel_outside_viewport": 0,
+      "recording_read_error": 0
+    },
+    "all_recorded_frames_passed": true,
+    "active_seconds": 10.968409,
+    "active_frames": 214,
+    "glyph_threshold": 38.0,
+    "scope": "Every recorded-screen frame: independent image capture32/CRC and expected visible panel glyph regions; bounded glyph comparison, not pixel equality"
+  },
+  "resources": {
+    "sample_count": 350,
+    "duration_s": 1796.7536812300023,
+    "stable_after_s": 60.0,
+    "window_s": 60.0,
+    "window_status": "available",
+    "rss": {
+      "total": {
+        "first_mib": 8993.46484375,
+        "last_mib": 9033.015625,
+        "peak_mib": 9183.62890625,
+        "delta_mib": 39.55078125,
+        "first_stable_window": {
+          "sample_count": 12,
+          "start_monotonic_s": 19048.425009946,
+          "end_monotonic_s": 19105.132364602,
+          "mean_monotonic_s": 19076.804802905917,
+          "mean_mib": 9036.0068359375,
+          "min_mib": 8928.40625,
+          "max_mib": 9183.62890625
+        },
+        "last_stable_window": {
+          "sample_count": 12,
+          "start_monotonic_s": 20726.87914111,
+          "end_monotonic_s": 20783.414360389,
+          "mean_monotonic_s": 20755.15533576617,
+          "mean_mib": 9053.763997395834,
+          "min_mib": 9032.9765625,
+          "max_mib": 9068.73828125
+        },
+        "stable_delta_mib": 17.75716145833394,
+        "stable_slope_mib_per_min": 2.1977125789387952,
+        "window_delta_slope_mib_per_min": 0.6348076082082371
+      },
+      "by_root": {
+        "169757": {
+          "first_mib": 6250.65625,
+          "last_mib": 6258.9296875,
+          "peak_mib": 6260.6640625,
+          "delta_mib": 8.2734375,
+          "first_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 19048.425009946,
+            "end_monotonic_s": 19105.132364602,
+            "mean_monotonic_s": 19076.804802905917,
+            "mean_mib": 6243.5458984375,
+            "min_mib": 6242.734375,
+            "max_mib": 6244.4296875
+          },
+          "last_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 20726.87914111,
+            "end_monotonic_s": 20783.414360389,
+            "mean_monotonic_s": 20755.15533576617,
+            "mean_mib": 6258.884440104167,
+            "min_mib": 6258.3203125,
+            "max_mib": 6259.22265625
+          },
+          "stable_delta_mib": 15.33854166666697,
+          "stable_slope_mib_per_min": 0.6213135537645024,
+          "window_delta_slope_mib_per_min": 0.5483434371910486
+        },
+        "169758": {
+          "first_mib": 309.2734375,
+          "last_mib": 254.921875,
+          "peak_mib": 309.2734375,
+          "delta_mib": -54.3515625,
+          "first_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 19048.425009946,
+            "end_monotonic_s": 19105.132364602,
+            "mean_monotonic_s": 19076.804802905917,
+            "mean_mib": 293.7594401041667,
+            "min_mib": 255.5078125,
+            "max_mib": 306.4375
+          },
+          "last_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 20726.87914111,
+            "end_monotonic_s": 20783.414360389,
+            "mean_monotonic_s": 20755.15533576617,
+            "mean_mib": 254.65299479166666,
+            "min_mib": 254.0,
+            "max_mib": 255.09765625
+          },
+          "stable_delta_mib": -39.10644531250003,
+          "stable_slope_mib_per_min": -0.27221949369039034,
+          "window_delta_slope_mib_per_min": -1.398031384273034
+        },
+        "169801": {
+          "first_mib": 2433.53515625,
+          "last_mib": 2519.1640625,
+          "peak_mib": 2634.45703125,
+          "delta_mib": 85.62890625,
+          "first_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 19048.425009946,
+            "end_monotonic_s": 19105.132364602,
+            "mean_monotonic_s": 19076.804802905917,
+            "mean_mib": 2498.7014973958335,
+            "min_mib": 2428.65625,
+            "max_mib": 2634.45703125
+          },
+          "last_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 20726.87914111,
+            "end_monotonic_s": 20783.414360389,
+            "mean_monotonic_s": 20755.15533576617,
+            "mean_mib": 2540.2265625,
+            "min_mib": 2518.89453125,
+            "max_mib": 2555.17578125
+          },
+          "stable_delta_mib": 41.525065104166515,
+          "stable_slope_mib_per_min": 1.8486185188646826,
+          "window_delta_slope_mib_per_min": 1.4844955552902053
+        }
+      },
+      "by_role": {
+        "api": {
+          "first_mib": 309.65625,
+          "last_mib": 303.9453125,
+          "peak_mib": 309.65625,
+          "delta_mib": -5.7109375,
+          "first_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 19048.425009946,
+            "end_monotonic_s": 19105.132364602,
+            "mean_monotonic_s": 19076.804802905917,
+            "mean_mib": 306.87109375,
+            "min_mib": 306.87109375,
+            "max_mib": 306.87109375
+          },
+          "last_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 20726.87914111,
+            "end_monotonic_s": 20783.414360389,
+            "mean_monotonic_s": 20755.15533576617,
+            "mean_mib": 303.9453125,
+            "min_mib": 303.9453125,
+            "max_mib": 303.9453125
+          },
+          "stable_delta_mib": -2.92578125,
+          "stable_slope_mib_per_min": -0.08743777850273124,
+          "window_delta_slope_mib_per_min": -0.1045948814404297
+        },
+        "browser": {
+          "first_mib": 1909.5859375,
+          "last_mib": 2119.5625,
+          "peak_mib": 2184.58984375,
+          "delta_mib": 209.9765625,
+          "first_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 19048.425009946,
+            "end_monotonic_s": 19105.132364602,
+            "mean_monotonic_s": 19076.804802905917,
+            "mean_mib": 2080.3444010416665,
+            "min_mib": 2069.984375,
+            "max_mib": 2124.84375
+          },
+          "last_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 20726.87914111,
+            "end_monotonic_s": 20783.414360389,
+            "mean_monotonic_s": 20755.15533576617,
+            "mean_mib": 2127.1438802083335,
+            "min_mib": 2119.5625,
+            "max_mib": 2133.96484375
+          },
+          "stable_delta_mib": 46.79947916666697,
+          "stable_slope_mib_per_min": 0.7719651990610324,
+          "window_delta_slope_mib_per_min": 1.673052616258099
+        },
+        "browser_driver": {
+          "first_mib": 523.94921875,
+          "last_mib": 399.6015625,
+          "peak_mib": 530.32421875,
+          "delta_mib": -124.34765625,
+          "first_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 19048.425009946,
+            "end_monotonic_s": 19105.132364602,
+            "mean_monotonic_s": 19076.804802905917,
+            "mean_mib": 418.3570963541667,
+            "min_mib": 358.671875,
+            "max_mib": 510.55078125
+          },
+          "last_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 20726.87914111,
+            "end_monotonic_s": 20783.414360389,
+            "mean_monotonic_s": 20755.15533576617,
+            "mean_mib": 413.0826822916667,
+            "min_mib": 394.1640625,
+            "max_mib": 421.5859375
+          },
+          "stable_delta_mib": -5.2744140625,
+          "stable_slope_mib_per_min": 1.0766533198036505,
+          "window_delta_slope_mib_per_min": -0.18855706096787744
+        },
+        "mediamtx": {
+          "first_mib": 50.625,
+          "last_mib": 54.9609375,
+          "peak_mib": 55.42578125,
+          "delta_mib": 4.3359375,
+          "first_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 19048.425009946,
+            "end_monotonic_s": 19105.132364602,
+            "mean_monotonic_s": 19076.804802905917,
+            "mean_mib": 52.4755859375,
+            "min_mib": 51.8671875,
+            "max_mib": 53.1875
+          },
+          "last_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 20726.87914111,
+            "end_monotonic_s": 20783.414360389,
+            "mean_monotonic_s": 20755.15533576617,
+            "mean_mib": 54.931315104166664,
+            "min_mib": 54.5390625,
+            "max_mib": 55.25390625
+          },
+          "stable_delta_mib": 2.4557291666666643,
+          "stable_slope_mib_per_min": 0.07075220689369283,
+          "window_delta_slope_mib_per_min": 0.0877908083652204
+        },
+        "vite": {
+          "first_mib": 309.2734375,
+          "last_mib": 254.921875,
+          "peak_mib": 309.2734375,
+          "delta_mib": -54.3515625,
+          "first_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 19048.425009946,
+            "end_monotonic_s": 19105.132364602,
+            "mean_monotonic_s": 19076.804802905917,
+            "mean_mib": 293.7594401041667,
+            "min_mib": 255.5078125,
+            "max_mib": 306.4375
+          },
+          "last_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 20726.87914111,
+            "end_monotonic_s": 20783.414360389,
+            "mean_monotonic_s": 20755.15533576617,
+            "mean_mib": 254.65299479166666,
+            "min_mib": 254.0,
+            "max_mib": 255.09765625
+          },
+          "stable_delta_mib": -39.10644531250003,
+          "stable_slope_mib_per_min": -0.27221949369039034,
+          "window_delta_slope_mib_per_min": -1.398031384273034
+        },
+        "worker": {
+          "first_mib": 5890.375,
+          "last_mib": 5900.0234375,
+          "peak_mib": 5900.89453125,
+          "delta_mib": 9.6484375,
+          "first_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 19048.425009946,
+            "end_monotonic_s": 19105.132364602,
+            "mean_monotonic_s": 19076.804802905917,
+            "mean_mib": 5884.19921875,
+            "min_mib": 5883.99609375,
+            "max_mib": 5884.37109375
+          },
+          "last_stable_window": {
+            "sample_count": 12,
+            "start_monotonic_s": 20726.87914111,
+            "end_monotonic_s": 20783.414360389,
+            "mean_monotonic_s": 20755.15533576617,
+            "mean_mib": 5900.0078125,
+            "min_mib": 5899.8359375,
+            "max_mib": 5900.0234375
+          },
+          "stable_delta_mib": 15.80859375,
+          "stable_slope_mib_per_min": 0.6379991253735408,
+          "window_delta_slope_mib_per_min": 0.565147510266247
+        }
+      }
+    },
+    "cpu": {
+      "peak_percent_one_core": 242.13302727371547,
+      "mean_sampled_percent_one_core": 190.2035514080613,
+      "peak_percent_machine": 10.08887613640481,
+      "mean_sampled_percent_machine": 7.925147975335887
+    },
+    "gpu_owned_vram": {
+      "first_mib": 1788.0,
+      "last_mib": 1723.0,
+      "peak_mib": 1788.0,
+      "delta_mib": -65.0,
+      "first_stable_window": {
+        "sample_count": 12,
+        "start_monotonic_s": 19048.425009946,
+        "end_monotonic_s": 19105.132364602,
+        "mean_monotonic_s": 19076.804802905917,
+        "mean_mib": 1723.0,
+        "min_mib": 1723.0,
+        "max_mib": 1723.0
+      },
+      "last_stable_window": {
+        "sample_count": 12,
+        "start_monotonic_s": 20726.87914111,
+        "end_monotonic_s": 20783.414360389,
+        "mean_monotonic_s": 20755.15533576617,
+        "mean_mib": 1723.0,
+        "min_mib": 1723.0,
+        "max_mib": 1723.0
+      },
+      "stable_delta_mib": 0.0,
+      "stable_slope_mib_per_min": 0.0,
+      "window_delta_slope_mib_per_min": 0.0
+    },
+    "interpretation": "Descriptive evidence only. Stable windows exclude configured warmup; they do not prove a plateau or determine acceptance. RSS sums may count shared pages; short-lived processes and post-last-observation CPU are unobserved."
+  },
+  "cpu_by_role": {
+    "api": {
+      "mean_one_core_percent": 12.405754267542436,
+      "mean_machine_percent": 0.5169064278142681,
+      "peak_one_core_percent": 71.23346300114628
+    },
+    "browser": {
+      "mean_one_core_percent": 74.79858460138541,
+      "mean_machine_percent": 3.1166076917243926,
+      "peak_one_core_percent": 102.42611391816693
+    },
+    "browser_driver": {
+      "mean_one_core_percent": 2.4007914897283964,
+      "mean_machine_percent": 0.10003297873868312,
+      "peak_one_core_percent": 8.263269978388703
+    },
+    "mediamtx": {
+      "mean_one_core_percent": 2.427429952859918,
+      "mean_machine_percent": 0.10114291470249669,
+      "peak_one_core_percent": 3.5040299356754074
+    },
+    "vite": {
+      "mean_one_core_percent": 0.7919393101808649,
+      "mean_machine_percent": 0.03299747125753601,
+      "peak_one_core_percent": 3.1055460708946607
+    },
+    "worker": {
+      "mean_one_core_percent": 97.39521592068063,
+      "mean_machine_percent": 4.058133996695029,
+      "peak_one_core_percent": 124.1388688658171
+    }
+  },
+  "legacy_api_cpu_5_percent": {
+    "one_core_passed": false,
+    "whole_machine_passed": true,
+    "no_denominator_substitution": true
+  },
+  "regression": {
+    "backend_passed": 953,
+    "backend_subtests": 5,
+    "backend_optional_skips": 3,
+    "frontend_passed": 264,
+    "existing_chrome_passed": 14,
+    "p0_cpu_passed": 90,
+    "recording_system_tests_passed": 16,
+    "contracts_typescript_build": "passed"
+  },
+  "review": {
+    "whole_change_important": 3,
+    "whole_change_minor": 1,
+    "refresh_followup_important": 1,
+    "outstanding": 0,
+    "resolution": "coverage explicitly distinguished plus full worker trace; recording gate required; PID recheck immediately before signal; final partial window flushed; late creation cannot overwrite newer ownership"
+  },
+  "failed_or_diagnostic_runs_preserved": [
+    "smoke-02",
+    "smoke-03",
+    "smoke-04",
+    "profile-01",
+    "soak-01",
+    "soak-02",
+    "matrix-01",
+    "recording-01"
+  ],
+  "limitations": [
+    "Physical gripper/base semantics remain provisional; same-run high-rate MCAP not covered.",
+    "30-minute pixel/source checks are sampled; every presentation has latency/buffer metrics, every worker trace has numeric/provenance verification, and every recorded PNG frame has independent ID/declared-glyph verification.",
+    "Local message-level faults only; no IP/RTP netem, non-loopback network or server deployment test.",
+    "Reload cleanup covers a known successful creation SID; document destruction before a create response returns its SID is not recovered automatically.",
+    "API CPU is 12.41% of one logical core and 0.517% of this 24-core machine; do not claim the ambiguous original 5% budget passes under the one-core interpretation."
+  ],
+  "implementation_commits": {
+    "backend": "fa6f6d0",
+    "frontend": "7306e1e"
+  },
+  "evidence_scopes": {
+    "soak": "30-minute same-session path before refresh-lifecycle addition; that path unchanged",
+    "matrix": "final refresh/duplicate-tab lifecycle and lossless recording after product addition"
+  }
+}

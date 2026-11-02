@@ -1,6 +1,6 @@
 # T12：会话生命周期
 
-`app/core/SessionManager` 管理一个活动会话，提供异步 `start/create/rpc/publish/delete/close` 和同步 `get/drain_events/drain_worker_events`。实现位于 `app/core/session_manager.py`；此阶段没有将这些操作绑定到 REST/WS，默认契约 API 仍返回 503。T14 将连接日志服务与时间轴，T15 接入正式浏览器呈现。
+`app/core/SessionManager` 管理一个活动会话，提供异步 `start/create/rpc/publish/delete/close` 和同步 `get/drain_events/drain_worker_events`。实现位于 `app/core/session_manager.py`；正式 REST/WS 已由 T14 绑定，T15 已接入浏览器呈现。只有无配置的默认契约入口仍返回503；操作入口见 [交付手册](delivery-v1.md)。
 
 ## 使用方式
 
