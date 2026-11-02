@@ -211,6 +211,23 @@ def align_annotations(path, source_id, rows):
                 # The terminal edge is an interval boundary, never sample N.
                 elapsed = (Decimal(len(rows)) * 1_000_000_000 / Decimal(str(fps))).to_integral_value(rounding=ROUND_HALF_UP)
                 expected = rows[0]["source_log_time_ns"] + int(elapsed)
+                if stamp != expected:
+                    # Some reviewed sources construct the exclusive terminal
+                    # edge as last sample + one rounded period. At fractional
+                    # nanosecond rates this can differ from rounding the total.
+                    # Only accept that exact construction on a verified grid;
+                    # observed/internal boundaries retain strict equality.
+                    period = Decimal(1_000_000_000) / Decimal(str(fps))
+                    origin = rows[0]["source_log_time_ns"]
+                    on_grid = all(
+                        row["source_log_time_ns"] == origin + int(
+                            (Decimal(i) * period).to_integral_value(rounding=ROUND_HALF_UP))
+                        for i, row in enumerate(rows)
+                    )
+                    alternate = rows[-1]["source_log_time_ns"] + int(
+                        period.to_integral_value(rounding=ROUND_HALF_UP))
+                    if on_grid and stamp == alternate:
+                        expected = alternate
             if stamp != expected:
                 fail("ANNOTATION_CLOCK_MISMATCH", f"{field} does not match source frame {frame}")
         segment_id = original.get("id", original.get("segment_id", f"{source_id}:segment:{index}"))

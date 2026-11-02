@@ -12,6 +12,9 @@ import unittest
 SCRIPT = Path(__file__).resolve().parents[2] / "scripts" / "prepare_b041.py"
 HAVE_ARROW = importlib.util.find_spec("pyarrow") is not None
 NS = 1792116367247308928
+_spec = importlib.util.spec_from_file_location("b041_prepare_under_test", SCRIPT)
+prepare = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(prepare)
 
 
 class PrepareTests(unittest.TestCase):
@@ -165,6 +168,41 @@ class PrepareTests(unittest.TestCase):
         sidecar = self.run / "annotations.json"
         sidecar.write_text(json.dumps({"sources": [source]}))
         return path, sidecar
+
+    def test_terminal_clock_accepts_both_exact_rounding_conventions_without_rewriting(self):
+        rows = [{"episode_index": 8, "source_log_time_ns": NS},
+                {"episode_index": 8, "source_log_time_ns": NS + 66666667}]
+        for terminal in (NS + 133333333, NS + 133333334):
+            with self.subTest(terminal=terminal):
+                source = {"source_id": "synthetic_B041", "source_episode_index": 8,
+                          "source_frame_count": 2, "source_fps": 15,
+                          "segments": [{"id": "all", "start_frame": 0, "end_frame": 2,
+                                        "start_log_ns": NS, "end_log_ns": terminal}]}
+                path = self.run / "annotations.json"
+                path.write_text(json.dumps({"sources": [source]}))
+                original = path.read_bytes()
+                result = prepare.align_annotations(path, "synthetic_B041", rows)
+                self.assertEqual(result["segments"][0]["end_log_ns"], str(terminal))
+                self.assertEqual(path.read_bytes(), original)
+
+    def test_terminal_clock_fallback_does_not_relax_internal_or_irregular_clocks(self):
+        cases = [
+            ([NS, NS + 66666667, NS + 133333333], 2, NS + 133333334),
+            ([NS, NS + 66666667], 2, NS + 133333332),
+            ([NS, NS + 66666667], 2, NS + 133333335),
+            ([NS, NS + 66666665], 2, NS + 133333332),
+        ]
+        for clocks, end, terminal in cases:
+            with self.subTest(clocks=clocks, terminal=terminal):
+                rows = [{"episode_index": 8, "source_log_time_ns": t} for t in clocks]
+                source = {"source_id": "synthetic_B041", "source_episode_index": 8,
+                          "source_frame_count": len(rows), "source_fps": 15,
+                          "segments": [{"id": "all", "start_frame": 0, "end_frame": end,
+                                        "start_log_ns": NS, "end_log_ns": terminal}]}
+                path = self.run / "annotations.json"
+                path.write_text(json.dumps({"sources": [source]}))
+                with self.assertRaisesRegex(ValueError, "ANNOTATION_CLOCK_MISMATCH"):
+                    prepare.align_annotations(path, "synthetic_B041", rows)
 
     @unittest.skipUnless(HAVE_ARROW, "Parquet tests run separately in an existing PyArrow environment")
     def test_parquet_retains_exact_clocks_quality_and_unapproved_half_open_segments(self):

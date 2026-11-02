@@ -81,6 +81,8 @@ full23 索引使用零基切片：`0:7` 左臂、`7:14` 右臂、`14:16` 左右�
 
 离线标注只在 `source_id`、episode、实际帧数及边界时钟精确匹配后标为 `source_frames`。区间为 `[start_frame,end_frame)`；`end_frame=N` 是末端边界，不读取不存在的第 N 帧。来源或边界不匹配会拒绝准备，不能靠近似时间猜测对齐。
 
+末端边界默认按 `t0 + round(N × 1e9 / fps)` 校验；若全部实际帧精确符合相同采样网格，也接受 `last_sample + round(1e9 / fps)`。两者使用 `ROUND_HALF_UP`，在 15 Hz 下可能相差 1 ns；仅接受这两种精确构造，内部边界仍须完全相等，原始标注时间不改写。
+
 若所选 action basis 的尾部没有动作记录，阶段结束时间仍按完整来源帧边界保留，可能晚于所选回放末时刻；阶段可定位起点和事件仍必须位于所选时域。不会把缺失 action 补成反馈，或截短原始标注边界来使接口通过。
 
 Rim 的 selection 是旧来源参考，标为 `reference_only`，不能映射为当前 run 的阶段或用于 seek。`pending_review`、边界待审核和 `training_approved=false` 原样展示，不升级成确认真值。历史事件只是诊断记录，不等于当前机器人状态；无法对齐或超出当前 basis 时间域的事件 `time_s=null`，不可定位。接口为 `GET /api/v1/sessions/{sid}/logs/{lid}/annotations`。
